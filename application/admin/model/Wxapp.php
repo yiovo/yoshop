@@ -1,0 +1,74 @@
+<?php
+
+namespace app\admin\model;
+
+use app\common\model\Wxapp as WxappModel;
+
+/**
+ * 微信小程序模型
+ * Class Wxapp
+ * @package app\admin\model
+ */
+class Wxapp extends WxappModel
+{
+    /**
+     * 更新小程序设置
+     * @param $data
+     * @return bool
+     */
+    public function edit($data)
+    {
+        // 在线客服图标
+        $service_image = isset($data['service_image']) ? $data['service_image'] : null;
+        $data['service_image_id'] = $this->uploadImage(
+            $this->wxapp_id,
+            $this->service_image_id,
+            $service_image,
+            'service'
+        );
+        // 电话客服图标
+        $phone_image = isset($data['phone_image']) ? $data['phone_image'] : null;
+        $data['phone_image_id'] = $this->uploadImage(
+            $this->wxapp_id,
+            $this->phone_image_id,
+            $phone_image,
+            'service.phone'
+        );
+        return $this->allowField(true)->save($data) !== false ?: false;
+    }
+
+    /**
+     * 记录图片信息
+     * @param $wxapp_id
+     * @param $oldFileId
+     * @param $newFilePath
+     * @param $fromType
+     * @return int|mixed
+     */
+    private function uploadImage($wxapp_id, $oldFileId, $newFilePath, $fromType)
+    {
+        $UploadFile = new UploadFile;
+        $UploadFileUsed = new UploadFileUsed;
+        if ($oldFileId > 0) {
+            // 获取原图片path
+            $oldFilePath = $UploadFile->getFilePath($oldFileId);
+            // 新文件与原来路径一致, 代表用户未修改, 不做更新
+            if ($newFilePath === $oldFilePath)
+                return $oldFileId;
+            // 删除原文件使用记录
+            $UploadFileUsed->remove('service', $oldFileId);
+        }
+        // 删除图片
+        if (empty($newFilePath)) return 0;
+        // 查询新文件file_id
+        $fileId = $UploadFile->getFildIdByPath($newFilePath);
+        // 添加文件使用记录
+        $UploadFileUsed->add([
+            'file_id' => $fileId,
+            'wxapp_id' => $wxapp_id,
+            'from_type' => $fromType
+        ]);
+        return $fileId;
+    }
+
+}
