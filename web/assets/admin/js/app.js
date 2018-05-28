@@ -207,7 +207,111 @@
                 }
                 $error.text('上传失败');
             };
-        }
+        },
+
+
+        /**
+         * 文件上传 (多文件)
+         */
+        uploadImages: function (option) {
+            // 文件大小
+            let maxSize = option.maxSize !== undefined ? option.maxSize : 2;
+            // 初始化Web Uploader
+            let uploader = WebUploader.create({
+                // 选完文件后，是否自动上传。
+                auto: true,
+                // 文件接收服务端。
+                server: BASE_URL + '/upload/images',
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: {
+                    id: option.pick,
+                    multiple: true
+                },
+                // 文件上传域的name
+                fileVal: 'iFile',
+                // 图片上传前不进行压缩
+                compress: false,
+                // 文件总数量
+                fileNumLimit: 10,
+                // 文件大小2m => 2097152
+                fileSingleSizeLimit: maxSize * 1024 * 1024,
+                // 只允许选择图片文件。
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,bmp,png',
+                    mimeTypes: 'image/*'
+                },
+                // 缩略图配置
+                thumb: {
+                    quality: 100,
+                    crop: false,
+                    allowMagnify: false
+                }
+            });
+            //  验证大小
+            uploader.on('error', function (type) {
+                if (type === "F_DUPLICATE") {
+                    // console.log("请不要重复选择文件！");
+                } else if (type === "F_EXCEED_SIZE") {
+                    alert("文件大小不可超过" + maxSize + "m 哦！换个小点的文件吧！");
+                }
+            });
+            // 当有文件添加进来的时候
+            uploader.on('fileQueued', function (file) {
+                let $list = $(option.list.id);
+                // $list.empty();
+                let $li = $(
+                    '<div id="' + file.id + '" class="file-item thumbnail">' +
+                    '<img>' +
+                    '<input type="hidden" name="' + option.list.inputName + '" value="">' +
+                    '<i class="iconfont icon-shanchu file-item-delete"></i>' +
+                    '</div>'
+                    ),
+                    $img = $li.find('img'),
+                    $delete = $li.find('.file-item-delete');
+                // 删除文件
+                $delete.on('click', function () {
+                    uploader.removeFile(file);
+                    $delete.parent().remove();
+                });
+                // $list为容器jQuery实例
+                $list.append($li);
+                // 创建缩略图
+                // 如果为非图片文件，可以不用调用此方法。
+                // thumbnailWidth x thumbnailHeight 为 100 x 100
+                uploader.makeThumb(file, function (error, src) {
+                    if (error) {
+                        $img.replaceWith('<span>不能预览</span>');
+                        return;
+                    }
+                    $img.attr('src', src);
+                }, 1, 1);
+            });
+            // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+            uploader.on('uploadSuccess', function (file, response) {
+                if (response.code === 1) {
+                    let $item = $('#' + file.id);
+                    $item.addClass('upload-state-done')
+                        .children('input[type=hidden]').val(response.data.path);
+                } else
+                    uploader.uploadError(file);
+            });
+            // 文件上传失败
+            uploader.on('uploadError', function (file) {
+                uploader.uploadError(file);
+            });
+            // 显示上传出错信息
+            uploader.uploadError = function (file) {
+                let $li = $('#' + file.id),
+                    $error = $li.find('div.error');
+                // 避免重复创建
+                if (!$error.length) {
+                    $error = $('<div class="error"></div>').appendTo($li);
+                }
+                $error.text('上传失败');
+            };
+        },
     });
 
 })(jQuery);

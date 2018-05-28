@@ -53,6 +53,15 @@ class Driver
     }
 
     /**
+     * 返回文件信息
+     * @return mixed
+     */
+    public function getFileInfo()
+    {
+        return $this->engine->getFileInfo();
+    }
+
+    /**
      * 获取当前的存储引擎
      * @return mixed
      * @throws Exception

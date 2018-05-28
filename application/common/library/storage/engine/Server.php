@@ -15,6 +15,7 @@ abstract class Server
     protected $file;
     protected $error;
     protected $filePath;
+    protected $fileInfo;
 
     /**
      * 构造函数
@@ -30,7 +31,15 @@ abstract class Server
         }
         // 生成保存文件名
         $this->filePath = $this->buildSaveName();
+        // 文件信息
+        $this->fileInfo = $this->file->getInfo();
     }
+
+    /**
+     * 文件上传
+     * @return mixed
+     */
+    abstract protected function upload();
 
     /**
      * 返回文件路径
@@ -42,6 +51,15 @@ abstract class Server
     }
 
     /**
+     * 返回文件信息
+     * @return mixed
+     */
+    public function getFileInfo()
+    {
+        return $this->fileInfo;
+    }
+
+    /**
      * 返回错误信息
      * @return mixed
      */
@@ -49,12 +67,6 @@ abstract class Server
     {
         return $this->error;
     }
-
-    /**
-     * 文件上传
-     * @return mixed
-     */
-    abstract protected function upload();
 
     /**
      * 生成保存文件名
