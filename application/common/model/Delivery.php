@@ -34,6 +34,15 @@ class Delivery extends BaseModel
     }
 
     /**
+     * 获取全部
+     * @return false|static[]
+     * @throws \think\exception\DbException
+     */
+    public static function getAll() {
+        return self::all();
+    }
+
+    /**
      * 获取列表
      * @return \think\Paginator
      * @throws \think\exception\DbException

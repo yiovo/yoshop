@@ -11,33 +11,40 @@
         superForm: function (option) {
             let form = $(this);
             option = option || {};
-            let btn_submit = $(option.btn_submit || '.j-submit');
+            let btn_submit = $('.j-submit');
             form.validator({
                 onValid: function (validity) {
                     $(validity.field).next('.am-alert').hide();
                 },
+                /**
+                 * 显示错误信息
+                 * @param validity
+                 */
                 onInValid: function (validity) {
                     let $field = $(validity.field)
                         , $group = $field.parent()
                         , $alert = $group.find('.am-alert');
-                    // 使用自定义的提示信息 或 插件内置的提示信息
-                    let msg = $field.data('validationMessage') || this.getValidationMessage(validity);
-                    if (!$alert.length) {
-                        $alert = $('<div class="am-alert am-alert-danger"></div>').hide().appendTo($group);
+
+                    if ($field.data('validationMessage') !== undefined) {
+                        // 使用自定义的提示信息 或 插件内置的提示信息
+                        let msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+                        if (!$alert.length) {
+                            $alert = $('<div class="am-alert am-alert-danger"></div>').hide().appendTo($group);
+                        }
+                        $alert.html(msg).show();
                     }
-                    $alert.html(msg).show();
                 },
                 submit: function () {
                     if (this.isFormValid() === true) {
                         // 禁用按钮, 防止二次提交
-                        btn_submit.attr('disabled', true);
+                        // btn_submit.attr('disabled', true);
                         // 表单提交
                         form.ajaxSubmit({
                             type: "post",
                             dataType: "json",
                             success: function (result) {
-                                result.code === 1 ? $.show_success(result.msg, result.url)
-                                    : $.show_error(result.msg);
+                                // result.code === 1 ? $.show_success(result.msg, result.url)
+                                //     : $.show_error(result.msg);
                                 btn_submit.attr('disabled', false);
                             }
                         });
@@ -262,7 +269,7 @@
                 let $list = $(option.list.id);
                 // $list.empty();
                 let $li = $(
-                    '<div id="' + file.id + '" class="file-item thumbnail">' +
+                    '<div id="' + file.id + '" class="file-item thumbnail test">' +
                     '<img>' +
                     '<input type="hidden" name="' + option.list.inputName + '" value="">' +
                     '<i class="iconfont icon-shanchu file-item-delete"></i>' +
@@ -272,6 +279,7 @@
                     $delete = $li.find('.file-item-delete');
                 // 删除文件
                 $delete.on('click', function () {
+                    console.log('1231');
                     uploader.removeFile(file);
                     $delete.parent().remove();
                 });

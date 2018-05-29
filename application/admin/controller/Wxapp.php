@@ -20,7 +20,7 @@ class Wxapp extends Controller
     {
         $wxapp = WxappModel::detail();
         if ($this->request->isAjax()) {
-            $data = $this->request->post('wxapp/a');
+            $data = $this->postData('wxapp');
             if ($wxapp->edit($data)) return $this->renderSuccess('更新成功');
             return $this->renderError('更新失败');
         }

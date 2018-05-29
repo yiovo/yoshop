@@ -1030,10 +1030,14 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-notifications-item .menu-messages-con
 
 .tpl-form-line-form .am-form-label {
     padding-top: .8rem;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: #656565;
     font-weight: inherit;
     text-align: right;
+}
+
+.tpl-form-line-form .am-form-error .am-form-label {
+    color: #dd514c;
 }
 
 .tpl-form-line-form .am-form-group { /*padding: 20px 0;*/
@@ -1587,6 +1591,11 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-notifications-title {
     line-height: 18px;
 }
 
+.am-field-valid:focus, .am-form-success .am-form-field:focus {
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;;
+}
+
 .am-form-success label {
     color: #656565 !important;
 }
@@ -1641,6 +1650,7 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-notifications-title {
 /*.uploader-list{}*/
 .uploader-list .file-item {
     float: left;
+    width: 110px;
     position: relative;
     margin: 20px 25px 0 0;
     padding: 4px;
@@ -1949,25 +1959,72 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-notifications-title {
     border: 1px solid #e4e4e4;
     padding: 20px;
     border-radius: 4px;
+
+    display: none;
 }
+
+.goods-spec input {
+    font-size: 1.3rem !important;
+    padding-left: 10px !important;;
+    border: 1px solid #e3e2e5 !important;;
+}
+.goods-spec input.am-field-error {
+    border-color: #dd514c!important;
+}
+
 .goods-spec .spec-group-item {
-    margin-bottom: 32px;
+    margin-bottom: 25px;
 }
+
+.goods-spec .spec-group-item .spec-group-name {
+    margin-bottom: 15px;
+}
+
+.goods-spec .spec-group-item .spec-group-name span {
+    font-size: 1.5rem;
+}
+
+.goods-spec .icon-shanchu1 {
+    cursor: pointer;
+    text-align: center;
+    color: #ababab;
+    font-size: 1.3rem;
+}
+
+.goods-spec .icon-shanchu1:hover {
+    color: #6b6b6b;
+}
+
+.goods-spec .spec-group-item .spec-group-name .icon-shanchu1 {
+    display: inline-block;
+}
+
 .goods-spec .spec-group-item .spec-list .spec-item {
+    position: relative;
     margin-right: 12px;
 }
 
 .goods-spec .spec-group-item .spec-list .spec-item span {
     min-width: 50px;
     display: inline-block;
-    border: 1px solid #DDDDDD;
+    border: 1px solid #ddd;
     text-align: center;
-    cursor: pointer;
     padding: 0 15px;
-    position: relative;
     border-radius: 2px;
     font-size: 1.3rem;
-    line-height: 31px;
+    line-height: 30px;
+}
+
+.goods-spec .spec-group-item .spec-list .spec-item:hover .icon-shanchu1 {
+    visibility: visible;
+}
+
+.goods-spec .spec-group-item .spec-list .spec-item .icon-shanchu1 {
+    position: absolute;
+    width: 20px;
+    top: -9px;
+    right: -9px;
+    visibility: hidden;
 }
 
 .goods-spec .spec-group-item .spec-item-add {
@@ -1978,16 +2035,42 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-notifications-title {
     width: 110px;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
-    border: 1px solid #e3e2e5;
-
 }
+
 .goods-spec .spec-group-item .spec-item-add button {
     display: table-cell;
-    height: 33px;
+    height: 32px;
     font-size: 1.3rem;
     border-color: #e3e2e5;
     border-left: none;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
     outline: none;
+}
+
+.spec-group-button button {
+    color: #2589ff;
+    background-color: #fff;
+    border-color: #2589ff;
+    font-size: 12px;
+    border-radius: 4px;
+    outline: 0;
+    font-weight: 400;
+    padding: .6em 1em;
+    outline: none !important;
+}
+
+.spec-group-button button:hover, .spec-group-button button:focus {
+    color: #0075ff;
+}
+
+.goods-spec .spec-group-add .spec-group-add-item {
+    margin-bottom: 10px;
+}
+
+.goods-spec .spec-group-add .spec-group-add-item input {
+    width: 160px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-left: 12px;
 }

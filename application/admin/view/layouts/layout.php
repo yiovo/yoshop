@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="assets/admin/css/amazeui.min.css"/>
     <!--    <link rel="stylesheet" href="assets/admin/css/amazeui.datatables.min.css"/>-->
     <link rel="stylesheet" href="assets/admin/css/app.css"/>
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_664399_w4vx5yg5ys9yhkt9.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_664399_g96an052m7qilik9.css">
     <script src="assets/admin/js/jquery.min.js"></script>
     <script src="//at.alicdn.com/t/font_664399_9nhgo6mutxyfogvi.js"></script>
     <script>

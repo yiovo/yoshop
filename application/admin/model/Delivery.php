@@ -11,6 +11,7 @@ use app\common\model\Delivery as DeliveryModel;
  */
 class Delivery extends DeliveryModel
 {
+
     /**
      * 添加新记录
      * @param $data
