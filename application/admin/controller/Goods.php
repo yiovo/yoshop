@@ -68,11 +68,10 @@ class Goods extends Controller
     }
 
     /**
+     * 商品编辑
      * @param $goods_id
      * @return array|mixed
-     * @throws \think\Exception
      * @throws \think\exception\DbException
-     * @throws \think\exception\PDOException
      */
     public function edit($goods_id)
     {

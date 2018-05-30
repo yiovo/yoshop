@@ -30,7 +30,9 @@ return [
                 'name' => '商品分类',
                 'url' => 'category/index',
                 'handle' => [
-                    'goods.category/index'
+                    'goods.category/index',
+                    'goods.category/add',
+                    'goods.category/edit',
                 ],
             ],
         ],

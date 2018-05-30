@@ -100,7 +100,6 @@
 </div>
 <script>
     $(function () {
-
         // 删除元素
         let url = "<?= url('goods.category/delete') ?>";
         $('.item-delete').delete('category_id', url);
