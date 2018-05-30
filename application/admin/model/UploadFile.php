@@ -21,14 +21,4 @@ class UploadFile extends UploadFileModel
         return $this->save($data);
     }
 
-    public function getFildIdByPath($filePath)
-    {
-        return $this->where(['file_path' => $filePath])->value('file_id');
-    }
-
-    public function getFilePath($fileId)
-    {
-        return $this->where(['file_id' => $fileId])->value('file_path');
-    }
-
 }

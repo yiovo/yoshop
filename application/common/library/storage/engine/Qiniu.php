@@ -46,13 +46,22 @@ class Qiniu extends Server
         $uploadMgr = new UploadManager();
 
         // 调用 UploadManager 的 putFile 方法进行文件的上传
-        list($result, $error) = $uploadMgr->putFile($token, $this->filePath, $realPath);
+        list($result, $error) = $uploadMgr->putFile($token, $this->fileName, $realPath);
 
         if ($error !== null) {
             $this->error = $error->message();
             return false;
         }
         return true;
+    }
+
+    /**
+     * 返回文件路径
+     * @return mixed
+     */
+    public function getFileName()
+    {
+        return $this->fileName;
     }
 
 }

@@ -37,14 +37,14 @@
                 submit: function () {
                     if (this.isFormValid() === true) {
                         // 禁用按钮, 防止二次提交
-                        // btn_submit.attr('disabled', true);
+                        btn_submit.attr('disabled', true);
                         // 表单提交
                         form.ajaxSubmit({
                             type: "post",
                             dataType: "json",
                             success: function (result) {
-                                // result.code === 1 ? $.show_success(result.msg, result.url)
-                                //     : $.show_error(result.msg);
+                                result.code === 1 ? $.show_success(result.msg, result.url)
+                                    : $.show_error(result.msg);
                                 btn_submit.attr('disabled', false);
                             }
                         });

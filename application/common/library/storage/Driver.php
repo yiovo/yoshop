@@ -47,9 +47,9 @@ class Driver
      * 获取文件路径
      * @return mixed
      */
-    public function getFilePath()
+    public function getFileName()
     {
-        return $this->engine->getFilePath();
+        return $this->engine->getFileName();
     }
 
     /**

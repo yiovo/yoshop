@@ -12,14 +12,34 @@ class UploadFile extends BaseModel
     protected $name = 'upload_file';
     protected $updateTime = false;
 
-    public function getFileUrlAttr($file_url, $data)
+    public function getFileNameAttr($value, $data)
     {
         if ($data['storage'] === 'local') {
-            $full_path = self::$base_url . DS . $data['file_path'];
+            $file_path = self::$base_url . 'uploads' . DS . $data['file_name'];
         } else {
-            $full_path = $file_url . DS . $data['file_path'];
+            $file_path = $value . DS . $data['file_name'];
         }
-        return compact('file_url', 'full_path');
+        return compact('file_path', 'value');
+    }
+
+    /**
+     * 根据文件名查询文件id
+     * @param $fileName
+     * @return mixed
+     */
+    public function getFildIdByName($fileName)
+    {
+        return $this->where(['file_name' => $fileName])->value('file_id');
+    }
+
+    /**
+     * 查询文件id
+     * @param $fileId
+     * @return mixed
+     */
+    public function getFileName($fileId)
+    {
+        return $this->where(['file_id' => $fileId])->value('file_name');
     }
 
 }

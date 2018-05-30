@@ -1109,12 +1109,12 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-notifications-item .menu-messages-con
 }
 
 .tpl-table-black thead > tr > th {
-    font-size: 14px;
+    font-size: 1.3rem;
     padding: 6px;
 }
 
 .tpl-table-black tbody > tr > td {
-    font-size: 14px;
+    font-size: 1.3rem;
     padding: 7px 6px;
 }
 
@@ -1386,7 +1386,7 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-notifications-title {
     }
 }
 
-/* xany*/
+/* xany  */
 .am-table {
     border-collapse: collapse;
     font-size: 1.4rem;
@@ -1395,6 +1395,15 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-notifications-title {
 .am-btn-toolbar .am-btn-group > .am-btn {
     border-radius: 2px !important;
     margin-right: 10px;
+}
+
+
+/* 文字颜色 */
+.x-color-red {
+    color: #f00 !important;
+}
+.x-color-green {
+    color: #4db14d !important;
 }
 
 /*分页*/

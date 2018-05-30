@@ -30,7 +30,7 @@ class Delivery extends BaseModel
     public function getMethodAttr($value)
     {
         $method = [10 => '按件数', 20 => '按重量'];
-        return ['name' => $method[$value], 'value' => $value];
+        return ['text' => $method[$value], 'value' => $value];
     }
 
     /**

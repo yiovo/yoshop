@@ -21,15 +21,24 @@ class Local extends Server
     public function upload()
     {
         // 上传目录
-        $uplodDir = ROOT_PATH . 'web' . DS.'uploads' ;
+        $uplodDir = ROOT_PATH . 'web' . DS . 'uploads';
         // 验证文件并上传
         $info = $this->file->validate(['size' => 4 * 1024 * 1024, 'ext' => 'jpg,jpeg,png,gif'])
-            ->move($uplodDir, $this->filePath);
+            ->move($uplodDir, $this->fileName);
         if (empty($info)) {
             $this->error = $this->file->getError();
             return false;
         }
         return true;
+    }
+
+    /**
+     * 返回文件路径
+     * @return mixed
+     */
+    public function getFileName()
+    {
+        return $this->fileName;
     }
 
 }

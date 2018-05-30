@@ -3,6 +3,7 @@
 namespace app\admin\model;
 
 use app\common\model\Goods as GoodsModel;
+use think\Db;
 
 /**
  * 商品模型
@@ -11,5 +12,68 @@ use app\common\model\Goods as GoodsModel;
  */
 class Goods extends GoodsModel
 {
+    /**
+     * 添加新记录
+     * @param array $data
+     * @return bool
+     */
+    public function add(array $data)
+    {
+        if (!isset($data['images']) || empty($data['images'])) {
+            $this->error = '请上传商品图片';
+            return false;
+        }
+        $data['content'] = isset($data['content']) ? $data['content'] : '';
+        $data['wxapp_id'] = $data['spec']['wxapp_id'] = self::$wxapp_id;
+
+        // 开启事务
+        Db::startTrans();
+        try {
+            // 添加商品
+            $this->allowField(true)->save($data);
+            // 商品规格
+            $this->spec()->save($data['spec']);
+            // 商品图片
+            $this->addGoodsImages($data['images']);
+            Db::commit();
+            return true;
+        } catch (\Exception $e) {
+            // 回滚事务
+            Db::rollback();
+        }
+        return false;
+    }
+
+    /**
+     * 添加商品图片
+     * @param $images
+     * @return int
+     */
+    private function addGoodsImages($images)
+    {
+        $model = new UploadFile;
+        $imagesIds = $model->where('file_name', 'in', $images)->column('file_id');
+        $data = [];
+        foreach ($imagesIds as $imageId) {
+            $data[] = [
+                'image_id' => $imageId,
+                'wxapp_id' => self::$wxapp_id
+            ];
+        }
+        return $this->image()->saveAll($data);
+    }
+
+    /**
+     * 删除商品
+     * @return int
+     * @throws \think\Exception
+     * @throws \think\exception\PDOException
+     */
+    public function remove()
+    {
+        $this->spec()->delete();
+        $this->image()->delete();
+        return $this->delete();
+    }
 
 }

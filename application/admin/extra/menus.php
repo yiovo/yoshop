@@ -21,7 +21,8 @@ return [
             [
                 'name' => '出售中',
                 'handle' => [
-                    'goods/index'
+                    'goods/index',
+                    'goods/add'
                 ],
             ],
             [
@@ -34,7 +35,7 @@ return [
                 'name' => '商品分类',
                 'url' => 'category/index',
                 'handle' => [
-                    'category/index'
+                    'goods.category/index'
                 ],
             ],
         ],

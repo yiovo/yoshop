@@ -4,6 +4,8 @@ namespace app\admin\controller;
 
 use app\admin\model\Category;
 use app\admin\model\Delivery;
+use app\admin\model\Goods as GoodsModel;
+
 
 /**
  * 商品管理控制器
@@ -13,22 +15,60 @@ use app\admin\model\Delivery;
 class Goods extends Controller
 {
     /**
-     * 添加商品
+     * 商品列表(出售中)
      * @return mixed
      * @throws \think\exception\DbException
      */
     public function index()
     {
-        if ($this->request->isAjax()) {
-            $data = $this->postData('goods');
-         
+        $model = new GoodsModel;
+        $list = $model->getList();
+        return $this->fetch('index',compact('list'));
+    }
+
+    /**
+     * 添加商品
+     * @return mixed
+     * @throws \think\exception\DbException
+     */
+    public function add()
+    {
+        if (!$this->request->isAjax()) {
+            // 商品分类
+            $catgory = Category::getCacheTree();
+            // 配送模板
+            $delivery = Delivery::getAll();
+            return $this->fetch('add', compact('catgory', 'delivery'));
+        }
+        $model = new GoodsModel;
+        $data = $this->postData('goods');
+        if ($model->add($data)) {
             return $this->renderSuccess('添加成功', url('goods/index'));
         }
-        // 商品分类
-        $catgory = Category::getCacheTree();
-        // 配送模板
-        $delivery = Delivery::getAll();
-        return $this->fetch('add', compact('catgory', 'delivery'));
+        $error = $model->getError() ?: '更新失败';
+        return $this->renderError($error);
+    }
+
+    /**
+     * 删除商品
+     * @param $goods_id
+     * @return array
+     * @throws \think\Exception
+     * @throws \think\exception\DbException
+     * @throws \think\exception\PDOException
+     */
+    public function delete($goods_id)
+    {
+        $model = GoodsModel::get($goods_id);
+        if (!$model->remove()) {
+            $error = $model->getError() ?: '删除失败';
+            return $this->renderError($error);
+        }
+        return $this->renderSuccess('删除成功');
+    }
+
+    public function edit() {
+
     }
 
 }

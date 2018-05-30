@@ -14,7 +14,7 @@ abstract class Server
 {
     protected $file;
     protected $error;
-    protected $filePath;
+    protected $fileName;
     protected $fileInfo;
 
     /**
@@ -30,7 +30,7 @@ abstract class Server
             throw new Exception('未找到上传文件的信息');
         }
         // 生成保存文件名
-        $this->filePath = $this->buildSaveName();
+        $this->fileName = $this->buildSaveName();
         // 文件信息
         $this->fileInfo = $this->file->getInfo();
     }
@@ -42,13 +42,10 @@ abstract class Server
     abstract protected function upload();
 
     /**
-     * 返回文件路径
+     * 返回上传后文件路径
      * @return mixed
      */
-    public function getFilePath()
-    {
-        return $this->filePath;
-    }
+    abstract public function getFileName();
 
     /**
      * 返回文件信息
@@ -79,7 +76,7 @@ abstract class Server
         $ext = pathinfo($this->file->getInfo('name'), PATHINFO_EXTENSION);
         // 自动生成文件名
         return date('YmdHis') . substr(md5($realPath), 0, 5)
-            . str_pad(rand(0, 9999),4,'0',STR_PAD_LEFT) . '.' . $ext;
+            . str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT) . '.' . $ext;
     }
 
 }

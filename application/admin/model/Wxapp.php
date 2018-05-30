@@ -41,27 +41,27 @@ class Wxapp extends WxappModel
      * 记录图片信息
      * @param $wxapp_id
      * @param $oldFileId
-     * @param $newFilePath
+     * @param $newFileName
      * @param $fromType
      * @return int|mixed
      */
-    private function uploadImage($wxapp_id, $oldFileId, $newFilePath, $fromType)
+    private function uploadImage($wxapp_id, $oldFileId, $newFileName, $fromType)
     {
         $UploadFile = new UploadFile;
         $UploadFileUsed = new UploadFileUsed;
         if ($oldFileId > 0) {
             // 获取原图片path
-            $oldFilePath = $UploadFile->getFilePath($oldFileId);
+            $oldFileName = $UploadFile->getFileName($oldFileId);
             // 新文件与原来路径一致, 代表用户未修改, 不做更新
-            if ($newFilePath === $oldFilePath)
+            if ($newFileName === $oldFileName)
                 return $oldFileId;
             // 删除原文件使用记录
             $UploadFileUsed->remove('service', $oldFileId);
         }
         // 删除图片
-        if (empty($newFilePath)) return 0;
+        if (empty($newFileName)) return 0;
         // 查询新文件file_id
-        $fileId = $UploadFile->getFildIdByPath($newFilePath);
+        $fileId = $UploadFile->getFildIdByName($newFileName);
         // 添加文件使用记录
         $UploadFileUsed->add([
             'file_id' => $fileId,
