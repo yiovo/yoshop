@@ -23,7 +23,7 @@ class Goods extends Controller
     {
         $model = new GoodsModel;
         $list = $model->getList();
-        return $this->fetch('index',compact('list'));
+        return $this->fetch('index', compact('list'));
     }
 
     /**
@@ -67,8 +67,31 @@ class Goods extends Controller
         return $this->renderSuccess('删除成功');
     }
 
-    public function edit() {
+    /**
+     * @param $goods_id
+     * @return array|mixed
+     * @throws \think\Exception
+     * @throws \think\exception\DbException
+     * @throws \think\exception\PDOException
+     */
+    public function edit($goods_id)
+    {
+        // 模板详情
+        $model = GoodsModel::get($goods_id, ['spec', 'image.file']);
+        if (!$this->request->isAjax()) {
+            // 商品分类
+            $catgory = Category::getCacheTree();
+            // 配送模板
+            $delivery = Delivery::getAll();
+            return $this->fetch('edit', compact('model', 'catgory', 'delivery'));
+        }
 
+        // 更新记录
+        if ($model->edit($this->postData('goods'))) {
+            return $this->renderSuccess('更新成功', url('goods/index'));
+        }
+        $error = $model->getError() ?: '更新失败';
+        return $this->renderError($error);
     }
 
 }

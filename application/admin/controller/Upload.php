@@ -45,7 +45,7 @@ class Upload extends Controller
         // 添加文件库记录
         $this->addUploadFile($fileName, $fileInfo, 'image');
         // 图片上传成功
-        return json(['code' => 1, 'msg' => '图片上传成功']);
+        return json(['code' => 1, 'msg' => '图片上传成功', 'data' => ['path' => $fileName]]);
     }
 
     /**

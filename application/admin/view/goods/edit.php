@@ -13,7 +13,7 @@
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品名称 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="text" class="tpl-form-input" name="goods[goods_name]"
-                                           value="" required>
+                                           value="<?= $model['goods_name'] ?>" required>
                                 </div>
                             </div>
                             <div class="am-form-group">
@@ -22,17 +22,27 @@
                                     <select name="goods[category_id]" required
                                             data-am-selected="{searchBox: 1, btnSize: 'sm',  placeholder:'请选择商品分类'}">
                                         <option value=""></option>
-                                        <?php if (isset($catgory)): foreach ($catgory as $first): ?>
-                                            <option value="<?= $first['category_id'] ?>"><?= $first['name'] ?></option>
-                                            <?php if (isset($first['child'])): foreach ($first['child'] as $two): ?>
-                                                <option value="<?= $two['category_id'] ?>">
-                                                    　　<?= $two['name'] ?></option>
-                                                <?php if (isset($two['child'])): foreach ($two['child'] as $three): ?>
-                                                    <option value="<?= $three['category_id'] ?>">
-                                                        　　　<?= $three['name'] ?></option>
-                                                <?php endforeach; endif; ?>
-                                            <?php endforeach; endif; ?>
-                                        <?php endforeach; endif; ?>
+                                        <?php if (isset($catgory) && !empty($catgory)): ?>
+                                            <?php foreach ($catgory as $first): ?>
+                                                <option value="<?= $first['category_id'] ?>"
+                                                    <?= $model['category_id'] === $first['category_id'] ? 'selected' : '' ?>>
+                                                    <?= $first['name'] ?></option>
+                                                <?php if (isset($first['child']) && !empty($first['child'])): ?>
+                                                    <?php foreach ($first['child'] as $two): ?>
+                                                        <option value="<?= $two['category_id'] ?>"
+                                                            <?= $model['category_id'] === $two['category_id'] ? 'selected' : '' ?>>
+                                                            　　<?= $two['name'] ?></option>
+                                                        <?php if (isset($two['child']) && !empty($two['child'])): ?>
+                                                            <?php foreach ($two['child'] as $three): ?>
+                                                                <option value="<?= $three['category_id'] ?>"
+                                                                    <?= $model['category_id'] === $three['category_id'] ? 'selected' : '' ?>>
+                                                                    　　　<?= $three['name'] ?></option>
+                                                            <?php endforeach; ?>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </select>
                                     <small class="am-margin-left-xs">
                                         <a href="<?= url('goods.categroy/add') ?>">去添加</a>
@@ -43,10 +53,18 @@
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品图片 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <div class="am-form-file">
-                                        <div id="file-phone" class="upload-button">
+                                        <div id="file-goods-image" class="upload-button">
                                             <i class="am-icon-cloud-upload"></i> 上传图片
                                         </div>
                                         <div id="file-list" class="uploader-list am-cf">
+                                            <?php foreach ($model['image'] as $key => $item): ?>
+                                                <div class="file-item thumbnail upload-state-done">
+                                                    <img src="<?= $item['file']['file_name']['file_path'] ?>">
+                                                    <input type="hidden" name="goods[images][]"
+                                                           value="<?= $item['file']['file_name']['value'] ?>">
+                                                    <i class="iconfont icon-shanchu file-item-delete"></i>
+                                                </div>
+                                            <?php endforeach; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -133,45 +151,48 @@
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label">商品编码 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="text" class="tpl-form-input" name="goods[spec][goods_no]"
-                                           value="">
+                                           value="<?= $model['spec'][0]['goods_no'] ?>">
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品价格 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="text" class="tpl-form-input" name="goods[spec][goods_price]"
-                                           required>
+                                           value="<?= $model['spec'][0]['goods_price'] ?>" required>
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label">商品划线价 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="goods[spec][line_price]">
+                                    <input type="text" class="tpl-form-input" name="goods[spec][line_price]"
+                                           value="<?= $model['spec'][0]['line_price'] ?>">
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">当前库存数量 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="goods[spec][stock_num]" required>
+                                    <input type="text" class="tpl-form-input" name="goods[spec][stock_num]"
+                                           value="<?= $model['spec'][0]['stock_num'] ?>" required>
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品重量(Kg) </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="text" class="tpl-form-input" name="goods[spec][goods_weight]"
-                                           required>
+                                           value="<?= $model['spec'][0]['goods_weight'] ?>" required>
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">库存计算方式 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <label class="am-radio-inline">
-                                        <input type="radio" name="goods[deduct_stock_type]" value="10" data-am-ucheck>
+                                        <input type="radio" name="goods[deduct_stock_type]" value="10" data-am-ucheck
+                                            <?= $model['deduct_stock_type'] === 10 ? 'checked' : '' ?> >
                                         下单减库存
                                     </label>
                                     <label class="am-radio-inline">
                                         <input type="radio" name="goods[deduct_stock_type]" value="20" data-am-ucheck
-                                               checked>
+                                            <?= $model['deduct_stock_type'] === 20 ? 'checked' : '' ?> >
                                         付款减库存
                                     </label>
                                 </div>
@@ -184,7 +205,7 @@
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label">商品详情 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <!-- 加载编辑器的容器 -->
-                                    <textarea id="container" name="goods[content]" type="text/plain"></textarea>
+                                    <textarea id="container" name="goods[content]"><?= $model['content'] ?></textarea>
                                 </div>
                             </div>
                             <div class="widget-head am-cf">
@@ -197,7 +218,8 @@
                                             data-am-selected="{searchBox: 1, btnSize: 'sm',  placeholder:'请选择运费模板'}">
                                         <option value="">请选择运费模板</option>
                                         <?php foreach ($delivery as $item): ?>
-                                            <option value="<?= $item['delivery_id'] ?>">
+                                            <option value="<?= $item['delivery_id'] ?>"
+                                                <?= $model['delivery_id'] === $item['delivery_id'] ? 'selected' : '' ?>>
                                                 <?= $item['name'] ?> (<?= $item['method']['text'] ?>)
                                             </option>
                                         <?php endforeach; ?>
@@ -212,11 +234,12 @@
                                 <div class="am-u-sm-9 am-u-end">
                                     <label class="am-radio-inline">
                                         <input type="radio" name="goods[goods_status]" value="10" data-am-ucheck
-                                               checked>
+                                            <?= $model['goods_status']['value'] === 10 ? 'checked' : '' ?> >
                                         上架
                                     </label>
                                     <label class="am-radio-inline">
-                                        <input type="radio" name="goods[goods_status]" value="20" data-am-ucheck>
+                                        <input type="radio" name="goods[goods_status]" value="20" data-am-ucheck
+                                            <?= $model['goods_status']['value'] === 20 ? 'checked' : '' ?> >
                                         下架
                                     </label>
                                 </div>
@@ -225,14 +248,14 @@
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label">初始销量</label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="number" class="tpl-form-input" name="goods[sales_initial]"
-                                           value="0">
+                                           value="<?= $model['sales_initial'] ?>">
                                 </div>
                             </div>
                             <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品排序</label>
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品排序 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="number" class="tpl-form-input" name="goods[goods_sort]"
-                                           value="100" required>
+                                           value="<?= $model['goods_sort'] ?>" required>
                                     <small>数字越小越靠前</small>
                                 </div>
                             </div>
@@ -266,7 +289,7 @@
 
         // 上传商品图片
         $.uploadImages({
-            pick: '#file-phone',
+            pick: '#file-goods-image',
             list: {
                 id: '#file-list',
                 inputName: 'goods[images][]',

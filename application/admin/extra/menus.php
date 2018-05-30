@@ -19,16 +19,11 @@ return [
         'url' => 'goods/index',
         'submenu' => [
             [
-                'name' => '出售中',
+                'name' => '商品列表',
                 'handle' => [
                     'goods/index',
-                    'goods/add'
-                ],
-            ],
-            [
-                'name' => '回收站',
-                'handle' => [
-
+                    'goods/add',
+                    'goods/edit'
                 ],
             ],
             [
@@ -123,6 +118,5 @@ return [
             ],
         ],
     ],
-
 
 ];

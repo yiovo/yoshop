@@ -39,7 +39,7 @@
                                     <tr>
                                         <td class="am-text-middle"><?= $item['goods_id'] ?></td>
                                         <td class="am-text-middle">
-                                            <img src=" <?= $item['image'][0]['file']['file_name']['file_path'] ?>"
+                                            <img src="<?= $item['image'][0]['file']['file_name']['file_path'] ?>"
                                                 width="50" height="50"  alt="">
                                             <?= $item['goods_name'] ?>
                                         </td>
@@ -56,7 +56,7 @@
                                         <td class="am-text-middle"><?= $item['create_time'] ?></td>
                                         <td class="am-text-middle">
                                             <div class="tpl-table-black-operation">
-                                                <a href="<?= url('setting.goods/edit',
+                                                <a href="<?= url('goods/edit',
                                                     ['goods_id' => $item['goods_id']]) ?>">
                                                     <i class="am-icon-pencil"></i> 编辑
                                                 </a>

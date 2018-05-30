@@ -47,6 +47,7 @@ class Delivery extends DeliveryModel
         if ($this->allowField(true)->save($data)) {
             return $this->createDeliveryRule($data['rule']);
         }
+        return false;
     }
 
     /**
