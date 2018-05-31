@@ -29,6 +29,11 @@ ul, li {
     width: 100%;
     transition: all 0.4s ease-in-out;
     padding-left: 160px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .tpl-header-logo {
@@ -1004,6 +1009,7 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-notifications-item .menu-messages-con
     margin-top: 0;
     margin-bottom: 0;
     padding-top: .8rem;
+    color: #656565;
 }
 
 .tpl-form-line-form .am-checkbox .am-ucheck-icons,

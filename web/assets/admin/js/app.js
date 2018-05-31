@@ -10,7 +10,6 @@
     $.fn.extend({
         superForm: function (option) {
             let form = $(this);
-            option = option || {};
             let btn_submit = $('.j-submit');
             form.validator({
                 onValid: function (validity) {

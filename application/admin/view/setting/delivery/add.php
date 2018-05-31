@@ -77,7 +77,7 @@
     </div>
 </div>
 <div class="regional-choice"></div>
-<script src="assets/admin/js/Delivery.js"></script>
+<script src="assets/admin/js/delivery.js"></script>
 <script>
     $(function () {
 

@@ -3,7 +3,7 @@
         <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
             <div class="widget am-cf">
                 <div class="widget-head am-cf">
-                    <div class="widget-title  am-cf">出售中的商品</div>
+                    <div class="widget-title am-cf">出售中的商品</div>
                 </div>
                 <div class="widget-body am-fr">
                     <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
@@ -25,7 +25,6 @@
                                 <th>商品ID</th>
                                 <th>商品名称</th>
                                 <th>商品分类</th>
-                                <th>初始销量</th>
                                 <th>实际销量</th>
                                 <th>商品排序</th>
                                 <th>商品状态</th>
@@ -44,7 +43,6 @@
                                             <?= $item['goods_name'] ?>
                                         </td>
                                         <td class="am-text-middle"><?= $item['category']['name'] ?></td>
-                                        <td class="am-text-middle"><?= $item['sales_initial'] ?></td>
                                         <td class="am-text-middle"><?= $item['sales_actual'] ?></td>
                                         <td class="am-text-middle"><?= $item['goods_sort'] ?></td>
                                         <td class="am-text-middle">
@@ -70,7 +68,7 @@
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="9" class="am-text-center">暂无记录</td>
+                                    <td colspan="8" class="am-text-center">暂无记录</td>
                                 </tr>
                             <?php endif; ?>
                             </tbody>

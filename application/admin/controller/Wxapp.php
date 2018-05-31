@@ -27,4 +27,9 @@ class Wxapp extends Controller
         return $this->fetch('setting', compact('wxapp'));
     }
 
+    public function page()
+    {
+        return $this->fetch('page');
+    }
+
 }

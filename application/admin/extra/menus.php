@@ -40,13 +40,13 @@ return [
     'order' => [
         'name' => '订单管理',
         'icon' => 'icon-order',
-        'url' => 'order/index',
+//        'url' => 'order/index',
         'submenu' => [],
     ],
     'user' => [
         'name' => '会员管理',
         'icon' => 'icon-user',
-        'url' => 'user/index',
+//        'url' => 'user/index',
         'submenu' => [],
     ],
     'marketing' => [
@@ -73,12 +73,12 @@ return [
                     'wxapp/page'
                 ],
             ],
-            [
-                'name' => '底部导航',
-                'handle' => [
-                    'wxapp/tabbar'
-                ],
-            ]
+//            [
+//                'name' => '底部导航',
+//                'handle' => [
+//                    'wxapp/tabbar'
+//                ],
+//            ]
         ],
     ],
     'plugins' => [
