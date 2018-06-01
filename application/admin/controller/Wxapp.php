@@ -27,6 +27,10 @@ class Wxapp extends Controller
         return $this->fetch('setting', compact('wxapp'));
     }
 
+    /**
+     * 页面设计
+     * @return mixed
+     */
     public function page()
     {
         return $this->fetch('page');

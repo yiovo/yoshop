@@ -76,10 +76,10 @@
                                 </label>
                                 <div class="am-u-sm-9">
                                     <div class="am-form-file">
-                                        <div id="form-file-service" class="upload-button">
+                                        <div class="upload-file upload-button" data-name="wxapp[service_image]">
                                             <i class="am-icon-cloud-upload"></i> 上传图片
                                         </div>
-                                        <div id="fileList" class="uploader-list am-cf">
+                                        <div class="uploader-list am-cf">
                                             <?php if ($wxapp['service_image']): ?>
                                                 <div class="file-item thumbnail">
                                                     <img src="<?= $wxapp['service_image']['file_name']['file_path'] ?>">
@@ -117,10 +117,10 @@
                                 </label>
                                 <div class="am-u-sm-9">
                                     <div class="am-form-file">
-                                        <div id="form-file-phone" class="upload-button">
+                                        <div class="upload-file upload-button" data-name="wxapp[phone_image]">
                                             <i class="am-icon-cloud-upload"></i> 上传图片
                                         </div>
-                                        <div id="fileList2" class="uploader-list am-cf">
+                                        <div class="uploader-list am-cf">
                                             <?php if ($wxapp['phone_image']): ?>
                                                 <div class="file-item thumbnail">
                                                     <img src="<?= $wxapp['phone_image']['file_name']['file_path'] ?>">
@@ -165,22 +165,10 @@
          */
         $('#my-form').superForm();
 
-        // 在线客服图标
+        // 单文件上传: 客服图标
         $.uploadImage({
-            pick: '#form-file-service',
-            list: {
-                id: '#fileList',
-                inputName: 'wxapp[service_image]',
-            }
-        });
-
-        // 电话客服图标
-        $.uploadImage({
-            pick: '#form-file-phone',
-            list: {
-                id: '#fileList2',
-                inputName: 'wxapp[phone_image]',
-            }
+            pick: '.upload-file',
+            list: '.uploader-list'
         });
 
     });

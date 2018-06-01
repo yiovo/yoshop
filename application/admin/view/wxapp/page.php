@@ -39,20 +39,33 @@
         let diyDataSave = {
             items: {
                 101: {
-                    "id": "101",
-                    "type": "search",
-                    "params": {"placeholder": "请输入关键字进行搜索"},
-                    "style": {
-                        "background": "#f1f1f2",
-                        "iconColor": "#b4b4b4",
-                        "inputBackground": "#ffffff",
-                        "inputColor": "#999999",
-                        "textAlign": "left",
-                        "paddingTop": "10",
-                        "paddingLeft": "10",
-                        "searchStyle": '',
+                    id: 101,
+                    type: 'search',
+                    params: {'placeholder': '请输入关键字进行搜索'},
+                    style: {
+                        textAlign: 'left',
+                        searchStyle: '',
                     },
                 },
+                102: {
+                    id: 102,
+                    type: 'banner',
+                    style: {
+                        btnColor: '#fff',
+                        btnShape: 'round',
+                    },
+                    data: {
+                        n10001: {
+                            imgUrl: 'http://wm.awm1314.com/addons/ewei_shopv2/plugin/app/static/images/default/banner-1.jpg',
+                            linkUrl: '',
+                        },
+                        n10002: {
+                            imgUrl: 'http://wm.awm1314.com/addons/ewei_shopv2/plugin/app/static/images/default/banner-2.jpg',
+                            linkUrl: '',
+                        },
+                    }
+                },
+
             }
         };
 

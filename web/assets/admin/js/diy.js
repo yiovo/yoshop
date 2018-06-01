@@ -1,25 +1,4 @@
 (function () {
-    /**
-     * 默认diy元素参数
-     * @type {{items: {search: {id: string, params: {placeholder: string}, style: {background: string, iconColor: string, inputBackground: string, inputColor: string, textAlign: string, paddingTop: string, paddingLeft: string}}}}}
-     */
-    // let defaultData = {
-    //     items: {
-    //         search: {
-    //             "id": "search",
-    //             "params": {"placeholder": "请输入关键字进行搜索"},
-    //             "style": {
-    //                 "background": "#f1f1f2",
-    //                 "iconColor": "#b4b4b4",
-    //                 "inputBackground": "#ffffff",
-    //                 "inputColor": "#999999",
-    //                 "textAlign": "left",
-    //                 "paddingTop": "10",
-    //                 "paddingLeft": "10",
-    //             },
-    //         },
-    //     },
-    // };
 
     /***
      * 前端可视化diy

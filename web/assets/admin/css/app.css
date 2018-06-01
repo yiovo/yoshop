@@ -997,8 +997,9 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-notifications-item .menu-messages-con
 }
 
 .am-form input[type=text][readonly] {
-    background: none !important;
-    cursor: pointer;
+    /*background: none !important;*/
+    background: #f7f7f7 !important;
+    cursor: text;
 }
 
 .tpl-form-line-form .am-checkbox,
