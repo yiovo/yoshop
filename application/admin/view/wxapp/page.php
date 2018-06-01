@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="assets/admin/css/diy.css">
-<link rel="stylesheet" href="iconfont.css">
 <div class="row-content am-cf">
     <div class="row">
         <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
@@ -51,16 +50,18 @@
                     id: 102,
                     type: 'banner',
                     style: {
-                        btnColor: '#fff',
+                        btnColor: '#ffffff',
                         btnShape: 'round',
                     },
                     data: {
                         n10001: {
                             imgUrl: 'http://wm.awm1314.com/addons/ewei_shopv2/plugin/app/static/images/default/banner-1.jpg',
+                            imgName: 'banner-1.jpg',
                             linkUrl: '',
                         },
                         n10002: {
                             imgUrl: 'http://wm.awm1314.com/addons/ewei_shopv2/plugin/app/static/images/default/banner-2.jpg',
+                            imgName: 'banner-2.jpg',
                             linkUrl: '',
                         },
                     }
@@ -71,6 +72,5 @@
 
         // 渲染diy页面
         new diyPhone(diyDataSave);
-
     });
 </script>

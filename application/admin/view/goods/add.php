@@ -43,7 +43,7 @@
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品图片 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <div class="am-form-file">
-                                        <div id="file-phone" class="upload-button">
+                                        <div id="file-phone" class="upload-file">
                                             <i class="am-icon-cloud-upload"></i> 上传图片
                                         </div>
                                         <div id="file-list" class="uploader-list am-cf">

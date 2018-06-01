@@ -1,343 +1,96 @@
 /*diy手机*/
-.diy-phone {
-    width: 330px;
-    border-radius: 3px;
-    float: left;
-}
-
-.diy-phone .phone-top {
-    width: 100%;
-    height: 66px;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-image: url('https://img.yzcdn.cn/public_files/2017/12/15/c16b686fda5bc8b2c607f8c64edbef6c.png')
-}
-
-.diy-phone .phone-main {
-    min-height: 520px;
-    border: 1px solid #ddd;
-    border-top: 0;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    position: relative;
-}
-
-.diy-phone .phone-main .drag {
-    position: relative;
-    min-height: 20px;
-    display: block;
-    overflow: hidden;
-    font-size: 1.3rem;
-}
-
+.diy-phone { width: 330px; border-radius: 3px; float: left; }
+.diy-phone .phone-top { width: 100%; height: 66px; background-repeat: no-repeat; background-size: contain; background-image: url('https://img.yzcdn.cn/public_files/2017/12/15/c16b686fda5bc8b2c607f8c64edbef6c.png') }
+.diy-phone .phone-main { min-height: 520px; border: 1px solid #ddd; border-top: 0; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; position: relative; }
+.diy-phone .phone-main .drag { position: relative; min-height: 20px; display: block; overflow: hidden; font-size: 1.3rem; }
 .diy-phone .phone-main .drag.selected:before,
-.diy-phone .phone-main .drag:hover:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 2px dashed #00a0e9;
-    cursor: move;
-    z-index: 10;
-}
-
-.diy-phone .phone-main .drag .btn-edit-del {
-    height: 16px;
-    position: absolute;
-    right: 2px;
-    bottom: 2px;
-    display: none;
-    z-index: 90;
-}
-
-.diy-phone .phone-main .drag .btn-edit-del > div {
-    width: 32px;
-    height: 16px;
-    line-height: 16px;
-    display: inline-block;
-    text-align: center;
-    font-size: 10px;
-    color: #fff;
-    background: rgba(0, 0, 0, .4);
-    margin-left: 2px;
-    cursor: pointer;
-    position: relative;
-    z-index: 11;
-}
-
+.diy-phone .phone-main .drag:hover:before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border: 2px dashed #00a0e9; cursor: move; z-index: 10; }
+.diy-phone .phone-main .drag .btn-edit-del { height: 16px; position: absolute; right: 2px; bottom: 2px; display: none; z-index: 90; }
+.diy-phone .phone-main .drag .btn-edit-del > div { width: 32px; height: 16px; line-height: 16px; display: inline-block; text-align: center; font-size: 10px; color: #fff; background: rgba(0, 0, 0, .4); margin-left: 2px; cursor: pointer; position: relative; z-index: 11; }
 .diy-phone .phone-main .drag.selected .btn-edit-del,
-.diy-phone .phone-main .drag:hover .btn-edit-del {
-    display: block;
-}
-
-.diy-phone .phone-main .drag.nodelete .btn-edit-del .btn-del {
-    display: none;
-}
-
-.diy-phone .phone-main a {
-    color: #337ab7;
-}
+.diy-phone .phone-main .drag:hover .btn-edit-del { display: block; }
+.diy-phone .phone-main .drag.nodelete .btn-edit-del .btn-del { display: none; }
+.diy-phone .phone-main a { color: #337ab7; }
 
 /*编辑器*/
-.diy-editor {
-    float: left;
-    width: 494px;
-    height: auto;
-    min-height: 100px;
-    background: #fdfdfd;
-    padding: 15px 10px;
-    margin-left: 18px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-top: 55px;
-    margin-bottom: 260px;
-}
-
-.diy-editor .editor-arrow {
-    height: 0;
-    position: relative;
-}
-
+.diy-editor { float: left; width: 494px; height: auto; min-height: 100px; background: #fdfdfd; padding: 15px 10px; margin-left: 18px; border: 1px solid #ddd; border-radius: 5px; margin-top: 55px; margin-bottom: 260px; }
+.diy-editor .editor-arrow { height: 0; position: relative; }
 .diy-editor .editor-arrow:after,
-.diy-editor .editor-arrow:before {
-    position: absolute;
-    content: "◆";
-    top: 8px;
-    left: -21px;
-    display: block;
-    width: 9px;
-    height: 18px;
-    font-size: 24px;
-    color: #fdfdfd;
-    z-index: 111;
-}
-
-.diy-editor .editor-arrow:after {
-    left: -22px;
-    color: #ddd;
-    z-index: 11;
-}
+.diy-editor .editor-arrow:before { position: absolute; content: "◆"; top: 8px; left: -21px; display: block; width: 9px; height: 18px; font-size: 24px; color: #fdfdfd; z-index: 111; }
+.diy-editor .editor-arrow:after { left: -22px; color: #ddd; z-index: 11; }
 
 /*表单样式*/
-.diy-editor .tpl-form-line-form {
-    font-size: 1.3rem !important;
-}
-
-.diy-editor .tpl-form-line-form .am-form-group {
-    margin: .8rem 0;
-}
-
-.diy-editor .tpl-form-line-form .am-form-label {
-    padding-top: 0;
-    line-height: 28px;
-    font-size: 1.3rem;
-}
-
-.diy-editor .tpl-form-line-form .am-radio-inline {
-    padding-top: 0;
-    font-size: 1.3rem;
-    line-height: 28px;
-}
-
-.diy-editor .tpl-form-line-form .am-radio-inline .am-ucheck-icons {
-    line-height: 28px;
-}
-
-.diy-editor .tpl-form-line-form input[type=text] {
-    font-size: 1.3rem;
-    padding:  5px;
-    color: #656565;
-}
-
-.diy-editor .tpl-form-line-form input[type=color] {
-    -webkit-appearance: square-button;
-    width: 65px;
-    height: 26px;
-    background-color: #FFFFFF;
-    border: 1px solid #efefef;
-    padding: 0 4px;
-    margin: 1px 0;
-    cursor: pointer;
-}
+.diy-editor .tpl-form-line-form { font-size: 1.3rem !important; }
+.diy-editor .tpl-form-line-form .am-form-group { margin: .8rem 0; }
+.diy-editor .tpl-form-line-form .am-form-label { padding-top: 0; line-height: 28px; font-size: 1.3rem; }
+.diy-editor .tpl-form-line-form .am-radio-inline { padding-top: 0; font-size: 1.3rem; line-height: 28px; }
+.diy-editor .tpl-form-line-form .am-radio-inline .am-ucheck-icons { line-height: 28px; }
+.diy-editor .tpl-form-line-form input[type=text] { font-size: 1.3rem; padding: 5px; color: #656565; }
+.diy-editor .tpl-form-line-form input[type=color] { -webkit-appearance: square-button; width: 65px; height: 26px; background-color: #FFFFFF; border: 1px solid #efefef; padding: 0 4px; margin: 1px 0; cursor: pointer; }
 
 /*表单子元素*/
-.diy-editor .form-items {
-    height: auto;
-}
+.diy-editor .form-items { height: auto; padding: 0 6px;}
+.diy-editor .form-items .item { position: relative; height: auto; background: #fff; padding: 10px; margin-bottom: 10px; border: 1px solid #e7eaec; border-radius: 3px;  cursor: move;}
 
-.diy-editor .form-items .item {
-    height: auto;
-    background: #fff;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #e7eaec;
-    border-radius: 3px;
-    overflow: hidden;
-}
-
-.diy-editor .form-items .item .item-image {
-    height: 70px;
-    width: auto;
-    min-width: 40px;
-    max-width: 220px;
-    background: #eee;
-    float: left;
-    margin-right: 10px;
-    border: 1px solid #e7eaec;
-    position: relative;
-}
-
-.diy-editor .form-items .item .item-image img {
-    height: 68px;
-    width: auto;
-    max-width: 220px;
-    display: block;
-}
-
-.diy-editor .form-items .item .item-form {
-    height: auto;
-    overflow: hidden;
-}
-
-.diy-editor .form-items .item .item-form .input-group {
-    display: table;
-    width: 100%;
-}
-
-.diy-editor .form-items .item .item-form .input-group input,
-.diy-editor .form-items .item .item-form .input-group .input-group-addon {
-    display: table-cell;
-    border: 1px solid #efefef;
-}
-
-.diy-editor .form-items .item .item-form .input-group .input-group-addon {
+.diy-editor .form-items .item .item-delete {
+    position: absolute;
+    top: -10px;
+    right: -10px;
     cursor: pointer;
-    border-radius: 1px;
-    font-weight: 400;
-    /*padding: 0 12px;*/
+    height: 22px;
+    width: 22px;
+    line-height: 22px;
+    background: rgba(153, 153, 153, 0.7);
+    border-radius: 50%;
     text-align: center;
-    background: #fdfdfd;
+    color: #fff !important;
+}
+  .diy-editor .form-items .item  .item-delete:hover { background: #000; }
+
+.diy-editor .form-items .item .item-image { height: 70px; width: auto; min-width: 40px; max-width: 220px; background: #eee; float: left; margin-right: 10px; border: 1px solid #e7eaec; position: relative; }
+.diy-editor .form-items .item .item-image img { height: 68px; width: auto; max-width: 220px; display: block; }
+.diy-editor .form-items .item .item-form { height: auto; overflow: hidden; }
+.diy-editor .form-items .item .item-form .input-group { display: table; width: 100%; }
+.diy-editor .form-items .item .item-form .input-group input,
+.diy-editor .form-items .item .item-form .input-group .input-group-addon { display: table-cell; border: 1px solid #efefef; }
+.diy-editor .form-items .item .item-form .input-group .input-group-addon { cursor: pointer; border-radius: 1px; font-weight: 400; text-align: center; background: #fdfdfd; color: #6b6b6b; border-left: 0; }
+.diy-editor .form-items .item .title { padding-bottom: 10px; }
+.diy-editor .form-items .item .title-child { padding-bottom: 10px; padding-top: 10px; }
+.diy-editor .form-items .item .item-body.child { margin-bottom: 10px; background: #fff; }
+.diy-editor .form-item-add {
+        width: 100%;
+background: #fdfdfd ;
     color: #6b6b6b;
-    border-left: 0;
-}
-
-.diy-editor .form-items .item .title {
-    padding-bottom: 10px;
-}
-
-.diy-editor .form-items .item .title-child {
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
-
-.diy-editor .form-items .item .item-body.child {
-    margin-bottom: 10px;
-    background: #fff;
+    border: 1px solid #efefef ;
+    outline: none;
+    padding: 8px 16px;
+    border-radius: 2px;
+    font-size: 12px;
+    line-height: 1;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
 }
 
 /*diy-搜索*/
-.diy-phone .phone-main .diy-search {
-    background: #f1f1f2;
-    padding: 10px 10px
-}
-
-.diy-search {
-    background: #f1f1f2;
-    padding: 10px 10px
-}
-
-.diy-search .inner {
-    height: 30px;
-    background: #fff;
-    overflow: hidden
-}
-
-.diy-search .inner.radius {
-    border-radius: 5px
-}
-
-.diy-search .inner.round {
-    border-radius: 30px
-}
-
-.diy-search .inner .search-icon {
-    height: 30px;
-    width: 30px;
-    text-align: center;
-    line-height: 30px;
-    color: #b4b4b4
-}
-
-.diy-search .inner .search-input {
-    height: 30px;
-    width: 100%;
-    line-height: 30px;
-    color: #999999
-}
-
-.diy-search .inner .search-input span {
-    padding: 0 10px 0
-}
-
-.diy-search .inner.left .search-icon {
-    float: left
-}
-
-.diy-search .inner.right .search-icon {
-    float: right
-}
+.diy-phone .phone-main .diy-search { background: #f1f1f2; padding: 10px 10px }
+.diy-search { background: #f1f1f2; padding: 10px 10px }
+.diy-search .inner { height: 30px; background: #fff; overflow: hidden }
+.diy-search .inner.radius { border-radius: 5px }
+.diy-search .inner.round { border-radius: 30px }
+.diy-search .inner .search-icon { height: 30px; width: 30px; text-align: center; line-height: 30px; color: #b4b4b4 }
+.diy-search .inner .search-input { height: 30px; width: 100%; line-height: 30px; color: #999999 }
+.diy-search .inner .search-input span { padding: 0 10px 0 }
+.diy-search .inner.left .search-icon { float: left }
+.diy-search .inner.right .search-icon { float: right }
 
 /*diy-banner*/
-.diy-banner {
-    display: block;
-    margin: 0;
-    padding: 0;
-    height: auto;
-    overflow: hidden;
-    position: relative;
-}
-
-.diy-banner img {
-    display: none;
-    width: 100%;
-}
-
-.diy-banner img:first-child {
-    display: block;
-}
-
-.diy-banner .dots {
-    height: 14px;
-    padding: 0 10px;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 10px;
-    opacity: 0.8;
-    text-align: center;
-}
-
-.diy-banner .dots span {
-    display: inline-block;
-}
-
-.diy-banner .dots.rectangle span {
-    height: 10px;
-    width: 16px;
-}
-
-.diy-banner .dots.square span {
-    height: 10px;
-    width: 10px;
-}
-
-.diy-banner .dots.round span {
-    height: 10px;
-    width: 10px;
-    border-radius: 10px;
-}
+.diy-banner { display: block; margin: 0; padding: 0; height: auto; overflow: hidden; position: relative; }
+.diy-banner img { display: none; width: 100%; }
+.diy-banner img:first-child { display: block; }
+.diy-banner .dots { height: 14px; padding: 0 10px; position: absolute; left: 0; right: 0; bottom: 10px; opacity: 0.8; text-align: center; }
+.diy-banner .dots span { display: inline-block; }
+.diy-banner .dots.rectangle span { height: 10px; width: 16px; }
+.diy-banner .dots.square span { height: 10px; width: 10px; }
+.diy-banner .dots.round span { height: 10px; width: 10px; border-radius: 10px; }

@@ -43,9 +43,12 @@ class Upload extends Controller
         // 图片信息
         $fileInfo = $Driver->getFileInfo();
         // 添加文件库记录
-        $this->addUploadFile($fileName, $fileInfo, 'image');
+        $uploadFile = $this->addUploadFile($fileName, $fileInfo, 'image');
         // 图片上传成功
-        return json(['code' => 1, 'msg' => '图片上传成功', 'data' => ['path' => $fileName]]);
+        return json(['code' => 1, 'msg' => '图片上传成功', 'data' => [
+            'path' => $uploadFile['file_name']['value'],
+            'file_path' => $uploadFile['file_name']['file_path'],
+        ]]);
     }
 
     /**
@@ -53,7 +56,8 @@ class Upload extends Controller
      * @param $fileName
      * @param $fileInfo
      * @param $fileType
-     * @return false|int
+     * @return array
+     * @throws \think\Exception
      */
     private function addUploadFile($fileName, $fileInfo, $fileType)
     {
@@ -64,7 +68,8 @@ class Upload extends Controller
         // 存储域名
         $fileUrl = isset($this->config['engine'][$storage]) ? $this->config['engine'][$storage]['domain'] : '';
         // 添加文件库记录
-        return (new UploadFile)->add([
+        $model = new UploadFile;
+        $model->add([
             'wxapp_id' => $this->getWxappId(),
             'storage' => $storage,
             'file_url' => $fileUrl,
@@ -73,7 +78,7 @@ class Upload extends Controller
             'file_type' => $fileType,
             'extension' => pathinfo($fileInfo['name'], PATHINFO_EXTENSION),
         ]);
-
+        return $model->toArray();
     }
 
 }

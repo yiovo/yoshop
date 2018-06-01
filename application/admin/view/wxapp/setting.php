@@ -76,7 +76,7 @@
                                 </label>
                                 <div class="am-u-sm-9">
                                     <div class="am-form-file">
-                                        <div class="upload-file upload-button" data-name="wxapp[service_image]">
+                                        <div class="upload-file" data-name="wxapp[service_image]">
                                             <i class="am-icon-cloud-upload"></i> 上传图片
                                         </div>
                                         <div class="uploader-list am-cf">
@@ -117,7 +117,7 @@
                                 </label>
                                 <div class="am-u-sm-9">
                                     <div class="am-form-file">
-                                        <div class="upload-file upload-button" data-name="wxapp[phone_image]">
+                                        <div class="upload-file" data-name="wxapp[phone_image]">
                                             <i class="am-icon-cloud-upload"></i> 上传图片
                                         </div>
                                         <div class="uploader-list am-cf">

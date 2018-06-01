@@ -15,6 +15,8 @@
         floatStyle: {
             // 用固定定位可以防止定位父级不是Body的情况的兼容处理，表示不兼容IE6，无妨
             'position': 'fixed',
+            'border': '1px solid #ccc',
+            'background-color': '#fff',
             // 'box-shadow': '10px 10px 20px 0 #eee',
             // 'webkitTransform': 'rotate(4deg)',
             // 'mozTransform': 'rotate(4deg)',

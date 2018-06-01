@@ -76,44 +76,27 @@
             </div>
         </div>
         <div class="form-items">
+            {{each data}}
             <div class="item">
-                <div class="item-image">
-                    <img src="http://wm.awm1314.com/addons/ewei_shopv2/plugin/app/static/images/default/banner-1.jpg"
-                         alt="">
-                </div>
-                <div class="item-form">
+                <div class="item-image"><img src="{{ $value.imgUrl }}" alt=""></div>
+                <div class="item-form am-form-file">
                     <div class="input-group">
-                        <input type="text" class="" placeholder="请选择图片" readonly>
+                        <input type="text" data-bind="data.{{ $index }}.imgName" value="{{ $value.imgName }}"
+                               placeholder="请选择图片">
                         <span class="input-group-addon">上传图片</span>
-                    </div>
-<!--<div class="input-group" style="margin-top:10px;">-->
-<!--    <input type="text" class=""  placeholder="请选择链接地址" value="" readonly="">-->
-<!--    <span class="input-group-addon">选择链接</span>-->
-<!--</div>-->
-                </div>
-            </div>
-
-            <div class="item">
-                <div class="item-image">
-                    <img src="http://wm.awm1314.com/addons/ewei_shopv2/plugin/app/static/images/default/cube-1.jpg"
-                         alt="">
-                </div>
-                <div class="item-form">
-                    <div class="input-group">
-                        <input type="text" class="" placeholder="请选择图片" readonly>
-                        <span class="input-group-addon">上传图片</span>
+                        <input type="hidden" data-bind="data.{{ $index }}.imgUrl" value="{{ $value.imgUrl }}">
                     </div>
                     <div class="input-group" style="margin-top:10px;">
-                        <input type="text" class=""  placeholder="请选择链接地址" value="" readonly="">
-                        <span class="input-group-addon">选择链接</span>
+                        <input type="text" class="" placeholder="请输入链接地址    例：page/index/index" value="">
+                        <!-- <span class="input-group-addon">选择链接</span> -->
                     </div>
                 </div>
+                <i class="iconfont icon-shanchu item-delete"></i>
             </div>
-
+            {{/each}}
         </div>
-        <div class="btn btn-w-m btn-block btn-default btn-outline" id="addChild"><i class="fa fa-plus"></i> 添加一个
+        <div class="form-item-add">
+            <i class="fa fa-plus"></i> 添加一个
         </div>
-
-
     </form>
 </script>
