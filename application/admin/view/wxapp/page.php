@@ -12,9 +12,29 @@
                         <div id="phone-main" class="phone-main"></div>
                     </div>
                     <!-- 编辑器容器 -->
-                    <div class="diy-editor form-horizontal" id="diy-editor">
+                    <div id="diy-editor" class="diy-editor form-horizontal">
                         <div class="editor-arrow"></div>
                         <div class="inner"></div>
+                    </div>
+                    <!-- 工具栏 -->
+                    <div id="diy-menu" class="diy-menu">
+                        <div class="navs">
+                            <div id="">
+                                <div class="title">组件</div>
+                                <div id="components">
+                                    <nav class="special" data-type="search"> 搜索框</nav>
+                                    <nav class="special" data-type="banner"> 图片轮播</nav>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action">
+                            <a id="back-top" class="am-fl am-btn am-btn-xs am-btn-default" href="javascript:;">
+                                <span class="am-icon-angle-double-up"></span> 返回顶部
+                            </a>
+                            <button type="button" class="am-btn am-btn-xs am-btn-secondary">
+                                保存页面
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -34,11 +54,11 @@
 <script>
     $(function () {
 
-        // 可编辑diy数据元素
-        let diyDataSave = {
+        // 渲染diy页面
+        new diyPhone({
             items: {
-                101: {
-                    id: 101,
+                'Y101': {
+                    id: 'Y101',
                     type: 'search',
                     params: {'placeholder': '请输入关键字进行搜索'},
                     style: {
@@ -46,31 +66,29 @@
                         searchStyle: '',
                     },
                 },
-                102: {
-                    id: 102,
+                'Y102': {
+                    id: 'Y102',
                     type: 'banner',
                     style: {
                         btnColor: '#ffffff',
                         btnShape: 'round',
                     },
                     data: {
-                        n10001: {
+                        'Y10001': {
                             imgUrl: 'http://wm.awm1314.com/addons/ewei_shopv2/plugin/app/static/images/default/banner-1.jpg',
                             imgName: 'banner-1.jpg',
                             linkUrl: '',
                         },
-                        n10002: {
+                        'Y10002': {
                             imgUrl: 'http://wm.awm1314.com/addons/ewei_shopv2/plugin/app/static/images/default/banner-2.jpg',
                             imgName: 'banner-2.jpg',
                             linkUrl: '',
                         },
                     }
                 },
-
             }
-        };
+        });
 
-        // 渲染diy页面
-        new diyPhone(diyDataSave);
+
     });
 </script>

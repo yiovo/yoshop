@@ -68,17 +68,17 @@ return [
                 ],
             ],
             [
-                'name' => '页面设计',
+                'name' => '首页设计',
                 'handle' => [
                     'wxapp/page'
                 ],
             ],
-//            [
-//                'name' => '底部导航',
-//                'handle' => [
-//                    'wxapp/tabbar'
-//                ],
-//            ]
+            [
+                'name' => '导航设置',
+                'handle' => [
+                    'wxapp/tabbar'
+                ],
+            ]
         ],
     ],
     'plugins' => [

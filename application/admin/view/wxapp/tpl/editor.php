@@ -77,21 +77,27 @@
         </div>
         <div class="form-items">
             {{each data}}
-            <div class="item">
-                <div class="item-image"><img src="{{ $value.imgUrl }}" alt=""></div>
-                <div class="item-form am-form-file">
-                    <div class="input-group">
-                        <input type="text" data-bind="data.{{ $index }}.imgName" value="{{ $value.imgName }}"
-                               placeholder="请选择图片">
-                        <span class="input-group-addon">上传图片</span>
-                        <input type="hidden" data-bind="data.{{ $index }}.imgUrl" value="{{ $value.imgUrl }}">
-                    </div>
-                    <div class="input-group" style="margin-top:10px;">
-                        <input type="text" class="" placeholder="请输入链接地址    例：page/index/index" value="">
-                        <!-- <span class="input-group-addon">选择链接</span> -->
+            <div class="item" data-key="{{ $index }}">
+                <div class="container">
+                    <div class="item-image"><img src="{{ $value.imgUrl }}" alt=""></div>
+                    <div class="item-form am-form-file">
+                        <div class="input-group">
+                            <input type="text" name="imgName" data-bind="data.{{ $index }}.imgName"
+                                   value="{{ $value.imgName }}" placeholder="请选择图片" readonly>
+                            <span class="input-group-addon">上传图片</span>
+                            <input type="hidden" name="imgUrl" data-bind="data.{{ $index }}.imgUrl"
+                                   value="{{ $value.imgUrl }}">
+                        </div>
+                        <div class="input-group" style="margin-top:10px;">
+                            <input type="text" name="linkUrl" data-bind="data.{{ $index }}.linkUrl"
+                                   value="{{ $value.linkUrl }}"
+                                   placeholder="请输入链接地址    例：page/index/index">
+                            <!-- <span class="input-group-addon">选择链接</span> -->
+                        </div>
                     </div>
                 </div>
                 <i class="iconfont icon-shanchu item-delete"></i>
+
             </div>
             {{/each}}
         </div>

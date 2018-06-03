@@ -1,6 +1,6 @@
 /*diy手机*/
-.diy-phone { width: 330px; border-radius: 3px; float: left; }
-.diy-phone .phone-top { width: 100%; height: 66px; background-repeat: no-repeat; background-size: contain; background-image: url('https://img.yzcdn.cn/public_files/2017/12/15/c16b686fda5bc8b2c607f8c64edbef6c.png') }
+.diy-phone { width: 330px; border-radius: 3px; float: left; margin-top: 20px; margin-bottom: 160px; }
+.diy-phone .phone-top { width: 100%; height: 66px; background-repeat: no-repeat; background-size: contain; background-image: url('https://img.yzcdn.cn/public_files/2017/12/15/c16b686fda5bc8b2c607f8c64edbef6c.png'); cursor: pointer; }
 .diy-phone .phone-main { min-height: 520px; border: 1px solid #ddd; border-top: 0; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; position: relative; }
 .diy-phone .phone-main .drag { position: relative; min-height: 20px; display: block; overflow: hidden; font-size: 1.3rem; }
 .diy-phone .phone-main .drag.selected:before,
@@ -21,7 +21,7 @@
 
 /*表单样式*/
 .diy-editor .tpl-form-line-form { font-size: 1.3rem !important; }
-.diy-editor .tpl-form-line-form .am-form-group { margin: .8rem 0; }
+.diy-editor .tpl-form-line-form .am-form-group { margin: 1rem 0; }
 .diy-editor .tpl-form-line-form .am-form-label { padding-top: 0; line-height: 28px; font-size: 1.3rem; }
 .diy-editor .tpl-form-line-form .am-radio-inline { padding-top: 0; font-size: 1.3rem; line-height: 28px; }
 .diy-editor .tpl-form-line-form .am-radio-inline .am-ucheck-icons { line-height: 28px; }
@@ -29,24 +29,11 @@
 .diy-editor .tpl-form-line-form input[type=color] { -webkit-appearance: square-button; width: 65px; height: 26px; background-color: #FFFFFF; border: 1px solid #efefef; padding: 0 4px; margin: 1px 0; cursor: pointer; }
 
 /*表单子元素*/
-.diy-editor .form-items { height: auto; padding: 0 6px;}
-.diy-editor .form-items .item { position: relative; height: auto; background: #fff; padding: 10px; margin-bottom: 10px; border: 1px solid #e7eaec; border-radius: 3px;  cursor: move;}
-
-.diy-editor .form-items .item .item-delete {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    cursor: pointer;
-    height: 22px;
-    width: 22px;
-    line-height: 22px;
-    background: rgba(153, 153, 153, 0.7);
-    border-radius: 50%;
-    text-align: center;
-    color: #fff !important;
-}
-  .diy-editor .form-items .item  .item-delete:hover { background: #000; }
-
+.diy-editor .form-items { height: auto; padding: 0 6px; }
+.diy-editor .form-items .item { position: relative; height: auto; background: #fff; margin-bottom: 10px; border: 1px solid #e7eaec; border-radius: 3px; cursor: move; }
+.diy-editor .form-items .item > .container { padding: 10px; }
+.diy-editor .form-items .item .item-delete { position: absolute; top: -10px; right: -10px; cursor: pointer; height: 22px; width: 22px; line-height: 22px; background: rgba(153, 153, 153, 0.7); border-radius: 50%; text-align: center; color: #fff !important; }
+.diy-editor .form-items .item  .item-delete:hover { background: #000; }
 .diy-editor .form-items .item .item-image { height: 70px; width: auto; min-width: 40px; max-width: 220px; background: #eee; float: left; margin-right: 10px; border: 1px solid #e7eaec; position: relative; }
 .diy-editor .form-items .item .item-image img { height: 68px; width: auto; max-width: 220px; display: block; }
 .diy-editor .form-items .item .item-form { height: auto; overflow: hidden; }
@@ -57,21 +44,7 @@
 .diy-editor .form-items .item .title { padding-bottom: 10px; }
 .diy-editor .form-items .item .title-child { padding-bottom: 10px; padding-top: 10px; }
 .diy-editor .form-items .item .item-body.child { margin-bottom: 10px; background: #fff; }
-.diy-editor .form-item-add {
-        width: 100%;
-background: #fdfdfd ;
-    color: #6b6b6b;
-    border: 1px solid #efefef ;
-    outline: none;
-    padding: 8px 16px;
-    border-radius: 2px;
-    font-size: 12px;
-    line-height: 1;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    user-select: none;
-}
+.diy-editor .form-item-add { width: 100%; background: #fdfdfd; color: #6b6b6b; border: 1px solid #efefef; outline: none; padding: 8px 16px; border-radius: 2px; font-size: 12px; line-height: 1; text-align: center; vertical-align: middle; cursor: pointer; user-select: none; }
 
 /*diy-搜索*/
 .diy-phone .phone-main .diy-search { background: #f1f1f2; padding: 10px 10px }
@@ -94,3 +67,22 @@ background: #fdfdfd ;
 .diy-banner .dots.rectangle span { height: 10px; width: 16px; }
 .diy-banner .dots.square span { height: 10px; width: 10px; }
 .diy-banner .dots.round span { height: 10px; width: 10px; border-radius: 10px; }
+
+/*diy-工具栏*/
+.diy-menu { width: 840px; height: auto; background: #fdfdfd; margin-right: -455px; border: 1px solid #ddd; border-radius: 3px; position: fixed; bottom: 15px; right: 50%; box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); z-index: 999; -webkit-transition: all 0.3s; transition: all 0.3s; user-select: none; }
+.diy-menu .navs,
+.diy-menu .action { height: auto; }
+.diy-menu .navs { padding: 10px 24px; border-bottom: 1px dotted #ddd; display: block; position: relative; display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; }
+.diy-menu .navs .title { font-size: 12px; color: #999; margin-bottom: 10px; }
+.diy-menu .navs .btns-global { width: 96px; }
+/*.diy-menu .navs .btns-local { -webkit-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1; }*/
+.diy-menu .navs nav { display: inline-block; width: 72px; height: 26px; padding: 0; margin: 0 14px 10px 0; line-height: 24px; border: 1px solid #dddddd; text-align: center; border-radius: 2px; font-size: 12px; cursor: pointer; -webkit-transition: background-color 0.3s; -moz-transition: background-color 0.3s; transition: background-color 0.3s; }
+.diy-menu .navs .btns-global nav { height: 40px; line-height: 38px; }
+.diy-menu .navs nav.page-setup { width: auto; padding: 0; margin: 0; position: absolute; top: 12px; right: 12px; border-color: #fff; line-height: 12px; }
+.diy-menu .navs nav.page-setup:hover { border-color: #fff; }
+.diy-menu .navs nav.special { background: #f4f4f4; }
+.diy-menu .navs nav:hover { background: #fff; border: 1px solid #00aeff; transition: all 0.4s; -moz-transition: all 0.4s; -webkit-transition: all 0.4s; -o-transition: all 0.4s; }
+.diy-menu .navs nav:active { -webkit-box-shadow: inset 1px 3px 5px rgba(0, 0, 0, 0.2); box-shadow: inset 1px 3px 5px rgba(0, 0, 0, 0.2); }
+.diy-menu .action { padding: 10px; text-align: right; position: relative; }
+.diy-menu .action:before { content: ""; position: absolute; top: 0; left: 0; height: 0; width: 100%; }
+.diy-menu .action nav { margin-right: 5px; }
