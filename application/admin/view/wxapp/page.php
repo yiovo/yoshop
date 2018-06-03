@@ -31,7 +31,7 @@
                             <a id="back-top" class="am-fl am-btn am-btn-xs am-btn-default" href="javascript:;">
                                 <span class="am-icon-angle-double-up"></span> 返回顶部
                             </a>
-                            <button type="button" class="am-btn am-btn-xs am-btn-secondary">
+                            <button id="submit" type="button" class="am-btn am-btn-xs am-btn-secondary">
                                 保存页面
                             </button>
                         </div>
@@ -55,39 +55,7 @@
     $(function () {
 
         // 渲染diy页面
-        new diyPhone({
-            items: {
-                'Y101': {
-                    id: 'Y101',
-                    type: 'search',
-                    params: {'placeholder': '请输入关键字进行搜索'},
-                    style: {
-                        textAlign: 'left',
-                        searchStyle: '',
-                    },
-                },
-                'Y102': {
-                    id: 'Y102',
-                    type: 'banner',
-                    style: {
-                        btnColor: '#ffffff',
-                        btnShape: 'round',
-                    },
-                    data: {
-                        'Y10001': {
-                            imgUrl: 'http://wm.awm1314.com/addons/ewei_shopv2/plugin/app/static/images/default/banner-1.jpg',
-                            imgName: 'banner-1.jpg',
-                            linkUrl: '',
-                        },
-                        'Y10002': {
-                            imgUrl: 'http://wm.awm1314.com/addons/ewei_shopv2/plugin/app/static/images/default/banner-2.jpg',
-                            imgName: 'banner-2.jpg',
-                            linkUrl: '',
-                        },
-                    }
-                },
-            }
-        });
+        new diyPhone(<?= $jsonData ?: '{}' ?>);
 
 
     });

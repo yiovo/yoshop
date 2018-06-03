@@ -155,7 +155,7 @@
 
 </div>
 <script src="assets/layer/layer.js"></script>
-<script src="//cdn.bootcss.com/jquery.form/3.51/jquery.form.min.js"></script>
+<script src="assets/admin/js/jquery.form.min.js"></script>
 <script src="assets/admin/js/amazeui.min.js"></script>
 <!--<script src="assets/admin/js/amazeui.datatables.min.js"></script>-->
 <!--<script src="assets/admin/js/dataTables.responsive.min.js"></script>-->

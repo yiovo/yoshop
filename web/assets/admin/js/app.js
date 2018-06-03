@@ -42,8 +42,8 @@
                             type: "post",
                             dataType: "json",
                             success: function (result) {
-                                // result.code === 1 ? $.show_success(result.msg, result.url)
-                                //     : $.show_error(result.msg);
+                                result.code === 1 ? $.show_success(result.msg, result.url)
+                                    : $.show_error(result.msg);
                                 btn_submit.attr('disabled', false);
                             }
                         });

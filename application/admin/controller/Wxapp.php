@@ -3,6 +3,7 @@
 namespace app\admin\controller;
 
 use app\admin\model\Wxapp as WxappModel;
+use app\admin\model\WxappPage as WxappPageModel;
 
 /**
  * 小程序管理
@@ -29,11 +30,22 @@ class Wxapp extends Controller
 
     /**
      * 页面设计
-     * @return mixed
+     * @return array|mixed
+     * @throws \think\exception\DbException
      */
     public function page()
     {
-        return $this->fetch('page');
+        $model = WxappPageModel::detail();
+
+        if (!$this->request->isAjax()) {
+            $jsonData = $model['page_data']['json'];
+            return $this->fetch('page', compact('jsonData'));
+        }
+        $data = $this->postData('data');
+        if (!$model->edit($data)) {
+            return $this->renderError('更新失败');
+        }
+        return $this->renderSuccess('更新成功');
     }
 
 }

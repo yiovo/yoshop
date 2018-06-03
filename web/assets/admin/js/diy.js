@@ -131,6 +131,8 @@
                         this.backTop();
                         // 新增组件事件
                         this.components();
+                        // 数据提交
+                        this.submit();
                     },
 
                     /**
@@ -149,6 +151,19 @@
                     backTop: function () {
                         this.diyMenu.find('#back-top').click(function () {
                             $('html,body').animate({scrollTop: 0}, 100);
+                        });
+                    },
+
+                    /**
+                     * 保存数据到后端
+                     */
+                    submit: function () {
+                        $('#submit').click(function () {
+                            console.log('123123');
+                            $.post('', {data: diyData}, function (result) {
+                                result.code === 1 ? $.show_success(result.msg, result.url)
+                                    : $.show_error(result.msg);
+                            },'json');
                         });
                     },
 

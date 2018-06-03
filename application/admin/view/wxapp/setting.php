@@ -84,7 +84,7 @@
                                                 <div class="file-item thumbnail">
                                                     <img src="<?= $wxapp['service_image']['file_name']['file_path'] ?>">
                                                     <input type="hidden" name="wxapp[service_image]"
-                                                           value="<?= $wxapp['service_image']['file_name'] ?>">
+                                                           value="<?= $wxapp['service_image']['file_name']['value'] ?>">
                                                     <i class="iconfont icon-shanchu file-item-delete"></i>
                                                 </div>
                                             <?php endif; ?>
@@ -125,7 +125,7 @@
                                                 <div class="file-item thumbnail">
                                                     <img src="<?= $wxapp['phone_image']['file_name']['file_path'] ?>">
                                                     <input type="hidden" name="wxapp[phone_image]"
-                                                           value="<?= $wxapp['phone_image']['file_name'] ?>">
+                                                           value="<?= $wxapp['phone_image']['file_name']['value'] ?>">
                                                     <i class="iconfont icon-shanchu3 file-item-delete"></i>
                                                 </div>
                                             <?php endif; ?>
