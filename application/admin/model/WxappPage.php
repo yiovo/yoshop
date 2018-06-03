@@ -11,7 +11,6 @@ use app\common\model\WxappPage as WxappPageModel;
  */
 class WxappPage extends WxappPageModel
 {
-
     /**
      * 自动转换data为json格式
      * @param $value

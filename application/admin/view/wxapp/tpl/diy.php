@@ -3,10 +3,8 @@
     <div class="drag" id="diy-{{ id }}" data-itemid="{{ id }}">
         <div class="diy-search" style="background: {{ style.background }}; padding-top:{{ style.paddingTop  }}px; ">
             <div class="inner left {{ style.searchStyle }}" style="background: {{ style.inputBackground }};">
-                <div class="search-icon" style="color: {{ style.iconColor }};">
-                    <i class="iconfont icon-ss-search"></i>
-                </div>
                 <div class="search-input" style="text-align: {{ style.textAlign }}; color: {{ style.inputColor }};">
+                    <i class="search-icon iconfont icon-ss-search"></i>
                     <span>{{ params.placeholder }}</span>
                 </div>
             </div>

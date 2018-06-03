@@ -413,7 +413,7 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-notifications-title { color: #616161;
 .search-form .am-selected .am-btn-default { border: 1px solid #ccc; }
 
 /* 表单页面*/
-.form-require::after { content: "*"; color: #f00; line-height: 18px; }
+.am-form .form-require::after { content: "*"; color: #f00; line-height: 18px; }
 .am-field-valid:focus,
 .am-form-success .am-form-field:focus { box-shadow: none !important; -webkit-box-shadow: none !important; }
 .am-form-success label { color: #656565 !important; }
@@ -424,6 +424,19 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-notifications-title { color: #616161;
 .am-form .form-tab-group { display: none; }
 .am-form .form-tab-group.active { display: block; }
 .am-form .am-form-file a.webuploader-container { font-size: 1.3rem; }
+.am-form input[type=color] {
+    -webkit-appearance: square-button;
+    width: 44px;
+    height: 23px;
+    background-color: buttonface;
+    cursor: pointer;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(220, 220, 220);
+    border-image: initial;
+    padding: 0 2px;
+  }
+
 
 /* 图片上传*/
 .am-form .am-form-file .upload-file { font-size: 0; }

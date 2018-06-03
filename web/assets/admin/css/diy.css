@@ -1,3 +1,4 @@
+.iconfont { font-size: inherit !important;  }
 /*diy手机*/
 .diy-phone { width: 330px; border-radius: 3px; float: left; margin-top: 20px; margin-bottom: 160px; }
 .diy-phone .phone-top { width: 100%; height: 66px; background-repeat: no-repeat; background-size: contain; background-image: url('https://img.yzcdn.cn/public_files/2017/12/15/c16b686fda5bc8b2c607f8c64edbef6c.png'); cursor: pointer; }
@@ -48,15 +49,10 @@
 
 /*diy-搜索*/
 .diy-phone .phone-main .diy-search { background: #f1f1f2; padding: 10px 10px }
-.diy-search { background: #f1f1f2; padding: 10px 10px }
 .diy-search .inner { height: 30px; background: #fff; overflow: hidden }
 .diy-search .inner.radius { border-radius: 5px }
 .diy-search .inner.round { border-radius: 30px }
-.diy-search .inner .search-icon { height: 30px; width: 30px; text-align: center; line-height: 30px; color: #b4b4b4 }
-.diy-search .inner .search-input { height: 30px; width: 100%; line-height: 30px; color: #999999 }
-.diy-search .inner .search-input span { padding: 0 10px 0 }
-.diy-search .inner.left .search-icon { float: left }
-.diy-search .inner.right .search-icon { float: right }
+.diy-search .inner .search-input { height: 30px; width: 100%; line-height: 30px; color: #999999; padding: 0 10px; }
 
 /*diy-banner*/
 .diy-banner { display: block; margin: 0; padding: 0; height: auto; overflow: hidden; position: relative; }
