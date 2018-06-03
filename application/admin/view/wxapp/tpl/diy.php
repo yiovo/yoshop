@@ -11,6 +11,10 @@
                 </div>
             </div>
         </div>
+        <div class="btn-edit-del">
+            <div class="btn-edit">编辑</div>
+            <div class="btn-del">删除</div>
+        </div>
     </div>
 </script>
 
@@ -26,6 +30,10 @@
                     <span style="background: {{ style.btnColor }};"></span>
                 {{/each}}
             </div>
+        </div>
+        <div class="btn-edit-del">
+            <div class="btn-edit">编辑</div>
+            <div class="btn-del">删除</div>
         </div>
     </div>
 </script>

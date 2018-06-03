@@ -7,6 +7,7 @@
         , diyData = {}
 
         // 编辑器新增元素默认数据
+        // TODO: 即将废弃, 改为defaultData
         , addEditorItemData = {
             banner: {
                 imgUrl: 'http://wm.awm1314.com/addons/ewei_shopv2/plugin/app/static/images/default/banner-1.jpg',
@@ -62,9 +63,11 @@
                     // 渲染已有diy数据
                     method.render.main();
                     // 初始化diy元素拖拽事件
-                    this.diyItemDDSort();
+                    this.diyItem.DDSort();
                     // 初始化diy元素选中事件
-                    this.diyItemSelected();
+                    this.diyItem.selected();
+                    // 初始化diy元素删除事件
+                    this.diyItem.delete();
                     // 注册数据绑定
                     this.inputDataBind();
                     // 初始化工具栏事件
@@ -72,32 +75,63 @@
                 },
 
                 /**
-                 * 初始化diy元素拖拽事件
+                 * diy元素事件类
                  */
-                diyItemDDSort: function () {
-                    // diy元素拖拽
-                    $(options.container).DDSort({
-                        target: '.drag',
-                        delay: 50, // 延时处理，默认为 50 ms，防止手抖点击 A 链接无效
-                    });
-                },
+                diyItem: {
 
+                    /**
+                     * 初始化拖拽事件
+                     */
+                    DDSort: function () {
+                        let $phoneMain = $(options.phoneMain);
+                        // diy元素拖拽
+                        $phoneMain.DDSort({
+                            target: '.drag',
+                            delay: 50, // 延时处理，默认为 50 ms，防止手抖点击 A 链接无效
+                            up: function () {
+                                let newItems = {};
+                                $phoneMain.find('.drag').each(function () {
+                                    let itemId = $(this).data('itemid');
+                                    newItems[itemId] = diyData.items[itemId]
+                                });
+                                diyData.items = newItems;
+                            }
+                        });
+                    },
 
-                /**
-                 * 初始化diy元素选中事件
-                 */
-                diyItemSelected: function () {
-                    let $container = $(options.container);
-                    $container.on('click', '.drag', function () {
-                        let $drag = $(this);
-                        if (!$drag.hasClass('selected')) {
-                            // 设置选中
-                            $container.children().removeClass('selected');
-                            $drag.addClass('selected');
-                            // 渲染编辑器
-                            method.render.editor($drag.data('itemid'));
-                        }
-                    });
+                    /**
+                     * 初始化选中事件
+                     */
+                    selected: function () {
+                        let $phoneMain = $(options.phoneMain);
+                        $phoneMain.on('click', '.drag', function () {
+                            let $drag = $(this);
+                            if (!$drag.hasClass('selected')) {
+                                // 设置选中
+                                $phoneMain.children().removeClass('selected');
+                                $drag.addClass('selected');
+                                // 渲染编辑器
+                                method.render.editor($drag.data('itemid'));
+                            }
+                        });
+                    },
+
+                    delete: function () {
+                        let $phoneMain = $(options.phoneMain);
+                        $phoneMain.on('click', '.btn-del', function () {
+                            let $this = $(this);
+                            layer.confirm('确定要删除吗？', function (index) {
+                                let $item = $this.parent().parent()
+                                    , $nextItem = $item.next()
+                                    , itemId = $item.data('itemid');
+                                method.diyData.deleteItem(itemId);
+                                $item.remove();
+                                $nextItem.trigger('click');
+                                layer.close(index);
+                            });
+                        });
+                    },
+
                 },
 
 
@@ -159,11 +193,14 @@
                      */
                     submit: function () {
                         $('#submit').click(function () {
-                            console.log('123123');
+                            if ($.isEmptyObject(diyData.items)) {
+                                layer.msg('至少存在一个组件', {anim: 6});
+                                return false;
+                            }
                             $.post('', {data: diyData}, function (result) {
                                 result.code === 1 ? $.show_success(result.msg, result.url)
                                     : $.show_error(result.msg);
-                            },'json');
+                            });
                         });
                     },
 
@@ -180,12 +217,12 @@
 
                     /**
                      * 添加banner
+                     * @param itemId
                      * @param $items
                      */
-                    banner: function ($items) {
-                        let itemId = $items.parent().data('itemid')
-                            , data = method.diyData.additemData(itemId, 'banner');
-                        let $html = $(
+                    banner: function (itemId, $items) {
+                        let data = method.diyData.additemData(itemId, 'banner');
+                        $items.append($(
                             '<div class="item" data-key="' + data.dataId + '">' +
                             '  <div class="container">' +
                             '    <div class="item-image"> <img src="' + data.imgUrl + '" alt=""> </div>' +
@@ -205,8 +242,7 @@
                             '  </div>' +
                             '  <i class="iconfont icon-shanchu item-delete"></i>' +
                             '</div>'
-                        );
-                        $items.append($html);
+                        ));
                         // 文件上传
                         method.editor.event.upload();
                     },
@@ -274,7 +310,7 @@
                         $html.on('click', '.item-delete', function () {
                             let $item = $(this).parent();
                             if ($html.find('.item-delete').length <= 1) {
-                                layer.msg('至少保留一个');
+                                layer.msg('至少保留一个', {anim: 6});
                                 return false;
                             }
                             layer.confirm('您确定要删除吗？', {
@@ -298,8 +334,13 @@
                      */
                     itemAdd: function ($html) {
                         $html.find('.form-item-add').click(function () {
-                            let $items = $(this).prev('.form-items');
-                            method.editor.addItem.banner($items);
+                            let $items = $(this).prev('.form-items')
+                                , itemId = $items.parent().data('itemid')
+                                , type = diyData.items[itemId].type;
+                            // 添加子元素
+                            method.editor.addItem[type](itemId, $items);
+                            // 重新渲染diy元素
+                            method.render.refreshDiyItem(itemId);
                         });
                     },
 
@@ -406,7 +447,7 @@
                     $.each(diyData.items, function (index, item) {
                         html += template('tpl_diy_' + item.type, item);
                     });
-                    $(options.container).html(html);
+                    $(options.phoneMain).html(html);
                 },
 
                 /**
@@ -444,8 +485,8 @@
                     }
                     // 渲染页面
                     let html = template('tpl_diy_' + type, item);
-                    $(options.container).append(html);
-                    $('#diy-' + diyItemId).trigger('click');
+                    $(options.phoneMain).append(html)
+                        .find('#diy-' + diyItemId).trigger('click');
                 },
 
 
@@ -514,6 +555,13 @@
                     return data;
                 },
 
+                /**
+                 * 删除diy元素
+                 */
+                deleteItem: function (itemId) {
+                    delete diyData.items[itemId];
+                },
+
             },
 
         };
@@ -526,7 +574,7 @@
         // diy 数据
         diyData = data;
         // 配置信息
-        options = $.extend({}, {container: '#phone-main', editor: '#diy-editor'}, opts);
+        options = $.extend({}, {phoneMain: '#phone-main', editor: '#diy-editor'}, opts);
         // 执行初始化
         method.init.execute();
     }

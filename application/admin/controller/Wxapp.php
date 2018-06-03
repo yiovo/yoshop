@@ -36,7 +36,6 @@ class Wxapp extends Controller
     public function page()
     {
         $model = WxappPageModel::detail();
-
         if (!$this->request->isAjax()) {
             $jsonData = $model['page_data']['json'];
             return $this->fetch('page', compact('jsonData'));

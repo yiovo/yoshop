@@ -19,7 +19,7 @@ class WxappPage extends WxappPageModel
      */
     public function setPageDataAttr($value)
     {
-        return json_encode($value);
+        return json_encode($value ?: ['items' => []]);
     }
 
     /**
@@ -27,8 +27,9 @@ class WxappPage extends WxappPageModel
      * @param $page_data
      * @return bool
      */
-    public function edit($page_data) {
-        return $this->save(['page_data' => $page_data]) !== false;
+    public function edit($page_data)
+    {
+        return $this->save(compact('page_data')) !== false;
     }
 
 }
