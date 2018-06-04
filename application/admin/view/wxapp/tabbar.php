@@ -9,6 +9,13 @@
                                 <div class="widget-title am-fl">顶部导航设置</div>
                             </div>
                             <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label form-require"> 小程序标题 </label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" name="tabbar[wxapp_title]"
+                                           value="<?= $model['wxapp_title'] ?>">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
                                 <label class="am-u-sm-3 am-form-label form-require">顶部导航文字颜色 </label>
                                 <div class="am-u-sm-9">
                                     <label class="am-radio-inline">

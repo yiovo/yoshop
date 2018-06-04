@@ -59,7 +59,7 @@ class Controller extends ThinkController
         // 控制器名称
         $controller = toUnderScore($this->request->controller());
         // 方法名称
-        $action = $$this->request->action();
+        $action = $this->request->action();
         // 控制器分组 (用于定义所属模块)
         $groupstr = strstr($controller, '.', true);
         $group = $groupstr !== false ? $groupstr : $controller;
