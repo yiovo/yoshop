@@ -42,12 +42,20 @@ class BaseModel extends Model
     }
 
     /**
-     * admin模块 wxapp_id
+     * 设置wxapp_id (admin模块)
      */
     protected static function setAdminWxappId()
     {
         $session = Session::get('best_shop_admin');
         self::$wxapp_id = $session['wxapp']['wxapp_id'];
+    }
+
+    /**
+     * 设置wxapp_id (api模块)
+     */
+    protected static function setApiWxappId() {
+        $request = Request::instance();
+        self::$wxapp_id  = $request->param('wxapp_id');
     }
 
     /**
