@@ -426,8 +426,8 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-notifications-title { color: #616161;
 .am-form .am-form-file a.webuploader-container { font-size: 1.3rem; }
 .am-form input[type=color] {
     -webkit-appearance: square-button;
-    width: 44px;
-    height: 23px;
+    width: 5rem;
+    height: 2.2rem;
     background-color: buttonface;
     cursor: pointer;
     border-width: 1px;

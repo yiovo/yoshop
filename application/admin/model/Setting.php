@@ -20,7 +20,7 @@ class Setting extends SettingModel
     public function edit($data)
     {
         // 删除系统设置缓存
-        Cache::rm('setting');
+        Cache::rm('setting_' . self::$wxapp_id);
         return $this->save(['values' => $data]) !== false ?: false;
     }
 

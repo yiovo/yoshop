@@ -51,9 +51,9 @@ class Setting extends BaseModel
      */
     public static function getAll()
     {
-        if (!$data = Cache::get('setting')) {
+        if (!$data = Cache::get('setting_' . self::$wxapp_id)) {
             $data = array_column(collection(self::all())->toArray(), null, 'key');
-            Cache::set('setting', $data);
+            Cache::set('setting_' . self::$wxapp_id, $data);
         }
         return $data;
     }

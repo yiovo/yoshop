@@ -20,7 +20,7 @@ class Setting extends Controller
     {
         $store = SettingModel::detail('store');
         if (!$this->request->isAjax()) {
-            $values = $store->values;
+            $values = $store['values'];
             return $this->fetch('store', compact('values'));
         }
         if ($store->edit($this->postData('store'))) {
@@ -38,7 +38,7 @@ class Setting extends Controller
     {
         $store = SettingModel::detail('trade');
         if (!$this->request->isAjax()) {
-            $values = $store->values;
+            $values = $store['values'];
             return $this->fetch('trade', compact('values'));
         }
         if ($store->edit($this->postData('trade'))) {
@@ -56,7 +56,7 @@ class Setting extends Controller
     {
         $store = SettingModel::detail('storage');
         if (!$this->request->isAjax()) {
-            $values = $store->values;
+            $values = $store['values'];
             return $this->fetch('upload', compact('values'));
         }
         if ($store->edit($this->postData('storage'))) {
