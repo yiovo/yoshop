@@ -157,9 +157,14 @@
                  * 工具栏事件
                  */
                 toolbar: {
-
+                    /**
+                     * 工具栏元素
+                     */
                     diyMenu: $('#diy-menu'),
 
+                    /**
+                     * 执行初始化事件
+                     */
                     execute: function () {
                         // 返回顶部事件
                         this.backTop();
@@ -402,11 +407,8 @@
                         uploader.on('fileQueued', function (file) {
                             let $input = $('#rt_' + file.source.ruid).parent().prev('input')
                                 , $list = $input.parent().parent().prev(option.list)
-                                , $li = $('<div>' +
-                                '<img>' +
-                                '</div>'),
-                                $img = $li.find('img');
-                            $list.empty().append($li);
+                                , $img = $('<img>');
+                            $list.empty().append($img);
                             uploader.makeThumb(file, function (error, src) {
                                 if (error) {
                                     $img.replaceWith('<span>不能预览</span>');

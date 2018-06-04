@@ -26,7 +26,7 @@
 .diy-editor .tpl-form-line-form .am-form-label { padding-top: 0; line-height: 28px; font-size: 1.3rem; }
 .diy-editor .tpl-form-line-form .am-radio-inline { padding-top: 0; font-size: 1.3rem; line-height: 28px; }
 .diy-editor .tpl-form-line-form .am-radio-inline .am-ucheck-icons { line-height: 28px; }
-.diy-editor .tpl-form-line-form input[type=text] { font-size: 1.3rem; padding: 5px; color: #656565; }
+.diy-editor .tpl-form-line-form input[type=text] {     line-height: 28px; font-size: 1.3rem; padding: 0 5px; color: #656565; }
 .diy-editor .tpl-form-line-form input[type=color] { -webkit-appearance: square-button; width: 65px; height: 26px; background-color: #FFFFFF; border: 1px solid #efefef; padding: 0 4px; margin: 1px 0; cursor: pointer; }
 
 /*表单子元素*/
@@ -35,13 +35,13 @@
 .diy-editor .form-items .item > .container { padding: 10px; }
 .diy-editor .form-items .item .item-delete { position: absolute; top: -10px; right: -10px; cursor: pointer; height: 22px; width: 22px; line-height: 22px; background: rgba(153, 153, 153, 0.7); border-radius: 50%; text-align: center; color: #fff !important; }
 .diy-editor .form-items .item  .item-delete:hover { background: #000; }
-.diy-editor .form-items .item .item-image { height: 70px; width: auto; min-width: 40px; max-width: 220px; background: #eee; float: left; margin-right: 10px; border: 1px solid #e7eaec; position: relative; }
-.diy-editor .form-items .item .item-image img { height: 68px; width: auto; max-width: 220px; display: block; }
+.diy-editor .form-items .item .item-image { height: 70px; width: 105px; min-width: 40px; max-width: 220px; background: #eee; float: left; margin-right: 10px; border: 1px solid #e7eaec; position: relative; text-align: center; }
+.diy-editor .form-items .item .item-image img { height: 68px; width: auto; max-width: 220px; }
 .diy-editor .form-items .item .item-form { height: auto; overflow: hidden; }
 .diy-editor .form-items .item .item-form .input-group { display: table; width: 100%; }
 .diy-editor .form-items .item .item-form .input-group input,
 .diy-editor .form-items .item .item-form .input-group .input-group-addon { display: table-cell; border: 1px solid #efefef; }
-.diy-editor .form-items .item .item-form .input-group .input-group-addon { cursor: pointer; border-radius: 1px; font-weight: 400; text-align: center; background: #fdfdfd; color: #6b6b6b; border-left: 0; }
+.diy-editor .form-items .item .item-form .input-group .input-group-addon { border-radius: 1px; font-weight: 400; text-align: center; background: #fdfdfd; color: #6b6b6b; border-left: 0; width: 82px; }
 .diy-editor .form-items .item .title { padding-bottom: 10px; }
 .diy-editor .form-items .item .title-child { padding-bottom: 10px; padding-top: 10px; }
 .diy-editor .form-items .item .item-body.child { margin-bottom: 10px; background: #fff; }
