@@ -22,23 +22,26 @@ class BaseModel extends Model
     public static function init()
     {
         parent::init();
-        // 后期静态绑定类名称
-        if (preg_match('/app\\\(\w+)/', get_called_class(), $match)) {
-            $callfunc = "set{$match[1]}WxappId";
-            self::$callfunc();
-        }
         // 获取当前域名
         self::$base_url = self::baseUrl();
+        // 后期静态绑定类名称
+        self::staticBindWxappId(get_called_class());
     }
 
     /**
-     * 获取当前域名
-     * @return string
+     * 后期静态绑定类名称
+     * 用于定义全局查询范围的wxapp_id条件
+     * 子类调用方式:
+     *   非静态方法:  self::$wxapp_id
+     *   静态方法中:  $self = new static();   $self::$wxapp_id
+     * @param $calledClass
      */
-    protected static function baseUrl()
+    public static function staticBindWxappId($calledClass)
     {
-        $request = Request::instance();
-        return $request->scheme() . '://' . $request->host() . dirname($request->baseUrl());
+        if (preg_match('/app\\\(\w+)/', $calledClass, $match)) {
+            $callfunc = 'set' . $match[1] . 'WxappId';
+            self::$callfunc();
+        }
     }
 
     /**
@@ -53,9 +56,20 @@ class BaseModel extends Model
     /**
      * 设置wxapp_id (api模块)
      */
-    protected static function setApiWxappId() {
+    protected static function setApiWxappId()
+    {
         $request = Request::instance();
-        self::$wxapp_id  = $request->param('wxapp_id');
+        self::$wxapp_id = $request->param('wxapp_id');
+    }
+
+    /**
+     * 获取当前域名
+     * @return string
+     */
+    protected static function baseUrl()
+    {
+        $request = Request::instance();
+        return $request->scheme() . '://' . $request->host() . dirname($request->baseUrl());
     }
 
     /**

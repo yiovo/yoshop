@@ -18,6 +18,8 @@ class WxappNavbar extends WxappNavbarModel
      */
     public function edit($data)
     {
+        // 删除wxapp缓存
+        Wxapp::deleteCache();
         return $this->save($data) !== false;
     }
 

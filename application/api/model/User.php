@@ -3,8 +3,8 @@
 namespace app\api\model;
 
 use app\common\model\User as UserModel;
+//use app\api\model\Wxapp;
 use app\common\library\wechat\WxUser;
-use app\common\model\Wxapp;
 use app\common\exception\BaseException;
 use think\Cache;
 use think\Request;
@@ -16,8 +16,17 @@ use think\Request;
  */
 class User extends UserModel
 {
-    protected $hidden = ['create_time', 'update_time'];
     private $token;
+
+    /**
+     * 隐藏字段
+     * @var array
+     */
+    protected $hidden = [
+        'wxapp_id',
+        'create_time',
+        'update_time'
+    ];
 
     /**
      * 获取用户信息
@@ -59,7 +68,7 @@ class User extends UserModel
     public function login($wxapp_id)
     {
         // 微信登录 获取session_key
-        $session = $this->wxlogin($wxapp_id);
+        $session = $this->wxlogin();
         // 自动注册用户
         $user_id = $this->register($session['openid'], $wxapp_id);
         // 生成token (session3rd)
@@ -80,16 +89,15 @@ class User extends UserModel
 
     /**
      * 微信登录
-     * @param $wxapp_id
      * @return array|mixed
      * @throws BaseException
      * @throws \think\Exception
      * @throws \think\exception\DbException
      */
-    private function wxlogin($wxapp_id)
+    private function wxlogin()
     {
         // 获取当前小程序信息
-        $wxapp = Wxapp::getWxappCache($wxapp_id);
+        $wxapp = Wxapp::detail();
         // 微信登录 (获取session_key)
         $code = \request()->post('code');
         $WxUser = new WxUser($wxapp['app_id'], $wxapp['app_secret']);
@@ -122,9 +130,9 @@ class User extends UserModel
         if (!$user = $this->get(['open_id' => $open_id])) {
             if (!$this->save(compact('open_id', 'wxapp_id')))
                 throw new BaseException(['msg' => '用户注册失败']);
-            return $this->user_id;
+            return $this['user_id'];
         } else {
-            return $user->user_id;
+            return $user['user_id'];
         }
     }
 

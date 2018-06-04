@@ -19,7 +19,7 @@ class Wxapp extends Controller
      */
     public function base()
     {
-        $wxapp = WxappModel::getWxappCache($this->wxapp_id);
+        $wxapp = WxappModel::getWxappCache();
         return $this->renderSuccess(compact('wxapp'));
     }
 

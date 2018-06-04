@@ -11,5 +11,14 @@ use app\common\model\WxappNavbar as WxappNavbarModel;
  */
 class WxappNavbar extends WxappNavbarModel
 {
+    /**
+     * 隐藏字段
+     * @var array
+     */
+    protected $hidden = [
+        'wxapp_id',
+        'create_time',
+        'update_time'
+    ];
 
 }

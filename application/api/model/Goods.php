@@ -11,5 +11,14 @@ use app\common\model\Goods as GoodsModel;
  */
 class Goods extends GoodsModel
 {
+    /**
+     * 隐藏字段
+     * @var array
+     */
+    protected $hidden = [
+        'wxapp_id',
+        'create_time',
+        'update_time'
+    ];
 
 }

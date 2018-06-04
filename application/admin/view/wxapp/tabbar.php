@@ -20,11 +20,11 @@
                                 <div class="am-u-sm-9">
                                     <label class="am-radio-inline">
                                         <input type="radio" name="tabbar[top_text_color]" value="10" data-am-ucheck
-                                            <?= $model['top_text_color'] === 10 ? 'checked' : '' ?>> 黑色
+                                            <?= $model['top_text_color']['value'] === 10 ? 'checked' : '' ?>> 黑色
                                     </label>
                                     <label class="am-radio-inline">
                                         <input type="radio" name="tabbar[top_text_color]" value="20" data-am-ucheck
-                                            <?= $model['top_text_color'] === 20 ? 'checked' : '' ?>> 白色
+                                            <?= $model['top_text_color']['value'] === 20 ? 'checked' : '' ?>> 白色
                                     </label>
                                 </div>
                             </div>

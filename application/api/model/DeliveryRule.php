@@ -11,6 +11,14 @@ use app\common\model\DeliveryRule as DeliveryRuleModel;
  */
 class DeliveryRule extends DeliveryRuleModel
 {
-
+    /**
+     * 隐藏字段
+     * @var array
+     */
+    protected $hidden = [
+        'wxapp_id',
+        'create_time',
+        'update_time'
+    ];
 
 }

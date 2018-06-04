@@ -3,6 +3,7 @@
 namespace app\admin\model;
 
 use app\common\model\Wxapp as WxappModel;
+use think\Cache;
 
 /**
  * 微信小程序模型
@@ -34,6 +35,8 @@ class Wxapp extends WxappModel
             $phone_image,
             'service.phone'
         );
+        // 删除wxapp缓存
+        self::deleteCache();
         return $this->allowField(true)->save($data) !== false ?: false;
     }
 
@@ -69,6 +72,15 @@ class Wxapp extends WxappModel
             'from_type' => $fromType
         ]);
         return $fileId;
+    }
+
+    /**
+     * 删除wxapp缓存
+     * @return bool
+     */
+    public static function deleteCache()
+    {
+        return Cache::rm('wxapp_' . self::$wxapp_id);
     }
 
 }

@@ -11,5 +11,13 @@ use app\common\model\UploadFile as UploadFileModel;
  */
 class UploadFile extends UploadFileModel
 {
+    /**
+     * 隐藏字段
+     * @var array
+     */
+    protected $hidden = [
+        'wxapp_id',
+        'create_time',
+    ];
 
 }

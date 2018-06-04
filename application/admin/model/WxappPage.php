@@ -28,6 +28,8 @@ class WxappPage extends WxappPageModel
      */
     public function edit($page_data)
     {
+        // 删除wxapp缓存
+        Wxapp::deleteCache();
         return $this->save(compact('page_data')) !== false;
     }
 

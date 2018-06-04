@@ -18,7 +18,8 @@ class Wxapp extends BaseModel
      * 小程序导航
      * @return \think\model\relation\HasOne
      */
-    public function navbar() {
+    public function navbar()
+    {
         return $this->hasOne('WxappNavbar');
     }
 
@@ -26,7 +27,8 @@ class Wxapp extends BaseModel
      * 小程序页面
      * @return \think\model\relation\HasOne
      */
-    public function diyPage() {
+    public function diyPage()
+    {
         return $this->hasOne('WxappPage');
     }
 
@@ -55,25 +57,25 @@ class Wxapp extends BaseModel
      */
     public static function detail()
     {
-        return self::get([], ['serviceImage', 'phoneImage', 'navbar', 'diyPage']);
+        return self::get([], ['serviceImage', 'phoneImage']);
     }
 
     /**
      * 从缓存中获取小程序信息
-     * @param $wxapp_id
      * @return array|mixed
      * @throws \think\Exception
      * @throws \think\exception\DbException
      */
-    public static function getWxappCache($wxapp_id)
+    public static function getWxappCache()
     {
-        if ($cache = Cache::get('wxapp_' . $wxapp_id))
-            return $cache;
-        self::get([], [ 'navbar', 'diyPage']);
-        if (!$wxapp = self::detail())
-            throw new BaseException(['msg' => '未找到当前小程序信息']);
-        Cache::set('wxapp_' . $wxapp_id, $wxapp->toArray());
-        return $wxapp;
+        $self = new static();
+        if (!$data = Cache::get('wxapp_' . $self::$wxapp_id)) {
+            $wxapp = self::get([], ['serviceImage', 'phoneImage', 'navbar']);
+            if (empty($wxapp)) throw new BaseException(['msg' => '未找到当前小程序信息']);
+            $data = $wxapp->toArray();
+            Cache::set('wxapp_' . $self::$wxapp_id, $data);
+        }
+        return $data;
     }
 
 }
