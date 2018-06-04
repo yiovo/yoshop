@@ -3,16 +3,15 @@
 namespace app\admin\controller;
 
 use think\Config;
-use think\Request;
 use think\Session;
-use think\Controller as BaseController;
+use think\Controller as ThinkController;
 
 /**
  * 后台控制器基类
  * Class BaseController
  * @package app\admin\controller
  */
-class Controller extends BaseController
+class Controller extends ThinkController
 {
     protected $admin;
 
@@ -57,11 +56,10 @@ class Controller extends BaseController
      */
     protected function getRouteinfo()
     {
-        $request = Request::instance();
         // 控制器名称
-        $controller = toUnderScore($request->controller());
+        $controller = toUnderScore($this->request->controller());
         // 方法名称
-        $action = $request->action();
+        $action = $$this->request->action();
         // 控制器分组 (用于定义所属模块)
         $groupstr = strstr($controller, '.', true);
         $group = $groupstr !== false ? $groupstr : $controller;
