@@ -37,7 +37,7 @@ class Goods extends BaseModel
      */
     public function image()
     {
-        return $this->hasMany('GoodsImage');
+        return $this->hasMany('GoodsImage')->order(['id' => 'asc']);
     }
 
     /**
@@ -52,7 +52,7 @@ class Goods extends BaseModel
     }
 
     /**
-     * 获取列表
+     * 获取商品列表
      * @return \think\Paginator
      * @throws \think\exception\DbException
      */
@@ -60,10 +60,44 @@ class Goods extends BaseModel
     {
         return $this->with(['category', 'image.file'])
             ->where('is_delete', '=', 0)
-            ->order(['goods_id' => 'desc'])
+            ->order(['goods_sort' => 'asc', 'goods_id' => 'desc'])
             ->paginate(15, false, [
                 'query' => Request::instance()->request()
             ]);
     }
+
+    /**
+     * 猜您喜欢 (临时方法以后作废)
+     * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getBestList()
+    {
+        return $this->with(['spec','category', 'image.file'])
+            ->where('is_delete', '=', 0)
+            ->where('goods_status', '=', 10)
+            ->order(['sales_initial' => 'desc', 'goods_sort' => 'asc'])
+            ->limit(10)
+            ->select();
+    }
+
+    /**
+     * 新品推荐 (临时方法以后作废)
+     * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getNewList()
+    {
+        return $this->with(['spec','category', 'image.file'])
+            ->where('is_delete', '=', 0)
+            ->where('goods_status', '=', 10)
+            ->order(['goods_id' => 'desc', 'goods_sort' => 'asc'])
+            ->select();
+    }
+
 
 }

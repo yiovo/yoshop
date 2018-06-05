@@ -53,16 +53,16 @@ class Goods extends GoodsModel
      */
     private function addGoodsImages($images)
     {
-        $model = new UploadFile;
-        $imagesIds = $model->where('file_name', 'in', $images)->column('file_id');
-        $data = [];
-        foreach ($imagesIds as $imageId) {
-            $data[] = [
-                'image_id' => $imageId,
-                'wxapp_id' => self::$wxapp_id
-            ];
-        }
         $this->image()->delete();
+        $model = new UploadFile;
+
+        $imagesIds = $model->where('file_name', 'in', $images)
+            ->column('file_id', 'file_name');
+
+        $data = array_map(function ($val) use ($imagesIds) {
+            return ['image_id' => $imagesIds[$val], 'wxapp_id' => self::$wxapp_id];
+        }, $images);
+//pre($data);
         return $this->image()->saveAll($data);
     }
 
@@ -81,7 +81,7 @@ class Goods extends GoodsModel
         $data['wxapp_id'] = $data['spec']['wxapp_id'] = self::$wxapp_id;
 
         // 开启事务
-        Db::startTrans();
+//        Db::startTrans();
         try {
             // 保存商品
             $this->allowField(true)->save($data);

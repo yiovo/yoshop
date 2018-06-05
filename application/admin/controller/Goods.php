@@ -84,7 +84,6 @@ class Goods extends Controller
             $delivery = Delivery::getAll();
             return $this->fetch('edit', compact('model', 'catgory', 'delivery'));
         }
-
         // 更新记录
         if ($model->edit($this->postData('goods'))) {
             return $this->renderSuccess('更新成功', url('goods/index'));
