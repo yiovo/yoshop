@@ -48,6 +48,9 @@
                                         </div>
                                         <div id="file-list" class="uploader-list am-cf">
                                         </div>
+                                        <div class="help-block am-margin-top-sm">
+                                            <small>尺寸750x750像素以上，大小2M以下，最多10张 (可拖拽图片调整显示顺序 )</small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -229,7 +232,7 @@
                                 </div>
                             </div>
                             <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品排序</label>
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品排序 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="number" class="tpl-form-input" name="goods[goods_sort]"
                                            value="100" required>
