@@ -17,8 +17,12 @@ class Category extends CategoryModel
      */
     protected $hidden = [
         'wxapp_id',
-        'create_time',
+//        'create_time',
         'update_time'
     ];
+
+    public static function getList() {
+
+    }
 
 }

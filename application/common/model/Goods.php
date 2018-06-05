@@ -58,7 +58,7 @@ class Goods extends BaseModel
      */
     public function getList()
     {
-        return $this->with(['category', 'image.file'])
+        return $this->with(['category', 'image.file', 'spec'])
             ->where('is_delete', '=', 0)
             ->order(['goods_sort' => 'asc', 'goods_id' => 'desc'])
             ->paginate(15, false, [
@@ -75,7 +75,7 @@ class Goods extends BaseModel
      */
     public function getBestList()
     {
-        return $this->with(['spec','category', 'image.file'])
+        return $this->with(['spec', 'category', 'image.file'])
             ->where('is_delete', '=', 0)
             ->where('goods_status', '=', 10)
             ->order(['sales_initial' => 'desc', 'goods_sort' => 'asc'])
@@ -92,7 +92,7 @@ class Goods extends BaseModel
      */
     public function getNewList()
     {
-        return $this->with(['spec','category', 'image.file'])
+        return $this->with(['spec', 'category', 'image.file'])
             ->where('is_delete', '=', 0)
             ->where('goods_status', '=', 10)
             ->order(['goods_id' => 'desc', 'goods_sort' => 'asc'])

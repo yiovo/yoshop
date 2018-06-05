@@ -19,7 +19,7 @@ class Category extends BaseModel
      */
     public function image()
     {
-        return $this->hasOne('uploadFile', 'file_id','image_id');
+        return $this->hasOne('uploadFile', 'file_id', 'image_id');
     }
 
     /**
@@ -29,8 +29,9 @@ class Category extends BaseModel
      */
     public static function getALL()
     {
-        if (!Cache::get('category_' . self::$wxapp_id)) {
-            $all = ($data = static::all()) ?  collection($data)->toArray() : [];
+        $self = new static();
+        if (!Cache::get('category_' . $self::$wxapp_id)) {
+            $all = ($data = static::all(null, ['image'])) ? collection($data)->toArray() : [];
             $tree = [];
             foreach ($all as $first) {
                 if ($first['parent_id'] !== 0) continue;
@@ -47,9 +48,9 @@ class Category extends BaseModel
                 !empty($twoTree) && $first['child'] = $twoTree;
                 $tree[$first['category_id']] = $first;
             }
-            Cache::set('category_' . self::$wxapp_id, compact('all', 'tree'));
+            Cache::set('category_' . $self::$wxapp_id, compact('all', 'tree'));
         }
-        return Cache::get('category_' . self::$wxapp_id);
+        return Cache::get('category_' . $self::$wxapp_id);
     }
 
 

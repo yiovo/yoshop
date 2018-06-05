@@ -2,25 +2,23 @@
 
 namespace app\api\controller;
 
-use app\api\model\Goods as GoodsModel;
+use app\api\model\Category as CategoryModel;
 
 /**
- * 商品控制器
+ * 商品分类控制器
  * Class Goods
  * @package app\api\controller
  */
-class Goods extends Controller
+class Category extends Controller
 {
     /**
-     * 商品列表
+     * 全部分类
      * @return array
      * @throws \think\exception\DbException
      */
     public function lists()
     {
-        $model = new GoodsModel;
-        $list = $model->getList();
+        $list = array_values(CategoryModel::getCacheTree());
         return $this->renderSuccess(compact('list'));
     }
-
 }

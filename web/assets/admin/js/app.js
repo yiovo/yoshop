@@ -36,7 +36,7 @@
                 submit: function () {
                     if (this.isFormValid() === true) {
                         // 禁用按钮, 防止二次提交
-                        // btn_submit.attr('disabled', true);
+                        btn_submit.attr('disabled', true);
                         // 表单提交
                         form.ajaxSubmit({
                             type: "post",
