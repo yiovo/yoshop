@@ -41,10 +41,9 @@ class Category extends Controller
     }
 
     /**
-     * 添加配送模板
+     * 添加商品分类
      * @return array|mixed
-     * @throws \think\Exception
-     * @throws \think\exception\PDOException
+     * @throws \think\exception\DbException
      */
     public function add()
     {
@@ -71,15 +70,15 @@ class Category extends Controller
     public function edit($category_id)
     {
         // 模板详情
-        $model = CategoryModel::get($category_id);
+        $model = CategoryModel::get($category_id, ['image']);
         if (!$this->request->isAjax()) {
             // 获取所有地区
             $list = $model->getCacheTree();
-            return $this->fetch('edit', compact('model','list'));
+            return $this->fetch('edit', compact('model', 'list'));
         }
         // 更新记录
         if ($model->edit($this->postData('category'))) {
-            return $this->renderSuccess('更新成功', url('goods.category/edit'));
+            return $this->renderSuccess('更新成功', url('goods.category/index'));
         }
         $error = $model->getError() ?: '更新失败';
         return $this->renderError($error);

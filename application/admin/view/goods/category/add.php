@@ -24,12 +24,23 @@
                                         <?php if (isset($list)): foreach ($list as $first): ?>
                                             <option value="<?= $first['category_id'] ?>">
                                                 <?= $first['name'] ?></option>
-                                            <?php if (isset($first['child'])): foreach ($first['child'] as $two): ?>
-                                                <option value="<?= $two['category_id'] ?>">
-                                                    　　<?= $two['name'] ?></option>
-                                            <?php endforeach; endif; ?>
                                         <?php endforeach; endif; ?>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">分类图片  </label>
+                                <div class="am-u-sm-9 am-u-end">
+                                    <div class="am-form-file">
+                                        <div class="upload-file" data-name="category[image]">
+                                            <i class="am-icon-cloud-upload"></i> 上传图片
+                                        </div>
+                                        <div class="uploader-list am-cf">
+                                        </div>
+                                    </div>
+                                    <div class="help-block am-margin-top-sm">
+                                        <small>尺寸150x150像素以上，大小2M以下</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="am-form-group">
@@ -47,6 +58,13 @@
 </div>
 <script>
     $(function () {
+
+        // 单文件上传: 分类图片
+        $.uploadImage({
+            pick: '.upload-file',
+            list: '.uploader-list'
+        });
+
         /**
          * 表单验证提交
          * @type {*}

@@ -14,6 +14,15 @@ class Category extends BaseModel
     protected $name = 'category';
 
     /**
+     * 分类图片
+     * @return \think\model\relation\HasOne
+     */
+    public function image()
+    {
+        return $this->hasOne('uploadFile', 'file_id','image_id');
+    }
+
+    /**
      * 所有分类
      * @return mixed
      * @throws \think\exception\DbException

@@ -27,9 +27,9 @@ class UploadFile extends BaseModel
      * @param $fileName
      * @return mixed
      */
-    public function getFildIdByName($fileName)
+    public static function getFildIdByName($fileName)
     {
-        return $this->where(['file_name' => $fileName])->value('file_id');
+        return (new static)->where(['file_name' => $fileName])->value('file_id');
     }
 
     /**
@@ -37,9 +37,9 @@ class UploadFile extends BaseModel
      * @param $fileId
      * @return mixed
      */
-    public function getFileName($fileId)
+    public static function getFileName($fileId)
     {
-        return $this->where(['file_id' => $fileId])->value('file_name');
+        return (new static)->where(['file_id' => $fileId])->value('file_name');
     }
 
 }

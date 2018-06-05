@@ -23,6 +23,7 @@
                             <thead>
                             <tr>
                                 <th>商品ID</th>
+                                <th>商品图片</th>
                                 <th>商品名称</th>
                                 <th>商品分类</th>
                                 <th>实际销量</th>
@@ -38,10 +39,13 @@
                                     <tr>
                                         <td class="am-text-middle"><?= $item['goods_id'] ?></td>
                                         <td class="am-text-middle">
-                                            <img src="<?= $item['image'][0]['file']['file_name']['file_path'] ?>"
-                                                width="50" height="50"  alt="">
-                                            <?= $item['goods_name'] ?>
+                                            <a href="<?= $item['image'][0]['file']['file_name']['file_path'] ?>"
+                                               title="点击查看大图" target="_blank">
+                                                <img src="<?= $item['image'][0]['file']['file_name']['file_path'] ?>"
+                                                     width="50" height="50" alt="商品图片">
+                                            </a>
                                         </td>
+                                        <td class="am-text-middle"><?= $item['goods_name'] ?></td>
                                         <td class="am-text-middle"><?= $item['category']['name'] ?></td>
                                         <td class="am-text-middle"><?= $item['sales_actual'] ?></td>
                                         <td class="am-text-middle"><?= $item['goods_sort'] ?></td>
@@ -68,7 +72,7 @@
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="8" class="am-text-center">暂无记录</td>
+                                    <td colspan="9" class="am-text-center">暂无记录</td>
                                 </tr>
                             <?php endif; ?>
                             </tbody>
