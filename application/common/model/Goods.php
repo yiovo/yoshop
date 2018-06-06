@@ -53,17 +53,44 @@ class Goods extends BaseModel
 
     /**
      * 获取商品列表
+     * @param string $sortType
+     * @param bool $sortPrice
      * @return \think\Paginator
      * @throws \think\exception\DbException
      */
-    public function getList()
+    public function getList($sortType = 'all', $sortPrice = false)
     {
-        return $this->with(['category', 'image.file', 'spec'])
+        // 排序规则
+        $sort = [];
+        if ($sortType === 'all') {
+            $sort = ['goods_sort', 'goods_id'];
+        } elseif ($sortType === 'sales') {
+            $sort = ['goods_sales' => 'desc'];
+        } elseif ($sortType === 'price') {
+            $sort = $sortPrice ? ['goods_max_price' => 'desc'] :  ['goods_min_price'];
+        }
+
+        // 商品表名称
+        $tableName = $this->getTable();
+
+        // 多规格商品 最高价与最低价
+        $GoodsSpec = new GoodsSpec;
+        $minPriceSql = $GoodsSpec->field(['MIN(goods_price)'])
+            ->where('goods_id', 'EXP', "= `$tableName`.`goods_id`")->buildSql();
+        $maxPriceSql = $GoodsSpec->field(['MAX(goods_price)'])
+            ->where('goods_id', 'EXP', "= `$tableName`.`goods_id`")->buildSql();
+
+        // 执行查询
+        $list = $this->field(['*', '(sales_initial + sales_actual) as goods_sales',
+            "$minPriceSql AS goods_min_price",
+            "$maxPriceSql AS goods_max_price"
+        ])->with(['category', 'image.file', 'spec'])
             ->where('is_delete', '=', 0)
-            ->order(['goods_sort' => 'asc', 'goods_id' => 'desc'])
-            ->paginate(15, false, [
+            ->order($sort)
+            ->paginate(10, false, [
                 'query' => Request::instance()->request()
             ]);
+        return $list;
     }
 
     /**

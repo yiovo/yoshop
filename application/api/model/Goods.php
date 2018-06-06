@@ -16,6 +16,8 @@ class Goods extends GoodsModel
      * @var array
      */
     protected $hidden = [
+        'sales_initial',
+        'sales_actual',
         'wxapp_id',
         'create_time',
         'update_time'

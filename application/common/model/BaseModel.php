@@ -63,6 +63,13 @@ class BaseModel extends Model
     }
 
     /**
+     * 设置wxapp_id (common模块)
+     */
+    protected static function setCommonWxappId()
+    {
+    }
+
+    /**
      * 获取当前域名
      * @return string
      */
