@@ -25,4 +25,16 @@ class Goods extends Controller
         return $this->renderSuccess(compact('list'));
     }
 
+    /**
+     * 获取商品详情
+     * @param $goods_id
+     * @return array
+     * @throws \think\exception\DbException
+     */
+    public function detail($goods_id) {
+        $model = new GoodsModel;
+        $detail = $model->getDetail($goods_id);
+        return $this->renderSuccess(compact('detail'));
+    }
+
 }

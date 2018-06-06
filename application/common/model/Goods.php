@@ -67,7 +67,7 @@ class Goods extends BaseModel
         } elseif ($sortType === 'sales') {
             $sort = ['goods_sales' => 'desc'];
         } elseif ($sortType === 'price') {
-            $sort = $sortPrice ? ['goods_max_price' => 'desc'] :  ['goods_min_price'];
+            $sort = $sortPrice ? ['goods_max_price' => 'desc'] : ['goods_min_price'];
         }
 
         // 商品表名称
@@ -86,11 +86,30 @@ class Goods extends BaseModel
             "$maxPriceSql AS goods_max_price"
         ])->with(['category', 'image.file', 'spec'])
             ->where('is_delete', '=', 0)
+            ->where('goods_status', '=', 10)
             ->order($sort)
             ->paginate(10, false, [
                 'query' => Request::instance()->request()
             ]);
         return $list;
+    }
+
+    /**
+     * 获取商品详情
+     * @param $goods_id
+     * @return array|false|\PDOStatement|string|\think\Model
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getDetail($goods_id)
+    {
+//
+        return $this->field(['*', '(sales_initial + sales_actual) as goods_sales'])
+            ->with(['category', 'image.file', 'spec'])
+            ->where('goods_id','=', $goods_id)->find();
+
+//        return self::get($goods_id, ['category', 'image.file', 'spec']);
     }
 
     /**
