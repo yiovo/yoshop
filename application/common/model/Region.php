@@ -20,6 +20,18 @@ class Region extends BaseModel
     public $name = 'region';
 
     /**
+     * 根据名称获取地区id
+     * @param $name
+     * @param int $level
+     * @return mixed
+     */
+    public static function getIdByName($name, $level = 0)
+    {
+        return self::useGlobalScope(false)->where(compact('name', 'level'))
+            ->value('id');
+    }
+
+    /**
      * 获取所有地区(树状结构)
      * @return mixed
      */

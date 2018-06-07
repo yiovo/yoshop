@@ -92,4 +92,15 @@ class Controller extends ThinkController
     {
         return $this->renderJson(self::JSON_ERROR_STATUS, $msg, $data);
     }
+
+    /**
+     * 获取post数据 (数组)
+     * @param $key
+     * @return mixed
+     */
+    protected function postData($key)
+    {
+        return $this->request->post($key . '/a');
+    }
+
 }

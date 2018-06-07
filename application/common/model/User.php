@@ -18,6 +18,14 @@ class User extends BaseModel
 
     /**
      * 关联收货地址表
+     * @return \think\model\relation\HasMany
+     */
+    public function address() {
+        return $this->hasMany('UserAddress');
+    }
+
+    /**
+     * 关联收货地址表 (默认地址)
      * @return \think\model\relation\HasOne
      */
     public function addressDefault() {
