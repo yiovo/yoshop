@@ -64,7 +64,7 @@
                                             <?= $wxapp['is_service'] ? '' : 'checked' ?>> 关闭
                                     </label>
                                     <div class="help-block">
-                                        <small>客服图标显示位置：首页、商品详情页、会员中心页、订单详情页
+                                        <small>客服图标显示位置：首页、商品详情页、用户中心页、订单详情页
                                             <a href="https://mpkf.weixin.qq.com/" target="_blank">客服登录地址</a>
                                         </small>
                                     </div>
@@ -107,7 +107,7 @@
                                             <?= $wxapp['is_phone'] ? '' : 'checked' ?>> 关闭
                                     </label>
                                     <div class="help-block">
-                                        <small>客服图标显示位置：首页、商品详情页、会员中心页、订单详情页</small>
+                                        <small>客服图标显示位置：首页、商品详情页、用户中心页、订单详情页</small>
                                     </div>
                                 </div>
                             </div>

@@ -63,7 +63,7 @@ class Goods extends BaseModel
         // 排序规则
         $sort = [];
         if ($sortType === 'all') {
-            $sort = ['goods_sort', 'goods_id'];
+            $sort = ['goods_sort', 'goods_id' => 'desc'];
         } elseif ($sortType === 'sales') {
             $sort = ['goods_sales' => 'desc'];
         } elseif ($sortType === 'price') {
@@ -104,12 +104,9 @@ class Goods extends BaseModel
      */
     public function getDetail($goods_id)
     {
-//
         return $this->field(['*', '(sales_initial + sales_actual) as goods_sales'])
             ->with(['category', 'image.file', 'spec'])
-            ->where('goods_id','=', $goods_id)->find();
-
-//        return self::get($goods_id, ['category', 'image.file', 'spec']);
+            ->where('goods_id', '=', $goods_id)->find();
     }
 
     /**

@@ -5,7 +5,7 @@ namespace app\api\controller;
 use app\api\model\User as UserModel;
 
 /**
- * 会员管理
+ * 用户管理
  * Class User
  * @package app\api
  */

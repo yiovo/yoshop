@@ -44,7 +44,7 @@ return [
         'submenu' => [],
     ],
     'user' => [
-        'name' => '会员管理',
+        'name' => '用户管理',
         'icon' => 'icon-user',
 //        'url' => 'user/index',
         'submenu' => [],

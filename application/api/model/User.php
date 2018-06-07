@@ -34,10 +34,9 @@ class User extends UserModel
      * @return null|static
      * @throws \think\exception\DbException
      */
-    public function getUser($token)
+    public static function getUser($token)
     {
-        $session = Cache::get($token);
-        return self::get(['open_id' => $session['openid']]);
+        return self::detail(['open_id' =>  Cache::get($token)['openid']]);
     }
 
     /**
@@ -54,6 +53,7 @@ class User extends UserModel
             'province' => $post['province'],
             'country' => $post['country'],
             'avatar' => $post['avatarUrl'],
+            'is_auth' => 1,
         ]);
     }
 
@@ -118,7 +118,7 @@ class User extends UserModel
     }
 
     /**
-     * 自动注册会员
+     * 自动注册用户
      * @param $open_id
      * @param $wxapp_id
      * @return mixed
