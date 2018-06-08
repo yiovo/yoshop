@@ -41,6 +41,15 @@ class Goods extends BaseModel
     }
 
     /**
+     * 关联运费模板表
+     * @return \think\model\relation\BelongsTo
+     */
+    public function delivery()
+    {
+        return $this->BelongsTo('Delivery');
+    }
+
+    /**
      * 计费方式
      * @param $value
      * @return mixed
@@ -105,7 +114,7 @@ class Goods extends BaseModel
     public function getDetail($goods_id)
     {
         return $this->field(['*', '(sales_initial + sales_actual) as goods_sales'])
-            ->with(['category', 'image.file', 'spec'])
+            ->with(['category', 'image.file', 'spec', 'delivery.rule'])
             ->where('goods_id', '=', $goods_id)->find();
     }
 

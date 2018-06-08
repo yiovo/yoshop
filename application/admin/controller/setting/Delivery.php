@@ -3,6 +3,7 @@
 namespace app\admin\controller\setting;
 
 use app\admin\controller\Controller;
+use app\admin\model\DeliveryRule;
 use app\admin\model\Region;
 use app\admin\model\Delivery as DeliveryModel;
 
@@ -35,7 +36,7 @@ class Delivery extends Controller
      */
     public function delete($delivery_id)
     {
-        $model = DeliveryModel::get($delivery_id);
+        $model = DeliveryModel::detail($delivery_id);
         if (!$model->remove()) {
             $error = $model->getError() ?: '删除失败';
             return $this->renderError($error);
@@ -76,7 +77,7 @@ class Delivery extends Controller
     public function edit($delivery_id)
     {
         // 模板详情
-        $model = DeliveryModel::get($delivery_id, ['rule']);
+        $model = DeliveryModel::detail($delivery_id);
         if (!$this->request->isAjax()) {
             // 获取所有地区
             $regionData = json_encode(Region::getCacheTree());

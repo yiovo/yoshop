@@ -59,14 +59,12 @@ class Delivery extends BaseModel
     /**
      * 运费模板详情
      * @param $delivery_id
-     * @return array|false|\PDOStatement|string|\think\Model
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
+     * @return null|static
      * @throws \think\exception\DbException
      */
-    public function detail($delivery_id)
+    public static function detail($delivery_id)
     {
-        return $this->with(['rule'])->where(['delivery_id' => $delivery_id])->find();
+        return self::get($delivery_id, ['rule']);
     }
 
 }

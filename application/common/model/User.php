@@ -20,16 +20,18 @@ class User extends BaseModel
      * 关联收货地址表
      * @return \think\model\relation\HasMany
      */
-    public function address() {
+    public function address()
+    {
         return $this->hasMany('UserAddress');
     }
 
     /**
      * 关联收货地址表 (默认地址)
-     * @return \think\model\relation\HasOne
+     * @return \think\model\relation\BelongsTo
      */
-    public function addressDefault() {
-        return $this->hasOne('UserAddress');
+    public function addressDefault()
+    {
+        return $this->belongsTo('UserAddress', 'address_id');
     }
 
     /**
@@ -37,7 +39,8 @@ class User extends BaseModel
      * @param $value
      * @return mixed
      */
-    public function getGenderAttr($value) {
+    public function getGenderAttr($value)
+    {
         return $this->gender[$value];
     }
 
@@ -62,8 +65,9 @@ class User extends BaseModel
      * @return null|static
      * @throws \think\exception\DbException
      */
-    public static function detail($where) {
-        return self::get($where, ['addressDefault']);
+    public static function detail($where)
+    {
+        return self::get($where, ['address', 'addressDefault']);
     }
 
 }

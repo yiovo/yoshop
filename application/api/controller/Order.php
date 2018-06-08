@@ -2,8 +2,7 @@
 
 namespace app\api\controller;
 
-// use app\api\model\Order as OrderModel;
-use app\api\model\Goods as GoodsModel;
+ use app\api\model\Order as OrderModel;
 
 /**
  * 订单控制器
@@ -24,8 +23,11 @@ class Order extends Controller
      */
     public function buyNow($goods_id, $goods_num)
     {
-        $model = new GoodsModel;
-        $data = $model->buyNow($goods_id, $goods_num, $this->getUser()['address_default']);
+        //  用户信息
+        $user = $this->getUser();
+        // 商品结算信息
+        $model = new OrderModel;
+        $data = $model->buyNow($user, $goods_id, $goods_num);
         return $this->renderSuccess($data);
     }
 

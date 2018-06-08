@@ -53,14 +53,14 @@
                                                 <tr>
                                                     <td class="am-text-left">
                                                         <p class="selected-content am-margin-bottom-xs">
-                                                            <?= $item['region']['content'] ?>
+                                                            <?= $item['region_content'] ?>
                                                         </p>
                                                         <p class="operation am-margin-bottom-xs">
                                                             <a class="edit" href="javascript:;">编辑</a>
                                                             <a class="delete" href="javascript:;">删除</a>
                                                         </p>
                                                         <input type="hidden" name="delivery[rule][region][]"
-                                                               value="<?= $item['region']['value'] ?>">
+                                                               value="<?= $item['region'] ?>">
                                                     </td>
                                                     <td>
                                                         <input type="number" name="delivery[rule][first][]"
