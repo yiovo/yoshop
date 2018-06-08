@@ -20,6 +20,17 @@ class Region extends BaseModel
     public $name = 'region';
 
     /**
+     * 根据id获取地区名称
+     * @param $id
+     * @return string
+     */
+    public static function getNameById($id)
+    {
+        $region = self::getCacheAll();
+        return $region[$id]['name'];
+    }
+
+    /**
      * 根据名称获取地区id
      * @param $name
      * @param int $level

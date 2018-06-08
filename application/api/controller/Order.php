@@ -24,10 +24,8 @@ class Order extends Controller
      */
     public function buyNow($goods_id, $goods_num)
     {
-        // 默认收货地址
-        $address = $this->getUser()['address_default'];
         $model = new GoodsModel;
-        $data = $model->buyNow($goods_id, $goods_num, $address);
+        $data = $model->buyNow($goods_id, $goods_num, $this->getUser()['address_default']);
         return $this->renderSuccess($data);
     }
 

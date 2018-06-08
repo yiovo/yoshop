@@ -13,6 +13,26 @@ use app\common\model\UserAddress as UserAddressModel;
 class UserAddress extends UserAddressModel
 {
     /**
+     * 隐藏字段
+     * @var array
+     */
+    protected $hidden = [
+        'wxapp_id',
+        'create_time',
+        'update_time'
+    ];
+
+    /**
+     * @param $user_id
+     * @return false|static[]
+     * @throws \think\exception\DbException
+     */
+    public function getList($user_id)
+    {
+        return self::all(compact('user_id'));
+    }
+
+    /**
      * 新增收货地址
      * @param null|static $user
      * @param $data
@@ -32,6 +52,57 @@ class UserAddress extends UserAddressModel
         // 设为默认收货地址
         !$user['address_id'] && $user->save(['address_id' => $this->getLastInsID()]);
         return true;
+    }
+
+    /**
+     * 编辑收货地址
+     * @param $data
+     * @return false|int
+     */
+    public function edit($data)
+    {
+        // 添加收货地址
+        $region = explode(',', $data['region']);
+        return $this->allowField(true)->save(array_merge([
+            'province_id' => Region::getIdByName($region[0], 1),
+            'city_id' => Region::getIdByName($region[1], 2),
+            'region_id' => Region::getIdByName($region[2], 3),
+        ], $data));
+    }
+
+    /**
+     * 设为默认收货地址
+     * @param null|static $user
+     * @return int
+     */
+    public function setDefault($user)
+    {
+        // 设为默认地址
+        return $user->save(['address_id' => $this['address_id']]);
+    }
+
+    /**
+     * 删除收货地址
+     * @param null|static $user
+     * @return int
+     */
+    public function remove($user)
+    {
+        // 查询当前是否为默认地址
+        $user['address_id'] === $this['address_id'] && $user->save(['address_id' => 0]);
+        return $this->delete();
+    }
+
+    /**
+     * 收货地址详情
+     * @param $user_id
+     * @param $address_id
+     * @return null|static
+     * @throws \think\exception\DbException
+     */
+    public static function detail($user_id, $address_id)
+    {
+        return self::get(compact('user_id', 'address_id'));
     }
 
 }
