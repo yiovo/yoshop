@@ -11,4 +11,9 @@ class Order extends BaseModel
 {
     protected $name = 'order';
 
+    public function address() {
+        return $this->hasOne('OrderAddress');
+    }
+
+
 }
