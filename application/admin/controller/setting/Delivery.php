@@ -3,7 +3,6 @@
 namespace app\admin\controller\setting;
 
 use app\admin\controller\Controller;
-use app\admin\model\DeliveryRule;
 use app\admin\model\Region;
 use app\admin\model\Delivery as DeliveryModel;
 

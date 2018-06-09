@@ -82,6 +82,11 @@ class Delivery extends DeliveryModel
      */
     public function remove()
     {
+        // 判断是否存在商品
+        if ($goodsCount = (new Goods)->where(['delivery_id' => $this['delivery_id']])->count()) {
+            $this->error = '该模板被' . $goodsCount . '个商品使用，不允许删除';
+            return false;
+        }
         $this->rule()->delete();
         return $this->delete();
     }
