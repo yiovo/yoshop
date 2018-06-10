@@ -11,23 +11,71 @@ use app\api\model\Cart as CartModel;
  */
 class Cart extends Controller
 {
+    /* @var User $user */
+    private $user;
+
+    /* @var CartModel $model */
+    private $model;
+
+    /**
+     * 构造方法
+     * @throws \app\common\exception\BaseException
+     * @throws \think\exception\DbException
+     */
+    public function _initialize()
+    {
+        parent::_initialize();
+        $this->user = $this->getUser();
+        $this->model = new CartModel($this->user['user_id']);
+    }
+
+    /**
+     * 购物车列表
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function lists()
+    {
+        return $this->renderSuccess($this->model->getList($this->user));
+    }
+
     /**
      * 加入购物车
      * @param $goods_id
      * @param $goods_num
      * @return array
-     * @throws \app\common\exception\BaseException
-     * @throws \think\exception\DbException
      */
     public function add($goods_id, $goods_num)
     {
-        $user = $this->getUser();
-        $model = new CartModel($user['user_id']);
-        if (!$model->add($goods_id, $goods_num)) {
+        if (!$this->model->add($goods_id, $goods_num)) {
             return $this->renderError('加入购物车失败');
         }
-        $total_num = $model->getTotalNum();
+        $total_num = $this->model->getTotalNum();
         return $this->renderSuccess(['cart_total_num' => $total_num], '加入购物车成功');
+    }
+
+    /**
+     * 减少购物车商品数量
+     * @param $goods_id
+     * @return array
+     */
+    public function sub($goods_id)
+    {
+        $this->model->sub($goods_id);
+        return $this->renderSuccess();
+    }
+
+    /**
+     * 删除购物车中指定商品
+     * @param $goods_id
+     * @return array
+     */
+    public function delete($goods_id)
+    {
+        $this->model->delete($goods_id);
+        return $this->renderSuccess();
     }
 
 }

@@ -47,12 +47,12 @@ class Delivery extends DeliveryModel
             if ($additional <= $rule['additional']) {
                 $additional_fee = $rule['additional_fee'];
             } else {
-                $additional_fee = bcdiv($rule['additional_fee'], $rule['additional'],2) * $additional;
+                $additional_fee = bcdiv($rule['additional_fee'], $rule['additional'], 2) * $additional;
             }
             $freight = $rule['first_fee'] + $additional_fee;
         }
 
-       return $freight;
+        return number_format($freight, 2);
     }
 
     /**
@@ -64,6 +64,30 @@ class Delivery extends DeliveryModel
     {
         $cityIds = explode(',', implode(',', array_column($this['rule']->toArray(), 'region')));
         return in_array($city_id, $cityIds);
+    }
+
+    /**
+     * 根据运费组合策略 计算最终运费
+     * @param $allExpressPrice
+     * @return float|int|mixed
+     * @throws \think\exception\DbException
+     */
+    public static function freightRule($allExpressPrice)
+    {
+        $freight_rule = Setting::getItem('trade')['freight_rule'];
+        $expressPrice = 0.00;
+        switch ($freight_rule) {
+            case 10:    // 策略1: 叠加
+                $expressPrice = array_sum($allExpressPrice);
+                break;
+            case 20:    // 策略2: 以最低运费结算
+                $expressPrice = min($allExpressPrice);
+                break;
+            case 30:    // 策略3: 以最高运费结算
+                $expressPrice = max($allExpressPrice);
+                break;
+        }
+        return $expressPrice;
     }
 
 }

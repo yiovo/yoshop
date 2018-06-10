@@ -11,32 +11,57 @@ use app\api\model\Order as OrderModel;
  */
 class Order extends Controller
 {
+    /* @var User $user */
+    private $user;
+
     /**
-     * 立即购买
+     * 构造方法
+     * @throws \app\common\exception\BaseException
+     * @throws \think\exception\DbException
+     */
+    public function _initialize()
+    {
+        parent::_initialize();
+        $this->user = $this->getUser();   //  用户信息
+    }
+
+    /**
+     * 订单确认-立即购买
      * @param $goods_id
      * @param $goods_num
      * @return array
-     * @throws \app\common\exception\BaseException
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
     public function buyNow($goods_id, $goods_num)
     {
-        //  用户信息
-        $user = $this->getUser();
         // 商品结算信息
         $model = new OrderModel;
-        $order = $model->buyNow($user, $goods_id, $goods_num);
-
+        $order = $model->getBuyNow($this->user, $goods_id, $goods_num);
         // 创建订单
-        if ($this->request->isPost()) {
-            if ($model->add($user['user_id'], $order)) {
-                return $this->renderSuccess([], '更新成功');
-            }
-            return $this->renderError('订单创建失败');
+        if (!$this->request->isPost()) {
+            return $this->renderSuccess($order);
         }
+        if ($model->add($this->user['user_id'], $order)) {
+            return $this->renderSuccess([], '更新成功');
+        }
+        return $this->renderError('订单创建失败');
+    }
 
+    /**
+     * 订单确认-购物车结算
+     * @return array
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function cart()
+    {
+        // 商品结算信息
+        $model = new OrderModel;
+        $order = $model->getCart($this->user);
         return $this->renderSuccess($order);
     }
 
