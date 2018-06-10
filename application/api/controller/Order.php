@@ -11,7 +11,7 @@ use app\api\model\Order as OrderModel;
  */
 class Order extends Controller
 {
-    /* @var User $user */
+    /* @var \app\api\model\User $user */
     private $user;
 
     /**
@@ -39,10 +39,10 @@ class Order extends Controller
         // 商品结算信息
         $model = new OrderModel;
         $order = $model->getBuyNow($this->user, $goods_id, $goods_num);
-        // 创建订单
         if (!$this->request->isPost()) {
             return $this->renderSuccess($order);
         }
+        // 创建订单
         if ($model->add($this->user['user_id'], $order)) {
             return $this->renderSuccess([], '更新成功');
         }
@@ -62,7 +62,14 @@ class Order extends Controller
         // 商品结算信息
         $model = new OrderModel;
         $order = $model->getCart($this->user);
-        return $this->renderSuccess($order);
+        if (!$this->request->isPost()) {
+            return $this->renderSuccess($order);
+        }
+        // 创建订单
+        if ($model->add($this->user['user_id'], $order)) {
+            return $this->renderSuccess([], '更新成功');
+        }
+        return $this->renderError('订单创建失败');
     }
 
 }

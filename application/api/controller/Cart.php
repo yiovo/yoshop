@@ -11,10 +11,10 @@ use app\api\model\Cart as CartModel;
  */
 class Cart extends Controller
 {
-    /* @var User $user */
+    /* @var \app\api\model\User $user */
     private $user;
 
-    /* @var CartModel $model */
+    /* @var \app\api\model\Cart $model */
     private $model;
 
     /**
@@ -32,6 +32,7 @@ class Cart extends Controller
     /**
      * 购物车列表
      * @return array
+     * @throws \think\Exception
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
