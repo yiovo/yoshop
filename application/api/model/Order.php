@@ -114,7 +114,7 @@ class Order extends OrderModel
                 'goods_id' => $goods['goods_id'],
                 'goods_name' => $goods['goods_name'],
                 'spec_type' => $goods['spec_type'],
-//                'content' => $goods['content'],
+                'content' => $goods['content'],
                 'goods_no' => $goods['spec'][0]['goods_no'],
                 'goods_price' => $goods['spec'][0]['goods_price'],
                 'line_price' => $goods['spec'][0]['line_price'],

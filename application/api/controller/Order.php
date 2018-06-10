@@ -22,7 +22,7 @@ class Order extends Controller
     public function _initialize()
     {
         parent::_initialize();
-        $this->user = $this->getUser();   //  用户信息
+        $this->user = $this->getUser();   // 用户信息
     }
 
     /**
