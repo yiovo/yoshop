@@ -2,6 +2,7 @@
 
 namespace app\api\model;
 
+use think\Db;
 use app\common\model\Order as OrderModel;
 
 /**
@@ -66,15 +67,62 @@ class Order extends OrderModel
 
     /**
      * 新增订单
+     * @param $user_id
      * @param $order
      * @return bool
      */
-    public function add($order)
+    public function add($user_id, $order)
     {
         if (!$order['intra_region']) {
             $this->error = $order['intra_region_error'];
             return false;
         }
+
+        Db::startTrans();
+        // 记录订单信息
+        $this->save([
+            'user_id' => $user_id,
+            'wxapp_id' => self::$wxapp_id,
+            'order_no' => $this->orderNo(),
+            'total_price' => $order['order_total_price'],
+            'pay_price' => $order['order_pay_price'],
+            'express_price' => $order['express_price'],
+        ]);
+
+        // 记录商品信息
+        $goodsList = [];
+        foreach ($order['goods_list'] as $goods) {
+            $goodsList[] = [
+                'user_id' => $user_id,
+                'wxapp_id' => self::$wxapp_id,
+                'goods_id' => $goods['goods_id'],
+                'goods_name' => $goods['goods_name'],
+                'spec_type' => $goods['spec_type'],
+                'content' => $goods['content'],
+                'goods_no' => $goods['spec'][0]['goods_no'],
+                'goods_price' => $goods['spec'][0]['goods_price'],
+                'line_price' => $goods['spec'][0]['line_price'],
+                'goods_weight' => $goods['spec'][0]['goods_weight'],
+                'total_num' => $goods['total_num'],
+                'total_price' => $goods['total_price'],
+                'image_id' => $goods['image'][0]['image_id'],
+            ];
+        }
+        $this->goods()->saveAll($goodsList);
+
+        // 记录收货地址
+        $this->address()->save([
+            'user_id' => $user_id,
+            'wxapp_id' => self::$wxapp_id,
+            'name' => $order['address']['name'],
+            'phone' => $order['address']['phone'],
+            'province_id' => $order['address']['province_id'],
+            'city_id' => $order['address']['city_id'],
+            'region_id' => $order['address']['region_id'],
+            'detail' => $order['address']['detail'],
+            'order_id' => $this['order_id'],
+        ]);
+        Db::commit();
 
         return true;
     }

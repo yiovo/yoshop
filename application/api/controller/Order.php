@@ -2,7 +2,7 @@
 
 namespace app\api\controller;
 
- use app\api\model\Order as OrderModel;
+use app\api\model\Order as OrderModel;
 
 /**
  * 订单控制器
@@ -27,8 +27,17 @@ class Order extends Controller
         $user = $this->getUser();
         // 商品结算信息
         $model = new OrderModel;
-        $data = $model->buyNow($user, $goods_id, $goods_num);
-        return $this->renderSuccess($data);
+        $order = $model->buyNow($user, $goods_id, $goods_num);
+
+        // 创建订单
+        if ($this->request->isPost()) {
+            if ($model->add($user['user_id'], $order)) {
+                return $this->renderSuccess([], '更新成功');
+            }
+            return $this->renderError('订单创建失败');
+        }
+
+        return $this->renderSuccess($order);
     }
 
 }
