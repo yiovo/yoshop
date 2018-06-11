@@ -73,7 +73,7 @@ class Order extends Controller
             $wxConfig = WxappModel::getWxappCache();
             $WxPay = new WxPay($wxConfig);
             $wxParams = $WxPay->unifiedorder($model['order_no'], $this->user['open_id']
-                , $order['order_pay_price'], 'bsshop');
+                , $order['order_pay_price']);
             return $this->renderSuccess($wxParams);
         }
         return $this->renderError('订单创建失败');

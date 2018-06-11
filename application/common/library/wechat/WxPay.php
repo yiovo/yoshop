@@ -28,12 +28,13 @@ class WxPay
      * @param $order_no
      * @param $openid
      * @param $total_fee
-     * @param $body
      * @return array
      * @throws BaseException
      */
-    public function unifiedorder($order_no, $openid, $total_fee, $body)
+    public function unifiedorder($order_no, $openid, $total_fee)
     {
+        $total_fee = 0.01;  // 测试金额
+
         // 当前时间
         $time = time();
 
@@ -44,7 +45,7 @@ class WxPay
         $params = [
             'appid' => $this->config['app_id'],
             'attach' => 'test',
-            'body' => $body,
+            'body' => $order_no,
             'mch_id' => $this->config['mchid'],
             'nonce_str' => $nonceStr,
             'notify_url' => url('order/notify', '', true, true),
