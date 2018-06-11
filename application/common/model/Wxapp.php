@@ -62,29 +62,23 @@ class Wxapp extends BaseModel
 
     /**
      * 从缓存中获取小程序信息
-     * @return array|mixed
-     * @throws \think\Exception
+     * @param null $wxapp_id
+     * @return mixed|null|static
+     * @throws BaseException
      * @throws \think\exception\DbException
      */
-    public static function getWxappCache()
+    public static function getWxappCache($wxapp_id = null)
     {
-        $self = new static();
-        if (!$data = Cache::get('wxapp_' . $self::$wxapp_id)) {
+        if (is_null($wxapp_id)) {
+            $self = new static();
+            $wxapp_id = $self::$wxapp_id;
+        }
+        if (!$data = Cache::get('wxapp_' . $wxapp_id)) {
             $data = self::get([], ['serviceImage', 'phoneImage', 'navbar']);
             if (empty($data)) throw new BaseException(['msg' => '未找到当前小程序信息']);
-            Cache::set('wxapp_' . $self::$wxapp_id, $data);
+            Cache::set('wxapp_' . $wxapp_id, $data);
         }
         return $data;
     }
-
-
-    public static function getWxConfig()
-    {
-        $self = new static();
-        return self::get([]);
-//        return $self->field(['app_id', 'app_secret', 'mchid', 'apikey'])->find();
-
-    }
-
 
 }

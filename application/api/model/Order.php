@@ -146,18 +146,15 @@ class Order extends OrderModel
 
     /**
      * 更新付款状态
-     * @param $order_no
      * @param $transaction_id
      * @return false|int
-     * @throws \think\exception\DbException
      */
-    public function updatePayStatus($order_no, $transaction_id)
+    public function updatePayStatus($transaction_id)
     {
         // todo: 累计商品销量
 
         // 更新订单状态
-        $order = self::get(['order_no' => $order_no]);
-        return $order->save([
+        return $this->save([
             'pay_status'=> 20,
             'pay_time'=> time(),
             'transaction_id' => $transaction_id,

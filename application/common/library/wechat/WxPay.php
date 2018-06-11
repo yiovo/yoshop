@@ -2,8 +2,9 @@
 
 namespace app\common\library\wechat;
 
-use app\common\exception\BaseException;
 use think\Request;
+use app\common\model\Wxapp as WxappModel;
+use app\common\exception\BaseException;
 
 /**
  * 微信支付
@@ -45,7 +46,6 @@ class WxPay
         // 异步通知地址
         $request = Request::instance();
         $domain = $request->scheme() . '://' . $request->host() . dirname($request->baseUrl()) . DS;
-        $notify_url =   url('order/notify', '', false, $domain);
 
         // API参数
         $params = [
@@ -54,7 +54,7 @@ class WxPay
             'body' => $order_no,
             'mch_id' => $this->config['mchid'],
             'nonce_str' => $nonceStr,
-            'notify_url' => $notify_url,
+            'notify_url' => $domain . 'notice.php',
             'openid' => $openid,
             'out_trade_no' => $order_no,
             'spbill_create_ip' => $request->ip(),
@@ -89,10 +89,11 @@ class WxPay
 
     /**
      * 支付成功异步通知
-     * @param \app\api\model\Order $Order
+     * @param \app\common\model\Order $OrderModel
+     * @throws BaseException
      * @throws \think\exception\DbException
      */
-    public function notify($Order)
+    public function notify($OrderModel)
     {
         if (!isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
             die('Not found HTTP_RAW_POST_DATA');
@@ -102,6 +103,14 @@ class WxPay
         $data = $this->fromXml($xml);
         // 记录日志
         $this->doLogs($data);
+
+        // 订单信息
+        $order = $OrderModel::get(['out_trade_no' => $data['out_trade_no']]);
+        $wxConfig = WxappModel::getWxappCache($order['wxapp_id']);
+
+        // 设置支付秘钥
+        $this->config['apikey'] = $wxConfig['apikey'];
+
         // 保存微信服务器返回的签名sign
         $data_sign = $data['sign'];
         // sign不参与签名算法
@@ -113,7 +122,7 @@ class WxPay
             && ($data['return_code'] == 'SUCCESS')
             && ($data['result_code'] == 'SUCCESS')) {
             // 更新订单状态
-            $Order->updatePayStatus($data['out_trade_no'], $data['transaction_id']);
+            $OrderModel->updatePayStatus($data['transaction_id']);
             // 返回状态
             $this->returnCode();
         } else {
@@ -121,6 +130,7 @@ class WxPay
             $this->returnCode(false);
         }
     }
+
 
     /**
      * 返回状态给微信服务器
