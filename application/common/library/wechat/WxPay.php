@@ -122,7 +122,7 @@ class WxPay
             && ($data['return_code'] == 'SUCCESS')
             && ($data['result_code'] == 'SUCCESS')) {
             // 更新订单状态
-            $OrderModel->updatePayStatus($data['transaction_id']);
+            $order->updatePayStatus($data['transaction_id']);
             // 返回状态
             $this->returnCode();
         } else {
