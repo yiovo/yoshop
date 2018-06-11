@@ -105,7 +105,7 @@ class WxPay
         $this->doLogs($data);
 
         // 订单信息
-        $order = $OrderModel::get(['out_trade_no' => $data['out_trade_no']]);
+        $order = $OrderModel::get(['order_no' => $data['out_trade_no'], 'pay_status' => 10]);
         $wxConfig = WxappModel::getWxappCache($order['wxapp_id']);
 
         // 设置支付秘钥
