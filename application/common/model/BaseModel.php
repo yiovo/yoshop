@@ -85,7 +85,7 @@ class BaseModel extends Model
      */
     protected function base($query)
     {
-        $query->where('wxapp_id', self::$wxapp_id);
+        self::$wxapp_id > 0 && $query->where('wxapp_id', self::$wxapp_id);
     }
 
 }
