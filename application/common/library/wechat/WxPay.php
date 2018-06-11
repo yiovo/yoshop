@@ -3,6 +3,7 @@
 namespace app\common\library\wechat;
 
 use app\common\exception\BaseException;
+use think\Request;
 
 /**
  * 微信支付
@@ -41,6 +42,11 @@ class WxPay
         // 生成随机字符串
         $nonceStr = md5($time . $openid);
 
+        // 异步通知地址
+        $request = Request::instance();
+        $domain = $request->scheme() . '://' . $request->host() . dirname($request->baseUrl()) . DS;
+        $notify_url =   url('order/notify', '', false, $domain);
+
         // API参数
         $params = [
             'appid' => $this->config['app_id'],
@@ -48,10 +54,10 @@ class WxPay
             'body' => $order_no,
             'mch_id' => $this->config['mchid'],
             'nonce_str' => $nonceStr,
-            'notify_url' => url('order/notify', '', true, true),
+            'notify_url' => $notify_url,
             'openid' => $openid,
             'out_trade_no' => $order_no,
-            'spbill_create_ip' => request()->ip(),
+            'spbill_create_ip' => $request->ip(),
             'total_fee' => $total_fee * 100, // 价格:单位分
             'trade_type' => 'JSAPI',
         ];
