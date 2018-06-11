@@ -144,20 +144,4 @@ class Order extends OrderModel
         return true;
     }
 
-    /**
-     * 更新付款状态
-     * @param $transaction_id
-     * @return false|int
-     */
-    public function updatePayStatus($transaction_id)
-    {
-        // todo: 累计商品销量
-
-        // 更新订单状态
-        return $this->save([
-            'pay_status'=> 20,
-            'pay_time'=> time(),
-            'transaction_id' => $transaction_id,
-        ]);
-    }
 }
