@@ -114,6 +114,7 @@ class Order extends OrderModel
                 'goods_id' => $goods['goods_id'],
                 'goods_name' => $goods['goods_name'],
                 'spec_type' => $goods['spec_type'],
+                'goods_spec_id' => $goods['spec'][0]['goods_spec_id'],
                 'content' => $goods['content'],
                 'goods_no' => $goods['spec'][0]['goods_no'],
                 'goods_price' => $goods['spec'][0]['goods_price'],
@@ -143,4 +144,23 @@ class Order extends OrderModel
         return true;
     }
 
+    /**
+     * 更新付款状态
+     * @param $order_no
+     * @param $transaction_id
+     * @return false|int
+     * @throws \think\exception\DbException
+     */
+    public function updatePayStatus($order_no, $transaction_id)
+    {
+        // todo: 累计商品销量
+
+        // 更新订单状态
+        $order = self::get(['order_no' => $order_no]);
+        return $order->save([
+            'pay_status'=> 20,
+            'pay_time'=> time(),
+            'transaction_id' => $transaction_id,
+        ]);
+    }
 }

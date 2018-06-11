@@ -79,4 +79,16 @@ class Order extends Controller
         return $this->renderError('订单创建失败');
     }
 
+    /**
+     * 支付成功异步通知
+     * @throws \think\Exception
+     * @throws \think\exception\DbException
+     */
+    public function notify()
+    {
+        $wxConfig = WxappModel::getWxappCache();
+        $WxPay = new WxPay($wxConfig);
+        $WxPay->notify(new OrderModel);
+    }
+
 }

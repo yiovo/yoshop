@@ -1,6 +1,7 @@
 <?php
 
 namespace app\common\library\wechat;
+
 use app\common\exception\BaseException;
 
 /**
@@ -79,39 +80,33 @@ class WxPay
         ];
     }
 
-
     /**
      * 支付成功异步通知
+     * @param \app\api\model\Order $Order
+     * @throws \think\exception\DbException
      */
-    public function notify()
+    public function notify($Order)
     {
         if (!isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
             die('Not found HTTP_RAW_POST_DATA');
         }
-
         $xml = $GLOBALS['HTTP_RAW_POST_DATA'];
-
         // 将服务器返回的XML数据转化为数组
         $data = $this->fromXml($xml);
-
         // 记录日志
         $this->doLogs($data);
-
         // 保存微信服务器返回的签名sign
         $data_sign = $data['sign'];
-
         // sign不参与签名算法
         unset($data['sign']);
-
         // 生成签名
         $sign = $this->makeSign($data);
-
         // 判断签名是否正确  判断支付状态
-        if (($sign === $data_sign) && ($data['return_code'] == 'SUCCESS') && ($data['result_code'] == 'SUCCESS')) {
+        if (($sign === $data_sign)
+            && ($data['return_code'] == 'SUCCESS')
+            && ($data['result_code'] == 'SUCCESS')) {
             // 更新订单状态
-            $model = new Order;
-            $model->updateOrderStatus($data['out_trade_no'], $data['transaction_id']);
-
+            $Order->updatePayStatus($data['out_trade_no'], $data['transaction_id']);
             // 返回状态
             $this->returnCode();
         } else {
