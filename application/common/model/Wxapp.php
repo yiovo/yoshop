@@ -70,12 +70,21 @@ class Wxapp extends BaseModel
     {
         $self = new static();
         if (!$data = Cache::get('wxapp_' . $self::$wxapp_id)) {
-            $wxapp = self::get([], ['serviceImage', 'phoneImage', 'navbar']);
-            if (empty($wxapp)) throw new BaseException(['msg' => '未找到当前小程序信息']);
-            $data = $wxapp->toArray();
+            $data = self::get([], ['serviceImage', 'phoneImage', 'navbar']);
+            if (empty($data)) throw new BaseException(['msg' => '未找到当前小程序信息']);
             Cache::set('wxapp_' . $self::$wxapp_id, $data);
         }
         return $data;
     }
+
+
+    public static function getWxConfig()
+    {
+        $self = new static();
+        return self::get([]);
+//        return $self->field(['app_id', 'app_secret', 'mchid', 'apikey'])->find();
+
+    }
+
 
 }

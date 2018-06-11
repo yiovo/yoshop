@@ -74,7 +74,7 @@ class Cart
         // 所有商品的运费金额
         $allExpressPrice = array_column($cartList, 'express_price');
         // 订单总运费金额
-        $expressPrice = Delivery::freightRule($allExpressPrice);
+        $expressPrice = $allExpressPrice ? Delivery::freightRule($allExpressPrice) : 0.00;
 
         return [
             'goods_list' => $cartList,  // 商品列表
@@ -83,7 +83,7 @@ class Cart
             'order_pay_price' => bcadd($orderTotalPrice, $expressPrice, 2),  // 实际支付金额
 
             'address' => $user['address_default'],  // 默认地址
-            'exist_address' => $user['address']->isEmpty(),  // 是否存在收货地址
+            'exist_address' => !$user['address']->isEmpty(),  // 是否存在收货地址
             'express_price' => $expressPrice,   // 配送费用
             'intra_region' => $intraRegion,     // 当前用户收货城市是否存在配送规则中
             'intra_region_error' => $intraRegionError,

@@ -3,6 +3,8 @@
 namespace app\api\controller;
 
 use app\api\model\Order as OrderModel;
+use app\api\model\Wxapp as WxappModel;
+use app\common\library\wechat\WxPay;
 
 /**
  * 订单控制器
@@ -67,7 +69,12 @@ class Order extends Controller
         }
         // 创建订单
         if ($model->add($this->user['user_id'], $order)) {
-            return $this->renderSuccess([], '更新成功');
+            // 发起微信支付
+            $wxConfig = WxappModel::getWxappCache();
+            $WxPay = new WxPay($wxConfig);
+            $wxParams = $WxPay->unifiedorder($model['order_no'], $this->user['open_id']
+                , $order['order_pay_price'], 'bsshop');
+            return $this->renderSuccess($wxParams);
         }
         return $this->renderError('订单创建失败');
     }
