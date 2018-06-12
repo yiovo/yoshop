@@ -12,10 +12,11 @@ class Order extends BaseModel
     protected $name = 'order';
 
     /**
-     *
+     * 订单商品列表
      * @return \think\model\relation\HasMany
      */
-    public function goods () {
+    public function goods()
+    {
         return $this->hasMany('OrderGoods');
     }
 
@@ -28,22 +29,6 @@ class Order extends BaseModel
         return $this->hasOne('OrderAddress');
     }
 
-    /**
-     * 更新付款状态
-     * @param $transaction_id
-     * @return false|int
-     */
-    public function updatePayStatus($transaction_id)
-    {
-        // todo: 累计商品销量
-
-        // 更新订单状态
-        return $this->save([
-            'pay_status'=> 20,
-            'pay_time'=> time(),
-            'transaction_id' => $transaction_id,
-        ]);
-    }
     /**
      * 生成订单号
      */

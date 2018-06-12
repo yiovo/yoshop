@@ -2,7 +2,7 @@
 
 namespace app\task\controller;
 
-use app\common\model\Order as OrderModel;
+use app\task\model\Order as OrderModel;
 use app\common\library\wechat\WxPay;
 
 /**
