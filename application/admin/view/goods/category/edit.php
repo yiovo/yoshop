@@ -39,9 +39,9 @@
                                         <div class="uploader-list am-cf">
                                             <?php if ($model['image']): ?>
                                                 <div class="file-item thumbnail">
-                                                    <img src="<?= $model['image']['file_name']['file_path'] ?>">
+                                                    <img src="<?= $model['image']['file_path'] ?>">
                                                     <input type="hidden" name="category[image]"
-                                                           value="<?= $model['image']['file_name']['value'] ?>">
+                                                           value="<?= $model['image']['file_name'] ?>">
                                                     <i class="iconfont icon-shanchu file-item-delete"></i>
                                                 </div>
                                             <?php endif; ?>
