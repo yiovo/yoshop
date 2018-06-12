@@ -11,16 +11,37 @@ class UploadFile extends BaseModel
 {
     protected $name = 'upload_file';
     protected $updateTime = false;
+    protected $append = ['file_path'];
 
-    public function getFileNameAttr($value, $data)
+    /**
+     * 获取图片完整路径
+     * @param $value
+     * @param $data
+     * @return string
+     */
+    public function getFilePathAttr($value, $data)
     {
         if ($data['storage'] === 'local') {
-            $file_path = self::$base_url . 'uploads' . DS . $data['file_name'];
-        } else {
-            $file_path = $value . DS . $data['file_name'];
+            return self::$base_url . 'uploads' . DS . $data['file_name'];
         }
-        return compact('file_path', 'value');
+        return $data['file_url'] . DS . $data['file_name'];
     }
+
+    /**
+     * 兼容写法 (即将废弃)
+     * @param $value
+     * @param $data
+     * @return array
+     */
+//    public function getFileNameAttr($value, $data)
+//    {
+//        if ($data['storage'] === 'local') {
+//            $file_path = self::$base_url . 'uploads' . DS . $data['file_name'];
+//        } else {
+//            $file_path = $data['file_url'] . DS . $data['file_name'];
+//        }
+//        return compact('file_path', 'value');
+//    }
 
     /**
      * 根据文件名查询文件id

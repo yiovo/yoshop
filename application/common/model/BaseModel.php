@@ -76,7 +76,9 @@ class BaseModel extends Model
     protected static function baseUrl()
     {
         $request = Request::instance();
-        return $request->scheme() . '://' . $request->host() . dirname($request->baseUrl());
+        $host = $request->scheme() . '://' . $request->host();
+        $dirname = dirname($request->baseUrl());
+        return empty($dirname) ? $host : $host . $dirname . DS;
     }
 
     /**
