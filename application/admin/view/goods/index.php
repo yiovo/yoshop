@@ -39,9 +39,9 @@
                                     <tr>
                                         <td class="am-text-middle"><?= $item['goods_id'] ?></td>
                                         <td class="am-text-middle">
-                                            <a href="<?= $item['image'][0]['file']['file_name']['file_path'] ?>"
+                                            <a href="<?= $item['image'][0]['file_path'] ?>"
                                                title="点击查看大图" target="_blank">
-                                                <img src="<?= $item['image'][0]['file']['file_name']['file_path'] ?>"
+                                                <img src="<?= $item['image'][0]['file_path'] ?>"
                                                      width="50" height="50" alt="商品图片">
                                             </a>
                                         </td>

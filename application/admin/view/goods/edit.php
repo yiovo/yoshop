@@ -53,9 +53,9 @@
                                         <div id="file-list" class="uploader-list am-cf">
                                             <?php foreach ($model['image'] as $key => $item): ?>
                                                 <div class="file-item thumbnail upload-state-done">
-                                                    <img src="<?= $item['file']['file_name']['file_path'] ?>">
+                                                    <img src="<?= $item['file_path'] ?>">
                                                     <input type="hidden" name="goods[images][]"
-                                                           value="<?= $item['file']['file_name']['value'] ?>">
+                                                           value="<?= $item['file_name'] ?>">
                                                     <i class="iconfont icon-shanchu file-item-delete"></i>
                                                 </div>
                                             <?php endforeach; ?>
