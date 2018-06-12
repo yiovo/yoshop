@@ -46,8 +46,8 @@ class Upload extends Controller
         $uploadFile = $this->addUploadFile($fileName, $fileInfo, 'image');
         // 图片上传成功
         return json(['code' => 1, 'msg' => '图片上传成功', 'data' => [
-            'path' => $uploadFile['file_name']['value'],
-            'file_path' => $uploadFile['file_name']['file_path'],
+            'path' => $uploadFile['file_name'],
+            'file_path' => $uploadFile['file_path'],
         ]]);
     }
 
@@ -56,15 +56,12 @@ class Upload extends Controller
      * @param $fileName
      * @param $fileInfo
      * @param $fileType
-     * @return array
-     * @throws \think\Exception
+     * @return UploadFile
      */
     private function addUploadFile($fileName, $fileInfo, $fileType)
     {
         // 存储引擎
         $storage = $this->config['default'];
-        // 上传的文件信息
-        $file = $this->request->file('iFile');
         // 存储域名
         $fileUrl = isset($this->config['engine'][$storage]) ? $this->config['engine'][$storage]['domain'] : '';
         // 添加文件库记录
@@ -78,7 +75,7 @@ class Upload extends Controller
             'file_type' => $fileType,
             'extension' => pathinfo($fileInfo['name'], PATHINFO_EXTENSION),
         ]);
-        return $model->toArray();
+        return $model;
     }
 
 }
