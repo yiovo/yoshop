@@ -51,7 +51,7 @@ class Controller extends ThinkController
     protected function getUser()
     {
         if (!$token = $this->request->param('token')) {
-            throw new BaseException(['msg' => '缺少必要的参数：token']);
+            throw new BaseException(['code' => -1, 'msg' => '缺少必要的参数：token']);
         }
         if (!$user = UserModel::getUser($token)) {
             throw new BaseException(['code' => -1, 'msg' => '没有找到用户信息']);

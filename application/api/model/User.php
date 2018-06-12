@@ -36,45 +36,28 @@ class User extends UserModel
      */
     public static function getUser($token)
     {
-        return self::detail(['open_id' =>  Cache::get($token)['openid']]);
-    }
-
-    /**
-     * 设置微信用户信息
-     * @return false|int
-     */
-    public function setUserInfo()
-    {
-        $post = Request::instance()->post();
-        return $this->save([
-            'nick_name' => preg_replace('/[\xf0-\xf7].{3}/', '', $post['nickName']),
-            'gender' => $post['gender'],
-            'city' => $post['city'],
-            'province' => $post['province'],
-            'country' => $post['country'],
-            'avatar' => $post['avatarUrl'],
-            'is_auth' => 1,
-        ]);
+        return self::detail(['open_id' => Cache::get($token)['openid']]);
     }
 
     /**
      * 用户登录
-     * @param $wxapp_id
+     * @param array $post
      * @return string
      * @throws BaseException
      * @throws \think\Exception
      * @throws \think\exception\DbException
      */
-    public function login($wxapp_id)
+    public function login($post)
     {
         // 微信登录 获取session_key
-        $session = $this->wxlogin();
+        $session = $this->wxlogin($post['code']);
         // 自动注册用户
-        $user_id = $this->register($session['openid'], $wxapp_id);
+        $userInfo = json_decode(htmlspecialchars_decode($post['user_info']), true);
+        $user_id = $this->register($session['openid'], $userInfo);
         // 生成token (session3rd)
-        $this->token = $this->token($session['openid'], $wxapp_id);
+        $this->token = $this->token($session['openid']);
         // 记录缓存, 7天
-        Cache::set($this->token, $session,86400 * 7);
+        Cache::set($this->token, $session, 86400 * 7);
         return $user_id;
     }
 
@@ -89,17 +72,16 @@ class User extends UserModel
 
     /**
      * 微信登录
+     * @param $code
      * @return array|mixed
      * @throws BaseException
-     * @throws \think\Exception
      * @throws \think\exception\DbException
      */
-    private function wxlogin()
+    private function wxlogin($code)
     {
         // 获取当前小程序信息
         $wxapp = Wxapp::detail();
         // 微信登录 (获取session_key)
-        $code = \request()->post('code');
         $WxUser = new WxUser($wxapp['app_id'], $wxapp['app_secret']);
         if (!$session = $WxUser->sessionKey($code))
             throw new BaseException(['msg' => 'session_key 获取失败']);
@@ -109,31 +91,33 @@ class User extends UserModel
     /**
      * 生成用户认证的token
      * @param $openid
-     * @param $wxapp_id
      * @return string
      */
-    private function token($openid, $wxapp_id)
+    private function token($openid)
     {
-        return md5($openid . $wxapp_id . 'token_salt');
+        return md5($openid . self::$wxapp_id . 'token_salt');
     }
 
     /**
      * 自动注册用户
      * @param $open_id
-     * @param $wxapp_id
+     * @param $userInfo
      * @return mixed
      * @throws BaseException
      * @throws \think\exception\DbException
      */
-    private function register($open_id, $wxapp_id)
+    private function register($open_id, $userInfo)
     {
-        if (!$user = $this->get(['open_id' => $open_id])) {
-            if (!$this->save(compact('open_id', 'wxapp_id')))
-                throw new BaseException(['msg' => '用户注册失败']);
-            return $this['user_id'];
-        } else {
-            return $user['user_id'];
+        if (!$user = self::get(['open_id' => $open_id])) {
+            $user = $this;
+            $userInfo['open_id'] = $open_id;
+            $userInfo['wxapp_id'] = self::$wxapp_id;
         }
+        $userInfo['nickName'] = preg_replace('/[\xf0-\xf7].{3}/', '', $userInfo['nickName']);
+        if (!$user->allowField(true)->save($userInfo)) {
+            throw new BaseException(['msg' => '用户注册失败']);
+        }
+        return $user['user_id'];
     }
 
 }
