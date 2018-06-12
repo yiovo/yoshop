@@ -82,9 +82,9 @@
                                         <div class="uploader-list am-cf">
                                             <?php if ($wxapp['service_image']): ?>
                                                 <div class="file-item thumbnail">
-                                                    <img src="<?= $wxapp['service_image']['file_name']['file_path'] ?>">
+                                                    <img src="<?= $wxapp['service_image']['file_path'] ?>">
                                                     <input type="hidden" name="wxapp[service_image]"
-                                                           value="<?= $wxapp['service_image']['file_name']['value'] ?>">
+                                                           value="<?= $wxapp['service_image']['file_name'] ?>">
                                                     <i class="iconfont icon-shanchu file-item-delete"></i>
                                                 </div>
                                             <?php endif; ?>
@@ -123,9 +123,9 @@
                                         <div class="uploader-list am-cf">
                                             <?php if ($wxapp['phone_image']): ?>
                                                 <div class="file-item thumbnail">
-                                                    <img src="<?= $wxapp['phone_image']['file_name']['file_path'] ?>">
+                                                    <img src="<?= $wxapp['phone_image']['file_path'] ?>">
                                                     <input type="hidden" name="wxapp[phone_image]"
-                                                           value="<?= $wxapp['phone_image']['file_name']['value'] ?>">
+                                                           value="<?= $wxapp['phone_image']['file_name'] ?>">
                                                     <i class="iconfont icon-shanchu file-item-delete"></i>
                                                 </div>
                                             <?php endif; ?>
