@@ -2,6 +2,8 @@
 
 namespace app\common\model;
 
+use app\common\exception\BaseException;
+
 /**
  * 订单模型
  * Class Order
@@ -85,16 +87,15 @@ class Order extends BaseModel
      * 订单详情
      * @param $order_id
      * @return null|static
+     * @throws BaseException
      * @throws \think\exception\DbException
      */
     public static function detail($order_id)
     {
-        return self::get($order_id);
-    }
-
-    public function cancel()
-    {
-        return $this->save(['order_status' => 20]);
+        if (!$order = self::get($order_id)) {
+            throw new BaseException(['msg' => '订单不存在']);
+        }
+        return $order;
     }
 
 }

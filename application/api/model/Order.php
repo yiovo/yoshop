@@ -176,4 +176,30 @@ class Order extends OrderModel
             ->select();
     }
 
+    /**
+     * 取消订单
+     * @return bool|false|int
+     */
+    public function cancel()
+    {
+        if ($this['pay_status']['value'] === 20) {
+            $this->error = '已付款订单不可取消';
+            return false;
+        }
+        return $this->save(['order_status' => 20]);
+    }
+
+    /**
+     * 确认收货
+     * @return bool|false|int
+     */
+    public function receipt()
+    {
+        if ($this['delivery_status']['value'] === 10 || $this['receipt_status']['value'] === 20) {
+            $this->error = '该订单不合法';
+            return false;
+        }
+        return $this->save(['receipt_status' => 20, 'order_status' => 30]);
+    }
+
 }

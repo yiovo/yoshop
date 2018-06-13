@@ -33,19 +33,32 @@ class Order extends Controller
      * 取消订单
      * @param $order_id
      * @return array
+     * @throws \app\common\exception\BaseException
      * @throws \think\exception\DbException
      */
     public function cancel($order_id)
     {
-        $order = OrderModel::detail($order_id);
-        if (empty($order)) {
-            return $this->renderError('订单不存在');
+        $model = OrderModel::detail($order_id);
+        if ($model->cancel()) {
+            return $this->renderSuccess();
         }
-        if ($order['pay_status']['value'] === 20) {
-            return $this->renderError('已付款订单不可取消');
+        return $this->renderError($model->getError());
+    }
+
+    /**
+     * 确认收货
+     * @param $order_id
+     * @return array
+     * @throws \app\common\exception\BaseException
+     * @throws \think\exception\DbException
+     */
+    public function receipt($order_id)
+    {
+        $model = OrderModel::detail($order_id);
+        if ($model->receipt()) {
+            return $this->renderSuccess();
         }
-        $order->cancel();
-        return $this->renderSuccess();
+        return $this->renderError($model->getError());
     }
 
 }
