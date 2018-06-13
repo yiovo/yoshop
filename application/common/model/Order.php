@@ -94,7 +94,10 @@ class Order extends BaseModel
     public static function detail($order_id, $user_id = null)
     {
         $filter = ['order_id' => $order_id];
-        !is_null($user_id) && $filter['user_id'] = $user_id;
+        if (!is_null($user_id)) {
+            $filter['user_id'] = $user_id;
+            $filter['order_status'] = ['<>', 20];
+        }
         if (!$order = self::get($filter, ['goods.image', 'address'])) {
             throw new BaseException(['msg' => '订单不存在']);
         }

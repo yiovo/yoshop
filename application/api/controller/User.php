@@ -26,16 +26,4 @@ class User extends Controller
         return $this->renderSuccess(compact('user_id', 'token'));
     }
 
-    /**
-     * 获取当前用户信息
-     * @return array
-     * @throws \app\common\exception\BaseException
-     * @throws \think\exception\DbException
-     */
-    public function detail()
-    {
-        $userInfo = $this->getUser();
-        return $this->renderSuccess(['user_info' => $userInfo]);
-    }
-
 }

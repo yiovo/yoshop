@@ -88,7 +88,6 @@ class Order extends Controller
         return $this->renderError($model->getError());
     }
 
-
     /**
      * 立即支付
      * @param $order_id

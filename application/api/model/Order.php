@@ -202,4 +202,32 @@ class Order extends OrderModel
         return $this->save(['receipt_status' => 20, 'order_status' => 30]);
     }
 
+    /**
+     * 获取订单总数
+     * @param $user_id
+     * @param string $type
+     * @return int|string
+     */
+    public function getCount($user_id, $type = 'all')
+    {
+        // 筛选条件
+        $filter = [];
+        // 订单数据类型
+        switch ($type) {
+            case 'all':
+                break;
+            case 'payment';
+                $filter['pay_status'] = 10;
+                break;
+            case 'received';
+                $filter['pay_status'] = 20;
+                $filter['receipt_status'] = 10;
+                break;
+        }
+        return $this ->where('user_id', '=', $user_id)
+            ->where('order_status', '<>', 20)
+            ->where($filter)
+            ->count();
+    }
+
 }
