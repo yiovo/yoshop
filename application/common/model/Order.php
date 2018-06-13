@@ -86,13 +86,16 @@ class Order extends BaseModel
     /**
      * 订单详情
      * @param $order_id
+     * @param null $user_id
      * @return null|static
      * @throws BaseException
      * @throws \think\exception\DbException
      */
-    public static function detail($order_id)
+    public static function detail($order_id, $user_id = null)
     {
-        if (!$order = self::get($order_id)) {
+        $filter = ['order_id' => $order_id];
+        !is_null($user_id) && $filter['user_id'] = $user_id;
+        if (!$order = self::get($filter, ['goods.image', 'address'])) {
             throw new BaseException(['msg' => '订单不存在']);
         }
         return $order;
