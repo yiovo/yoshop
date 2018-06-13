@@ -29,4 +29,23 @@ class Order extends Controller
         return $this->renderSuccess(compact('list'));
     }
 
+    /**
+     * 取消订单
+     * @param $order_id
+     * @return array
+     * @throws \think\exception\DbException
+     */
+    public function cancel($order_id)
+    {
+        $order = OrderModel::detail($order_id);
+        if (empty($order)) {
+            return $this->renderError('订单不存在');
+        }
+        if ($order['pay_status']['value'] === 20) {
+            return $this->renderError('已付款订单不可取消');
+        }
+        $order->cancel();
+        return $this->renderSuccess();
+    }
+
 }

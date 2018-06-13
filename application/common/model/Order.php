@@ -81,4 +81,20 @@ class Order extends BaseModel
         return date('Ymd') . substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
     }
 
+    /**
+     * 订单详情
+     * @param $order_id
+     * @return null|static
+     * @throws \think\exception\DbException
+     */
+    public static function detail($order_id)
+    {
+        return self::get($order_id);
+    }
+
+    public function cancel()
+    {
+        return $this->save(['order_status' => 20]);
+    }
+
 }
