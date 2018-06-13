@@ -69,6 +69,8 @@ class Order extends Controller
         }
         // 创建订单
         if ($model->add($this->user['user_id'], $order)) {
+            // todo: 清空购物车
+
             // 发起微信支付
             $wxConfig = WxappModel::getWxappCache();
             $WxPay = new WxPay($wxConfig);

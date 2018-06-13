@@ -68,12 +68,14 @@ class WxPay
         // 请求API
         $url = 'https://api.mch.weixin.qq.com/pay/unifiedorder';
         $result = $this->postXmlCurl($this->toXml($params), $url);
-
         $prepay = $this->fromXml($result);
 
         // 请求失败
         if ($prepay['return_code'] === 'FAIL') {
             throw new BaseException(['msg' => $prepay['return_msg']]);
+        }
+        if ($prepay['result_code'] === 'FAIL') {
+            throw new BaseException(['msg' => $prepay['err_code_des']]);
         }
 
         // 生成 nonce_str 供前端使用

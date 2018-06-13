@@ -4,6 +4,8 @@ namespace app\api\controller\user;
 
 use app\api\controller\Controller;
 use app\api\model\Order as OrderModel;
+use app\api\model\Wxapp as WxappModel;
+use app\common\library\wechat\WxPay;
 
 /**
  * 用户订单管理
@@ -59,6 +61,25 @@ class Order extends Controller
             return $this->renderSuccess();
         }
         return $this->renderError($model->getError());
+    }
+
+
+    /**
+     * 立即支付
+     * @param $order_id
+     * @return array
+     * @throws \app\common\exception\BaseException
+     * @throws \think\exception\DbException
+     */
+    public function pay($order_id)
+    {
+        $user = $this->getUser();
+        $model = OrderModel::detail($order_id);
+        // 发起微信支付
+        $wxConfig = WxappModel::getWxappCache();
+        $WxPay = new WxPay($wxConfig);
+        $wxParams = $WxPay->unifiedorder($model['order_no'], $user['open_id'], $model['pay_price']);
+        return $this->renderSuccess($wxParams);
     }
 
 }
