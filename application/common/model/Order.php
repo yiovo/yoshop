@@ -30,6 +30,50 @@ class Order extends BaseModel
     }
 
     /**
+     * 付款状态
+     * @param $value
+     * @return array
+     */
+    public function getPayStatusAttr($value)
+    {
+        $status = [10 => '待付款', 20 => '已付款'];
+        return ['text' => $status[$value], 'value' => $value];
+    }
+
+    /**
+     * 发货状态
+     * @param $value
+     * @return array
+     */
+    public function getDeliveryStatusAttr($value)
+    {
+        $status = [10 => '待发货', 20 => '已发货'];
+        return ['text' => $status[$value], 'value' => $value];
+    }
+
+    /**
+     * 收货状态
+     * @param $value
+     * @return array
+     */
+    public function getReceiptStatusAttr($value)
+    {
+        $status = [10 => '待收货', 20 => '已收货'];
+        return ['text' => $status[$value], 'value' => $value];
+    }
+
+    /**
+     * 收货状态
+     * @param $value
+     * @return array
+     */
+    public function getOrderStatusAttr($value)
+    {
+        $status = [10 => '进行中', 20 => '取消', 30 => '已完成'];
+        return ['text' => $status[$value], 'value' => $value];
+    }
+
+    /**
      * 生成订单号
      */
     protected function orderNo()

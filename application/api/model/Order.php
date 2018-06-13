@@ -18,7 +18,6 @@ class Order extends OrderModel
      */
     protected $hidden = [
         'wxapp_id',
-        'create_time',
         'update_time'
     ];
 
@@ -142,6 +141,39 @@ class Order extends OrderModel
         Db::commit();
 
         return true;
+    }
+
+    /**
+     * 用户中心订单列表
+     * @param $user_id
+     * @param string $type
+     * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getList($user_id, $type = 'all')
+    {
+        // 筛选条件
+        $filter = [];
+        // 订单数据类型
+        switch ($type) {
+            case 'all':
+                break;
+            case 'payment';
+                $filter['pay_status'] = 10;
+                break;
+            case 'received';
+                $filter['pay_status'] = 20;
+                $filter['receipt_status'] = 10;
+                break;
+        }
+        return $this->with(['goods.image'])
+            ->where('user_id', '=', $user_id)
+            ->where('order_status', '<>', 20)
+            ->where($filter)
+            ->order(['create_time' => 'desc'])
+            ->select();
     }
 
 }

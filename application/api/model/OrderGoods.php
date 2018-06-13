@@ -16,6 +16,7 @@ class OrderGoods extends OrderGoodsModel
      * @var array
      */
     protected $hidden = [
+        'content',
         'wxapp_id',
         'create_time',
     ];

@@ -27,16 +27,15 @@ class User extends Controller
     }
 
     /**
-     * 更新微信用户信息
+     * 获取当前用户信息
      * @return array
      * @throws \app\common\exception\BaseException
      * @throws \think\exception\DbException
      */
-    public function append()
+    public function detail()
     {
-        $model = $this->getUser();
-        $model->setUserInfo();
-        return $this->renderSuccess();
+        $userInfo = $this->getUser();
+        return $this->renderSuccess(['user_info' => $userInfo]);
     }
 
 }

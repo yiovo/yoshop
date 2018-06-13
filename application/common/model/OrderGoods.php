@@ -12,4 +12,13 @@ class OrderGoods extends BaseModel
     protected $name = 'order_goods';
     protected $updateTime = false;
 
+    /**
+     * 订单商品列表
+     * @return \think\model\relation\BelongsTo
+     */
+    public function image()
+    {
+        return $this->belongsTo('UploadFile', 'image_id', 'file_id');
+    }
+
 }
