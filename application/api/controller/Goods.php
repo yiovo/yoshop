@@ -14,15 +14,16 @@ class Goods extends Controller
 {
     /**
      * 商品列表
+     * @param $category_id
      * @param $sortType
      * @param $sortPrice
      * @return array
      * @throws \think\exception\DbException
      */
-    public function lists($sortType, $sortPrice)
+    public function lists($category_id, $sortType, $sortPrice)
     {
         $model = new GoodsModel;
-        $list = $model->getList($sortType, $sortPrice);
+        $list = $model->getList($category_id,$sortType, $sortPrice);
         return $this->renderSuccess(compact('list'));
     }
 
