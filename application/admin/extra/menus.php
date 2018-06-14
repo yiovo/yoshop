@@ -78,7 +78,13 @@ return [
                 'handle' => [
                     'wxapp/tabbar'
                 ],
-            ]
+            ],
+            [
+                'name' => '帮助中心',
+                'handle' => [
+                    'wxapp.help/index'
+                ],
+            ],
         ],
     ],
     'plugins' => [
