@@ -20,10 +20,10 @@ class Goods extends Controller
      * @return array
      * @throws \think\exception\DbException
      */
-    public function lists($category_id, $sortType, $sortPrice)
+    public function lists($category_id, $search, $sortType, $sortPrice)
     {
         $model = new GoodsModel;
-        $list = $model->getList($category_id,$sortType, $sortPrice);
+        $list = $model->getList($category_id,$search, $sortType, $sortPrice);
         return $this->renderSuccess(compact('list'));
     }
 
@@ -31,7 +31,7 @@ class Goods extends Controller
      * 获取商品详情
      * @param $goods_id
      * @return array
-//     * @throws \app\common\exception\BaseException
+     * //     * @throws \app\common\exception\BaseException
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
