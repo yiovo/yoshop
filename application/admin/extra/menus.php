@@ -40,21 +40,21 @@ return [
     'order' => [
         'name' => '订单管理',
         'icon' => 'icon-order',
-//        'url' => 'order/index',
+        'url' => 'order/index',
         'submenu' => [],
     ],
     'user' => [
         'name' => '用户管理',
         'icon' => 'icon-user',
-//        'url' => 'user/index',
+        'url' => 'user/index',
         'submenu' => [],
     ],
-    'marketing' => [
-        'name' => '营销管理',
-        'icon' => 'icon-marketing',
+//    'marketing' => [
+//        'name' => '营销管理',
+//        'icon' => 'icon-marketing',
 //        'url' => 'marketing/index',
-        'submenu' => [],
-    ],
+//        'submenu' => [],
+//    ],
     'wxapp' => [
         'name' => '小程序',
         'icon' => 'icon-wxapp',
@@ -87,12 +87,12 @@ return [
             ],
         ],
     ],
-    'plugins' => [
-        'name' => '应用中心',
-        'icon' => 'icon-application',
-        'is_svg' => true,   // 多色图标
+//    'plugins' => [
+//        'name' => '应用中心',
+//        'icon' => 'icon-application',
+//        'is_svg' => true,   // 多色图标
 //        'url' => 'plugins/index',
-    ],
+//    ],
     'setting' => [
         'name' => '设置',
         'icon' => 'icon-setting',
