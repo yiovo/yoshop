@@ -79,7 +79,8 @@
                                             <td class="am-text-middle" rowspan="<?= $goodsCount ?>">
                                                 <div class="tpl-table-black-operation">
                                                     <a class="tpl-table-black-operation-green"
-                                                       href="">订单详情</a>
+                                                       href="<?= url('order/detail', ['order_id' => $order['order_id']]) ?>">
+                                                        订单详情</a>
                                                 </div>
                                             </td>
                                         <?php endif; ?>

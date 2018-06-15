@@ -19,7 +19,7 @@ class Order extends OrderModel
      */
     public function getList()
     {
-        return $this->with(['goods', 'address', 'user'])
+        return $this->with(['goods.image', 'address', 'user'])
             ->where([])
             ->order(['create_time' => 'desc'])->paginate(10, false, [
                 'query' => Request::instance()->request()
