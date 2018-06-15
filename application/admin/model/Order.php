@@ -17,10 +17,10 @@ class Order extends OrderModel
      * @return \think\Paginator
      * @throws \think\exception\DbException
      */
-    public function getList()
+    public function getList($filter)
     {
         return $this->with(['goods.image', 'address', 'user'])
-            ->where([])
+            ->where($filter)
             ->order(['create_time' => 'desc'])->paginate(10, false, [
                 'query' => Request::instance()->request()
             ]);

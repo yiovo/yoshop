@@ -11,9 +11,7 @@
     <link rel="icon" type="image/png" href="assets/admin/i/favicon.png"/>
     <link rel="apple-touch-icon-precomposed" href="assets/admin/i/app-icon72x72@2x.png"/>
     <meta name="apple-mobile-web-app-title" content="Best Shop"/>
-    <!--    <script src="assets/admin/js/echarts.min.js"></script>-->
     <link rel="stylesheet" href="assets/admin/css/amazeui.min.css"/>
-    <!--    <link rel="stylesheet" href="assets/admin/css/amazeui.datatables.min.css"/>-->
     <link rel="stylesheet" href="assets/admin/css/app.css"/>
     <link rel="stylesheet" href="//at.alicdn.com/t/font_664399_8kvutk31par79zfr.css">
     <script src="assets/admin/js/jquery.min.js"></script>

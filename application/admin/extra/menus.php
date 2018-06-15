@@ -40,12 +40,42 @@ return [
     'order' => [
         'name' => '订单管理',
         'icon' => 'icon-order',
-        'url' => 'order/index',
+        'url' => 'order/delivery_list',
         'submenu' => [
+            [
+                'name' => '待发货',
+                'handle' => [
+                    'order/delivery_list',
+                ],
+            ],
+            [
+                'name' => '待收货',
+                'handle' => [
+                    'order/receipt_list',
+                ],
+            ],
+            [
+                'name' => '待付款',
+                'handle' => [
+                    'order/pay_list',
+                ],
+            ],
+            [
+                'name' => '已完成',
+                'handle' => [
+                    'order/complete_list',
+                ],
+            ],
+            [
+                'name' => '已取消',
+                'handle' => [
+                    'order/cancel_list',
+                ],
+            ],
             [
                 'name' => '全部订单',
                 'handle' => [
-                    'order/index',
+                    'order/all_list',
                 ],
             ],
         ]
