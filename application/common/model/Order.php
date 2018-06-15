@@ -32,6 +32,15 @@ class Order extends BaseModel
     }
 
     /**
+     * 关联用户表
+     * @return \think\model\relation\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo('User');
+    }
+
+    /**
      * 付款状态
      * @param $value
      * @return array

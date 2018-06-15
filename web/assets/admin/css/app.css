@@ -531,6 +531,7 @@ visibility: visible; }
 .order-list .am-table .goods-detail { min-width: 350px; }
 .order-list .am-table .goods-detail > div { float: left; }
 .order-list .am-table .goods-detail .goods-image { margin-right: 0.6rem; }
+.order-list .am-table .goods-detail .goods-image img { width: 72px; height: 72px; }
 .order-list .am-table .goods-detail .goods-info { width: 250px; }
 .order-list .am-table .goods-detail .goods-info p { display: block; white-space: normal; margin: 0 0 0.3rem 0; padding: 0 0.5rem; font-size: 1.3rem; text-align: left; }
 .order-list .am-table .goods-detail .goods-info .goods-spec { border: none; font-size: 1.2rem; }

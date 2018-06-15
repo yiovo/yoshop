@@ -102,7 +102,7 @@ class Goods extends BaseModel
             ->where('goods_status', '=', 10)
             ->where($filter)
             ->order($sort)
-            ->paginate(10, false, [
+            ->paginate(15, false, [
                 'query' => Request::instance()->request()
             ]);
         return $list;

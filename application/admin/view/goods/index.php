@@ -34,43 +34,41 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php if (!$list->isEmpty()): ?>
-                                <?php foreach ($list as $item): ?>
-                                    <tr>
-                                        <td class="am-text-middle"><?= $item['goods_id'] ?></td>
-                                        <td class="am-text-middle">
-                                            <a href="<?= $item['image'][0]['file_path'] ?>"
-                                               title="点击查看大图" target="_blank">
-                                                <img src="<?= $item['image'][0]['file_path'] ?>"
-                                                     width="50" height="50" alt="商品图片">
-                                            </a>
-                                        </td>
-                                        <td class="am-text-middle"><?= $item['goods_name'] ?></td>
-                                        <td class="am-text-middle"><?= $item['category']['name'] ?></td>
-                                        <td class="am-text-middle"><?= $item['sales_actual'] ?></td>
-                                        <td class="am-text-middle"><?= $item['goods_sort'] ?></td>
-                                        <td class="am-text-middle">
+                            <?php if (!$list->isEmpty()): foreach ($list as $item): ?>
+                                <tr>
+                                    <td class="am-text-middle"><?= $item['goods_id'] ?></td>
+                                    <td class="am-text-middle">
+                                        <a href="<?= $item['image'][0]['file_path'] ?>"
+                                           title="点击查看大图" target="_blank">
+                                            <img src="<?= $item['image'][0]['file_path'] ?>"
+                                                 width="50" height="50" alt="商品图片">
+                                        </a>
+                                    </td>
+                                    <td class="am-text-middle"><?= $item['goods_name'] ?></td>
+                                    <td class="am-text-middle"><?= $item['category']['name'] ?></td>
+                                    <td class="am-text-middle"><?= $item['sales_actual'] ?></td>
+                                    <td class="am-text-middle"><?= $item['goods_sort'] ?></td>
+                                    <td class="am-text-middle">
                                             <span class="<?= $item['goods_status']['value'] === 10 ? 'x-color-green'
                                                 : 'x-color-red' ?>">
                                             <?= $item['goods_status']['text'] ?>
                                             </span>
-                                        </td>
-                                        <td class="am-text-middle"><?= $item['create_time'] ?></td>
-                                        <td class="am-text-middle">
-                                            <div class="tpl-table-black-operation">
-                                                <a href="<?= url('goods/edit',
-                                                    ['goods_id' => $item['goods_id']]) ?>">
-                                                    <i class="am-icon-pencil"></i> 编辑
-                                                </a>
-                                                <a href="javascript:;" class="item-delete tpl-table-black-operation-del"
-                                                   data-id="<?= $item['goods_id'] ?>">
-                                                    <i class="am-icon-trash"></i> 删除
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            <?php else: ?>
+                                    </td>
+                                    <td class="am-text-middle"><?= $item['create_time'] ?></td>
+                                    <td class="am-text-middle">
+                                        <div class="tpl-table-black-operation">
+                                            <a href="<?= url('goods/edit',
+                                                ['goods_id' => $item['goods_id']]) ?>">
+                                                <i class="am-icon-pencil"></i> 编辑
+                                            </a>
+                                            <a href="javascript:;" class="item-delete tpl-table-black-operation-del"
+                                               data-id="<?= $item['goods_id'] ?>">
+                                                <i class="am-icon-trash"></i> 删除
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; else: ?>
                                 <tr>
                                     <td colspan="9" class="am-text-center">暂无记录</td>
                                 </tr>
