@@ -6,7 +6,7 @@
                     <div class="am-u-sm-12">
                         <ul class="order-detail-progress progress-3">
                             <li>下单时间
-                                <div class="tip">2018-06-15 10:54:26</div>
+                                <div class="tip"><?= $detail['create_time'] ?></div>
                             </li>
                             <li>付款
                                 <div class="tip">付款于 2018-06-15 10:54:36</div>
@@ -27,8 +27,8 @@
                         <div class="widget-title am-fl">基本信息</div>
                     </div>
                     <div class="am-scrollable-horizontal">
-                        <table class="regional-table am-table am-table-bordered
-                                         am-table-centered am-margin-bottom-xs">
+                        <table class="regional-table am-table am-table-bordered am-table-centered
+                            am-text-nowrap am-margin-bottom-xs">
                             <tbody>
                             <tr>
                                 <th>订单号</th>
@@ -73,8 +73,8 @@
                         <div class="widget-title am-fl">商品信息</div>
                     </div>
                     <div class="am-scrollable-horizontal">
-                        <table class="regional-table am-table am-table-bordered
-                                         am-table-centered am-margin-bottom-xs">
+                        <table class="regional-table am-table am-table-bordered am-table-centered
+                            am-text-nowrap am-margin-bottom-xs">
                             <tbody>
                             <tr>
                                 <th>商品名称</th>
@@ -118,8 +118,8 @@
                         <div class="widget-title am-fl">收货信息</div>
                     </div>
                     <div class="am-scrollable-horizontal">
-                        <table class="regional-table am-table am-table-bordered
-                                         am-table-centered am-margin-bottom-xs">
+                        <table class="regional-table am-table am-table-bordered am-table-centered
+                            am-text-nowrap am-margin-bottom-xs">
                             <tbody>
                             <tr>
                                 <th>收货人</th>
@@ -141,36 +141,38 @@
                     </div>
 
 
-                    <div class="widget-head am-cf">
-                        <div class="widget-title am-fl">付款信息</div>
-                    </div>
-                    <div class="am-scrollable-horizontal">
-                        <table class="regional-table am-table am-table-bordered
-                                         am-table-centered am-margin-bottom-xs">
-                            <tbody>
-                            <tr>
-                                <th>应付款金额</th>
-                                <th>支付方式</th>
-                                <th>支付流水号</th>
-                                <th>付款状态</th>
-                                <th>付款时间</th>
-                            </tr>
-                            <tr>
-                                <td>￥<?= $detail['pay_price'] ?></td>
-                                <td>微信支付</td>
-                                <td><?= $detail['transaction_id'] ?: '--' ?></td>
-                                <td>
+                    <?php if ($detail['pay_status']['value'] === 20): ?>
+                        <div class="widget-head am-cf">
+                            <div class="widget-title am-fl">付款信息</div>
+                        </div>
+                        <div class="am-scrollable-horizontal">
+                            <table class="regional-table am-table am-table-bordered am-table-centered
+                                am-text-nowrap am-margin-bottom-xs">
+                                <tbody>
+                                <tr>
+                                    <th>应付款金额</th>
+                                    <th>支付方式</th>
+                                    <th>支付流水号</th>
+                                    <th>付款状态</th>
+                                    <th>付款时间</th>
+                                </tr>
+                                <tr>
+                                    <td>￥<?= $detail['pay_price'] ?></td>
+                                    <td>微信支付</td>
+                                    <td><?= $detail['transaction_id'] ?: '--' ?></td>
+                                    <td>
                                   <span class="am-badge
                                         <?= $detail['pay_status']['value'] === 20 ? 'am-badge-success' : '' ?>">
                                                 <?= $detail['pay_status']['text'] ?></span>
-                                </td>
-                                <td>
-                                    <?= $detail['pay_time'] ? date('Y-m-d H:i:s', $detail['pay_time']) : '--' ?>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                                    </td>
+                                    <td>
+                                        <?= $detail['pay_time'] ? date('Y-m-d H:i:s', $detail['pay_time']) : '--' ?>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endif; ?>
 
 
                 </div>

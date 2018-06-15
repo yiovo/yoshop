@@ -41,7 +41,14 @@ return [
         'name' => '订单管理',
         'icon' => 'icon-order',
         'url' => 'order/index',
-        'submenu' => [],
+        'submenu' => [
+            [
+                'name' => '全部订单',
+                'handle' => [
+                    'order/index',
+                ],
+            ],
+        ]
     ],
     'user' => [
         'name' => '用户管理',
@@ -87,12 +94,12 @@ return [
             ],
         ],
     ],
-//    'plugins' => [
-//        'name' => '应用中心',
-//        'icon' => 'icon-application',
-//        'is_svg' => true,   // 多色图标
+    'plugins' => [
+        'name' => '应用中心',
+        'icon' => 'icon-application',
+        'is_svg' => true,   // 多色图标
 //        'url' => 'plugins/index',
-//    ],
+    ],
     'setting' => [
         'name' => '设置',
         'icon' => 'icon-setting',

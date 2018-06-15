@@ -47,7 +47,7 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
 .am-dimmer { z-index: 1200; }
 .am-modal { z-index: 1300; }
 .am-datepicker-dropdown { z-index: 1400; }
-.left-sidebar { display: flex; transition: all 0.4s ease-in-out; width: 280px; height: 100%; position: fixed; /*z-index: 1200;*/ top: 0; left: 0; }
+.left-sidebar { display: flex; transition: all 0.4s ease-in-out; width: 280px; height: 100%; position: fixed; z-index: 10; top: 0; left: 0; }
 .left-sidebar .sidebar-nav { width: 160px; background-color: #20222A; box-shadow: 1px 0 2px 0 rgba(0, 0, 0, .05); }
 .left-sidebar .left-sidebar-second { width: 120px; min-height: 100%; background: #fff; padding-top: 50px; }
 .left-sidebar .left-sidebar-second a { display: block; color: #333; font-size: 1.3rem; }

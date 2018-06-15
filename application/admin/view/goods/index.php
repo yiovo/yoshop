@@ -18,8 +18,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="am-u-sm-12">
-                        <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black ">
+                    <div class="am-scrollable-horizontal am-u-sm-12">
+                        <table width="100%" class="am-table am-table-compact am-table-striped
+                         tpl-table-black am-text-nowrap">
                             <thead>
                             <tr>
                                 <th>商品ID</th>
