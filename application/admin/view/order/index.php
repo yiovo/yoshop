@@ -81,6 +81,13 @@
                                                     <a class="tpl-table-black-operation-green"
                                                        href="<?= url('order/detail', ['order_id' => $order['order_id']]) ?>">
                                                         订单详情</a>
+                                                    <?php if ($order['pay_status']['value'] === 20
+                                                        && $order['delivery_status']['value'] === 10): ?>
+                                                        <a class="tpl-table-black-operation"
+                                                           href="<?= url('order/detail#delivery',
+                                                               ['order_id' => $order['order_id']]) ?>">
+                                                            去发货</a>
+                                                    <?php endif; ?>
                                                 </div>
                                             </td>
                                         <?php endif; ?>
