@@ -41,11 +41,15 @@
                                             <tr>
                                                 <th width="42%">可配送区域</th>
                                                 <th>
-                                                    <span class="first">首件 (个)</span>
+                                                    <span class="first">
+                                                        <?= $model['method'] === 10 ? '首件 (个)' : '首重 (Kg)' ?>
+                                                    </span>
                                                 </th>
                                                 <th>运费 (元)</th>
                                                 <th>
-                                                    <span class="additional">续件 (个)</span>
+                                                    <span class="additional">
+                                                          <?= $model['method'] === 10 ? '续件 (个)' : '续重 (Kg)' ?>
+                                                    </span>
                                                 </th>
                                                 <th>续费 (元)</th>
                                             </tr>
