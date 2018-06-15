@@ -199,7 +199,11 @@ class Order extends OrderModel
             $this->error = '该订单不合法';
             return false;
         }
-        return $this->save(['receipt_status' => 20, 'order_status' => 30]);
+        return $this->save([
+            'receipt_status' => 20,
+            'receipt_time' => time(),
+            'order_status' => 30
+        ]);
     }
 
     /**
@@ -224,7 +228,7 @@ class Order extends OrderModel
                 $filter['receipt_status'] = 10;
                 break;
         }
-        return $this ->where('user_id', '=', $user_id)
+        return $this->where('user_id', '=', $user_id)
             ->where('order_status', '<>', 20)
             ->where($filter)
             ->count();
