@@ -1,4 +1,4 @@
-<link href="assets/admin/plugins/umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+<link rel="stylesheet" href="assets/admin/plugins/umeditor/themes/default/css/umeditor.css">
 <div class="row-content am-cf">
     <div class="row">
         <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
@@ -271,7 +271,7 @@
 </div>
 <script src="assets/admin/js/ddsort.js"></script>
 <script src="assets/admin/plugins/umeditor/umeditor.config.js"></script>
-<script src="assets/admin/plugins/umeditor/umeditor.js"></script>
+<script src="assets/admin/plugins/umeditor/umeditor.min.js"></script>
 <script>
     $(function () {
 
