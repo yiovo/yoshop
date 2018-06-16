@@ -46,16 +46,13 @@ class User extends BaseModel
 
     /**
      * 获取用户列表
-     * @param $wxapp_id
      * @return \think\Paginator
      * @throws \think\exception\DbException
      */
-    public function getList($wxapp_id)
+    public function getList()
     {
         $request = Request::instance();
-        $filter = ['wxapp_id' => $wxapp_id];
-        return $this->where($filter)
-            ->order(['create_time' => 'desc', 'user_id' => 'desc'])
+        return $this->order(['create_time' => 'desc'])
             ->paginate(15, false, ['query' => $request->request()]);
     }
 
