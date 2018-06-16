@@ -348,10 +348,21 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-notifications-title { color: #616161;
     ul.tpl-dropdown-content { position: fixed; width: 100%; left: 0; top: 112px; right: 0; }
 }
 
-/* xany  */
+/* table  */
 .am-table { border-collapse: collapse; font-size: 1.4rem; }
 .am-table > thead > tr > th { vertical-align: middle; }
 .am-btn-toolbar .am-btn-group > .am-btn { border-radius: 2px !important; margin-right: 10px; }
+.am-table .item-title {
+    max-width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-align: left !important;
+    margin: 0;
+    white-space: normal;
+}
 
 /* 文字颜色 */
 .x-color-red { color: #f00 !important; }

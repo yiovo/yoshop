@@ -45,7 +45,9 @@
                                                  width="50" height="50" alt="商品图片">
                                         </a>
                                     </td>
-                                    <td class="am-text-middle"><?= $item['goods_name'] ?></td>
+                                    <td class="am-text-middle">
+                                        <p class="item-title"><?= $item['goods_name'] ?></p>
+                                    </td>
                                     <td class="am-text-middle"><?= $item['category']['name'] ?></td>
                                     <td class="am-text-middle"><?= $item['sales_actual'] ?></td>
                                     <td class="am-text-middle"><?= $item['goods_sort'] ?></td>
