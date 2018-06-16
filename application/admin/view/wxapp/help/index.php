@@ -32,8 +32,12 @@
                             <tbody>
                             <?php if (!$list->isEmpty()): foreach ($list as $item): ?>
                                 <tr>
-                                    <td class="am-text-middle"><?= $item['title'] ?></td>
-                                    <td class="am-text-middle"><?= $item['content'] ?></td>
+                                    <td class="am-text-middle">
+                                        <p class="item-title"><?= $item['title'] ?></p>
+                                    </td>
+                                    <td class="am-text-middle">
+                                        <p class="item-title" style="max-width: 400px;"><?= $item['content'] ?></p>
+                                    </td>
                                     <td class="am-text-middle"><?= $item['sort'] ?></td>
                                     <td class="am-text-middle"><?= $item['create_time'] ?></td>
                                     <td class="am-text-middle">
