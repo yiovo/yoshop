@@ -35,11 +35,12 @@ class Delivery extends BaseModel
 
     /**
      * 获取全部
-     * @return false|static[]
-     * @throws \think\exception\DbException
+     * @return mixed
      */
-    public static function getAll() {
-        return self::all();
+    public static function getAll()
+    {
+        $model = new static;
+        return $model->order(['create_time' => 'desc'])->select();
     }
 
     /**
@@ -50,7 +51,7 @@ class Delivery extends BaseModel
     public function getList()
     {
         return $this->with(['rule'])
-            ->order(['delivery_id' => 'desc'])
+            ->order(['create_time' => 'desc'])
             ->paginate(15, false, [
                 'query' => Request::instance()->request()
             ]);
