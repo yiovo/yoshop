@@ -47,6 +47,8 @@
                                            value="<?= $wxapp['apikey'] ?>">
                                 </div>
                             </div>
+
+                            <!--
                             <div class="widget-head am-cf">
                                 <div class="widget-title am-fl">在线客服</div>
                             </div>
@@ -143,6 +145,8 @@
                                     <small>请填写正确的座机号码或手机号码</small>
                                 </div>
                             </div>
+                          -->
+
                             <div class="am-form-group">
                                 <div class="am-u-sm-9 am-u-sm-push-3 am-margin-top-lg">
                                     <button type="submit" class="j-submit am-btn am-btn-secondary">提交
