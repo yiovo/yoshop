@@ -11,8 +11,14 @@ use think\Cache;
  */
 class Cart
 {
+    /* @var int $user_id 用户id */
     private $user_id;
-    private $cart;
+
+    /* @var array $cart 购物车列表 */
+    private $cart = [];
+
+    /* @var bool $clear 是否清空购物车 */
+    private $clear = false;
 
     /**
      * 构造方法
@@ -145,7 +151,16 @@ class Cart
      */
     public function __destruct()
     {
-        Cache::set('cart_' . $this->user_id, $this->cart);
+        $this->clear !== true && Cache::set('cart_' . $this->user_id, $this->cart);
+    }
+
+    /**
+     * 清空当前用户购物车
+     */
+    public function clearAll()
+    {
+        $this->clear = true;
+        Cache::rm('cart_' . $this->user_id);
     }
 
 }

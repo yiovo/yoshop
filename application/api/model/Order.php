@@ -136,7 +136,6 @@ class Order extends OrderModel
             'city_id' => $order['address']['city_id'],
             'region_id' => $order['address']['region_id'],
             'detail' => $order['address']['detail'],
-            'order_id' => $this['order_id'],
         ]);
         Db::commit();
 

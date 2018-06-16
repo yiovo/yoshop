@@ -4,6 +4,7 @@ namespace app\api\controller;
 
 use app\api\model\Order as OrderModel;
 use app\api\model\Wxapp as WxappModel;
+use app\api\model\Cart as CartModel;
 use app\common\library\wechat\WxPay;
 
 /**
@@ -32,6 +33,7 @@ class Order extends Controller
      * @param $goods_id
      * @param $goods_num
      * @return array
+     * @throws \app\common\exception\BaseException
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
@@ -46,7 +48,12 @@ class Order extends Controller
         }
         // 创建订单
         if ($model->add($this->user['user_id'], $order)) {
-            return $this->renderSuccess([], '更新成功');
+            // 发起微信支付
+            return $this->renderSuccess([
+                'payment' => $this->wxPay($model['order_no'], $this->user['open_id']
+                    , $order['order_pay_price']),
+                'order_id' => $model['order_id']
+            ]);
         }
         return $this->renderError('订单创建失败');
     }
@@ -69,16 +76,33 @@ class Order extends Controller
         }
         // 创建订单
         if ($model->add($this->user['user_id'], $order)) {
-            // todo: 清空购物车
-
+            // 清空购物车
+            $Card = new CartModel($this->user['user_id']);
+            $Card->clearAll();
             // 发起微信支付
-            $wxConfig = WxappModel::getWxappCache();
-            $WxPay = new WxPay($wxConfig);
-            $wxParams = $WxPay->unifiedorder($model['order_no'], $this->user['open_id']
-                , $order['order_pay_price']);
-            return $this->renderSuccess($wxParams);
+            return $this->renderSuccess([
+                'payment' => $this->wxPay($model['order_no'], $this->user['open_id']
+                    , $order['order_pay_price']),
+                'order_id' => $model['order_id']
+            ]);
         }
         return $this->renderError('订单创建失败');
+    }
+
+    /**
+     * 构建微信支付
+     * @param $order_no
+     * @param $open_id
+     * @param $pay_price
+     * @return array
+     * @throws \app\common\exception\BaseException
+     * @throws \think\exception\DbException
+     */
+    private function wxPay($order_no, $open_id, $pay_price)
+    {
+        $wxConfig = WxappModel::getWxappCache();
+        $WxPay = new WxPay($wxConfig);
+        return $WxPay->unifiedorder($order_no, $open_id, $pay_price);
     }
 
 }
