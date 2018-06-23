@@ -439,6 +439,7 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-notifications-title { color: #616161;
 .am-form .form-tab-group.active { display: block; }
 .am-form .am-form-file a.webuploader-container { font-size: 1.3rem; }
 .am-form input[type=color] { -webkit-appearance: square-button; width: 5rem; height: 2.2rem; background-color: buttonface; cursor: pointer; border-width: 1px; border-style: solid; border-color: rgb(220, 220, 220); border-image: initial; padding: 0 2px; }
+.am-form input[type=text][disabled] { background-color: initial; }
 
 /* 图片上传*/
 .am-form .am-form-file .upload-file { font-size: 0; }

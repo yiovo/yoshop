@@ -24,11 +24,11 @@
                                 <div class="am-u-sm-9">
                                     <label class="am-radio-inline">
                                         <input type="radio" name="store[is_notice]" value="1" data-am-ucheck
-                                            <?= $values['is_notice'] ? 'checked' : '' ?>> 开启
+                                            <?= $values['is_notice'] ? 'checked' : '' ?> disabled> 开启
                                     </label>
                                     <label class="am-radio-inline">
                                         <input type="radio" name="store[is_notice]" value="0" data-am-ucheck
-                                            <?= $values['is_notice']  ? '' : 'checked' ?>> 关闭
+                                            <?= $values['is_notice']  ? '' : 'checked' ?> disabled> 关闭
                                     </label>
                                 </div>
                             </div>
@@ -38,7 +38,7 @@
                                     首页公告内容
                                 </label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" class="tpl-form-input" name="store[notice]"
+                                    <input type="text" class="tpl-form-input" name="store[notice]" disabled
                                            value="<?= isset($values['notice']) ? $values['notice'] : '' ?>">
                                 </div>
                             </div>
