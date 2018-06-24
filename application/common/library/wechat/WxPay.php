@@ -106,6 +106,7 @@ class WxPay
         // 将服务器返回的XML数据转化为数组
         $data = $this->fromXml($GLOBALS['HTTP_RAW_POST_DATA']);
         // 记录日志
+        $this->doLogs($GLOBALS['HTTP_RAW_POST_DATA']);
         $this->doLogs($data);
         // 订单信息
         $order = $OrderModel->payDetail($data['out_trade_no']);
