@@ -23,12 +23,12 @@
                                 </label>
                                 <div class="am-u-sm-9">
                                     <label class="am-radio-inline">
-                                        <input type="radio" name="store[is_notice]" value="1" data-am-ucheck
-                                            <?= $values['is_notice'] ? 'checked' : '' ?> disabled> 开启
+                                        <input type="radio" name="store[is_notice]" value="1"
+                                               data-am-ucheck disabled> 开启
                                     </label>
                                     <label class="am-radio-inline">
-                                        <input type="radio" name="store[is_notice]" value="0" data-am-ucheck
-                                            <?= $values['is_notice']  ? '' : 'checked' ?> disabled> 关闭
+                                        <input type="radio" name="store[is_notice]" value="0"
+                                               data-am-ucheck checked disabled> 关闭
                                     </label>
                                 </div>
                             </div>
@@ -39,7 +39,7 @@
                                 </label>
                                 <div class="am-u-sm-9">
                                     <input type="text" class="tpl-form-input" name="store[notice]" disabled
-                                           value="<?= isset($values['notice']) ? $values['notice'] : '' ?>">
+                                           value="">
                                 </div>
                             </div>
                             <div class="am-form-group">

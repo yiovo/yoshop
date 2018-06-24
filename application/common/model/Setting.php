@@ -46,14 +46,14 @@ class Setting extends BaseModel
 
     /**
      * 全局缓存: 系统设置
-     * @return false|static[]
-     * @throws \think\exception\DbException
+     * @return array|mixed
      */
     public static function getAll()
     {
-        if (!$data = Cache::get('setting_' . self::$wxapp_id)) {
-            $data = array_column(collection(self::all())->toArray(), null, 'key');
-            Cache::set('setting_' . self::$wxapp_id, $data);
+        $self = new static;
+        if (!$data = Cache::get('setting_' . $self::$wxapp_id)) {
+            $data = array_column(collection($self::all())->toArray(), null, 'key');
+            Cache::set('setting_' . $self::$wxapp_id, $data);
         }
         return $data;
     }
@@ -61,8 +61,7 @@ class Setting extends BaseModel
     /**
      * 获取指定项设置
      * @param $key
-     * @return array|static
-     * @throws \think\exception\DbException
+     * @return array
      */
     public static function getItem($key)
     {

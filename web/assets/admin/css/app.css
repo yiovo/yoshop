@@ -121,7 +121,7 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
 .tpl-switch input[type="checkbox"].bigswitch.ios-switch:checked + div > div { -webkit-transform: translate3d(25px, 0, 0); -moz-transform: translate3d(16px, 0, 0); }
 .tpl-switch input[type="checkbox"].green.ios-switch:checked + div > div { box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3), 0 0 0 1px #00a23f; }
 .tpl-page-state { width: 100%; }
-.tpl-page-state-title { font-size: 40px; font-weight: bold; }
+.tpl-page-state-title { font-size: 40px; font-weight: bold; color: #838FA1;  }
 .tpl-page-state-content { padding: 10px 0; }
 .tpl-login { width: 100%; }
 .tpl-login-logo { max-width: 159px; height: 205px; margin: 0 auto 20px auto; }

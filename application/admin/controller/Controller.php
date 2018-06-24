@@ -5,6 +5,7 @@ namespace app\admin\controller;
 use think\Config;
 use think\Session;
 use think\Controller as ThinkController;
+use app\admin\model\Setting;
 
 /**
  * 后台控制器基类
@@ -40,6 +41,8 @@ class Controller extends ThinkController
      */
     private function layout()
     {
+        // 当前商城设置
+        $setting = Setting::getAll();
         // 路由信息
         list ($group, $controller, $action) = $this->getRouteinfo();
         // 后台菜单
@@ -47,7 +50,8 @@ class Controller extends ThinkController
         // 当前小程序信息
         $wxapp = $this->admin['wxapp'];
         // 输出到view
-        $this->assign(compact('group', 'controller', 'action', 'menus', 'wxapp'));
+        $this->assign(compact('group', 'controller', 'action', 'menus'
+            , 'wxapp', 'setting'));
     }
 
     /**
