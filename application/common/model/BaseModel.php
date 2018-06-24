@@ -24,8 +24,8 @@ class BaseModel extends Model
         parent::init();
         // 获取当前域名
         self::$base_url = self::baseUrl();
-        // 后期静态绑定类名称
-        self::staticBindWxappId(get_called_class());
+        // 后期静态绑定wxapp_id
+        self::bindWxappId(get_called_class());
     }
 
     /**
@@ -36,11 +36,12 @@ class BaseModel extends Model
      *   静态方法中:  $self = new static();   $self::$wxapp_id
      * @param $calledClass
      */
-    public static function staticBindWxappId($calledClass)
+    private static function bindWxappId($calledClass)
     {
-        if (preg_match('/app\\\(\w+)/', $calledClass, $match)) {
-            $callfunc = 'set' . $match[1] . 'WxappId';
-            self::$callfunc();
+        $class = [];
+        if (preg_match('/app\\\(\w+)/', $calledClass, $class)) {
+            $callfunc = 'set' . $class[1] . 'WxappId';
+            method_exists(new self, $callfunc) && self::$callfunc();
         }
     }
 
@@ -60,13 +61,6 @@ class BaseModel extends Model
     {
         $request = Request::instance();
         self::$wxapp_id = $request->param('wxapp_id');
-    }
-
-    /**
-     * 设置wxapp_id (common模块)
-     */
-    protected static function setCommonWxappId()
-    {
     }
 
     /**
