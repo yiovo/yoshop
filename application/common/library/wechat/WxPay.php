@@ -144,7 +144,6 @@ class WxPay
         }
         // 返回状态
         $this->returnCode(false);
-
     }
 
     /**
