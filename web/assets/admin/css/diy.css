@@ -1,6 +1,6 @@
 .iconfont { font-size: inherit !important;  }
 /*diy手机*/
-.diy-phone { width: 330px; border-radius: 3px; float: left; margin-top: 20px; margin-bottom: 160px; }
+.diy-phone { width: 330px; border-radius: 3px; float: left; margin-top: 10px; margin-bottom: 160px; }
 .diy-phone .phone-top { width: 100%; height: 66px; background-repeat: no-repeat; background-size: contain; background-image: url('https://img.yzcdn.cn/public_files/2017/12/15/c16b686fda5bc8b2c607f8c64edbef6c.png'); cursor: pointer; }
 .diy-phone .phone-main { min-height: 520px; border: 1px solid #ddd; border-top: 0; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; position: relative; }
 .diy-phone .phone-main .drag { position: relative; min-height: 20px; display: block; overflow: hidden; font-size: 1.3rem; }
@@ -14,7 +14,7 @@
 .diy-phone .phone-main a { color: #337ab7; }
 
 /*编辑器*/
-.diy-editor { float: left; width: 494px; height: auto; min-height: 100px; background: #fdfdfd; padding: 15px 10px; margin-left: 18px; border: 1px solid #ddd; border-radius: 5px; margin-top: 55px; margin-bottom: 260px; }
+.diy-editor { float: left; width: 494px; height: auto; min-height: 100px; background: #fdfdfd; padding: 15px 10px; margin-left: 18px; border: 1px solid #ddd; border-radius: 2px; margin-top: 55px; margin-bottom: 260px; }
 .diy-editor .editor-arrow { height: 0; position: relative; }
 .diy-editor .editor-arrow:after,
 .diy-editor .editor-arrow:before { position: absolute; content: "◆"; top: 8px; left: -21px; display: block; width: 9px; height: 18px; font-size: 24px; color: #fdfdfd; z-index: 111; }
@@ -36,7 +36,7 @@
 .diy-editor .form-items .item .item-delete { position: absolute; top: -10px; right: -10px; cursor: pointer; height: 22px; width: 22px; line-height: 22px; background: rgba(153, 153, 153, 0.7); border-radius: 50%; text-align: center; color: #fff !important; }
 .diy-editor .form-items .item  .item-delete:hover { background: #000; }
 .diy-editor .form-items .item .item-image { height: 70px; width: 105px; min-width: 40px; max-width: 220px; background: #eee; float: left; margin-right: 10px; border: 1px solid #e7eaec; position: relative; text-align: center; }
-.diy-editor .form-items .item .item-image img { height: 68px; width: auto; max-width: 220px; }
+.diy-editor .form-items .item .item-image img { height: 68px; width: auto; max-width: 100%; }
 .diy-editor .form-items .item .item-form { height: auto; overflow: hidden; }
 .diy-editor .form-items .item .item-form .input-group { display: table; width: 100%; }
 .diy-editor .form-items .item .item-form .input-group input,

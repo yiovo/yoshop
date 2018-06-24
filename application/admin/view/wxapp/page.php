@@ -3,7 +3,10 @@
     <div class="row">
         <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
             <div class="widget am-cf">
-                <div class="widget-body">
+                <div class="widget-body am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title am-fl">首页设计</div>
+                    </div>
                     <!--手机diy容器-->
                     <div class="diy-phone">
                         <!-- 手机顶部标题 -->
