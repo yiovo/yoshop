@@ -1,35 +1,35 @@
 <?php
-// +----------------------------------------------------------------------
-// | ThinkPHP [ WE CAN DO IT JUST THINK ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2006~2018 http://thinkphp.cn All rights reserved.
-// +----------------------------------------------------------------------
-// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
-// +----------------------------------------------------------------------
-// | Author: liu21st <liu21st@gmail.com>
-// +----------------------------------------------------------------------
+
+defined('IN_IA') or define('IN_IA', true);
+
+// 引入微擎配置文件
+$config = call_user_func(function () {
+    $config = [];
+    require __DIR__ . '/../../../../data/config.php';
+    return $config['db']['master'];
+});
 
 return [
     // 数据库类型
     'type'            => 'mysql',
     // 服务器地址
-    'hostname'        => '192.168.33.10',
+    'hostname'        => $config['host'],
     // 数据库名
-    'database'        => 'bestshop_cn',
+    'database'        =>  $config['database'],
     // 用户名
-    'username'        => 'root',
+    'username'        => $config['username'],
     // 密码
-    'password'        => '123456',
+    'password'        => $config['password'],
     // 端口
-    'hostport'        => '3306',
+    'hostport'        => $config['port'],
     // 连接dsn
     'dsn'             => '',
     // 数据库连接参数
     'params'          => [],
     // 数据库编码默认采用utf8
-    'charset'         => 'utf8',
+    'charset'         => $config['charset'],
     // 数据库表前缀
-    'prefix'          => 'shop_',
+    'prefix'          => 'yoshop_',
     // 数据库调试模式
     'debug'           => true,
     // 数据库部署方式:0 集中式(单一服务器),1 分布式(主从服务器)
