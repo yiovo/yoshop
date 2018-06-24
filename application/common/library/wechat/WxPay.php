@@ -98,20 +98,18 @@ class WxPay
      */
     public function notify($OrderModel)
     {
-        $json = '{"appid":"wx62f4cad175ad0f90","attach":"test","bank_type":"ICBC_DEBIT","cash_fee":"1","fee_type":"CNY","is_subscribe":"N","mch_id":"1499579162","nonce_str":"130b19a42ba1a9942b73978370b5b53c","openid":"o9coS0eYE8pigBkvSrLfdv49b8k4","out_trade_no":"2018061651981015","result_code":"SUCCESS","return_code":"SUCCESS","sign":"F6E2F0535C7F82801EAA2E077EDE162B","time_end":"20180624114057","total_fee":"1","trade_type":"JSAPI","transaction_id":"4200000149201806247069077305"}';
-        $data = json_decode($json, true);
-
+//        $json = '{"appid":"wx62f4cad175ad0f90","attach":"test","bank_type":"ICBC_DEBIT","cash_fee":"1","fee_type":"CNY","is_subscribe":"N","mch_id":"1499579162","nonce_str":"130b19a42ba1a9942b73978370b5b53c","openid":"o9coS0eYE8pigBkvSrLfdv49b8k4","out_trade_no":"2018061651981015","result_code":"SUCCESS","return_code":"SUCCESS","sign":"F6E2F0535C7F82801EAA2E077EDE162B","time_end":"20180624114057","total_fee":"1","trade_type":"JSAPI","transaction_id":"4200000149201806247069077305"}';
+//        $data = json_decode($json, true);
         if (!isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
-//            $this->returnCode(false, 'Not found DATA');
+            $this->returnCode(false, 'Not found DATA');
         }
         // 将服务器返回的XML数据转化为数组
-//        $data = $this->fromXml($GLOBALS['HTTP_RAW_POST_DATA']);
+        $data = $this->fromXml($GLOBALS['HTTP_RAW_POST_DATA']);
         // 记录日志
         $this->doLogs($data);
-
         // 订单信息
         $order = $OrderModel->payDetail($data['out_trade_no']);
-        empty($order) && $this->returnCode(false, '订单不存在');
+        empty($order) && $this->returnCode(true, '订单不存在');
         // 小程序配置信息
         $wxConfig = WxappModel::getWxappCache($order['wxapp_id']);
         $order->updatePayStatus($data['transaction_id']);
