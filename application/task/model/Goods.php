@@ -11,32 +11,31 @@ use app\common\model\Goods as GoodsModel;
  */
 class Goods extends GoodsModel
 {
-
-    public function updateStock($goodsData)
-    {
-        $this->doLogs(
-           print_r(
-               $goodsData->toArray(),
-               true
-           )
-        );
-    }
-
     /**
-     * 写入日志记录
-     * @param $values
+     * 更新商品库存销量
+     * @param $goodsList
+     * @throws \Exception
      */
-    private function doLogs($values)
+    public function updateStockSales($goodsList)
     {
-        if (is_array($values))
-            $values = print_r($values, true);
-
-        // 日志内容
-        $content = '[' . date('Y-m-d H:i:s') . ']' . PHP_EOL . $values . PHP_EOL . PHP_EOL;
-
-        // 日志路径
-        $path = __DIR__ . '/logs/' . date('Ymd') . '.log';
-        file_put_contents($path, $content, FILE_APPEND);
+        // 整理批量更新的数据
+        $goodsData = [];
+        foreach ($goodsList as $goods) {
+            $goodsData[] = [
+                'goods_id' => $goods['goods_id'],
+                'sales_actual' => ['inc', 1],
+                'goods_spec' => [
+                    'goods_spec_id' => $goods['goods_spec_id'],
+                    'goods_sales' => ['inc', 1],
+                    'stock_num' => ['dec', 1]
+                ]
+            ];
+        }
+        // 更新商品总销量
+        $this->allowField(true)->isUpdate()->saveAll($goodsData);
+        // 更新商品规格库存
+        $GoodsSpec = new GoodsSpec;
+        $GoodsSpec->isUpdate()->saveAll(array_column($goodsData, 'goods_spec'));
     }
 
 }

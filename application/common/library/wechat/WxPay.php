@@ -93,22 +93,27 @@ class WxPay
      * 支付成功异步通知
      * @param \app\task\model\Order $OrderModel
      * @throws BaseException
+     * @throws \Exception
      * @throws \think\exception\DbException
      */
     public function notify($OrderModel)
     {
         if (!isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
-            die('Not found HTTP_RAW_POST_DATA');
+            $this->returnCode(false, 'Not found DATA');
         }
-        $xml = $GLOBALS['HTTP_RAW_POST_DATA'];
+
         // 将服务器返回的XML数据转化为数组
-        $data = $this->fromXml($xml);
+        $data = $this->fromXml($GLOBALS['HTTP_RAW_POST_DATA']);
         // 记录日志
         $this->doLogs($data);
 
         // 订单信息
         $order = $OrderModel->payDetail($data['out_trade_no']);
+        empty($order) && $this->returnCode(false, '订单不存在');
+
+        // 小程序配置信息
         $wxConfig = WxappModel::getWxappCache($order['wxapp_id']);
+        $order->updatePayStatus($data['transaction_id']);
 
         // 设置支付秘钥
         $this->config['apikey'] = $wxConfig['apikey'];

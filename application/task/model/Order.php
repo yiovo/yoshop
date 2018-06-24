@@ -3,6 +3,7 @@
 namespace app\task\model;
 
 use app\common\model\Order as OrderModel;
+use think\Db;
 
 /**
  * 订单模型
@@ -26,19 +27,22 @@ class Order extends OrderModel
      * 更新付款状态
      * @param $transaction_id
      * @return false|int
+     * @throws \Exception
      */
     public function updatePayStatus($transaction_id)
     {
+        Db::startTrans();
         // 更新商品库存、销量
         $GoodsModel = new Goods;
-        $GoodsModel->updateStock($this['goods']);
-
+        $GoodsModel->updateStockSales($this['goods']);
         // 更新订单状态
-        return $this->save([
+        $this->save([
             'pay_status' => 20,
             'pay_time' => time(),
             'transaction_id' => $transaction_id,
         ]);
+        Db::commit();
+        return true;
     }
 
 }
