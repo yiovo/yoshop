@@ -23,11 +23,11 @@ class Goods extends GoodsModel
         foreach ($goodsList as $goods) {
             $goodsData[] = [
                 'goods_id' => $goods['goods_id'],
-                'sales_actual' => ['inc', 1],
+                'sales_actual' => ['inc', $goods['total_num']],
                 'goods_spec' => [
                     'goods_spec_id' => $goods['goods_spec_id'],
-                    'goods_sales' => ['inc', 1],
-                    'stock_num' => ['dec', 1]
+                    'goods_sales' => ['inc', $goods['total_num']],
+                    'stock_num' => ['dec', $goods['total_num']]
                 ]
             ];
         }
