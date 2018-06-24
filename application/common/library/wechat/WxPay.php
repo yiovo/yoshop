@@ -100,6 +100,31 @@ class WxPay
     {
 //        $json = '{"appid":"wx62f4cad175ad0f90","attach":"test","bank_type":"ICBC_DEBIT","cash_fee":"1","fee_type":"CNY","is_subscribe":"N","mch_id":"1499579162","nonce_str":"130b19a42ba1a9942b73978370b5b53c","openid":"o9coS0eYE8pigBkvSrLfdv49b8k4","out_trade_no":"2018061651981015","result_code":"SUCCESS","return_code":"SUCCESS","sign":"F6E2F0535C7F82801EAA2E077EDE162B","time_end":"20180624114057","total_fee":"1","trade_type":"JSAPI","transaction_id":"4200000149201806247069077305"}';
 //        $data = json_decode($json, true);
+        $GLOBALS['HTTP_RAW_POST_DATA'] =
+            <<<EOF
+<xml><appid><![CDATA[wx62f4cad175ad0f90]]></appid>
+<attach><![CDATA[test]]></attach>
+<bank_type><![CDATA[ICBC_DEBIT]]></bank_type>
+<cash_fee><![CDATA[1]]></cash_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<is_subscribe><![CDATA[N]]></is_subscribe>
+<mch_id><![CDATA[1499579162]]></mch_id>
+<nonce_str><![CDATA[963b42d0a71f2d160b3831321808ab79]]></nonce_str>
+<openid><![CDATA[o9coS0eYE8pigBkvSrLfdv49b8k4]]></openid>
+<out_trade_no><![CDATA[2018062448524950]]></out_trade_no>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<return_code><![CDATA[SUCCESS]]></return_code>
+<sign><![CDATA[6AD4F98B00A59F5C81A540352DBF989C]]></sign>
+<time_end><![CDATA[20180624122501]]></time_end>
+<total_fee>1</total_fee>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+<transaction_id><![CDATA[4200000146201806242438472701]]></transaction_id>
+</xml>
+
+
+EOF;
+
+
         if (!isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
             $this->returnCode(false, 'Not found DATA');
         }
@@ -113,7 +138,6 @@ class WxPay
         empty($order) && $this->returnCode(true, '订单不存在');
         // 小程序配置信息
         $wxConfig = WxappModel::getWxappCache($order['wxapp_id']);
-        $order->updatePayStatus($data['transaction_id']);
         // 设置支付秘钥
         $this->config['apikey'] = $wxConfig['apikey'];
         // 保存微信服务器返回的签名sign
