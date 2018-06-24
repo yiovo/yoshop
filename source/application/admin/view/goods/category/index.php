@@ -29,7 +29,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php if (isset($list)): foreach ($list as $first): ?>
+                            <?php if (!empty($list)): foreach ($list as $first): ?>
                                 <tr>
                                     <td class="am-text-middle"><?= $first['category_id'] ?></td>
                                     <td class="am-text-middle"><?= $first['name'] ?></td>
