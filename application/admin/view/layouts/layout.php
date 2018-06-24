@@ -8,8 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="renderer" content="webkit"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="icon" type="image/png" href="assets/admin/i/favicon.png"/>
-    <link rel="apple-touch-icon-precomposed" href="assets/admin/i/app-icon72x72@2x.png"/>
+    <link rel="icon" type="image/png" href="assets/admin/i/favicon.ico"/>
     <meta name="apple-mobile-web-app-title" content="<?= $setting['store']['values']['name'] ?>"/>
     <link rel="stylesheet" href="assets/admin/css/amazeui.min.css"/>
     <link rel="stylesheet" href="assets/admin/css/app.css"/>
