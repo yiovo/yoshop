@@ -91,7 +91,7 @@ class WxPay
 
     /**
      * 支付成功异步通知
-     * @param \app\common\model\Order $OrderModel
+     * @param \app\task\model\Order $OrderModel
      * @throws BaseException
      * @throws \think\exception\DbException
      */
@@ -107,7 +107,7 @@ class WxPay
         $this->doLogs($data);
 
         // 订单信息
-        $order = $OrderModel::get(['order_no' => $data['out_trade_no'], 'pay_status' => 10]);
+        $order = $OrderModel->payDetail($data['out_trade_no']);
         $wxConfig = WxappModel::getWxappCache($order['wxapp_id']);
 
         // 设置支付秘钥
@@ -132,7 +132,6 @@ class WxPay
             $this->returnCode(false);
         }
     }
-
 
     /**
      * 返回状态给微信服务器
