@@ -21,7 +21,7 @@ class Controller extends ThinkController
      */
     public function _initialize()
     {
-        // test.start
+        // todo: test.start
         Session::set('best_shop_admin', [
             'is_login' => true,
             'wxapp' => [
@@ -84,6 +84,7 @@ class Controller extends ThinkController
      */
     private function checkLogin()
     {
+        // todo: best_shop_admin
         $this->admin = Session::get('best_shop_admin');
         if (empty($this->admin)
             || (int)$this->admin['is_login'] !== 1
