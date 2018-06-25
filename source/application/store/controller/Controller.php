@@ -23,6 +23,13 @@ class Controller extends \think\Controller
         'passport/login',
     ];
 
+    /* @var array $notLayoutAction 无需全局layout */
+    protected $notLayoutAction = [
+        // 登录页面
+        'passport/we7login',
+        'passport/login',
+    ];
+
     /**
      * 后台初始化
      */
@@ -39,10 +46,14 @@ class Controller extends \think\Controller
      */
     private function layout()
     {
-        // 当前商城设置
-        $setting = Setting::getAll();
         // 路由信息
         list ($controller, $action, $group) = $this->getRouteinfo();
+        // 验证当前请求是否在白名单
+        if (in_array($controller . DS . $action, $this->notLayoutAction)) {
+            return true;
+        }
+        // 当前商城设置
+        $setting = Setting::getAll();
         // 后台菜单
         $menus = $this->menus();
         // 当前小程序信息
@@ -50,6 +61,7 @@ class Controller extends \think\Controller
         // 输出到view
         $this->assign(compact('group', 'controller', 'action', 'menus'
             , 'wxapp', 'setting'));
+        return true;
     }
 
     /**

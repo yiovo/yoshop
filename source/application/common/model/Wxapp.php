@@ -91,6 +91,7 @@ class Wxapp extends BaseModel
     public function add($data)
     {
         Db::startTrans();
+
         // 添加小程序记录
         $this->save($data);
 
@@ -113,7 +114,9 @@ class Wxapp extends BaseModel
         // 新增小程序diy配置
         $Page = new WxappPage;
         $Page->insertDefault($data['wxapp_id']);
+
         Db::commit();
+
         return true;
     }
 
