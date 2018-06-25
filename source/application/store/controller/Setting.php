@@ -16,12 +16,12 @@ class Setting extends Controller
      * @return mixed
      * @throws \think\exception\DbException
      */
-    public function store()
+    public function index()
     {
         $store = SettingModel::detail('store');
         if (!$this->request->isAjax()) {
             $values = $store['values'];
-            return $this->fetch('store', compact('values'));
+            return $this->fetch('index', compact('values'));
         }
         if ($store->edit($this->postData('store'))) {
             return $this->renderSuccess('更新成功');
