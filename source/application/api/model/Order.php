@@ -88,6 +88,11 @@ class Order extends OrderModel
      */
     public function add($user_id, $order)
     {
+        if (empty($order['address'])) {
+            $this->error = '请先选择收货地址';
+            return false;
+        }
+
         if (!$order['intra_region']) {
             $this->error = $order['intra_region_error'];
             return false;

@@ -55,7 +55,8 @@ class Order extends Controller
                 'order_id' => $model['order_id']
             ]);
         }
-        return $this->renderError('订单创建失败');
+        $error = $model->getError() ?: '订单创建失败';
+        return $this->renderError($error);
     }
 
     /**
@@ -86,7 +87,8 @@ class Order extends Controller
                 'order_id' => $model['order_id']
             ]);
         }
-        return $this->renderError('订单创建失败');
+        $error = $model->getError() ?: '订单创建失败';
+        return $this->renderError($error);
     }
 
     /**
