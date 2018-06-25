@@ -18,8 +18,9 @@ class WxappHelp extends BaseModel
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function getList() {
-        return $this->order(['sort'=>'asc'])->select();
+    public function getList()
+    {
+        return $this->order(['sort' => 'asc'])->select();
     }
 
     /**
@@ -28,8 +29,24 @@ class WxappHelp extends BaseModel
      * @return null|static
      * @throws \think\exception\DbException
      */
-    public static function detail($help_id) {
+    public static function detail($help_id)
+    {
         return self::get($help_id);
+    }
+
+    /**
+     * 新增默认帮助
+     * @param $wxapp_id
+     * @return false|int
+     */
+    public function insertDefault($wxapp_id)
+    {
+        return $this->save([
+            'title' => '关于小程序',
+            'content' => '小程序本身无需下载，无需注册，不占用手机内存，可以跨平台使用，响应迅速，体验接近原生APP。',
+            'sort' => 100,
+            'wxapp_id'=> $wxapp_id
+        ]);
     }
 
 }

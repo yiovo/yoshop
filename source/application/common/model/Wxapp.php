@@ -4,6 +4,7 @@ namespace app\common\model;
 
 use app\common\exception\BaseException;
 use think\Cache;
+use think\Db;
 
 /**
  * 微信小程序模型
@@ -79,6 +80,41 @@ class Wxapp extends BaseModel
             Cache::set('wxapp_' . $wxapp_id, $data);
         }
         return $data;
+    }
+
+    /**
+     * 创建小程序
+     * @param $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function add($data)
+    {
+        Db::startTrans();
+        // 添加小程序记录
+        $this->save($data);
+
+        // 商城默认设置
+        $Setting = new Setting;
+        $Setting->insertDefault($data['wxapp_id'], $data['app_name']);
+
+        // 新增商家用户信息
+        $StoreUser = new StoreUser;
+        $StoreUser->insertDefault($data['wxapp_id']);
+
+        // 新增小程序默认帮助
+        $Help = new WxappHelp;
+        $Help->insertDefault($data['wxapp_id']);
+
+        // 新增小程序导航栏默认设置
+        $Navbar = new WxappNavbar;
+        $Navbar->insertDefault($data['wxapp_id'], $data['app_name']);
+
+        // 新增小程序diy配置
+        $Page = new WxappPage;
+        $Page->insertDefault($data['wxapp_id']);
+        Db::commit();
+        return true;
     }
 
 }

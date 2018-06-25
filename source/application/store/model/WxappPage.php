@@ -11,15 +11,6 @@ use app\common\model\WxappPage as WxappPageModel;
  */
 class WxappPage extends WxappPageModel
 {
-    /**
-     * 自动转换data为json格式
-     * @param $value
-     * @return string
-     */
-    public function setPageDataAttr($value)
-    {
-        return json_encode($value ?: ['items' => []]);
-    }
 
     /**
      * 更新页面数据

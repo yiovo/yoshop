@@ -4,7 +4,6 @@ namespace app\store\controller;
 
 use think\Config;
 use think\Session;
-use think\Controller as ThinkController;
 use app\store\model\Setting;
 
 /**
@@ -12,24 +11,23 @@ use app\store\model\Setting;
  * Class BaseController
  * @package app\store\controller
  */
-class Controller extends ThinkController
+class Controller extends \think\Controller
 {
+    /* @var array $store 商城session信息 */
     protected $store;
+
+    /* @var array $allowAllAction 登录验证白名单 */
+    protected $allowAllAction = [
+        // 登录页面
+        'passport/we7login',
+        'passport/login',
+    ];
 
     /**
      * 后台初始化
      */
     public function _initialize()
     {
-        // todo: test.start
-        Session::set('best_shop_store', [
-            'is_login' => true,
-            'wxapp' => [
-                'wxapp_id' => 5,
-            ],
-        ]);
-        // test.end
-
         // 验证登录
         $this->checkLogin();
         // 全局layout
@@ -44,7 +42,7 @@ class Controller extends ThinkController
         // 当前商城设置
         $setting = Setting::getAll();
         // 路由信息
-        list ($group, $controller, $action) = $this->getRouteinfo();
+        list ($controller, $action, $group) = $this->getRouteinfo();
         // 后台菜单
         $menus = $this->menus();
         // 当前小程序信息
@@ -67,7 +65,7 @@ class Controller extends ThinkController
         // 控制器分组 (用于定义所属模块)
         $groupstr = strstr($controller, '.', true);
         $group = $groupstr !== false ? $groupstr : $controller;
-        return [$group, $controller, $action];
+        return [$controller, $action, $group];
     }
 
     /**
@@ -84,15 +82,27 @@ class Controller extends ThinkController
      */
     private function checkLogin()
     {
-        // todo: best_shop_store
-        $this->store = Session::get('best_shop_store');
+        // 记录session信息
+        $this->store = Session::get('yoshop_store');
+
+        // 路由信息
+        list ($controller, $action) = $this->getRouteinfo();
+
+        // 验证当前请求是否在白名单
+        if (in_array($controller . DS . $action, $this->allowAllAction)) {
+            return true;
+        }
+
+        // 验证登录状态
         if (empty($this->store)
             || (int)$this->store['is_login'] !== 1
             || !isset($this->store['wxapp'])
             || empty($this->store['wxapp'])
         ) {
             $this->error('登录状态无效');
+            return false;
         }
+        return true;
     }
 
     /**

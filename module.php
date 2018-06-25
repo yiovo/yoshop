@@ -18,6 +18,10 @@ class Init
     {
         global $_W;
         $this->wechat_app = $_W['account'];  // 小程序信息
+
+//        echo '<pre>';
+//        print_r($this->wechat_app);
+//        die;
     }
 
     /**
@@ -27,12 +31,12 @@ class Init
     {
         // 验证模块核心文件
         $this->checkModuleFile();
-        // 自动创建小程序信息
-        $this->createWechatApp();
+
         // 设置session登录状态
-        $this->setSession();
+        $this->session();
+
         // 跳转到独立后台
-        $this->gotoAdmin();
+        $this->passport();
     }
 
     /**
@@ -45,39 +49,21 @@ class Init
     }
 
     /**
-     * 获取模块中小程序记录
-     */
-    private function getModuleWechatApp()
-    {
-        $sql = "\n SELECT * FROM yoshop_wxapp WHERE wxapp_id = :wxapp_id";
-        return pdo_fetch($sql, [':wxapp_id' => $this->wechat_app['uniacid']]);
-    }
-
-    /**
-     * 添加新小程序记录到模块
-     * @return bool
-     */
-    private function createWechatApp()
-    {
-        if (!$this->getModuleWechatApp()) {
-            $time = time();
-            $sql = "\n INSERT INTO yoshop_wxapp VALUES (
-            {$this->wechat_app['uniacid']}, '{$this->wechat_app['name']}',
-            '{$this->wechat_app['key']}', '{$this->wechat_app['secret']}',
-              '',  '{$time}', '{$time}')";
-            return pdo_run($sql);
-        }
-        return false;
-    }
-
-    /**
      * 设置session登录态
      */
-    private function setSession()
+    private function session()
     {
         @session_start();
-        $_SESSION['yoshop_admin'] = [
-            'wxapp' => $this->getModuleWechatApp(),
+        $_SESSION['yoshop_store'] = [
+            'wxapp' => [
+                'wxapp_id' => $this->wechat_app['uniacid']
+            ],
+            'we7_data' => [
+                'wxapp_id' => $this->wechat_app['uniacid'],
+                'app_name' => $this->wechat_app['name'],
+                'app_id' => $this->wechat_app['key'],
+                'app_secret' => $this->wechat_app['secret'],
+            ],
             'is_login' => true
         ];
     }
@@ -85,10 +71,11 @@ class Init
     /**
      * 跳转到模块后台
      */
-    private function gotoAdmin()
+    private function passport()
     {
         global $_W;
-        $url = "{$_W['siteroot']}addons/{$_W['current_module']['name']}/web/index.php?s=admin";
+        $passport = 'index.php?s=store/passport/we7login';
+        $url = "{$_W['siteroot']}addons/{$_W['current_module']['name']}/web/" . $passport;
         header('Location:' . $url);
         exit;
     }

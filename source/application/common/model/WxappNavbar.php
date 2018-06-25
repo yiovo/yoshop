@@ -32,4 +32,20 @@ class WxappNavbar extends BaseModel
         return self::get([]);
     }
 
+    /**
+     * 新增小程序导航栏默认设置
+     * @param $wxapp_id
+     * @param $wxapp_title
+     * @return false|int
+     */
+    public function insertDefault($wxapp_id, $wxapp_title)
+    {
+        return $this->save([
+            'wxapp_title' => $wxapp_title,
+            'top_text_color' => 20,
+            'top_background_color' => '#fd4a5f',
+            'wxapp_id' => $wxapp_id
+        ]);
+    }
+
 }
