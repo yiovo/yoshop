@@ -42,7 +42,7 @@ class Setting extends BaseModel
      */
     public static function detail($key)
     {
-        return self::get($key);
+        return self::get(compact('key'));
     }
 
     /**
@@ -87,7 +87,12 @@ class Setting extends BaseModel
                 'values' => [
                     'default' => 'local',
                     'engine' => [
-                        'qiniu' => ['bucket', 'access_key', 'secret_key', 'domain'],
+                        'qiniu' => [
+                            'bucket' => '',
+                            'access_key' => '',
+                            'secret_key' => '',
+                            'domain' => ''
+                        ],
                     ]
                 ],
                 'wxapp_id' => $wxapp_id
