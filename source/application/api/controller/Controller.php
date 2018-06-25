@@ -9,7 +9,7 @@ use think\Controller as ThinkController;
 /**
  * API控制器基类
  * Class BaseController
- * @package app\admin\controller
+ * @package app\store\controller
  */
 class Controller extends ThinkController
 {

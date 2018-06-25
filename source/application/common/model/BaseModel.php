@@ -40,17 +40,17 @@ class BaseModel extends Model
     {
         $class = [];
         if (preg_match('/app\\\(\w+)/', $calledClass, $class)) {
-            $callfunc = 'set' . $class[1] . 'WxappId';
+            $callfunc = 'set' . ucfirst($class[1]) . 'WxappId';
             method_exists(new self, $callfunc) && self::$callfunc();
         }
     }
 
     /**
-     * 设置wxapp_id (admin模块)
+     * 设置wxapp_id (store模块)
      */
-    protected static function setAdminWxappId()
+    protected static function setStoreWxappId()
     {
-        $session = Session::get('best_shop_admin');
+        $session = Session::get('best_shop_store');
         self::$wxapp_id = $session['wxapp']['wxapp_id'];
     }
 

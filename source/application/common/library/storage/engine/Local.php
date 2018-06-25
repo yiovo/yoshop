@@ -21,7 +21,7 @@ class Local extends Server
     public function upload()
     {
         // 上传目录
-        $uplodDir = ROOT_PATH . 'web' . DS . 'uploads';
+        $uplodDir = WEB_PATH . 'uploads';
         // 验证文件并上传
         $info = $this->file->validate(['size' => 4 * 1024 * 1024, 'ext' => 'jpg,jpeg,png,gif'])
             ->move($uplodDir, $this->fileName);

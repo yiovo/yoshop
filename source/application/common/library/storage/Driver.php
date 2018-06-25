@@ -15,6 +15,7 @@ class Driver
     private $engine;    // 当前存储引擎类
 
     /**
+     * 构造方法
      * Driver constructor.
      * @param $config
      * @throws Exception
@@ -69,7 +70,7 @@ class Driver
     private function getEngineClass()
     {
         $engineName = $this->config['default'];
-        $classSpace = __NAMESPACE__ . '\\engine\\' . ucwords($engineName);
+        $classSpace = __NAMESPACE__ . '\\engine\\' . ucfirst($engineName);
         if (!class_exists($classSpace)) {
             throw new Exception('未找到存储引擎类: ' . $engineName);
         }
