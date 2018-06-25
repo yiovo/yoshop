@@ -39,7 +39,7 @@
                                         <?php endforeach; endif; ?>
                                     </select>
                                     <small class="am-margin-left-xs">
-                                        <a href="<?= url('goods.categroy/add') ?>">去添加</a>
+                                        <a href="<?= url('goods.category/add') ?>">去添加</a>
                                     </small>
                                 </div>
                             </div>
@@ -154,28 +154,28 @@
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品价格 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="goods[spec][goods_price]"
+                                    <input type="number" class="tpl-form-input" name="goods[spec][goods_price]"
                                            value="<?= $model['spec'][0]['goods_price'] ?>" required>
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label">商品划线价 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="goods[spec][line_price]"
+                                    <input type="number" class="tpl-form-input" name="goods[spec][line_price]"
                                            value="<?= $model['spec'][0]['line_price'] ?>">
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">当前库存数量 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="goods[spec][stock_num]"
+                                    <input type="number" class="tpl-form-input" name="goods[spec][stock_num]"
                                            value="<?= $model['spec'][0]['stock_num'] ?>" required>
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品重量(Kg) </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="goods[spec][goods_weight]"
+                                    <input type="number" class="tpl-form-input" name="goods[spec][goods_weight]"
                                            value="<?= $model['spec'][0]['goods_weight'] ?>" required>
                                 </div>
                             </div>
@@ -222,7 +222,7 @@
                                         <?php endforeach; ?>
                                     </select>
                                     <small class="am-margin-left-xs">
-                                        <a href="<?= url('goods.categroy/add') ?>">去添加</a>
+                                        <a href="<?= url('setting.delivery/add') ?>">去添加</a>
                                     </small>
                                 </div>
                             </div>

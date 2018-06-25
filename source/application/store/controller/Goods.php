@@ -45,7 +45,7 @@ class Goods extends Controller
         if ($model->add($data)) {
             return $this->renderSuccess('添加成功', url('goods/index'));
         }
-        $error = $model->getError() ?: '更新失败';
+        $error = $model->getError() ?: '添加失败';
         return $this->renderError($error);
     }
 
