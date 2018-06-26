@@ -2,7 +2,7 @@
 
 defined('IN_IA') or exit('Access Denied');
 
-class Active_liteModuleWxapp extends WeModuleWxapp {
+class Yiovo_shopModuleWxapp extends WeModuleWxapp {
 
     public function doPageTest(){
 //        global $_GPC, $_W;

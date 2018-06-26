@@ -2,8 +2,8 @@
 <manifest xmlns="http://www.we7.cc" versionCode="">
     <application setting="false" >
         <name><![CDATA[萤火小程序商城]]></name>
-        <identifie><![CDATA[yoshop]]></identifie>
-        <version><![CDATA[0.9.0]]></version>
+        <identifie><![CDATA[yiovo_shop]]></identifie>
+        <version><![CDATA[1.0.0]]></version>
         <type><![CDATA[business]]></type>
         <ability><![CDATA[小程序商城]]></ability>
         <description><![CDATA[萤火小程序商城]]></description>
