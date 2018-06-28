@@ -1,53 +1,63 @@
 <?php
 
-defined('IN_IA') or define('IN_IA', true);
+// 独立配置
+$config = [
+    'host' => '192.168.33.10',
+    'database' => 'we7_cn',
+    'username' => 'root',
+    'password' => '123456',
+    'port' => '3306',
+    'charset' => 'utf8',
+];
 
-// 引入微擎配置文件
-$config = call_user_func(function () {
-    $config = [];
-    require __DIR__ . '/../../../../data/config.php';
-    return $config['db']['master'];
-});
+// 微擎配置
+if (defined('IS_WE7') && IS_WE7 === true && define('IN_IA', true)) {
+    $config = call_user_func(function () {
+        $config = [];
+        require __DIR__ . '/../../../../data/config.php';
+        return $config['db']['master'];
+    });
+}
 
 return [
     // 数据库类型
-    'type'            => 'mysql',
+    'type' => 'mysql',
     // 服务器地址
-    'hostname'        => $config['host'],
+    'hostname' => $config['host'],
     // 数据库名
-    'database'        =>  $config['database'],
+    'database' => $config['database'],
     // 用户名
-    'username'        => $config['username'],
+    'username' => $config['username'],
     // 密码
-    'password'        => $config['password'],
+    'password' => $config['password'],
     // 端口
-    'hostport'        => $config['port'],
+    'hostport' => $config['port'],
     // 连接dsn
-    'dsn'             => '',
+    'dsn' => '',
     // 数据库连接参数
-    'params'          => [],
+    'params' => [],
     // 数据库编码默认采用utf8
-    'charset'         => $config['charset'],
+    'charset' => $config['charset'],
     // 数据库表前缀
-    'prefix'          => 'yoshop_',
+    'prefix' => 'yoshop_',
     // 数据库调试模式
-    'debug'           => true,
+    'debug' => true,
     // 数据库部署方式:0 集中式(单一服务器),1 分布式(主从服务器)
-    'deploy'          => 0,
+    'deploy' => 0,
     // 数据库读写是否分离 主从式有效
-    'rw_separate'     => false,
+    'rw_separate' => false,
     // 读写分离后 主服务器数量
-    'master_num'      => 1,
+    'master_num' => 1,
     // 指定从服务器序号
-    'slave_no'        => '',
+    'slave_no' => '',
     // 是否严格检查字段是否存在
-    'fields_strict'   => true,
+    'fields_strict' => true,
     // 数据集返回类型
-    'resultset_type'  => 'collection',
+    'resultset_type' => 'collection',
     // 自动写入时间戳字段
-    'auto_timestamp'  => true,
+    'auto_timestamp' => true,
     // 时间字段取出后的默认时间格式
     'datetime_format' => 'Y-m-d H:i:s',
     // 是否需要进行SQL性能分析
-    'sql_explain'     => false,
+    'sql_explain' => false,
 ];
