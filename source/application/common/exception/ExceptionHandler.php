@@ -31,7 +31,7 @@ class ExceptionHandler extends Handle
                 return parent::render($e);
             }
             $this->code = 0;
-            $this->message = '很抱歉，服务器内部错误';
+            $this->message = $e->getMessage() ?: '很抱歉，服务器内部错误';
             $this->recordErrorLog($e);
         }
         return json(['msg' => $this->message, 'code' => $this->code]);
