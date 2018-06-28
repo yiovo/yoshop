@@ -40,19 +40,21 @@ class Delivery extends DeliveryModel
         // 商品总数量or总重量
         $total = $this['method']['value'] === 10 ? $total_num : $total_weight;
         if ($total <= $rule['first']) {
-            $freight = $rule['first_fee'];
-        } else {
-            // 续件or续重 数量
-            $additional = $total - $rule['first'];
-            if ($additional <= $rule['additional']) {
-                $additional_fee = $rule['additional_fee'];
-            } else {
-                $additional_fee = bcdiv($rule['additional_fee'], $rule['additional'], 2) * $additional;
-            }
-            $freight = $rule['first_fee'] + $additional_fee;
+            return number_format($rule['first_fee'], 2);
         }
-
-        return number_format($freight, 2);
+        // 续件or续重 数量
+        $additional = $total - $rule['first'];
+        if ($additional <= $rule['additional']) {
+            return number_format($rule['first_fee'] + $rule['additional_fee'], 2);
+        }
+        // 计算续重/件金额
+        if ($rule['additional'] < 1) {
+            // 配送规则中续件为0
+            $additionalFee = 0.00;
+        } else {
+            $additionalFee = bcdiv($rule['additional_fee'], $rule['additional'], 2) * $additional;
+        }
+        return number_format($rule['first_fee'] + $additionalFee, 2);
     }
 
     /**
