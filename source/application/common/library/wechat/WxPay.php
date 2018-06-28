@@ -35,7 +35,7 @@ class WxPay
      */
     public function unifiedorder($order_no, $openid, $total_fee)
     {
-        $total_fee = 0.01;  // todo: 测试金额
+        // $total_fee = 0.01;  // todo: 测试金额
         // 当前时间
         $time = time();
         // 生成随机字符串
