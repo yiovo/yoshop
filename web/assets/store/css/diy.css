@@ -1,4 +1,4 @@
-.iconfont { font-size: inherit !important;  }
+.row-content .iconfont { font-size: inherit !important;  }
 /*diy手机*/
 .diy-phone { width: 330px; border-radius: 3px; float: left; margin-top: 10px; margin-bottom: 160px; }
 .diy-phone .phone-top { width: 100%; height: 66px; background-repeat: no-repeat; background-size: contain; background-image: url('../img/phone-top.png'); cursor: pointer; }
