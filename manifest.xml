@@ -3,7 +3,7 @@
     <application setting="false" >
         <name><![CDATA[萤火小程序商城]]></name>
         <identifie><![CDATA[yiovo_shop]]></identifie>
-        <version><![CDATA[1.0.2]]></version>
+        <version><![CDATA[1.0.3]]></version>
         <type><![CDATA[business]]></type>
         <ability><![CDATA[小程序商城]]></ability>
         <description><![CDATA[萤火小程序商城]]></description>
