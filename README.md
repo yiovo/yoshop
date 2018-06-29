@@ -5,9 +5,9 @@
 
 
 #### 环境要求
-    - Nginx/Apache/IIS
-    - PHP5.4+
-    - MySQL5.1+
+    Nginx/Apache/IIS
+    PHP5.4+
+    MySQL5.1+
 
     建议使用环境：Linux + Nginx1.14 + PHP7 + MySQL5.6
 
@@ -16,5 +16,4 @@
 
 #### License
     萤火小程序商城（YoShop）遵循 GPL license 开源协议。
-
 
