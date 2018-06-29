@@ -5,11 +5,8 @@ $installSql = <<<sql
 SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
 
--- ----------------------------
--- Table structure for yoshop_category
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_category`;
-CREATE TABLE `yoshop_category` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_category` (
   `category_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品分类id',
   `name` varchar(50) NOT NULL DEFAULT '' COMMENT '分类名称',
   `parent_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '上级分类id',
@@ -20,11 +17,8 @@ CREATE TABLE `yoshop_category` (
   PRIMARY KEY (`category_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COMMENT='商品分类表';
 
--- ----------------------------
--- Table structure for yoshop_delivery
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_delivery`;
-CREATE TABLE `yoshop_delivery` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_delivery` (
   `delivery_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '模板id',
   `name` varchar(255) NOT NULL DEFAULT '' COMMENT '模板名称',
   `method` tinyint(3) unsigned NOT NULL DEFAULT '10' COMMENT '计费方式(10按件数 20按重量)',
@@ -34,11 +28,8 @@ CREATE TABLE `yoshop_delivery` (
   PRIMARY KEY (`delivery_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COMMENT='配送模板主表';
 
--- ----------------------------
--- Table structure for yoshop_delivery_rule
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_delivery_rule`;
-CREATE TABLE `yoshop_delivery_rule` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_delivery_rule` (
   `rule_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '规则id',
   `delivery_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '配送模板id',
   `region` text NOT NULL COMMENT '可配送区域(城市id集)',
@@ -51,11 +42,8 @@ CREATE TABLE `yoshop_delivery_rule` (
   PRIMARY KEY (`rule_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COMMENT='配送模板区域及运费表';
 
--- ----------------------------
--- Table structure for yoshop_dictionary
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_dictionary`;
-CREATE TABLE `yoshop_dictionary` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_dictionary` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `type` varchar(30) NOT NULL DEFAULT '' COMMENT '字段类型',
   `name` varchar(255) NOT NULL DEFAULT '' COMMENT '字段名称',
@@ -63,11 +51,8 @@ CREATE TABLE `yoshop_dictionary` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COMMENT='系统字典表';
 
--- ----------------------------
--- Table structure for yoshop_goods
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_goods`;
-CREATE TABLE `yoshop_goods` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_goods` (
   `goods_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品id',
   `goods_name` varchar(255) NOT NULL DEFAULT '' COMMENT '商品名称',
   `category_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '商品分类id',
@@ -87,11 +72,8 @@ CREATE TABLE `yoshop_goods` (
   KEY `category_id` (`category_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COMMENT='商品表';
 
--- ----------------------------
--- Table structure for yoshop_goods_image
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_goods_image`;
-CREATE TABLE `yoshop_goods_image` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_goods_image` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `goods_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '商品id',
   `image_id` int(11) NOT NULL COMMENT '图片id(关联文件记录表)',
@@ -101,11 +83,8 @@ CREATE TABLE `yoshop_goods_image` (
   UNIQUE KEY `goods_image` (`goods_id`,`image_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COMMENT='商品图片记录表';
 
--- ----------------------------
--- Table structure for yoshop_goods_spec
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_goods_spec`;
-CREATE TABLE `yoshop_goods_spec` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_goods_spec` (
   `goods_spec_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品规格id',
   `goods_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '商品id',
   `goods_no` varchar(100) NOT NULL DEFAULT '' COMMENT '商品编码',
@@ -120,11 +99,8 @@ CREATE TABLE `yoshop_goods_spec` (
   PRIMARY KEY (`goods_spec_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COMMENT='商品规格表';
 
--- ----------------------------
--- Table structure for yoshop_order
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_order`;
-CREATE TABLE `yoshop_order` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_order` (
   `order_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '订单id',
   `order_no` varchar(20) NOT NULL DEFAULT '' COMMENT '订单号',
   `total_price` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '订单金额(不含运费)',
@@ -148,11 +124,8 @@ CREATE TABLE `yoshop_order` (
   UNIQUE KEY `order_no` (`order_no`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COMMENT='订单记录表';
 
--- ----------------------------
--- Table structure for yoshop_order_address
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_order_address`;
-CREATE TABLE `yoshop_order_address` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_order_address` (
   `order_address_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '地址id',
   `name` varchar(30) NOT NULL DEFAULT '' COMMENT '收货人姓名',
   `phone` varchar(20) NOT NULL DEFAULT '' COMMENT '联系电话',
@@ -167,11 +140,8 @@ CREATE TABLE `yoshop_order_address` (
   PRIMARY KEY (`order_address_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COMMENT='订单收货地址记录表';
 
--- ----------------------------
--- Table structure for yoshop_order_goods
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_order_goods`;
-CREATE TABLE `yoshop_order_goods` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_order_goods` (
   `order_goods_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `goods_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '商品id',
   `goods_name` varchar(255) NOT NULL DEFAULT '' COMMENT '商品名称',
@@ -192,11 +162,8 @@ CREATE TABLE `yoshop_order_goods` (
   PRIMARY KEY (`order_goods_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COMMENT='订单商品记录表';
 
--- ----------------------------
--- Table structure for yoshop_region
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_region`;
-CREATE TABLE `yoshop_region` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_region` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `pid` int(11) DEFAULT NULL COMMENT '父id',
   `shortname` varchar(100) DEFAULT NULL COMMENT '简称',
@@ -3967,11 +3934,8 @@ INSERT INTO `yoshop_region` VALUES (3747, 3738, '路环岛', '路环岛', '中�
 INSERT INTO `yoshop_region` VALUES (3748, 3747, '圣方济各堂区', '圣方济各堂区', '中国,澳门特别行政区,路环岛,圣方济各堂区', 3, 'stfrancisxavier\'sparish', '00853', '999078', 'S', '113.559954', '22.123486');
 COMMIT;
 
--- ----------------------------
--- Table structure for yoshop_setting
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_setting`;
-CREATE TABLE `yoshop_setting` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_setting` (
   `key` varchar(30) NOT NULL COMMENT '设置项标示',
   `describe` varchar(255) NOT NULL DEFAULT '' COMMENT '设置项描述',
   `values` mediumtext NOT NULL COMMENT '设置内容（json格式）',
@@ -3980,11 +3944,8 @@ CREATE TABLE `yoshop_setting` (
   KEY `key_idx` (`key`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商城设置记录表';
 
--- ----------------------------
--- Table structure for yoshop_store_user
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_store_user`;
-CREATE TABLE `yoshop_store_user` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_store_user` (
   `store_user_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `user_name` varchar(255) NOT NULL DEFAULT '' COMMENT '用户名',
   `password` varchar(255) NOT NULL DEFAULT '' COMMENT '登录密码',
@@ -3995,11 +3956,8 @@ CREATE TABLE `yoshop_store_user` (
   UNIQUE KEY `user_name` (`user_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COMMENT='商家用户记录表';
 
--- ----------------------------
--- Table structure for yoshop_upload_file
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_upload_file`;
-CREATE TABLE `yoshop_upload_file` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_upload_file` (
   `file_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '文件id',
   `storage` varchar(20) NOT NULL COMMENT '存储方式',
   `file_url` varchar(255) NOT NULL DEFAULT '' COMMENT '存储域名',
@@ -4013,11 +3971,8 @@ CREATE TABLE `yoshop_upload_file` (
   UNIQUE KEY `path_idx` (`file_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COMMENT='文件库记录表';
 
--- ----------------------------
--- Table structure for yoshop_upload_file_used
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_upload_file_used`;
-CREATE TABLE `yoshop_upload_file_used` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_upload_file_used` (
   `used_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `file_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '文件id',
   `from_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '使用方id',
@@ -4028,11 +3983,8 @@ CREATE TABLE `yoshop_upload_file_used` (
   KEY `type_idx` (`from_type`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COMMENT='已上传文件使用记录表';
 
--- ----------------------------
--- Table structure for yoshop_user
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_user`;
-CREATE TABLE `yoshop_user` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_user` (
   `user_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户id',
   `open_id` varchar(255) NOT NULL DEFAULT '' COMMENT '微信openid(唯一标示)',
   `nickName` varchar(255) NOT NULL DEFAULT '' COMMENT '微信昵称',
@@ -4049,11 +4001,8 @@ CREATE TABLE `yoshop_user` (
   KEY `openid` (`open_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COMMENT='用户记录表';
 
--- ----------------------------
--- Table structure for yoshop_user_address
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_user_address`;
-CREATE TABLE `yoshop_user_address` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_user_address` (
   `address_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `name` varchar(30) NOT NULL DEFAULT '' COMMENT '收货人姓名',
   `phone` varchar(20) NOT NULL DEFAULT '' COMMENT '联系电话',
@@ -4068,11 +4017,8 @@ CREATE TABLE `yoshop_user_address` (
   PRIMARY KEY (`address_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COMMENT='用户收货地址表';
 
--- ----------------------------
--- Table structure for yoshop_wxapp
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_wxapp`;
-CREATE TABLE `yoshop_wxapp` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_wxapp` (
   `wxapp_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '小程序id',
   `app_name` varchar(50) NOT NULL DEFAULT '' COMMENT '小程序名称',
   `app_id` varchar(50) NOT NULL DEFAULT '' COMMENT '小程序AppID',
@@ -4089,11 +4035,8 @@ CREATE TABLE `yoshop_wxapp` (
   PRIMARY KEY (`wxapp_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='微信小程序记录表';
 
--- ----------------------------
--- Table structure for yoshop_wxapp_help
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_wxapp_help`;
-CREATE TABLE `yoshop_wxapp_help` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_wxapp_help` (
   `help_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `title` varchar(255) NOT NULL DEFAULT '' COMMENT '帮助标题',
   `content` text NOT NULL COMMENT '帮助内容',
@@ -4104,11 +4047,8 @@ CREATE TABLE `yoshop_wxapp_help` (
   PRIMARY KEY (`help_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COMMENT='微信小程序帮助';
 
--- ----------------------------
--- Table structure for yoshop_wxapp_navbar
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_wxapp_navbar`;
-CREATE TABLE `yoshop_wxapp_navbar` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_wxapp_navbar` (
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '主键id',
   `wxapp_title` varchar(100) NOT NULL DEFAULT '' COMMENT '小程序标题',
   `top_text_color` tinyint(3) unsigned NOT NULL DEFAULT '10' COMMENT '顶部导航文字颜色(10黑色 20白色)',
@@ -4118,11 +4058,8 @@ CREATE TABLE `yoshop_wxapp_navbar` (
   PRIMARY KEY (`wxapp_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='微信小程序导航栏设置';
 
--- ----------------------------
--- Table structure for yoshop_wxapp_page
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_wxapp_page`;
-CREATE TABLE `yoshop_wxapp_page` (
+
+CREATE TABLE IF NOT EXISTS `yoshop_wxapp_page` (
   `page_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '页面id',
   `page_type` tinyint(3) unsigned NOT NULL DEFAULT '10' COMMENT '页面类型(10首页)',
   `page_data` longtext NOT NULL COMMENT '页面数据',
