@@ -40,7 +40,7 @@ class Delivery extends BaseModel
     public static function getAll()
     {
         $model = new static;
-        return $model->order(['create_time' => 'desc'])->select();
+        return $model->order(['sort' => 'asc'])->select();
     }
 
     /**
@@ -51,7 +51,7 @@ class Delivery extends BaseModel
     public function getList()
     {
         return $this->with(['rule'])
-            ->order(['create_time' => 'desc'])
+            ->order(['sort' => 'asc'])
             ->paginate(15, false, [
                 'query' => Request::instance()->request()
             ]);

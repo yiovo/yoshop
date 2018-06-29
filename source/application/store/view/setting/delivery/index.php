@@ -25,6 +25,7 @@
                                 <th>模板ID</th>
                                 <th>模板名称</th>
                                 <th>计费方式</th>
+                                <th>排序</th>
                                 <th>添加时间</th>
                                 <th>操作</th>
                             </tr>
@@ -36,6 +37,7 @@
                                         <td class="am-text-middle"><?= $item['delivery_id'] ?></td>
                                         <td class="am-text-middle"><?= $item['name'] ?></td>
                                         <td class="am-text-middle"><?= $item['method']['text'] ?></td>
+                                        <td class="am-text-middle"><?= $item['sort'] ?></td>
                                         <td class="am-text-middle"><?= $item['create_time'] ?></td>
                                         <td class="am-text-middle">
                                             <div class="tpl-table-black-operation">
