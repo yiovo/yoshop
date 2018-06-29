@@ -72,20 +72,19 @@ class Delivery extends DeliveryModel
      * 根据运费组合策略 计算最终运费
      * @param $allExpressPrice
      * @return float|int|mixed
-     * @throws \think\exception\DbException
      */
     public static function freightRule($allExpressPrice)
     {
         $freight_rule = Setting::getItem('trade')['freight_rule'];
         $expressPrice = 0.00;
         switch ($freight_rule) {
-            case 10:    // 策略1: 叠加
+            case '10':    // 策略1: 叠加
                 $expressPrice = array_sum($allExpressPrice);
                 break;
-            case 20:    // 策略2: 以最低运费结算
+            case '20':    // 策略2: 以最低运费结算
                 $expressPrice = min($allExpressPrice);
                 break;
-            case 30:    // 策略3: 以最高运费结算
+            case '30':    // 策略3: 以最高运费结算
                 $expressPrice = max($allExpressPrice);
                 break;
         }

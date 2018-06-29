@@ -108,11 +108,11 @@ class Setting extends BaseModel
                 'describe' => '交易设置',
                 'values' => [
                     'order' => [
-                        'close_days' => 0,
-                        'receive_days' => 15,
-                        'refund_days' => 0
+                        'close_days' => '0',
+                        'receive_days' => '15',
+                        'refund_days' => '0'
                     ],
-                    'freight_rule' => 30,
+                    'freight_rule' => '10',
                 ],
                 'wxapp_id' => $wxapp_id
             ],
