@@ -32,5 +32,5 @@
 
 
 #### License
-萤火小程序商城（YoShop）遵循 GPL license 开源协议。
+萤火小程序商城（YoShop）遵循 [GPL license](https://opensource.org/licenses/GPL-3.0) 开源协议。
 
