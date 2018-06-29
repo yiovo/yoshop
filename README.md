@@ -1,39 +1,20 @@
-# yoshop-php
+# 萤火小程序商城（YoShop）
 
 #### 项目介绍
-{**以下是码云平台说明，您可以替换为您的项目简介**
-码云是开源中国推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用码云实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
-
-#### 软件架构
-软件架构说明
+萤火小程序商城，是一款开源的电商系统，为中小企业提供最佳的新零售解决方案。采用稳定的MVC框架开发，执行效率、扩展性、稳定性值得信赖。
 
 
-#### 安装教程
+#### 环境要求
+    - Nginx/Apache/IIS
+    - PHP5.4+
+    - MySQL5.1+
 
-1. xxxx
-2. xxxx
-3. xxxx
+    建议使用环境：Linux + Nginx1.14 + PHP7 + MySQL5.6
 
-#### 使用说明
+#### 安全&缺陷
+    如果你发现了一个安全漏洞，请发送邮件到 482075501@qq.com。所有的安全漏洞都将及时得到解决。
 
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### 参与贡献
-
-1. Fork 本项目
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
+#### License
+    萤火小程序商城（YoShop）遵循 GPL license 开源协议。
 
 
-#### 码云特技
-
-1. 使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2. 码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3. 你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4. [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5. 码云官方提供的使用手册 [http://git.mydoc.io/](http://git.mydoc.io/)
-6. 码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
