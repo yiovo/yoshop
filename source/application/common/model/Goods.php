@@ -62,6 +62,7 @@ class Goods extends BaseModel
 
     /**
      * 获取商品列表
+     * @param int $status
      * @param int $category_id
      * @param string $search
      * @param string $sortType
@@ -69,11 +70,12 @@ class Goods extends BaseModel
      * @return \think\Paginator
      * @throws \think\exception\DbException
      */
-    public function getList($category_id = 0, $search = '', $sortType = 'all', $sortPrice = false)
+    public function getList($status = null, $category_id = 0, $search = '', $sortType = 'all', $sortPrice = false)
     {
         // 筛选条件
         $filter = [];
         $category_id > 0 && $filter['category_id'] = $category_id;
+        $status > 0 && $filter['goods_status'] = $status;
         !empty($search) && $filter['goods_name'] = ['like', '%' . trim($search) . '%'];
 
         // 排序规则
@@ -99,7 +101,6 @@ class Goods extends BaseModel
             "$maxPriceSql AS goods_max_price"
         ])->with(['category', 'image.file', 'spec'])
             ->where('is_delete', '=', 0)
-            ->where('goods_status', '=', 10)
             ->where($filter)
             ->order($sort)
             ->paginate(15, false, [

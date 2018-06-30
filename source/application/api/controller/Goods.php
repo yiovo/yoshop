@@ -15,6 +15,7 @@ class Goods extends Controller
     /**
      * 商品列表
      * @param $category_id
+     * @param $search
      * @param $sortType
      * @param $sortPrice
      * @return array
@@ -23,7 +24,7 @@ class Goods extends Controller
     public function lists($category_id, $search, $sortType, $sortPrice)
     {
         $model = new GoodsModel;
-        $list = $model->getList($category_id,$search, $sortType, $sortPrice);
+        $list = $model->getList(10, $category_id, $search, $sortType, $sortPrice);
         return $this->renderSuccess(compact('list'));
     }
 
@@ -31,7 +32,6 @@ class Goods extends Controller
      * 获取商品详情
      * @param $goods_id
      * @return array
-     * //     * @throws \app\common\exception\BaseException
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
@@ -41,7 +41,7 @@ class Goods extends Controller
         // 商品详情
         $detail = (new GoodsModel)->getDetail($goods_id);
 //        $user = $this->getUser();
-        // 购物车商品总数量
+//        // 购物车商品总数量
 //        $cart_total_num = (new CartModel($user['user_id']))->getTotalNum();
         return $this->renderSuccess(compact('detail', 'cart_total_num'));
     }
