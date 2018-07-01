@@ -1,6 +1,6 @@
 <?php
 
-// 独立配置
+// 数据库配置
 $config = [
     'host' => '192.168.33.10',
     'database' => 'we7_cn',
@@ -9,15 +9,6 @@ $config = [
     'port' => '3306',
     'charset' => 'utf8',
 ];
-
-// 微擎配置
-if (defined('IS_WE7') && IS_WE7 === true && define('IN_IA', true)) {
-    $config = call_user_func(function () {
-        $config = [];
-        require __DIR__ . '/../../../../data/config.php';
-        return $config['db']['master'];
-    });
-}
 
 return [
     // 数据库类型
