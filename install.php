@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS `yoshop_delivery` (
   `delivery_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '模板id',
   `name` varchar(255) NOT NULL DEFAULT '' COMMENT '模板名称',
   `method` tinyint(3) unsigned NOT NULL DEFAULT '10' COMMENT '计费方式(10按件数 20按重量)',
+  `sort` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '排序方式(数字越小越靠前)',
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '小程序d',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
