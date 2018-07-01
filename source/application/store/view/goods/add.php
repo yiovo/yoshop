@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="assets/store/css/goods.css">
 <link rel="stylesheet" href="assets/store/plugins/umeditor/themes/default/css/umeditor.css">
 <div class="row-content am-cf">
     <div class="row">
@@ -65,11 +66,15 @@
                                         单规格
                                     </label>
                                     <label class="am-radio-inline">
-                                        <input type="radio" name="goods[spec_type]" value="20" data-am-ucheck disabled>
-                                        <span class="am-link-muted">多规格 (开发中)</span>
+                                        <input type="radio" name="goods[spec_type]" value="20" data-am-ucheck>
+                                        <span class="am-link-muted">多规格</span>
                                     </label>
                                 </div>
-                                <div class="goods-spec am-u-sm-9 am-u-end">
+
+                            </div>
+
+                            <div class="goods-spec-many am-form-group">
+                                <div class="goods-spec-box am-u-sm-9 am-u-sm-push-2 am-u-end">
                                     <div class="spec-group-item">
                                         <div class="spec-group-name">
                                             <span>颜色</span>
@@ -132,7 +137,8 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="am-form-group">
+
+                            <div class="goods-spec-single am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label">商品编码 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="text" class="tpl-form-input" name="goods[spec][goods_no]"
