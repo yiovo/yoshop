@@ -168,13 +168,12 @@ class WxPay
     {
         if (is_array($values))
             $values = print_r($values, true);
-
         // 日志内容
         $content = '[' . date('Y-m-d H:i:s') . ']' . PHP_EOL . $values . PHP_EOL . PHP_EOL;
-
-        // 日志路径
-        $path = __DIR__ . '/logs/' . date('Ymd') . '.log';
-        file_put_contents($path, $content, FILE_APPEND);
+        // 写入文件
+        $filePath = __DIR__ . '/logs/';
+        !is_dir($filePath) && @mkdir($filePath, 0755, true);
+        @file_put_contents($filePath . date('Ymd') . '.log', $content, FILE_APPEND);
     }
 
     /**
