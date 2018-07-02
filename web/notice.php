@@ -2,6 +2,9 @@
 
 // [ 支付通知入口文件 ]
 
+// 定义微擎版
+define('IS_WE7', true);
+
 // 手动定义路由
 $_GET['s'] = '/task/notify/order';
 
