@@ -2,9 +2,6 @@
 
 // [ 应用入口文件 ]
 
-// 测试
-define('test', true);
-
 // 定义运行目录
 define('WEB_PATH', __DIR__ . '/');
 
