@@ -108,11 +108,11 @@
                                             <input type="text" class="tpl-form-input" placeholder="请输入规格值">
                                         </div>
                                         <div class="spec-group-add-item am-margin-top">
-                                            <button type="button" class="am-btn am-btn-xs am-btn-secondary">
-                                                确定
+                                            <button type="button" class="btn-addspecName am-btn am-btn-xs
+                                            am-btn-secondary"> 确定
                                             </button>
-                                            <button type="button" class="am-btn am-btn-xs am-btn-default">
-                                                取消
+                                            <button type="button" class="btn-canclespecName am-btn am-btn-xs
+                                             am-btn-default"> 取消
                                             </button>
                                         </div>
                                     </div>
@@ -261,6 +261,8 @@
 <script src="assets/store/js/ddsort.js"></script>
 <script src="assets/store/plugins/umeditor/umeditor.config.js"></script>
 <script src="assets/store/plugins/umeditor/umeditor.min.js"></script>
+<script src="assets/store/js/goods.spec.js"></script>
+<script src="assets/store/js/test.js"></script>
 <script>
     $(function () {
 
