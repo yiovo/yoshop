@@ -1,0 +1,10 @@
+manifest.xml merge=ours
+
+install.php merge=ours
+upgrade.php merge=ours
+
+wxapp.php merge=ours
+module.php merge=ours
+
+web/index.php merge=ours
+source/application/database.php merge=ours

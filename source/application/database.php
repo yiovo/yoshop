@@ -1,14 +1,13 @@
 <?php
 
-// 独立配置
-$config = [
-    'host' => '192.168.33.10',
-    'database' => 'we7_cn',
-    'username' => 'root',
-    'password' => '123456',
-    'port' => '3306',
-    'charset' => 'utf8',
-];
+define('IN_IA', true);
+
+// 数据库配置
+$config = call_user_func(function () {
+    $config = [];
+    require __DIR__ . '/../../../../data/config.php';
+    return $config['db']['master'];
+});
 
 return [
     // 数据库类型

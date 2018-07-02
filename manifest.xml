@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.we7.cc" versionCode="">
+    <application setting="false" >
+        <name><![CDATA[萤火小程序商城]]></name>
+        <identifie><![CDATA[yiovo_shop]]></identifie>
+        <version><![CDATA[1.0.4]]></version>
+        <type><![CDATA[business]]></type>
+        <ability><![CDATA[小程序商城]]></ability>
+        <description><![CDATA[萤火小程序商城]]></description>
+        <author><![CDATA[逝水忆昔年]]></author>
+        <url><![CDATA[]]></url>
+    </application>
+    <platform>
+        <subscribes>
+        </subscribes>
+        <handles>
+        </handles>
+        <rule embed="false" />
+        <card embed="false" />
+        <supports>
+            <item type="wxapp" />
+        </supports>
+    </platform>
+    <bindings>
+        <page>
+            <entry title="首页" do="/pages/index/index" state="" direct="" />
+        </page>
+    </bindings>
+    <permissions>
+    </permissions>
+    <install><![CDATA[install.php]]></install>
+    <uninstall><![CDATA[]]></uninstall>
+    <upgrade><![CDATA[upgrade.php]]></upgrade>
+</manifest>
