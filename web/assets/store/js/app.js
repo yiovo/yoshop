@@ -9,9 +9,20 @@
      */
     $.fn.extend({
         superForm: function (option) {
-            let form = $(this);
+            // 默认选项
+            let defaultOption = {
+                buildData: function () {
+                    return {};
+                },
+                validation: function () {
+                    return true;
+                },
+            };
+            option = $.extend(true, {}, defaultOption, option);
+
+            let $form = $(this);
             let btn_submit = $('.j-submit');
-            form.validator({
+            $form.validator({
                 onValid: function (validity) {
                     $(validity.field).next('.am-alert').hide();
                 },
@@ -35,12 +46,16 @@
                 },
                 submit: function () {
                     if (this.isFormValid() === true) {
+                        // 自定义验证
+                        if (!option.validation())
+                            return false;
                         // 禁用按钮, 防止二次提交
                         btn_submit.attr('disabled', true);
                         // 表单提交
-                        form.ajaxSubmit({
+                        $form.ajaxSubmit({
                             type: "post",
                             dataType: "json",
+                            data: option.buildData(),
                             success: function (result) {
                                 result.code === 1 ? $.show_success(result.msg, result.url)
                                     : $.show_error(result.msg);
