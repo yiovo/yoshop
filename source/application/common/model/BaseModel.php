@@ -72,7 +72,7 @@ class BaseModel extends Model
         $request = Request::instance();
         $host = $request->scheme() . '://' . $request->host();
         $dirname = dirname($request->baseUrl());
-        return empty($dirname) ? $host : $host . $dirname . DS;
+        return empty($dirname) ? $host : $host . $dirname . '/';
     }
 
     /**
