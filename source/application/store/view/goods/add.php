@@ -286,19 +286,19 @@
         </td>
         {{ /each }}
         <td>
-            <input type="text" name="goods_no" value="" class="ipt-goods-no am-field-valid">
+            <input type="text" name="goods_no" value="{{ item.form.goods_no }}" class="ipt-goods-no am-field-valid">
         </td>
         <td>
-            <input type="text" name="goods_price" value="" class="am-field-valid ipt-w80" required>
+            <input type="text" name="goods_price" value="{{ item.form.goods_price }}" class="am-field-valid ipt-w80" required>
         </td>
         <td>
-            <input type="text" name="line_price" value="" class="am-field-valid ipt-w80">
+            <input type="text" name="line_price" value="{{ item.form.line_price }}" class="am-field-valid ipt-w80">
         </td>
         <td>
-            <input type="text" name="stock_num" value="" class="am-field-valid ipt-w80" required>
+            <input type="text" name="stock_num" value="{{ item.form.stock_num }}" class="am-field-valid ipt-w80" required>
         </td>
         <td>
-            <input type="text" name="goods_weight" value="" class="am-field-valid ipt-w80" required>
+            <input type="text" name="goods_weight" value="{{ item.form.goods_weight }}" class="am-field-valid ipt-w80" required>
         </td>
     </tr>
     {{ /each }}
@@ -356,9 +356,11 @@
          * @type {*}
          */
         $('#my-form').superForm({
+            // form data
             buildData: function () {
                 return specMany.getData();
             },
+            // 自定义验证
             validation: function () {
                 let specType = $('input:radio[name="goods[spec_type]"]:checked').val();
                 if (specType === '20') {

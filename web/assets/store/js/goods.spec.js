@@ -246,11 +246,27 @@
                             spec_value: skuValues[point].spec_value
                         });
                     }
-                    specSkuIdAttr.push(skuValues[parseInt(point)].item_id);
+                    specSkuIdAttr.push(skuValues[parseInt(point.toString())].item_id);
                 }
-                spec_list.push({spec_sku_id: specSkuIdAttr.join('_'), rows: rowData});
+                spec_list.push({
+                    spec_sku_id: specSkuIdAttr.join('_'),
+                    rows: rowData,
+                    form: {}
+                });
             }
-            console.log(spec_list);
+            // 合并旧sku数据
+            if (data.spec_list.length > 1 && spec_list.length > 1) {
+                for (let i = 0; i < spec_list.length; i++) {
+                    let overlap = data.spec_list.filter(function (val) {
+                        return val.spec_sku_id === spec_list[i].spec_sku_id;
+                    });
+                    if (overlap.length > 0) {
+                        // console.log(length);
+                        // console.log(overlap[0]);
+                        spec_list[i].form = overlap[0].form;
+                    }
+                }
+            }
             data.spec_list = spec_list;
         },
 
@@ -263,8 +279,8 @@
                 let $this = $(this)
                     , dataType = $this.attr('name')
                     , specIndex = $this.parent().parent().data('index');
-                if (!data.spec_list[specIndex].hasOwnProperty('form'))
-                    data.spec_list[specIndex].form = {};
+                // if (!data.spec_list[specIndex].hasOwnProperty('form'))
+                //     data.spec_list[specIndex].form = {};
                 data.spec_list[specIndex].form[dataType] = $this.val();
             });
         },
