@@ -131,8 +131,6 @@ class Goods extends GoodsModel
             Db::commit();
             return true;
         } catch (\Exception $e) {
-            pre($e->getMessage());  // todo
-            // 回滚事务
             Db::rollback();
         }
         return false;
@@ -169,10 +167,12 @@ class Goods extends GoodsModel
      */
     public function remove()
     {
-        // todo: 删除多规格关系
-        $this->spec()->delete();
+        Db::startTrans();
+        (new GoodsSpec)->removeAll($this['goods_id']);
         $this->image()->delete();
-        return $this->delete();
+        $this->delete();
+        Db::commit();
+        return true;
     }
 
 }

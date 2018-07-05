@@ -59,8 +59,7 @@ class Goods extends Controller
     {
         $model = GoodsModel::get($goods_id);
         if (!$model->remove()) {
-            $error = $model->getError() ?: '删除失败';
-            return $this->renderError($error);
+            return $this->renderError('删除失败');
         }
         return $this->renderSuccess('删除成功');
     }
