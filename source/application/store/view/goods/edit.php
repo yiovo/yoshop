@@ -75,17 +75,21 @@
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品规格 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <label class="am-radio-inline">
-                                        <input type="radio" name="goods[spec_type]" value="10" data-am-ucheck checked>
+                                        <input type="radio" name="goods[spec_type]" value="10" data-am-ucheck
+                                            <?= $model['spec_type'] === 10 ? 'checked' : '' ?> >
                                         单规格
                                     </label>
                                     <label class="am-radio-inline">
-                                        <input type="radio" name="goods[spec_type]" value="20" data-am-ucheck>
+                                        <input type="radio" name="goods[spec_type]" value="20" data-am-ucheck
+                                            <?= $model['spec_type'] === 20 ? 'checked' : '' ?> >
                                         <span class="am-link-muted">多规格</span>
                                     </label>
                                 </div>
                             </div>
 
-                            <div class="goods-spec-many am-form-group">
+                            <!-- 商品多规格 -->
+                            <div class="goods-spec-many am-form-group"
+                                 style="display: <?= $model['spec_type'] === 20 ? 'block' : 'none' ?>;">
                                 <div class="goods-spec-box am-u-sm-9 am-u-sm-push-2 am-u-end">
                                     <!-- 规格属性 -->
                                     <div class="spec-attr"></div>
@@ -129,7 +133,9 @@
                                 </div>
                             </div>
 
-                            <div class="goods-spec-single">
+                            <!-- 商品单规格 -->
+                            <div class="goods-spec-single"
+                                 style="display: <?= $model['spec_type'] === 10 ? 'block' : 'none' ?>;">
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label">商品编码 </label>
                                     <div class="am-u-sm-9 am-u-end">

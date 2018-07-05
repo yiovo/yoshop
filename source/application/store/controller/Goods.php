@@ -81,7 +81,7 @@ class Goods extends Controller
             // 配送模板
             $delivery = Delivery::getAll();
             // 规格信息
-            $specData = $model->getManySpecData($model['spec_rel'], $model['spec']);
+            $specData = $model['spec_type'] === 20 ? $model->getManySpecData($model['spec_rel'], $model['spec']) : null;
             return $this->fetch('edit', compact('model', 'catgory', 'delivery', 'specData'));
         }
         // 更新记录
