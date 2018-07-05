@@ -3,18 +3,18 @@
 namespace app\common\model;
 
 /**
- * 规格/属性(值)模型
- * Class SpecValue
+ * 商品规格关系模型
+ * Class GoodsSpecRel
  * @package app\common\model
  */
-class SpecValue extends BaseModel
+class GoodsSpecRel extends BaseModel
 {
-    protected $name = 'spec_value';
+    protected $name = 'goods_spec_rel';
     protected $updateTime = false;
 
     /**
-     * 关联规格组表
-     * @return $this|\think\model\relation\BelongsTo
+     * 关联规格组
+     * @return \think\model\relation\BelongsTo
      */
     public function spec()
     {

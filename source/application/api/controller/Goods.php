@@ -39,7 +39,7 @@ class Goods extends Controller
     public function detail($goods_id)
     {
         // 商品详情
-        $detail = (new GoodsModel)->getDetail($goods_id);
+        $detail = GoodsModel::detail($goods_id);
 //        $user = $this->getUser();
 //        // 购物车商品总数量
 //        $cart_total_num = (new CartModel($user['user_id']))->getTotalNum();

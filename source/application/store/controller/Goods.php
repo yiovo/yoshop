@@ -6,7 +6,6 @@ use app\store\model\Category;
 use app\store\model\Delivery;
 use app\store\model\Goods as GoodsModel;
 
-
 /**
  * 商品管理控制器
  * Class Goods
@@ -41,8 +40,7 @@ class Goods extends Controller
             return $this->fetch('add', compact('catgory', 'delivery'));
         }
         $model = new GoodsModel;
-        $data = $this->postData('goods');
-        if ($model->add($data)) {
+        if ($model->add($this->postData('goods'))) {
             return $this->renderSuccess('添加成功', url('goods/index'));
         }
         $error = $model->getError() ?: '添加失败';
@@ -75,14 +73,16 @@ class Goods extends Controller
      */
     public function edit($goods_id)
     {
-        // 模板详情
-        $model = GoodsModel::get($goods_id, ['spec', 'image.file']);
+        // 商品详情
+        $model = GoodsModel::detail($goods_id);
         if (!$this->request->isAjax()) {
             // 商品分类
             $catgory = Category::getCacheTree();
             // 配送模板
             $delivery = Delivery::getAll();
-            return $this->fetch('edit', compact('model', 'catgory', 'delivery'));
+            // 规格信息
+            $specData = $model->getManySpecData($model['spec_rel'], $model['spec']);
+            return $this->fetch('edit', compact('model', 'catgory', 'delivery', 'specData'));
         }
         // 更新记录
         if ($model->edit($this->postData('goods'))) {

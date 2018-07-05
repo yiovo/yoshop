@@ -2,18 +2,20 @@
 
     // 商品规格数据
     let data = {
-        spec_attr: [],
-        spec_list: [],
-    };
+            spec_attr: [],
+            spec_list: [],
+        }
 
-    // 配置信息
-    let setting = {
-        container: '.goods-spec-many'
-    };
-
-    function GoodsSpec(options) {
         // 配置信息
-        setting = $.extend(true, {}, {}, options);
+        , setting = {
+            container: '.goods-spec-many',
+        };
+
+    function GoodsSpec(options, baseData) {
+        // 配置信息
+        setting = $.extend(true, {}, setting, options);
+        // 已存在的规格数据
+        typeof baseData !== 'undefined' && (data = baseData);
         // 初始化
         this.initialize();
     }
@@ -23,6 +25,7 @@
          * 初始化
          */
         initialize: function () {
+
             // 注册html容器
             this.$container = $(setting.container);
             this.$specAttr = this.$container.find('.spec-attr');
@@ -40,6 +43,8 @@
             this.deleteSpecItemEvent();
             // 注册表格input数据修改事件
             this.updateSpecInputEvent();
+            // 渲染已存在的sku信息
+            this.renderHtml();
         },
 
         /**
@@ -260,11 +265,7 @@
                     let overlap = data.spec_list.filter(function (val) {
                         return val.spec_sku_id === spec_list[i].spec_sku_id;
                     });
-                    if (overlap.length > 0) {
-                        // console.log(length);
-                        // console.log(overlap[0]);
-                        spec_list[i].form = overlap[0].form;
-                    }
+                    if (overlap.length > 0) spec_list[i].form = overlap[0].form;
                 }
             }
             data.spec_list = spec_list;
@@ -279,8 +280,6 @@
                 let $this = $(this)
                     , dataType = $this.attr('name')
                     , specIndex = $this.parent().parent().data('index');
-                // if (!data.spec_list[specIndex].hasOwnProperty('form'))
-                //     data.spec_list[specIndex].form = {};
                 data.spec_list[specIndex].form[dataType] = $this.val();
             });
         },

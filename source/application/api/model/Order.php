@@ -35,7 +35,7 @@ class Order extends OrderModel
     {
         // 商品信息
         /* @var array|false|\PDOStatement|string|\think\Model|\think\Collection $goods */
-        $goods = (new Goods)->getDetail($goods_id);
+        $goods = (new Goods)->detail($goods_id);
         // 商品单价
         $goods['goods_price'] = $goods['spec'][0]['goods_price'];
         // 商品总价

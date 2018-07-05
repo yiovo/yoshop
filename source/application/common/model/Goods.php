@@ -12,6 +12,18 @@ use think\Request;
 class Goods extends BaseModel
 {
     protected $name = 'goods';
+    protected $append = ['goods_sales'];
+
+    /**
+     * 计算显示销量 (初始销量 + 实际销量)
+     * @param $value
+     * @param $data
+     * @return mixed
+     */
+    public function getGoodsSalesAttr($value, $data)
+    {
+        return $data['sales_initial'] + $data['sales_actual'];
+    }
 
     /**
      * 关联商品分类表
@@ -29,6 +41,15 @@ class Goods extends BaseModel
     public function spec()
     {
         return $this->hasMany('GoodsSpec');
+    }
+
+    /**
+     * 关联商品规格关系表
+     * @return \think\model\relation\BelongsToMany
+     */
+    public function specRel()
+    {
+        return $this->belongsToMany('SpecValue', 'GoodsSpecRel');
     }
 
     /**
@@ -96,7 +117,7 @@ class Goods extends BaseModel
         $maxPriceSql = $GoodsSpec->field(['MAX(goods_price)'])
             ->where('goods_id', 'EXP', "= `$tableName`.`goods_id`")->buildSql();
         // 执行查询
-        $list = $this->field(['*', '(sales_initial + sales_actual) as goods_sales',
+        $list = $this->field(['*',
             "$minPriceSql AS goods_min_price",
             "$maxPriceSql AS goods_max_price"
         ])->with(['category', 'image.file', 'spec'])
@@ -112,16 +133,12 @@ class Goods extends BaseModel
     /**
      * 获取商品详情
      * @param $goods_id
-     * @return array|false|\PDOStatement|string|\think\Model
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
+     * @return null|static
      * @throws \think\exception\DbException
      */
-    public function getDetail($goods_id)
+    public static function detail($goods_id)
     {
-        return $this->field(['*', '(sales_initial + sales_actual) as goods_sales'])
-            ->with(['category', 'image.file', 'spec', 'delivery.rule'])
-            ->where('goods_id', '=', $goods_id)->find();
+        return self::get($goods_id, ['category', 'image.file', 'spec', 'spec_rel.spec', 'delivery.rule']);
     }
 
     /**

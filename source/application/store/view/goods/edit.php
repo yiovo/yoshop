@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="assets/store/css/goods.css">
 <link rel="stylesheet" href="assets/store/plugins/umeditor/themes/default/css/umeditor.css">
 <div class="row-content am-cf">
     <div class="row">
@@ -66,6 +67,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="widget-head am-cf">
                                 <div class="widget-title am-fl">规格/库存</div>
                             </div>
@@ -77,108 +79,94 @@
                                         单规格
                                     </label>
                                     <label class="am-radio-inline">
-                                        <input type="radio" name="goods[spec_type]" value="20" data-am-ucheck disabled>
-                                        <span class="am-link-muted">多规格 (开发中)</span>
+                                        <input type="radio" name="goods[spec_type]" value="20" data-am-ucheck>
+                                        <span class="am-link-muted">多规格</span>
                                     </label>
                                 </div>
-                                <div class="goods-spec am-u-sm-9 am-u-end">
-                                    <div class="spec-group-item">
-                                        <div class="spec-group-name">
-                                            <span>颜色</span>
-                                            <i class="iconfont icon-shanchu1" title="点击删除"></i>
-                                        </div>
-                                        <div class="spec-list am-cf">
-                                            <div class="spec-item am-fl">
-                                                <span>红色</span>
-                                                <i class="iconfont icon-shanchu1" title="点击删除"></i>
-                                            </div>
-                                            <div class="spec-item am-fl">
-                                                <span>蓝色</span>
-                                                <i class="iconfont icon-shanchu1" title="点击删除"></i>
-                                            </div>
-                                            <div class="spec-item-add am-cf am-fl">
-                                                <input type="text" class="am-fl">
-                                                <button type="button" class="am-btn am-fl">添加</button>
-                                            </div>
-                                        </div>
+                            </div>
+
+                            <div class="goods-spec-many am-form-group">
+                                <div class="goods-spec-box am-u-sm-9 am-u-sm-push-2 am-u-end">
+                                    <!-- 规格属性 -->
+                                    <div class="spec-attr"></div>
+
+                                    <!-- 添加规格：按钮 -->
+                                    <div class="spec-group-button">
+                                        <button type="button" class="btn-addSpecGroup am-btn">添加规格</button>
                                     </div>
-                                    <!--<div class="spec-group-button">-->
-                                    <!--    <button type="button" class="am-btn">添加规格</button>-->
-                                    <!--</div>-->
+
+                                    <!-- 添加规格：表单 -->
                                     <div class="spec-group-add">
                                         <div class="spec-group-add-item am-form-group">
                                             <label class="am-form-label form-require">规格名 </label>
-                                            <input type="text" class="tpl-form-input" placeholder="请输入规格名称">
+                                            <input type="text" class="input-specName tpl-form-input"
+                                                   placeholder="请输入规格名称">
                                         </div>
                                         <div class="spec-group-add-item am-form-group">
                                             <label class="am-form-label form-require">规格值 </label>
-                                            <input type="text" class="tpl-form-input" placeholder="请输入规格值">
+                                            <input type="text" class="input-specValue tpl-form-input"
+                                                   placeholder="请输入规格值">
                                         </div>
                                         <div class="spec-group-add-item am-margin-top">
-                                            <button type="button" class="am-btn am-btn-xs am-btn-secondary">
-                                                确定
+                                            <button type="button" class="btn-addSpecName am-btn am-btn-xs
+                                            am-btn-secondary"> 确定
                                             </button>
-                                            <button type="button" class="am-btn am-btn-xs am-btn-default">
-                                                取消
+                                            <button type="button" class="btn-cancleAddSpecName am-btn am-btn-xs
+                                              am-btn-default"> 取消
                                             </button>
                                         </div>
                                     </div>
-                                    <div style="border: 1px dashed #e3e2e5;"
-                                         class="am-margin-top-lg am-margin-bottom-lg"></div>
-                                    <table class="am-table am-table-bordered am-table-centered am-margin-bottom-xs">
-                                        <tbody>
-                                        <tr>
-                                            <th>颜色</th>
-                                            <th>尺寸</th>
-                                            <th>商家编码</th>
-                                            <th>销售价</th>
-                                            <th>划线价</th>
-                                            <th>库存</th>
-                                            <th>重量(kg)</th>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="7" class="am-text-left">
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+
+                                    <!-- 虚线 -->
+                                    <div class="goods-spec-line am-margin-top-lg am-margin-bottom-lg"></div>
+
+                                    <!-- 商品规格table -->
+                                    <div class="am-scrollable-horizontal">
+                                        <table class="spec-tabel am-table am-table-bordered am-table-centered
+                                     am-margin-bottom-xs am-text-nowrap"></table>
+                                    </div>
+
                                 </div>
                             </div>
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">商品编码 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="goods[spec][goods_no]"
-                                           value="<?= $model['spec'][0]['goods_no'] ?>">
+
+                            <div class="goods-spec-single">
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">商品编码 </label>
+                                    <div class="am-u-sm-9 am-u-end">
+                                        <input type="text" class="tpl-form-input" name="goods[spec][goods_no]"
+                                               value="<?= $model['spec'][0]['goods_no'] ?>">
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品价格 </label>
+                                    <div class="am-u-sm-9 am-u-end">
+                                        <input type="number" class="tpl-form-input" name="goods[spec][goods_price]"
+                                               value="<?= $model['spec'][0]['goods_price'] ?>" required>
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">商品划线价 </label>
+                                    <div class="am-u-sm-9 am-u-end">
+                                        <input type="number" class="tpl-form-input" name="goods[spec][line_price]"
+                                               value="<?= $model['spec'][0]['line_price'] ?>">
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">当前库存数量 </label>
+                                    <div class="am-u-sm-9 am-u-end">
+                                        <input type="number" class="tpl-form-input" name="goods[spec][stock_num]"
+                                               value="<?= $model['spec'][0]['stock_num'] ?>" required>
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品重量(Kg) </label>
+                                    <div class="am-u-sm-9 am-u-end">
+                                        <input type="number" class="tpl-form-input" name="goods[spec][goods_weight]"
+                                               value="<?= $model['spec'][0]['goods_weight'] ?>" required>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品价格 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <input type="number" class="tpl-form-input" name="goods[spec][goods_price]"
-                                           value="<?= $model['spec'][0]['goods_price'] ?>" required>
-                                </div>
-                            </div>
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">商品划线价 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <input type="number" class="tpl-form-input" name="goods[spec][line_price]"
-                                           value="<?= $model['spec'][0]['line_price'] ?>">
-                                </div>
-                            </div>
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">当前库存数量 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <input type="number" class="tpl-form-input" name="goods[spec][stock_num]"
-                                           value="<?= $model['spec'][0]['stock_num'] ?>" required>
-                                </div>
-                            </div>
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品重量(Kg) </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <input type="number" class="tpl-form-input" name="goods[spec][goods_weight]"
-                                           value="<?= $model['spec'][0]['goods_weight'] ?>" required>
-                                </div>
-                            </div>
+
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">库存计算方式 </label>
                                 <div class="am-u-sm-9 am-u-end">
@@ -269,20 +257,20 @@
         </div>
     </div>
 </div>
+
+<!-- 商品多规格模板 -->
+{{include file="goods/_template/spec_many" /}}
+
 <script src="assets/store/js/ddsort.js"></script>
 <script src="assets/store/plugins/umeditor/umeditor.config.js"></script>
 <script src="assets/store/plugins/umeditor/umeditor.min.js"></script>
+<script src="assets/store/js/art-template.js"></script>
+<script src="assets/store/js/goods.spec.js"></script>
 <script>
     $(function () {
 
         // 富文本编辑器
         UM.getEditor('container');
-
-        /**
-         * 表单验证提交
-         * @type {*}
-         */
-        $('#my-form').superForm();
 
         // 上传商品图片
         $.uploadImages({
@@ -301,6 +289,47 @@
                 'border': '1px solid #ccc',
                 'background-color': '#fff'
             }
+        });
+
+        // 注册商品多规格组件
+        let specMany = new GoodsSpec({
+            container: '.goods-spec-many',
+        }, <?= $specData ?>);
+
+        // 切换单/多规格
+        $('input:radio[name="goods[spec_type]"]').change(function (e) {
+            let $goodsSpecMany = $('.goods-spec-many')
+                , $goodsSpecSingle = $('.goods-spec-single');
+            if (e.currentTarget.value === '10') {
+                $goodsSpecMany.hide() && $goodsSpecSingle.show();
+            } else {
+                $goodsSpecMany.show() && $goodsSpecSingle.hide();
+            }
+        });
+
+        /**
+         * 表单验证提交
+         * @type {*}
+         */
+        $('#my-form').superForm({
+            // form data
+            buildData: function () {
+                return {
+                    goods: {
+                        spec_many: specMany.getData()
+                    }
+                };
+            },
+            // 自定义验证
+            validation: function () {
+                let specType = $('input:radio[name="goods[spec_type]"]:checked').val();
+                if (specType === '20') {
+                    let isEmpty = specMany.isEmptySkuList();
+                    isEmpty === true && layer.msg('商品规格不能为空');
+                    return !isEmpty;
+                }
+                return true;
+            },
         });
 
     });
