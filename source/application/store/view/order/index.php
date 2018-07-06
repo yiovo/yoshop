@@ -39,11 +39,9 @@
                                             </div>
                                             <div class="goods-info">
                                                 <p class="goods-title"><?= $goods['goods_name'] ?></p>
-                                                <?php if ($goods['spec_type'] === 20): ?>
-                                                    <p class="goods-spec am-link-muted">
-                                                        颜色：918款黑色（加绒加厚款）尺码：33 套餐: 至尊
-                                                    </p>
-                                                <?php endif; ?>
+                                                <p class="goods-spec am-link-muted">
+                                                    <?= $goods['goods_attr'] ?>
+                                                </p>
                                             </div>
                                         </td>
                                         <td class="am-text-middle">

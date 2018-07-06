@@ -12,48 +12,6 @@ use think\Db;
  */
 class Goods extends GoodsModel
 {
-    /**
-     * 获取规格信息
-     * @param \think\Collection $spec_rel
-     * @param \think\Collection $skuData
-     * @return array
-     */
-    public function getManySpecData($spec_rel, $skuData)
-    {
-        // spec_attr
-        $specAttrData = [];
-        foreach ($spec_rel->toArray() as $item) {
-            if (!isset($specAttrData[$item['spec_id']])) {
-                $specAttrData[$item['spec_id']] = [
-                    'group_id' => $item['spec']['spec_id'],
-                    'group_name' => $item['spec']['spec_name'],
-                    'spec_items' => [],
-                ];
-            }
-            $specAttrData[$item['spec_id']]['spec_items'][] = [
-                'item_id' => $item['spec_value_id'],
-                'spec_value' => $item['spec_value'],
-            ];
-        }
-
-        // spec_list
-        $specListData = [];
-        foreach ($skuData->toArray() as $item) {
-            $specListData[] = [
-                'goods_spec_id' => $item['goods_spec_id'],
-                'spec_sku_id' => $item['spec_sku_id'],
-                'rows' => [],
-                'form' => [
-                    'goods_no' => $item['goods_no'],
-                    'goods_price' => $item['goods_price'],
-                    'goods_weight' => $item['goods_weight'],
-                    'line_price' => $item['line_price'],
-                    'stock_num' => $item['stock_num'],
-                ],
-            ];
-        }
-        return json_encode(['spec_attr' => array_values($specAttrData), 'spec_list' => $specListData]);
-    }
 
     /**
      * 添加商品

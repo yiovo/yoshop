@@ -79,8 +79,10 @@ class Goods extends Controller
             $catgory = Category::getCacheTree();
             // 配送模板
             $delivery = Delivery::getAll();
-            // 规格信息
-            $specData = $model['spec_type'] === 20 ? $model->getManySpecData($model['spec_rel'], $model['spec']) : null;
+            // 多规格信息
+            $specData = null;
+            if ($model['spec_type'] === 20)
+                $specData = json_encode($model->getManySpecData($model['spec_rel'], $model['spec']));
             return $this->fetch('edit', compact('model', 'catgory', 'delivery', 'specData'));
         }
         // 更新记录

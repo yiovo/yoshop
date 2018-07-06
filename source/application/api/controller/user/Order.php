@@ -52,7 +52,7 @@ class Order extends Controller
      */
     public function detail($order_id)
     {
-        $order = OrderModel::detail($order_id, $this->user['user_id']);
+        $order = OrderModel::getUserOrderDetail($order_id, $this->user['user_id']);
         return $this->renderSuccess(['order' => $order]);
     }
 
@@ -65,7 +65,7 @@ class Order extends Controller
      */
     public function cancel($order_id)
     {
-        $model = OrderModel::detail($order_id, $this->user['user_id']);
+        $model = OrderModel::getUserOrderDetail($order_id, $this->user['user_id']);
         if ($model->cancel()) {
             return $this->renderSuccess();
         }
@@ -81,7 +81,7 @@ class Order extends Controller
      */
     public function receipt($order_id)
     {
-        $model = OrderModel::detail($order_id, $this->user['user_id']);
+        $model = OrderModel::getUserOrderDetail($order_id, $this->user['user_id']);
         if ($model->receipt()) {
             return $this->renderSuccess();
         }
@@ -97,7 +97,7 @@ class Order extends Controller
      */
     public function pay($order_id)
     {
-        $model = OrderModel::detail($order_id, $this->user['user_id']);
+        $model = OrderModel::getUserOrderDetail($order_id, $this->user['user_id']);
         // 发起微信支付
         $wxConfig = WxappModel::getWxappCache();
         $WxPay = new WxPay($wxConfig);
