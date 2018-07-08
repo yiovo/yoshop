@@ -39,7 +39,7 @@
                 <ul>
                     <!-- 欢迎语 -->
                     <li class="am-text-sm tpl-header-navbar-welcome">
-                        <a href="javascript:;">欢迎你，<span><?= $store['user']['user_name'] ?></span> </a>
+                        <a href="<?= url('store.user/renew') ?>">欢迎你，<span><?= $store['user']['user_name'] ?></span> </a>
                     </li>
                     <!-- 新提示 -->
                     <!--<li class="am-dropdown" data-am-dropdown="">-->
