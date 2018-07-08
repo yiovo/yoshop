@@ -31,7 +31,7 @@ function toUnderScore($str)
  * @param $password
  * @return string
  */
-function password_hash($password)
+function yoshop_hash($password)
 {
     return md5(md5($password) . 'yoshop_salt_SmTRx');
 }
