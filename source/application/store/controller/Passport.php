@@ -3,6 +3,7 @@
 namespace app\store\controller;
 
 use app\store\model\StoreUser;
+use think\Session;
 
 /**
  * 商户认证
@@ -29,6 +30,15 @@ class Passport extends Controller
         }
         $this->view->engine->layout(false);
         return $this->fetch('login');
+    }
+
+    /**
+     * 退出登录
+     */
+    public function logout()
+    {
+        Session::clear('yoshop_store');
+        $this->redirect('passport/login');
     }
 
 }

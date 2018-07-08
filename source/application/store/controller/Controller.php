@@ -109,7 +109,7 @@ class Controller extends \think\Controller
             || !isset($this->store['wxapp'])
             || empty($this->store['wxapp'])
         ) {
-            $this->error('登录状态无效');
+            $this->error('您还没有登录', 'passport/login');
             return false;
         }
         return true;
