@@ -23,7 +23,7 @@
 <body data-type="">
 <div class="am-g tpl-g">
     <!-- 头部 -->
-    <header class="tpl-header" onselectstart="return false">
+    <header class="tpl-header">
         <!-- 右侧内容 -->
         <div class="tpl-header-fluid">
             <!-- 侧边切换 -->

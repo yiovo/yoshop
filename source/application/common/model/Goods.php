@@ -147,7 +147,6 @@ class Goods extends BaseModel
         if ($sortType === 'all') {
             $sort = ['goods_sort', 'goods_id' => 'desc'];
         } elseif ($sortType === 'sales') {
-            // todo
             $sort = ['goods_sales' => 'desc'];
         } elseif ($sortType === 'price') {
             $sort = $sortPrice ? ['goods_max_price' => 'desc'] : ['goods_min_price'];
@@ -161,7 +160,7 @@ class Goods extends BaseModel
         $maxPriceSql = $GoodsSpec->field(['MAX(goods_price)'])
             ->where('goods_id', 'EXP', "= `$tableName`.`goods_id`")->buildSql();
         // 执行查询
-        $list = $this->field(['*',
+        $list = $this->field(['*', '(sales_initial + sales_actual) as goods_sales',
             "$minPriceSql AS goods_min_price",
             "$maxPriceSql AS goods_max_price"
         ])->with(['category', 'image.file', 'spec'])
