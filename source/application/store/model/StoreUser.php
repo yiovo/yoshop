@@ -25,7 +25,7 @@ class StoreUser extends StoreUserModel
         // 验证用户名密码是否正确
         if (!$user = self::useGlobalScope(false)->with(['wxapp'])->where([
             'user_name' => $data['user_name'],
-            'password' => password_hash($data['password'])
+            'password' => yoshop_hash($data['password'])
         ])->find()) {
             $this->error = '登录失败, 用户名或密码错误';
             return false;
@@ -71,7 +71,7 @@ class StoreUser extends StoreUserModel
         // 更新管理员信息
         if ($this->save([
                 'user_name' => $data['user_name'],
-                'password' => password_hash($data['password']),
+                'password' => yoshop_hash($data['password']),
             ]) === false) {
             return false;
         }
