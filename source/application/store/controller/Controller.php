@@ -19,14 +19,12 @@ class Controller extends \think\Controller
     /* @var array $allowAllAction 登录验证白名单 */
     protected $allowAllAction = [
         // 登录页面
-        'passport/we7login',
         'passport/login',
     ];
 
     /* @var array $notLayoutAction 无需全局layout */
     protected $notLayoutAction = [
         // 登录页面
-        'passport/we7login',
         'passport/login',
     ];
 
@@ -49,7 +47,7 @@ class Controller extends \think\Controller
         // 路由信息
         list ($controller, $action, $group) = $this->getRouteinfo();
         // 验证当前请求是否在白名单
-        if (in_array($controller . DS . $action, $this->notLayoutAction)) {
+        if (in_array($controller . '/' . $action, $this->notLayoutAction)) {
             return true;
         }
         // 当前商城设置
@@ -57,10 +55,10 @@ class Controller extends \think\Controller
         // 后台菜单
         $menus = $this->menus();
         // 当前小程序信息
-        $wxapp = $this->store['wxapp'];
+        $store = $this->store;
         // 输出到view
         $this->assign(compact('group', 'controller', 'action', 'menus'
-            , 'wxapp', 'setting'));
+            , 'store', 'setting'));
         return true;
     }
 
@@ -101,7 +99,7 @@ class Controller extends \think\Controller
         list ($controller, $action) = $this->getRouteinfo();
 
         // 验证当前请求是否在白名单
-        if (in_array($controller . DS . $action, $this->allowAllAction)) {
+        if (in_array($controller . '/' . $action, $this->allowAllAction)) {
             return true;
         }
 
@@ -111,7 +109,7 @@ class Controller extends \think\Controller
             || !isset($this->store['wxapp'])
             || empty($this->store['wxapp'])
         ) {
-            $this->error('登录状态无效');
+            $this->error('您还没有登录', 'passport/login');
             return false;
         }
         return true;

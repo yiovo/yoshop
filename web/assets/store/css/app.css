@@ -13,11 +13,12 @@ a:focus { outline: none;}
 .tpl-header-fluid { height: 50px; padding-left: 20px; padding-right: 20px; background: #fff; }
 
 /*.tpl-header-button.switch-button.active{transform:rotate(180deg);-ms-transform:rotate(180deg);-moz-transform:rotate(180deg);-webkit-transform:rotate(180deg);-o-transform:rotate(180deg);}*/
-.tpl-header-button { float: left; color: #333; margin: 0 0 0 -20px; border: 0; border-radius: 0; padding: 0 22px; /*font-size: 18px;*/ line-height: 50px; background: #fff; cursor: pointer; }
-.tpl-header-button:hover { background: #fff; color: #999; outline: none; }
+.tpl-header-button { float: left; color: #333; margin: 0 0 0 -20px; border: 0; border-radius: 0; padding: 0 22px; outline: none;   line-height: 50px; background: #fff; cursor: pointer; }
+.tpl-header-button:hover { background: #fff; color: #999; }
 .tpl-header-navbar { color: #fff; }
 .tpl-header-navbar li { float: left; }
 .tpl-header-navbar a { line-height: 50px; display: block; padding: 0 16px; position: relative; }
+.tpl-header-navbar a:hover { color: #777; }
 .tpl-header-navbar a .item-feed-badge { position: absolute; top: 8px; left: 25px; padding: .25em .42em; }
 ul.tpl-dropdown-content { padding: 10px; margin-top: 0; width: 300px; background-color: #2f3638; border: 1px solid #525e62; border-radius: 0; }
 ul.tpl-dropdown-content li { float: none; }

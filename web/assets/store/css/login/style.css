@@ -1,0 +1,45 @@
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent; outline-style: none }
+@keyframes fade-in {
+    0% { opacity: 0; }
+
+    /*初始状态 透明度为0*/
+    40% { opacity: 0; }
+
+    /*过渡状态 透明度为0*/
+    100% { opacity: 1; }
+
+/*结束状态 透明度为1*/ }
+@-webkit-keyframes fade-in {
+
+    /*针对webkit内核*/
+    0% { opacity: 0; }
+    40% { opacity: 0; }
+    100% { opacity: 1; }
+}
+#wrapper { animation: fade-in;/*动画名称*/ animation-duration: .6s;/*动画持续时间*/ -webkit-animation: fade-in .6s;/*针对webkit内核*/ }
+body { line-height: 1; font: 14px/1.5 "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", Roboto, Arial, sans-serif; }
+a { margin: 0; padding: 0; border: 0; font-size: 100%; vertical-align: baseline; background: transparent }
+a:hover, a:focus { text-decoration: none; bblr: expression(this.onFocus=this.blur()); outline-style: none }
+table { border-collapse: collapse; border-spacing: 0 }
+input, select { vertical-align: middle }
+* { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+.clearfix::before, .clearfix::after { content: ""; height: 0; line-height: 0; display: block; visibility: hidden; clear: both }
+.clearfix:after { clear: both }
+.clearfix { *zoom: 1 }
+
+/* login */
+html, body { height: 100%; }
+.page-login-v3:before { position: fixed; top: 0; left: 0; z-index: -1; width: 100%; height: 100%; content: ''; background: #62a8ea; background: url(../../img/login_bg.jpg) center center/cover no-repeat !important; }
+.container { text-align: center; height: 100%; }
+.container:before { display: inline-block; height: 100%; vertical-align: middle; content: ""; }
+.login-body { display: inline-block; vertical-align: middle; width: 400px; margin: 75px 0; background: #fff; border-radius: 4px; padding: 50px 40px 40px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+.login-content { }
+.login-content .brand .brand-img { width: 50px; }
+.login-content .brand .brand-text { margin-top: 20px; margin-bottom: 11px; font-size: 20px !important; font-family: "Microsoft YaHei"; text-shadow: rgba(0, 0, 0, .15) 0 0 1px; font-weight: 400; color: #37474f; }
+.login-form { margin: 45px 0 30px; }
+.login-form .form-group { margin: 30px 0; }
+.login-form input { display: block; border: 0; border-radius: 0; -webkit-box-shadow: none; box-shadow: none; width: 100%; border-bottom: 1px solid #E4EAEC; font-size: 14px; height: 42px; line-height: 1.5; outline: none; padding: 0 5px; color: #a3afb7; font: 14px/1.5 "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", Roboto, Arial, sans-serif; transition: all 0.3s ease-in-out; -moz-transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; -o-transition: all 0.3s ease-in-out; }
+.login-form input:focus { border-bottom: 1px solid #ff5060; }
+.login-form button { width: 100%; margin-top: 20px; padding: 10px 18px; font-size: 18px; line-height: 1.3333333; border-radius: 4px; white-space: normal; -webkit-transition: border .2s linear, color .2s linear, width .2s linear, background-color .2s linear; -o-transition: border .2s linear, color .2s linear, width .2s linear, background-color .2s linear; transition: border .2s linear, color .2s linear, width .2s linear, background-color .2s linear; -webkit-font-smoothing: subpixel-antialiased; color: #fff; background-color: #ff5060; border-color: #ff5060; background-image: none; border: 1px solid transparent; cursor: pointer; outline: none; }
+.login-form button[disabled], .login-form button[disabled]:hover { color: #fff; background-color: #a2caee; border-color: #a2caee; cursor: not-allowed; opacity: .65; }
+.login-form button:hover { background-color: #fd717e; border-color: #fd717e; }
