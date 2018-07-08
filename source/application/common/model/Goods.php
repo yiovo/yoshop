@@ -12,6 +12,18 @@ use think\Request;
 class Goods extends BaseModel
 {
     protected $name = 'goods';
+    protected $append = ['goods_sales'];
+
+    /**
+     * 计算显示销量 (初始销量 + 实际销量)
+     * @param $value
+     * @param $data
+     * @return mixed
+     */
+    public function getGoodsSalesAttr($value, $data)
+    {
+        return $data['sales_initial'] + $data['sales_actual'];
+    }
 
     /**
      * 关联商品分类表
@@ -29,6 +41,15 @@ class Goods extends BaseModel
     public function spec()
     {
         return $this->hasMany('GoodsSpec');
+    }
+
+    /**
+     * 关联商品规格关系表
+     * @return \think\model\relation\BelongsToMany
+     */
+    public function specRel()
+    {
+        return $this->belongsToMany('SpecValue', 'GoodsSpecRel');
     }
 
     /**
@@ -58,6 +79,49 @@ class Goods extends BaseModel
     {
         $status = [10 => '上架', 20 => '下架'];
         return ['text' => $status[$value], 'value' => $value];
+    }
+
+    /**
+     * 获取规格信息
+     * @param \think\Collection $spec_rel
+     * @param \think\Collection $skuData
+     * @return array
+     */
+    public function getManySpecData($spec_rel, $skuData)
+    {
+        // spec_attr
+        $specAttrData = [];
+        foreach ($spec_rel->toArray() as $item) {
+            if (!isset($specAttrData[$item['spec_id']])) {
+                $specAttrData[$item['spec_id']] = [
+                    'group_id' => $item['spec']['spec_id'],
+                    'group_name' => $item['spec']['spec_name'],
+                    'spec_items' => [],
+                ];
+            }
+            $specAttrData[$item['spec_id']]['spec_items'][] = [
+                'item_id' => $item['spec_value_id'],
+                'spec_value' => $item['spec_value'],
+            ];
+        }
+
+        // spec_list
+        $specListData = [];
+        foreach ($skuData->toArray() as $item) {
+            $specListData[] = [
+                'goods_spec_id' => $item['goods_spec_id'],
+                'spec_sku_id' => $item['spec_sku_id'],
+                'rows' => [],
+                'form' => [
+                    'goods_no' => $item['goods_no'],
+                    'goods_price' => $item['goods_price'],
+                    'goods_weight' => $item['goods_weight'],
+                    'line_price' => $item['line_price'],
+                    'stock_num' => $item['stock_num'],
+                ],
+            ];
+        }
+        return ['spec_attr' => array_values($specAttrData), 'spec_list' => $specListData];
     }
 
     /**
@@ -112,16 +176,12 @@ class Goods extends BaseModel
     /**
      * 获取商品详情
      * @param $goods_id
-     * @return array|false|\PDOStatement|string|\think\Model
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
+     * @return null|static
      * @throws \think\exception\DbException
      */
-    public function getDetail($goods_id)
+    public static function detail($goods_id)
     {
-        return $this->field(['*', '(sales_initial + sales_actual) as goods_sales'])
-            ->with(['category', 'image.file', 'spec', 'delivery.rule'])
-            ->where('goods_id', '=', $goods_id)->find();
+        return self::get($goods_id, ['category', 'image.file', 'spec', 'spec_rel.spec', 'delivery.rule']);
     }
 
     /**

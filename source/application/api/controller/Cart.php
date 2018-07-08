@@ -46,11 +46,12 @@ class Cart extends Controller
      * 加入购物车
      * @param $goods_id
      * @param $goods_num
+     * @param $goods_spec_id
      * @return array
      */
-    public function add($goods_id, $goods_num)
+    public function add($goods_id, $goods_num, $goods_spec_id)
     {
-        if (!$this->model->add($goods_id, $goods_num)) {
+        if (!$this->model->add($goods_id, $goods_num, $goods_spec_id)) {
             return $this->renderError('加入购物车失败');
         }
         $total_num = $this->model->getTotalNum();
@@ -60,22 +61,24 @@ class Cart extends Controller
     /**
      * 减少购物车商品数量
      * @param $goods_id
+     * @param $goods_spec_id
      * @return array
      */
-    public function sub($goods_id)
+    public function sub($goods_id, $goods_spec_id)
     {
-        $this->model->sub($goods_id);
+        $this->model->sub($goods_id, $goods_spec_id);
         return $this->renderSuccess();
     }
 
     /**
      * 删除购物车中指定商品
      * @param $goods_id
+     * @param $goods_spec_id
      * @return array
      */
-    public function delete($goods_id)
+    public function delete($goods_id, $goods_spec_id)
     {
-        $this->model->delete($goods_id);
+        $this->model->delete($goods_id, $goods_spec_id);
         return $this->renderSuccess();
     }
 

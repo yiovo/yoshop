@@ -33,7 +33,7 @@ class Goods extends GoodsModel
      * @throws \think\exception\DbException
      */
     public function getListByIds($goodsIds) {
-        return $this->with(['category', 'image.file', 'spec', 'delivery.rule'])
+        return $this->with(['category', 'image.file', 'spec', 'spec_rel.spec', 'delivery.rule'])
             ->where('goods_id', 'in', $goodsIds)->select();
     }
 

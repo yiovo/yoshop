@@ -72,7 +72,7 @@ class BaseModel extends Model
         $request = Request::instance();
         $host = $request->scheme() . '://' . $request->host();
         $dirname = dirname($request->baseUrl());
-        return empty($dirname) ? $host : $host . $dirname . DS;
+        return empty($dirname) ? $host : $host . $dirname . '/';
     }
 
     /**
@@ -81,7 +81,9 @@ class BaseModel extends Model
      */
     protected function base($query)
     {
-        self::$wxapp_id > 0 && $query->where('wxapp_id', self::$wxapp_id);
+        if (self::$wxapp_id > 0) {
+            $query->where($query->getTable() . '.wxapp_id', self::$wxapp_id);
+        }
     }
 
 }

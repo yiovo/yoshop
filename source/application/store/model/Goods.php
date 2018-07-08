@@ -12,8 +12,9 @@ use think\Db;
  */
 class Goods extends GoodsModel
 {
+
     /**
-     * 添加新记录
+     * 添加商品
      * @param array $data
      * @return bool
      */
@@ -32,13 +33,12 @@ class Goods extends GoodsModel
             // 添加商品
             $this->allowField(true)->save($data);
             // 商品规格
-            $this->spec()->save($data['spec']);
+            $this->addGoodsSpec($data);
             // 商品图片
             $this->addGoodsImages($data['images']);
             Db::commit();
             return true;
         } catch (\Exception $e) {
-            // 回滚事务
             Db::rollback();
         }
         return false;
@@ -55,14 +55,11 @@ class Goods extends GoodsModel
     {
         $this->image()->delete();
         $model = new UploadFile;
-
         $imagesIds = $model->where('file_name', 'in', $images)
             ->column('file_id', 'file_name');
-
         $data = array_map(function ($val) use ($imagesIds) {
             return ['image_id' => $imagesIds[$val], 'wxapp_id' => self::$wxapp_id];
         }, $images);
-//pre($data);
         return $this->image()->saveAll($data);
     }
 
@@ -81,22 +78,43 @@ class Goods extends GoodsModel
         $data['wxapp_id'] = $data['spec']['wxapp_id'] = self::$wxapp_id;
 
         // 开启事务
-//        Db::startTrans();
+        Db::startTrans();
         try {
             // 保存商品
             $this->allowField(true)->save($data);
             // 商品规格
-//            $this->spec()->delete();
-            $this->spec()->update($data['spec']);
+            $this->addGoodsSpec($data, true);
             // 商品图片
             $this->addGoodsImages($data['images']);
             Db::commit();
             return true;
         } catch (\Exception $e) {
-            // 回滚事务
             Db::rollback();
         }
         return false;
+    }
+
+    /**
+     * 添加商品规格
+     * @param $data
+     * @param $isUpdate
+     * @throws \Exception
+     */
+    private function addGoodsSpec(&$data, $isUpdate = false)
+    {
+        // 更新模式: 先删除所有规格
+        $model = new GoodsSpec;
+        $isUpdate && $model->removeAll($this['goods_id']);
+        // 添加规格数据
+        if ($data['spec_type'] === '10') {
+            // 单规格
+            $this->spec()->save($data['spec']);
+        } else if ($data['spec_type'] === '20') {
+            // 添加商品与规格关系记录
+            $model->addGoodsSpecRel($this['goods_id'], $data['spec_many']['spec_attr']);
+            // 添加商品sku
+            $model->addSkuList($this['goods_id'], $data['spec_many']['spec_list']);
+        }
     }
 
     /**
@@ -107,9 +125,12 @@ class Goods extends GoodsModel
      */
     public function remove()
     {
-        $this->spec()->delete();
+        Db::startTrans();
+        (new GoodsSpec)->removeAll($this['goods_id']);
         $this->image()->delete();
-        return $this->delete();
+        $this->delete();
+        Db::commit();
+        return true;
     }
 
 }

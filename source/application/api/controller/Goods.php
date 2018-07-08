@@ -32,18 +32,18 @@ class Goods extends Controller
      * 获取商品详情
      * @param $goods_id
      * @return array
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
     public function detail($goods_id)
     {
         // 商品详情
-        $detail = (new GoodsModel)->getDetail($goods_id);
+        $detail = GoodsModel::detail($goods_id);
+        // 规格信息
+        $specData = $detail['spec_type'] === 20 ? $detail->getManySpecData($detail['spec_rel'], $detail['spec']) : null;
 //        $user = $this->getUser();
 //        // 购物车商品总数量
 //        $cart_total_num = (new CartModel($user['user_id']))->getTotalNum();
-        return $this->renderSuccess(compact('detail', 'cart_total_num'));
+        return $this->renderSuccess(compact('detail', 'cart_total_num', 'specData'));
     }
 
 }

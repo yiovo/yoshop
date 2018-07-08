@@ -32,17 +32,16 @@ class Order extends Controller
      * 订单确认-立即购买
      * @param $goods_id
      * @param $goods_num
+     * @param $goods_spec_id
      * @return array
      * @throws \app\common\exception\BaseException
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function buyNow($goods_id, $goods_num)
+    public function buyNow($goods_id, $goods_num, $goods_spec_id)
     {
         // 商品结算信息
         $model = new OrderModel;
-        $order = $model->getBuyNow($this->user, $goods_id, $goods_num);
+        $order = $model->getBuyNow($this->user, $goods_id, $goods_num, $goods_spec_id);
         if (!$this->request->isPost()) {
             return $this->renderSuccess($order);
         }

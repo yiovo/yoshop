@@ -2,8 +2,6 @@
 
 namespace app\common\model;
 
-use app\common\exception\BaseException;
-
 /**
  * 订单模型
  * Class Order
@@ -95,22 +93,12 @@ class Order extends BaseModel
     /**
      * 订单详情
      * @param $order_id
-     * @param null $user_id
      * @return null|static
-     * @throws BaseException
      * @throws \think\exception\DbException
      */
-    public static function detail($order_id, $user_id = null)
+    public static function detail($order_id)
     {
-        $filter = ['order_id' => $order_id];
-        if (!is_null($user_id)) {
-            $filter['user_id'] = $user_id;
-            $filter['order_status'] = ['<>', 20];
-        }
-        if (!$order = self::get($filter, ['goods.image', 'address'])) {
-            throw new BaseException(['msg' => '订单不存在']);
-        }
-        return $order;
+        return self::get($order_id, ['goods.image', 'address']);
     }
 
 }

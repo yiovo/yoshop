@@ -56,15 +56,29 @@ class Cart
         // 购物车商品列表
         $cartList = [];
         foreach ($this->cart as $key => $cart) {
-            /* @var $goods array|false|\PDOStatement|string|\think\Model */
+            /* @var Goods $goods */
+            // 规格信息
+            $goods['goods_spec_id'] = $cart['goods_spec_id'];
             $goods = $goodsList[$cart['goods_id']];
+            $goods_sku = array_column($goods['spec']->toArray(), null, 'goods_spec_id')[$cart['goods_spec_id']];
+            // 多规格文字内容
+            if ($goods['spec_type'] === 20) {
+                $goods_sku['goods_attr'] = '';
+                $attrs = explode('_', $goods_sku['spec_sku_id']);
+                $spec_rel = array_column($goods['spec_rel']->toArray(), null, 'spec_value_id');
+                foreach ($attrs as $specValueId) {
+                    $goods_sku['goods_attr'] .= $spec_rel[$specValueId]['spec']['spec_name'] . ':'
+                        . $spec_rel[$specValueId]['spec_value'] . '; ';
+                }
+            }
+            $goods['goods_sku'] = $goods_sku;
             // 商品单价
-            $goods['goods_price'] = $goods['spec'][0]['goods_price'];
+            $goods['goods_price'] = $goods_sku['goods_price'];
             // 商品总价
             $goods['total_num'] = $cart['goods_num'];
             $goods['total_price'] = $total_price = bcmul($goods['goods_price'], $cart['goods_num'], 2);
             // 商品总重量
-            $goods['goods_total_weight'] = bcmul($goods['spec'][0]['goods_weight'], $cart['goods_num'], 2);
+            $goods['goods_total_weight'] = bcmul($goods['goods_sku']['goods_weight'], $cart['goods_num'], 2);
             // 验证用户收货地址是否存在运费规则中
             if ($goods['delivery']->checkAddress($cityId)) {
                 $goods['express_price'] = $goods['delivery']->calcTotalFee(
@@ -81,7 +95,6 @@ class Cart
         $allExpressPrice = array_column($cartList, 'express_price');
         // 订单总运费金额
         $expressPrice = $allExpressPrice ? Delivery::freightRule($allExpressPrice) : 0.00;
-
         return [
             'goods_list' => $cartList,  // 商品列表
             'order_total_num' => $this->getTotalNum(),  // 商品总数量
@@ -100,39 +113,41 @@ class Cart
      * 添加购物车
      * @param $goods_id
      * @param $goods_num
+     * @param $goods_spec_id
      * @return bool
      */
-    public function add($goods_id, $goods_num)
+    public function add($goods_id, $goods_num, $goods_spec_id)
     {
-        $index = $goods_id . '_0';
+        $index = $goods_id . '_' . $goods_spec_id;
         $create_time = time();
+        $data = compact('goods_id', 'goods_num', 'goods_spec_id', 'create_time');
         if (empty($this->cart)) {
-            $this->cart[$index] = compact('goods_id', 'goods_num', 'create_time');
+            $this->cart[$index] = $data;
             return true;
         }
-        !isset($this->cart[$index])
-            ? $this->cart[$index] = compact('goods_id', 'goods_num', 'create_time')
-            : $this->cart[$index]['goods_num'] += $goods_num;
+        isset($this->cart[$index]) ? $this->cart[$index]['goods_num'] += $goods_num : $this->cart[$index] = $data;
         return true;
     }
 
     /**
      * 减少购物车中某商品数量
      * @param $goods_id
+     * @param $goods_spec_id
      */
-    public function sub($goods_id)
+    public function sub($goods_id, $goods_spec_id)
     {
-        $index = $goods_id . '_0';
+        $index = $goods_id . '_' . $goods_spec_id;
         $this->cart[$index]['goods_num'] > 1 && $this->cart[$index]['goods_num']--;
     }
 
     /**
      * 删除购物车中指定商品
      * @param $goods_id
+     * @param $goods_spec_id
      */
-    public function delete($goods_id)
+    public function delete($goods_id, $goods_spec_id)
     {
-        $index = $goods_id . '_0';
+        $index = $goods_id . '_' . $goods_spec_id;
         unset($this->cart[$index]);
     }
 

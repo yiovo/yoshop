@@ -22,9 +22,9 @@ class UploadFile extends BaseModel
     public function getFilePathAttr($value, $data)
     {
         if ($data['storage'] === 'local') {
-            return self::$base_url . 'uploads' . DS . $data['file_name'];
+            return self::$base_url . 'uploads/' . $data['file_name'];
         }
-        return $data['file_url'] . DS . $data['file_name'];
+        return $data['file_url'] . '/' . $data['file_name'];
     }
 
     /**
