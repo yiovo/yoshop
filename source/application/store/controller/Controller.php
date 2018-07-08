@@ -55,10 +55,10 @@ class Controller extends \think\Controller
         // 后台菜单
         $menus = $this->menus();
         // 当前小程序信息
-        $wxapp = $this->store['wxapp'];
+        $store = $this->store;
         // 输出到view
         $this->assign(compact('group', 'controller', 'action', 'menus'
-            , 'wxapp', 'setting'));
+            , 'store', 'setting'));
         return true;
     }
 

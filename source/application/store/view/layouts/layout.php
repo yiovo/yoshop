@@ -37,6 +37,10 @@
             <!-- 其它功能-->
             <div class="am-fr tpl-header-navbar">
                 <ul>
+                    <!-- 欢迎语 -->
+                    <li class="am-text-sm tpl-header-navbar-welcome">
+                        <a href="javascript:;">欢迎你，<span><?= $store['user']['user_name'] ?></span> </a>
+                    </li>
                     <!-- 新提示 -->
                     <!--<li class="am-dropdown" data-am-dropdown="">-->
                     <!--    <a href="javascript:;" class="am-dropdown-toggle" data-am-dropdown-toggle="">-->
