@@ -2,7 +2,7 @@
 
 namespace app\store\controller;
 
-use app\store\model\Wxapp as WxappModel;
+use app\store\model\StoreUser;
 
 /**
  * 商户认证
@@ -12,20 +12,23 @@ use app\store\model\Wxapp as WxappModel;
 class Passport extends Controller
 {
     /**
-     * 微擎自动登录/注册
-     * @throws \Exception
+     * 商户后台登录
+     * @return array|mixed
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function we7login()
+    public function login()
     {
-        // 获取当前小程序信息
-        $wxapp = WxappModel::detail();
-        // 判断不存在小程序信息 则自动注册
-        if (empty($wxapp)) {
-            $model = new WxappModel;
-            $model->add($this->store['we7_data']);
+        if ($this->request->isAjax()) {
+            $model = new StoreUser;
+            if ($model->login($this->postData('User'))) {
+                return $this->renderSuccess('登录成功', url('index/index'));
+            }
+            return $this->renderError($model->getError() ?: '登录失败');
         }
-        $this->redirect('index/index');
+        $this->view->engine->layout(false);
+        return $this->fetch('login');
     }
 
 }

@@ -19,14 +19,12 @@ class Controller extends \think\Controller
     /* @var array $allowAllAction 登录验证白名单 */
     protected $allowAllAction = [
         // 登录页面
-        'passport/we7login',
         'passport/login',
     ];
 
     /* @var array $notLayoutAction 无需全局layout */
     protected $notLayoutAction = [
         // 登录页面
-        'passport/we7login',
         'passport/login',
     ];
 
@@ -49,7 +47,7 @@ class Controller extends \think\Controller
         // 路由信息
         list ($controller, $action, $group) = $this->getRouteinfo();
         // 验证当前请求是否在白名单
-        if (in_array($controller . DS . $action, $this->notLayoutAction)) {
+        if (in_array($controller . '/' . $action, $this->notLayoutAction)) {
             return true;
         }
         // 当前商城设置
@@ -101,7 +99,7 @@ class Controller extends \think\Controller
         list ($controller, $action) = $this->getRouteinfo();
 
         // 验证当前请求是否在白名单
-        if (in_array($controller . DS . $action, $this->allowAllAction)) {
+        if (in_array($controller . '/' . $action, $this->allowAllAction)) {
             return true;
         }
 

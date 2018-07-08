@@ -12,6 +12,14 @@ class StoreUser extends BaseModel
     protected $name = 'store_user';
 
     /**
+     * 关联微信小程序表
+     * @return \think\model\relation\BelongsTo
+     */
+    public function wxapp() {
+        return $this->belongsTo('Wxapp');
+    }
+
+    /**
      * 新增默认商家用户信息
      * @param $wxapp_id
      * @return false|int
