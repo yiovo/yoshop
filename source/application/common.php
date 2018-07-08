@@ -27,6 +27,16 @@ function toUnderScore($str)
 }
 
 /**
+ * 生成密码hash值
+ * @param $password
+ * @return string
+ */
+function password_hash($password)
+{
+    return md5(md5($password) . 'yoshop_salt_SmTRx');
+}
+
+/**
  * curl请求指定url
  * @param $url
  * @param array $data
