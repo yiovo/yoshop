@@ -1,5 +1,8 @@
 <?php
-// 应用公共文件
+
+// 应用公共函数库文件
+
+use think\Request;
 
 /**
  * 打印调试函数
@@ -34,6 +37,16 @@ function toUnderScore($str)
 function yoshop_hash($password)
 {
     return md5(md5($password) . 'yoshop_salt_SmTRx');
+}
+
+/**
+ * 获取当前域名及根路径
+ * @return string
+ */
+function base_url() {
+    $request = Request::instance();
+    $subDir = str_replace('\\', '/', dirname($request->server('PHP_SELF')));
+    return $request->scheme() . '://' . $request->host() . $subDir . ($subDir === '/' ? '' : '/');
 }
 
 /**
