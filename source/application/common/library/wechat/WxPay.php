@@ -107,14 +107,14 @@ class WxPay
 //</xml>
 //
 //EOF;
-
-        if (!isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
+//        $xml = file_get_contents('php://input');
+        if (!$xml = file_get_contents('php://input')) {
             $this->returnCode(false, 'Not found DATA');
         }
         // 将服务器返回的XML数据转化为数组
-        $data = $this->fromXml($GLOBALS['HTTP_RAW_POST_DATA']);
+        $data = $this->fromXml($xml);
         // 记录日志
-        $this->doLogs($GLOBALS['HTTP_RAW_POST_DATA']);
+        $this->doLogs($xml);
         $this->doLogs($data);
         // 订单信息
         $order = $OrderModel->payDetail($data['out_trade_no']);
@@ -159,6 +159,7 @@ class WxPay
     /**
      * 写入日志记录
      * @param $values
+     * @return bool|int
      */
     private function doLogs($values)
     {
@@ -168,8 +169,12 @@ class WxPay
         $content = '[' . date('Y-m-d H:i:s') . ']' . PHP_EOL . $values . PHP_EOL . PHP_EOL;
         // 写入文件
         $filePath = __DIR__ . '/logs/';
-        !is_dir($filePath) && @mkdir($filePath, 0755, true);
-        @file_put_contents($filePath . date('Ymd') . '.log', $content, FILE_APPEND);
+        try {
+            !is_dir($filePath) && mkdir($filePath, 0755, true);
+            return file_put_contents($filePath . date('Ymd') . '.log', $content, FILE_APPEND);
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     /**
