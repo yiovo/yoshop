@@ -23,7 +23,7 @@ class BaseModel extends Model
     {
         parent::init();
         // 获取当前域名
-        self::$base_url = self::baseUrl();
+        self::$base_url = base_url();
         // 后期静态绑定wxapp_id
         self::bindWxappId(get_called_class());
     }
