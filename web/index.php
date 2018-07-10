@@ -2,9 +2,6 @@
 
 // [ 应用入口文件 ]
 
-// 定义微擎版
-define('IS_WE7', true);
-
 // 定义运行目录
 define('WEB_PATH', __DIR__ . '/');
 

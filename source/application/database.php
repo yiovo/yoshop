@@ -1,8 +1,6 @@
 <?php
 
-define('IN_IA', true);
-
-// 独立配置
+// 数据库配置
 $config = [
     'host' => '127.0.0.1',
     'database' => 'yoshop_db',
