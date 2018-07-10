@@ -2,12 +2,15 @@
 
 define('IN_IA', true);
 
-// 数据库配置
-$config = call_user_func(function () {
-    $config = [];
-    require __DIR__ . '/../../../../data/config.php';
-    return $config['db']['master'];
-});
+// 独立配置
+$config = [
+    'host' => '127.0.0.1',
+    'database' => 'yoshop_db',
+    'username' => 'yoshop_db',
+    'password' => '123456',
+    'port' => '3306',
+    'charset' => 'utf8',
+];
 
 return [
     // 数据库类型
