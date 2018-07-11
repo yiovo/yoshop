@@ -1,10 +1,10 @@
 <?php
 
-// 独立配置
+// 数据库配置
 $config = [
-    'host' => '127.0.0.1',
-    'database' => 'yoshop_db',
-    'username' => 'yoshop_db',
+    'host' => '192.168.33.10',
+    'database' => 'we7_cn',
+    'username' => 'root',
     'password' => '123456',
     'port' => '3306',
     'charset' => 'utf8',
