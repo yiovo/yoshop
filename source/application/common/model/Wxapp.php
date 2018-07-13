@@ -75,7 +75,7 @@ class Wxapp extends BaseModel
             $wxapp_id = $self::$wxapp_id;
         }
         if (!$data = Cache::get('wxapp_' . $wxapp_id)) {
-            $data = self::get([], ['serviceImage', 'phoneImage', 'navbar']);
+            $data = self::get($wxapp_id, ['serviceImage', 'phoneImage', 'navbar']);
             if (empty($data)) throw new BaseException(['msg' => '未找到当前小程序信息']);
             Cache::set('wxapp_' . $wxapp_id, $data);
         }
