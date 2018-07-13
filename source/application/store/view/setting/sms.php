@@ -11,23 +11,23 @@
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-form-label form-require"> AccessKeyId </label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" class="tpl-form-input" name="sms[aliyun_config][AccessKeyId]"
-                                           value="<?= $values['aliyun_config']['AccessKeyId'] ?>">
+                                    <input type="text" class="tpl-form-input" name="sms[engine][aliyun][AccessKeyId]"
+                                           value="<?= $values['engine']['aliyun']['AccessKeyId'] ?>">
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-form-label form-require"> AccessKeySecret </label>
                                 <div class="am-u-sm-9">
                                     <input type="text" class="tpl-form-input"
-                                           name="sms[aliyun_config][AccessKeySecret]"
-                                           value="<?= $values['aliyun_config']['AccessKeySecret'] ?>">
+                                           name="sms[engine][aliyun][AccessKeySecret]"
+                                           value="<?= $values['engine']['aliyun']['AccessKeySecret'] ?>">
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-form-label form-require"> 短信签名 </label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" class="tpl-form-input" name="sms[aliyun_config][sign]"
-                                           value="<?= $values['aliyun_config']['sign'] ?>">
+                                    <input type="text" class="tpl-form-input" name="sms[engine][aliyun][sign]"
+                                           value="<?= $values['engine']['aliyun']['sign'] ?>">
                                 </div>
                             </div>
                             <div class="widget-head am-cf">
@@ -39,13 +39,15 @@
                                 </label>
                                 <div class="am-u-sm-9">
                                     <label class="am-radio-inline">
-                                        <input type="radio" name="sms[order_pay][is_enable]" value="1"
-                                               data-am-ucheck <?= $values['order_pay']['is_enable'] === '1' ? 'checked' : '' ?>>
+                                        <input type="radio" name="sms[engine][aliyun][order_pay][is_enable]" value="1"
+                                               data-am-ucheck
+                                            <?= $values['engine']['aliyun']['order_pay']['is_enable'] === '1' ? 'checked' : '' ?>>
                                         开启
                                     </label>
                                     <label class="am-radio-inline">
-                                        <input type="radio" name="sms[order_pay][is_enable]" value="0"
-                                               data-am-ucheck <?= $values['order_pay']['is_enable'] === '0' ? 'checked' : '' ?>>
+                                        <input type="radio" name="sms[engine][aliyun][order_pay][is_enable]" value="0"
+                                               data-am-ucheck
+                                            <?= $values['engine']['aliyun']['order_pay']['is_enable'] === '0' ? 'checked' : '' ?>>
                                         关闭
                                     </label>
                                 </div>
@@ -55,8 +57,9 @@
                                     模板ID <span class="tpl-form-line-small-title">Template Code</span>
                                 </label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" class="tpl-form-input" name="sms[order_pay][template_code]"
-                                           value="<?= $values['order_pay']['template_code'] ?>">
+                                    <input type="text" class="tpl-form-input"
+                                           name="sms[engine][aliyun][order_pay][template_code]"
+                                           value="<?= $values['engine']['aliyun']['order_pay']['template_code'] ?>">
                                     <small>例如：SMS_139800030</small>
                                 </div>
                             </div>
@@ -68,8 +71,14 @@
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-form-label form-require"> 接收手机号 </label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" class="tpl-form-input" name="sms[order_pay][accept_phone]"
-                                           value="<?= $values['order_pay']['accept_phone'] ?>">
+                                    <input type="text" class="tpl-form-input"
+                                           name="sms[engine][aliyun][order_pay][accept_phone]"
+                                           value="<?= $values['engine']['aliyun']['order_pay']['accept_phone'] ?>">
+                                    <div class="help-block">
+                                        <small>接收测试： <a class="j-sendTestMsg" data-msg-type="order_pay"
+                                                        href="javascript:void(0);">点击发送</a>
+                                        </small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="am-form-group">
@@ -93,6 +102,50 @@
          * @type {*}
          */
         $('#my-form').superForm();
+
+        /**
+         * 发送测试短信
+         */
+        $('.j-sendTestMsg').click(function () {
+            var msgType = $(this).data('msg-type')
+                , formData = {
+                AccessKeyId: $('input[name="sms[engine][aliyun][AccessKeyId]"]').val()
+                , AccessKeySecret: $('input[name="sms[engine][aliyun][AccessKeySecret]"]').val()
+                , sign: $('input[name="sms[engine][aliyun][sign]"]').val()
+                , msg_type: msgType
+                , template_code: $('input[name="sms[engine][aliyun][' + msgType + '][template_code]"]').val()
+                , accept_phone: $('input[name="sms[engine][aliyun][' + msgType + '][accept_phone]"]').val()
+            };
+            if (!formData.AccessKeyId.length) {
+                layer.msg('请填写 AccessKeyId');
+                return false;
+            }
+            if (!formData.AccessKeySecret.length) {
+                layer.msg('请填写 AccessKeySecret');
+                return false;
+            }
+            if (!formData.sign.length) {
+                layer.msg('请填写 短信签名');
+                return false;
+            }
+            if (!formData.template_code.length) {
+                layer.msg('请填写 模板ID');
+                return false;
+            }
+            if (!formData.accept_phone.length) {
+                layer.msg('请填写 接收手机号');
+                return false;
+            }
+            layer.confirm('确定要发送测试短信吗', function (index) {
+                var load = layer.load();
+                var url = "<?= url('setting/smsTest') ?>";
+                $.post(url, formData, function (result) {
+                    layer.msg(result.msg);
+                    layer.close(load);
+                });
+                layer.close(index);
+            });
+        });
 
     });
 </script>
