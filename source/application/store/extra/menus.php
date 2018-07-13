@@ -156,6 +156,12 @@ return [
                 ],
             ],
             [
+                'name' => '短信通知',
+                'handle' => [
+                    'setting/sms'
+                ],
+            ],
+            [
                 'name' => '上传设置',
                 'handle' => [
                     'setting/upload'

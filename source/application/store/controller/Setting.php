@@ -30,6 +30,24 @@ class Setting extends Controller
     }
 
     /**
+     * 短信通知
+     * @return mixed
+     * @throws \think\exception\DbException
+     */
+    public function sms()
+    {
+        $store = SettingModel::detail('sms');
+        if (!$this->request->isAjax()) {
+            $values = $store['values'];
+            return $this->fetch('sms', compact('values'));
+        }
+        if ($store->edit($this->postData('sms'))) {
+            return $this->renderSuccess('更新成功');
+        }
+        return $this->renderError('更新失败');
+    }
+
+    /**
      * 交易设置
      * @return mixed
      * @throws \think\exception\DbException
