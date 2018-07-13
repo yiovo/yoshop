@@ -6,7 +6,6 @@ use think\Db;
 use app\common\model\Order as OrderModel;
 use app\common\exception\BaseException;
 
-
 /**
  * 订单模型
  * Class Order
@@ -98,6 +97,7 @@ class Order extends OrderModel
      * @param $user_id
      * @param $order
      * @return bool
+     * @throws \Exception
      */
     public function add($user_id, $order)
     {
@@ -119,8 +119,10 @@ class Order extends OrderModel
             'pay_price' => $order['order_pay_price'],
             'express_price' => $order['express_price'],
         ]);
-        // 记录商品信息
+        // 订单商品列表
         $goodsList = [];
+        // 更新商品库存 (下单减库存)
+        $deductStockData = [];
         foreach ($order['goods_list'] as $goods) {
             /* @var Goods $goods */
             $goodsList[] = [
@@ -128,6 +130,8 @@ class Order extends OrderModel
                 'wxapp_id' => self::$wxapp_id,
                 'goods_id' => $goods['goods_id'],
                 'goods_name' => $goods['goods_name'],
+                'image_id' => $goods['image'][0]['image_id'],
+                'deduct_stock_type' => $goods['deduct_stock_type'],
                 'spec_type' => $goods['spec_type'],
                 'spec_sku_id' => $goods['goods_sku']['spec_sku_id'],
                 'goods_spec_id' => $goods['goods_sku']['goods_spec_id'],
@@ -139,10 +143,17 @@ class Order extends OrderModel
                 'goods_weight' => $goods['goods_sku']['goods_weight'],
                 'total_num' => $goods['total_num'],
                 'total_price' => $goods['total_price'],
-                'image_id' => $goods['image'][0]['image_id'],
+            ];
+            // 下单减库存
+            $goods['deduct_stock_type'] === 10 && $deductStockData[] = [
+                'goods_spec_id' => $goods['goods_sku']['goods_spec_id'],
+                'stock_num' => ['dec', $goods['total_num']]
             ];
         }
+        // 保存订单商品信息
         $this->goods()->saveAll($goodsList);
+        // 更新商品库存
+        !empty($deductStockData) && (new GoodsSpec)->isUpdate()->saveAll($deductStockData);
         // 记录收货地址
         $this->address()->save([
             'user_id' => $user_id,

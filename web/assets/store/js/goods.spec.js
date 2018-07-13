@@ -15,7 +15,7 @@
         // 配置信息
         setting = $.extend(true, {}, setting, options);
         // 已存在的规格数据
-        typeof baseData !== 'undefined' && (data = baseData);
+        typeof baseData !== 'undefined' && baseData !== null && (data = baseData);
         // 初始化
         this.initialize();
     }
