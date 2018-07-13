@@ -36,6 +36,7 @@ class Order extends Controller
      * @return array
      * @throws \app\common\exception\BaseException
      * @throws \think\exception\DbException
+     * @throws \Exception
      */
     public function buyNow($goods_id, $goods_num, $goods_spec_id)
     {

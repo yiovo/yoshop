@@ -85,29 +85,6 @@ class WxPay
      */
     public function notify($OrderModel)
     {
-//        $GLOBALS['HTTP_RAW_POST_DATA'] =
-//            <<<EOF
-//<xml><appid><![CDATA[wx62f4cad175ad0f90]]></appid>
-//<attach><![CDATA[test]]></attach>
-//<bank_type><![CDATA[ICBC_DEBIT]]></bank_type>
-//<cash_fee><![CDATA[1]]></cash_fee>
-//<fee_type><![CDATA[CNY]]></fee_type>
-//<is_subscribe><![CDATA[N]]></is_subscribe>
-//<mch_id><![CDATA[1499579162]]></mch_id>
-//<nonce_str><![CDATA[963b42d0a71f2d160b3831321808ab79]]></nonce_str>
-//<openid><![CDATA[o9coS0eYE8pigBkvSrLfdv49b8k4]]></openid>
-//<out_trade_no><![CDATA[2018062448524950]]></out_trade_no>
-//<result_code><![CDATA[SUCCESS]]></result_code>
-//<return_code><![CDATA[SUCCESS]]></return_code>
-//<sign><![CDATA[6AD4F98B00A59F5C81A540352DBF989C]]></sign>
-//<time_end><![CDATA[20180624122501]]></time_end>
-//<total_fee>1</total_fee>
-//<trade_type><![CDATA[JSAPI]]></trade_type>
-//<transaction_id><![CDATA[4200000146201806242438472701]]></transaction_id>
-//</xml>
-//
-//EOF;
-//        $xml = file_get_contents('php://input');
         if (!$xml = file_get_contents('php://input')) {
             $this->returnCode(false, 'Not found DATA');
         }
@@ -124,13 +101,13 @@ class WxPay
         // 设置支付秘钥
         $this->config['apikey'] = $wxConfig['apikey'];
         // 保存微信服务器返回的签名sign
-        $data_sign = $data['sign'];
+        $dataSign = $data['sign'];
         // sign不参与签名算法
         unset($data['sign']);
         // 生成签名
         $sign = $this->makeSign($data);
         // 判断签名是否正确  判断支付状态
-        if (($sign === $data_sign)
+        if (($sign === $dataSign)
             && ($data['return_code'] == 'SUCCESS')
             && ($data['result_code'] == 'SUCCESS')) {
             // 更新订单状态
