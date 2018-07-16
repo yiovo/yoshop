@@ -3,6 +3,8 @@
 namespace app\common\library\wechat;
 
 use app\common\model\Wxapp as WxappModel;
+use app\task\model\Setting as SettingModel;
+use app\common\library\sms\Driver as SmsDriver;
 use app\common\exception\BaseException;
 
 /**
@@ -34,7 +36,6 @@ class WxPay
      */
     public function unifiedorder($order_no, $openid, $total_fee)
     {
-        // $total_fee = 0.01;  // todo: 测试金额
         // 当前时间
         $time = time();
         // 生成随机字符串
@@ -85,6 +86,26 @@ class WxPay
      */
     public function notify($OrderModel)
     {
+//        $xml = <<<EOF
+//<xml><appid><![CDATA[wx62f4cad175ad0f90]]></appid>
+//<attach><![CDATA[test]]></attach>
+//<bank_type><![CDATA[ICBC_DEBIT]]></bank_type>
+//<cash_fee><![CDATA[1]]></cash_fee>
+//<fee_type><![CDATA[CNY]]></fee_type>
+//<is_subscribe><![CDATA[N]]></is_subscribe>
+//<mch_id><![CDATA[1499579162]]></mch_id>
+//<nonce_str><![CDATA[963b42d0a71f2d160b3831321808ab79]]></nonce_str>
+//<openid><![CDATA[o9coS0eYE8pigBkvSrLfdv49b8k4]]></openid>
+//<out_trade_no><![CDATA[2018062448524950]]></out_trade_no>
+//<result_code><![CDATA[SUCCESS]]></result_code>
+//<return_code><![CDATA[SUCCESS]]></return_code>
+//<sign><![CDATA[E252025255D59FE900DAFA4562C4EF5C]]></sign>
+//<time_end><![CDATA[20180624122501]]></time_end>
+//<total_fee>1</total_fee>
+//<trade_type><![CDATA[JSAPI]]></trade_type>
+//<transaction_id><![CDATA[4200000146201806242438472701]]></transaction_id>
+//</xml>
+//EOF;
         if (!$xml = file_get_contents('php://input')) {
             $this->returnCode(false, 'Not found DATA');
         }
@@ -112,11 +133,28 @@ class WxPay
             && ($data['result_code'] == 'SUCCESS')) {
             // 更新订单状态
             $order->updatePayStatus($data['transaction_id']);
+            // 发送短信通知
+            $this->sendSms($order['wxapp_id'], $order['order_no']);
             // 返回状态
             $this->returnCode();
         }
         // 返回状态
         $this->returnCode(false);
+    }
+
+    /**
+     * 发送短信通知
+     * @param $wxapp_id
+     * @param $order_no
+     * @return mixed
+     * @throws \think\Exception
+     */
+    private function sendSms($wxapp_id, $order_no)
+    {
+        // 短信配置信息
+        $config = SettingModel::getItem('sms', $wxapp_id);
+        $SmsDriver = new SmsDriver($config);
+        return $SmsDriver->sendSms('order_pay', compact('order_no'));
     }
 
     /**
