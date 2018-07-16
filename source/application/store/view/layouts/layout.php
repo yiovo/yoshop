@@ -38,43 +38,43 @@
             <div class="am-fr tpl-header-navbar">
                 <ul>
                     <!-- 新提示 -->
-                    <!--<li class="am-dropdown" data-am-dropdown="">-->
-                    <!--<a href="javascript:;" class="am-dropdown-toggle" data-am-dropdown-toggle="">-->
-                    <!--    <i class="iconfont">&#xe69c;</i>-->
-                    <!--    <span class="am-badge am-badge-warning am-round item-feed-badge">5</span>-->
-                    <!--</a>-->
-                    <!--<!-- 弹出列表 -->-->
-                    <!--<ul class="am-dropdown-content tpl-dropdown-content">-->
-                    <!--    <li class="tpl-dropdown-menu-notifications">-->
-                    <!--        <a href="javascript:;" class="tpl-dropdown-menu-notifications-item am-cf">-->
-                    <!--            <div class="tpl-dropdown-menu-notifications-title">-->
-                    <!--                <i class="am-icon-line-chart"></i>-->
-                    <!--                <span>有6笔新的销售订单</span></div>-->
-                    <!--            <div class="tpl-dropdown-menu-notifications-time">12分钟前</div>-->
-                    <!--        </a>-->
-                    <!--    </li>-->
-                    <!--    <li class="tpl-dropdown-menu-notifications">-->
-                    <!--        <a href="javascript:;" class="tpl-dropdown-menu-notifications-item am-cf">-->
-                    <!--            <div class="tpl-dropdown-menu-notifications-title">-->
-                    <!--                <i class="am-icon-star"></i>-->
-                    <!--                <span>有3个来自人事部的消息</span></div>-->
-                    <!--            <div class="tpl-dropdown-menu-notifications-time">30分钟前</div>-->
-                    <!--        </a>-->
-                    <!--    </li>-->
-                    <!--    <li class="tpl-dropdown-menu-notifications">-->
-                    <!--        <a href="javascript:;" class="tpl-dropdown-menu-notifications-item am-cf">-->
-                    <!--            <div class="tpl-dropdown-menu-notifications-title">-->
-                    <!--                <i class="am-icon-folder-o"></i>-->
-                    <!--                <span>上午开会记录存档</span></div>-->
-                    <!--            <div class="tpl-dropdown-menu-notifications-time">1天前</div>-->
-                    <!--        </a>-->
-                    <!--    </li>-->
-                    <!--    <li class="tpl-dropdown-menu-notifications">-->
-                    <!--        <a href="javascript:;" class="tpl-dropdown-menu-notifications-item am-cf">-->
-                    <!--            <i class="am-icon-bell"></i> 进入列表…</a>-->
-                    <!--    </li>-->
-                    <!--</ul>-->
-                    <!--</li>-->
+                    <li class="am-dropdown" data-am-dropdown="">
+                        <a href="javascript:;" class="am-dropdown-toggle" data-am-dropdown-toggle="">
+                            <i class="iconfont">&#xe69c;</i>
+                            <span class="am-badge am-badge-warning am-round item-feed-badge">5</span>
+                        </a>
+                        <!-- 弹出列表 -->
+                        <ul class="am-dropdown-content tpl-dropdown-content">
+                            <li class="tpl-dropdown-menu-notifications">
+                                <a href="javascript:;" class="tpl-dropdown-menu-notifications-item am-cf">
+                                    <div class="tpl-dropdown-menu-notifications-title">
+                                        <i class="am-icon-line-chart"></i>
+                                        <span>有6笔新的销售订单</span></div>
+                                    <div class="tpl-dropdown-menu-notifications-time">12分钟前</div>
+                                </a>
+                            </li>
+                            <li class="tpl-dropdown-menu-notifications">
+                                <a href="javascript:;" class="tpl-dropdown-menu-notifications-item am-cf">
+                                    <div class="tpl-dropdown-menu-notifications-title">
+                                        <i class="am-icon-star"></i>
+                                        <span>有3个来自人事部的消息</span></div>
+                                    <div class="tpl-dropdown-menu-notifications-time">30分钟前</div>
+                                </a>
+                            </li>
+                            <li class="tpl-dropdown-menu-notifications">
+                                <a href="javascript:;" class="tpl-dropdown-menu-notifications-item am-cf">
+                                    <div class="tpl-dropdown-menu-notifications-title">
+                                        <i class="am-icon-folder-o"></i>
+                                        <span>上午开会记录存档</span></div>
+                                    <div class="tpl-dropdown-menu-notifications-time">1天前</div>
+                                </a>
+                            </li>
+                            <li class="tpl-dropdown-menu-notifications">
+                                <a href="javascript:;" class="tpl-dropdown-menu-notifications-item am-cf">
+                                    <i class="am-icon-bell"></i> 进入列表…</a>
+                            </li>
+                        </ul>
+                    </li>
                     <!-- 退出 -->
                     <li class="am-text-sm">
                         <a href="javascript:;">
