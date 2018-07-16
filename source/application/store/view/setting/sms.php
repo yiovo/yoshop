@@ -8,6 +8,7 @@
                             <div class="widget-head am-cf">
                                 <div class="widget-title am-fl">短信通知（ 阿里云短信 )</div>
                             </div>
+                            <input type="hidden" name="sms[default]" value="aliyun">
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-form-label form-require"> AccessKeyId </label>
                                 <div class="am-u-sm-9">

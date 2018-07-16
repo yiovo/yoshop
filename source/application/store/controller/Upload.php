@@ -4,7 +4,7 @@ namespace app\store\controller;
 
 use app\store\model\UploadFile;
 use app\common\library\storage\Driver;
-use app\store\model\Setting as SettingMdeol;
+use app\store\model\Setting as SettingModel;
 
 /**
  * 后台文件上传
@@ -17,13 +17,12 @@ class Upload extends Controller
 
     /**
      * 构造方法
-     * @throws \think\exception\DbException
      */
     public function _initialize()
     {
         parent::_initialize();
         // 存储配置信息
-        $this->config = SettingMdeol::getItem('storage');
+        $this->config = SettingModel::getItem('storage');
     }
 
     /**
