@@ -17,17 +17,19 @@ class Setting extends Controller
      * @return mixed
      * @throws \think\exception\DbException
      */
-    public function index()
+    public function store()
     {
-        $store = SettingModel::detail('store');
-        if (!$this->request->isAjax()) {
-            $values = $store['values'];
-            return $this->fetch('index', compact('values'));
-        }
-        if ($store->edit($this->postData('store'))) {
-            return $this->renderSuccess('更新成功');
-        }
-        return $this->renderError('更新失败');
+        return $this->updateEvent('store');
+    }
+
+    /**
+     * 交易设置
+     * @return mixed
+     * @throws \think\exception\DbException
+     */
+    public function trade()
+    {
+        return $this->updateEvent('trade');
     }
 
     /**
@@ -37,15 +39,7 @@ class Setting extends Controller
      */
     public function sms()
     {
-        $store = SettingModel::detail('sms');
-        if (!$this->request->isAjax()) {
-            $values = $store['values'];
-            return $this->fetch('sms', compact('values'));
-        }
-        if ($store->edit($this->postData('sms'))) {
-            return $this->renderSuccess('更新成功');
-        }
-        return $this->renderError('更新失败');
+        return $this->updateEvent('sms');
     }
 
     /**
@@ -83,36 +77,30 @@ class Setting extends Controller
     }
 
     /**
-     * 交易设置
-     * @return mixed
-     * @throws \think\exception\DbException
-     */
-    public function trade()
-    {
-        $store = SettingModel::detail('trade');
-        if (!$this->request->isAjax()) {
-            $values = $store['values'];
-            return $this->fetch('trade', compact('values'));
-        }
-        if ($store->edit($this->postData('trade'))) {
-            return $this->renderSuccess('更新成功');
-        }
-        return $this->renderError('更新失败');
-    }
-
-    /**
      * 上传设置
      * @return mixed
      * @throws \think\exception\DbException
      */
-    public function upload()
+    public function storage()
     {
-        $store = SettingModel::detail('storage');
+        return $this->updateEvent('storage');
+    }
+
+    /**
+     * 更新商城设置事件
+     * @param $key
+     * @return array|mixed
+     * @throws \think\exception\DbException
+     */
+    private function updateEvent($key)
+    {
+        $setting = SettingModel::detail($key);
         if (!$this->request->isAjax()) {
-            $values = $store['values'];
-            return $this->fetch('upload', compact('values'));
+            $values = $setting['values'];
+            return $this->fetch($key, compact('values'));
         }
-        if ($store->edit($this->postData('storage'))) {
+        $model = $setting ?: new SettingModel;
+        if ($model->edit($key, $this->postData($key))) {
             return $this->renderSuccess('更新成功');
         }
         return $this->renderError('更新失败');

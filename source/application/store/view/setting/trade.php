@@ -58,7 +58,7 @@
                                     <div class="am-u-sm-12">
                                         <label class="am-radio">
                                             <input type="radio" name="trade[freight_rule]" value="10" data-am-ucheck
-                                                <?= $values['freight_rule'] === '10' ? 'checked' : '' ?>> 叠加
+                                                <?= $values['freight_rule'] === '10' ? 'checked' : '' ?> required> 叠加
                                         </label>
                                         <div class="help-block">
                                             <small>订单中的商品有多个运费模板时，将每个商品的运费之和订为订单总运费</small>
@@ -67,7 +67,7 @@
                                     <div class="am-u-sm-12 am-margin-top-sm">
                                         <label class="am-radio">
                                             <input type="radio" name="trade[freight_rule]" value="20" data-am-ucheck
-                                                <?= $values['freight_rule'] === '20' ? 'checked' : '' ?>> 以最低运费结算
+                                                <?= $values['freight_rule'] === '20' ? 'checked' : '' ?> required> 以最低运费结算
                                         </label>
                                         <div class="help-block">
                                             <small>订单中的商品有多个运费模板时，取订单中运费最少的商品的运费计为订单总运费</small>
@@ -76,7 +76,7 @@
                                     <div class="am-u-sm-12 am-margin-top-sm">
                                         <label class="am-radio">
                                             <input type="radio" name="trade[freight_rule]" value="30" data-am-ucheck
-                                                <?= $values['freight_rule'] === '30' ? 'checked' : '' ?>> 以最高运费结算
+                                                <?= $values['freight_rule'] === '30' ? 'checked' : '' ?> required> 以最高运费结算
                                         </label>
                                         <div class="help-block">
                                             <small>订单中的商品有多个运费模板时，取订单中运费最多的商品的运费计为订单总运费</small>
