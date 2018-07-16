@@ -3957,6 +3957,7 @@ BEGIN;
 INSERT INTO `yoshop_setting` VALUES ('storage', '上传设置', '{\"default\":\"local\",\"engine\":{\"qiniu\":{\"bucket\":\"\",\"access_key\":\"\",\"secret_key\":\"\",\"domain\":\"\"}}}', 10001, 1529926348);
 INSERT INTO `yoshop_setting` VALUES ('store', '商城设置', '{\"name\":\"\\u8424\\u706b\\u5c0f\\u7a0b\\u5e8f\\u5546\\u57ce\"}', 10001, 1529926348);
 INSERT INTO `yoshop_setting` VALUES ('trade', '交易设置', '{\"order\":{\"close_days\":\"0\",\"receive_days\":\"15\",\"refund_days\":\"0\"},\"freight_rule\":\"10\"}', 10001, 1530265122);
+INSERT INTO `yoshop_setting` VALUES ('sms', '短信设置', '{"default":"aliyun","engine":{"aliyun":{"AccessKeyId":"","AccessKeySecret":"","sign":"","order_pay":{"is_enable":"0","template_code":"","accept_phone":""}}}}', 10001, 1530265122);
 COMMIT;
 
 DROP TABLE IF EXISTS `yoshop_spec`;
