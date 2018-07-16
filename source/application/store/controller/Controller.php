@@ -51,7 +51,7 @@ class Controller extends \think\Controller
             return true;
         }
         // 当前商城设置
-        $setting = Setting::getAll();
+        $setting = Setting::getAll() ?: null;
         // 后台菜单
         $menus = $this->menus();
         // 当前小程序信息

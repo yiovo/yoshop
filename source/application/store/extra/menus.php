@@ -133,12 +133,12 @@ return [
     'setting' => [
         'name' => '设置',
         'icon' => 'icon-setting',
-        'url' => 'setting/index',
+        'url' => 'setting/store',
         'submenu' => [
             [
                 'name' => '商城设置',
                 'handle' => [
-                    'setting/index'
+                    'setting/store'
                 ],
             ],
             [
@@ -164,7 +164,7 @@ return [
             [
                 'name' => '上传设置',
                 'handle' => [
-                    'setting/upload'
+                    'setting/storage'
                 ],
             ],
         ],

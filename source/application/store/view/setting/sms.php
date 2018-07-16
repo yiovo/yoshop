@@ -13,7 +13,7 @@
                                 <label class="am-u-sm-3 am-form-label form-require"> AccessKeyId </label>
                                 <div class="am-u-sm-9">
                                     <input type="text" class="tpl-form-input" name="sms[engine][aliyun][AccessKeyId]"
-                                           value="<?= $values['engine']['aliyun']['AccessKeyId'] ?>">
+                                           value="<?= $values['engine']['aliyun']['AccessKeyId'] ?>" required>
                                 </div>
                             </div>
                             <div class="am-form-group">
@@ -21,14 +21,14 @@
                                 <div class="am-u-sm-9">
                                     <input type="text" class="tpl-form-input"
                                            name="sms[engine][aliyun][AccessKeySecret]"
-                                           value="<?= $values['engine']['aliyun']['AccessKeySecret'] ?>">
+                                           value="<?= $values['engine']['aliyun']['AccessKeySecret'] ?>" required>
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-form-label form-require"> 短信签名 </label>
                                 <div class="am-u-sm-9">
                                     <input type="text" class="tpl-form-input" name="sms[engine][aliyun][sign]"
-                                           value="<?= $values['engine']['aliyun']['sign'] ?>">
+                                           value="<?= $values['engine']['aliyun']['sign'] ?>" required>
                                 </div>
                             </div>
                             <div class="widget-head am-cf">
@@ -42,7 +42,8 @@
                                     <label class="am-radio-inline">
                                         <input type="radio" name="sms[engine][aliyun][order_pay][is_enable]" value="1"
                                                data-am-ucheck
-                                            <?= $values['engine']['aliyun']['order_pay']['is_enable'] === '1' ? 'checked' : '' ?>>
+                                            <?= $values['engine']['aliyun']['order_pay']['is_enable'] === '1' ? 'checked' : '' ?>
+                                               required>
                                         开启
                                     </label>
                                     <label class="am-radio-inline">
