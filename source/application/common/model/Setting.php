@@ -119,6 +119,27 @@ class Setting extends BaseModel
                 ],
                 'wxapp_id' => $wxapp_id
             ],
+            [
+                'key' => 'sms',
+                'describe' => '短信通知',
+                'values' => [
+                    'default' => 'aliyun',
+                    'engine' => [
+                        'aliyun' => [
+                            'AccessKeyId' => '',
+                            'AccessKeySecret' => '',
+                            'sign' => '萤火科技',
+                            'order_pay' => [
+                                'is_enable' => '0',
+                                'template_code' => '',
+                                'accept_phone' => '',
+                            ],
+                        ],
+                    ],
+                ],
+                'wxapp_id' => $wxapp_id
+            ],
+
         ];
         return $this->saveAll($setting);
     }
