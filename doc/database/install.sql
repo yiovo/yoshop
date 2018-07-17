@@ -156,6 +156,7 @@ CREATE TABLE `yoshop_order_goods` (
   `goods_id` int(11) unsigned NOT NULL DEFAULT '0',
   `goods_name` varchar(255) NOT NULL DEFAULT '',
   `image_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `deduct_stock_type` tinyint(3) unsigned NOT NULL DEFAULT '20',
   `spec_type` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `spec_sku_id` varchar(255) NOT NULL DEFAULT '',
   `goods_spec_id` int(11) unsigned NOT NULL DEFAULT '0',
