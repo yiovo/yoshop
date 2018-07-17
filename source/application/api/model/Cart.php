@@ -62,8 +62,8 @@ class Cart
             $goods = $goodsList[$cart['goods_id']];
             $goods_sku = array_column($goods['spec']->toArray(), null, 'goods_spec_id')[$cart['goods_spec_id']];
             // 多规格文字内容
+            $goods_sku['goods_attr'] = '';
             if ($goods['spec_type'] === 20) {
-                $goods_sku['goods_attr'] = '';
                 $attrs = explode('_', $goods_sku['spec_sku_id']);
                 $spec_rel = array_column($goods['spec_rel']->toArray(), null, 'spec_value_id');
                 foreach ($attrs as $specValueId) {
