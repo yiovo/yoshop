@@ -14,7 +14,6 @@ class Category extends Controller
     /**
      * 全部分类
      * @return array
-     * @throws \think\exception\DbException
      */
     public function lists()
     {
