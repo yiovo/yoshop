@@ -25,13 +25,14 @@ class Category extends BaseModel
     /**
      * 所有分类
      * @return mixed
-     * @throws \think\exception\DbException
      */
     public static function getALL()
     {
         $self = new static();
         if (!Cache::get('category_' . $self::$wxapp_id)) {
-            $all = ($data = static::all(null, ['image'])) ? collection($data)->toArray() : [];
+            $model = new static;
+            $data = $model->with(['image'])->order(['sort' => 'asc'])->select();
+            $all = !empty($data) ? $data->toArray() : [];
             $tree = [];
             foreach ($all as $first) {
                 if ($first['parent_id'] !== 0) continue;
@@ -53,25 +54,22 @@ class Category extends BaseModel
         return Cache::get('category_' . $self::$wxapp_id);
     }
 
-
-    /**
-     * 获取所有分类(树状结构)
-     * @return mixed
-     * @throws \think\exception\DbException
-     */
-    public static function getCacheTree()
-    {
-        return self::getALL()['tree'];
-    }
-
     /**
      * 获取所有分类
      * @return mixed
-     * @throws \think\exception\DbException
      */
     public static function getCacheAll()
     {
         return self::getALL()['all'];
+    }
+
+    /**
+     * 获取所有分类(树状结构)
+     * @return mixed
+     */
+    public static function getCacheTree()
+    {
+        return self::getALL()['tree'];
     }
 
 }

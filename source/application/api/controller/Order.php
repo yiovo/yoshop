@@ -62,10 +62,12 @@ class Order extends Controller
     /**
      * 订单确认-购物车结算
      * @return array
+     * @throws \app\common\exception\BaseException
      * @throws \think\Exception
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
+     * @throws \Exception
      */
     public function cart()
     {

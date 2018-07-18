@@ -57,9 +57,9 @@ class Cart
         $cartList = [];
         foreach ($this->cart as $key => $cart) {
             /* @var Goods $goods */
+            $goods = $goodsList[$cart['goods_id']];
             // 规格信息
             $goods['goods_spec_id'] = $cart['goods_spec_id'];
-            $goods = $goodsList[$cart['goods_id']];
             $goods_sku = array_column($goods['spec']->toArray(), null, 'goods_spec_id')[$cart['goods_spec_id']];
             // 多规格文字内容
             $goods_sku['goods_attr'] = '';
@@ -98,7 +98,7 @@ class Cart
         return [
             'goods_list' => $cartList,  // 商品列表
             'order_total_num' => $this->getTotalNum(),  // 商品总数量
-            'order_total_price' => number_format($orderTotalPrice, 2),    // 商品总金额 (不含运费)
+            'order_total_price' => round($orderTotalPrice, 2), // 商品总金额 (不含运费)
             'order_pay_price' => bcadd($orderTotalPrice, $expressPrice, 2),  // 实际支付金额
 
             'address' => $user['address_default'],  // 默认地址
