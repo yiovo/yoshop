@@ -8,6 +8,7 @@ CREATE TABLE `yoshop_category` (
   `name` varchar(50) NOT NULL DEFAULT '',
   `parent_id` int(11) unsigned NOT NULL DEFAULT '0',
   `image_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `sort` int(11) unsigned NOT NULL DEFAULT '0',
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0',

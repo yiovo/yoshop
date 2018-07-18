@@ -10,3 +10,12 @@ INSERT INTO `yoshop_setting` VALUES ('sms', '短信设置', '{"default":"aliyun"
 ALTER TABLE `yoshop_order_goods`
 ADD COLUMN `deduct_stock_type` tinyint(3) UNSIGNED NOT NULL DEFAULT '20' AFTER `image_id`;
 
+
+### v1.0.9 ###
+
+# 商品分类表：分类排序
+ALTER TABLE `yoshop_category`
+ADD COLUMN `sort` int(11) UNSIGNED NOT NULL DEFAULT 0 AFTER `image_id`;
+
+
+
