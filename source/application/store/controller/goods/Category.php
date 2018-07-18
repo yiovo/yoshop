@@ -15,7 +15,6 @@ class Category extends Controller
     /**
      * 商品分类列表
      * @return mixed
-     * @throws \think\exception\DbException
      */
     public function index()
     {
@@ -43,7 +42,6 @@ class Category extends Controller
     /**
      * 添加商品分类
      * @return array|mixed
-     * @throws \think\exception\DbException
      */
     public function add()
     {

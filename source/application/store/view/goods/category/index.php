@@ -24,6 +24,7 @@
                             <tr>
                                 <th>分类ID</th>
                                 <th>分类名称</th>
+                                <th>分类排序</th>
                                 <th>添加时间</th>
                                 <th>操作</th>
                             </tr>
@@ -33,6 +34,7 @@
                                 <tr>
                                     <td class="am-text-middle"><?= $first['category_id'] ?></td>
                                     <td class="am-text-middle"><?= $first['name'] ?></td>
+                                    <td class="am-text-middle"><?= $first['sort'] ?></td>
                                     <td class="am-text-middle"><?= $first['create_time'] ?></td>
                                     <td class="am-text-middle">
                                         <div class="tpl-table-black-operation">
@@ -51,6 +53,7 @@
                                     <tr>
                                         <td class="am-text-middle"><?= $two['category_id'] ?></td>
                                         <td class="am-text-middle">　-- <?= $two['name'] ?></td>
+                                        <td class="am-text-middle"><?= $two['sort'] ?></td>
                                         <td class="am-text-middle"><?= $two['create_time'] ?></td>
                                         <td class="am-text-middle">
                                             <div class="tpl-table-black-operation">
