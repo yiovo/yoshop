@@ -45,7 +45,7 @@ class Order extends Controller
      */
     public function pay_list()
     {
-        return $this->getList('待付款订单列表', ['pay_status' => 10]);
+        return $this->getList('待付款订单列表', ['pay_status' => 10, 'order_status' => 10]);
     }
 
     /**
@@ -96,7 +96,6 @@ class Order extends Controller
      * 订单详情
      * @param $order_id
      * @return mixed
-     * @throws \app\common\exception\BaseException
      * @throws \think\exception\DbException
      */
     public function detail($order_id)
@@ -109,7 +108,6 @@ class Order extends Controller
      * 确认发货
      * @param $order_id
      * @return array
-     * @throws \app\common\exception\BaseException
      * @throws \think\exception\DbException
      */
     public function delivery($order_id)
