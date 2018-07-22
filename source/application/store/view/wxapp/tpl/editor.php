@@ -84,7 +84,7 @@
                         <div class="input-group">
                             <input type="text" name="imgName" data-bind="data.{{ $index }}.imgName"
                                    value="{{ $value.imgName }}" placeholder="请选择图片" readonly>
-                            <span class="input-group-addon">上传图片</span>
+                            <span class="input-group-addon">选择图片</span>
                             <input type="hidden" name="imgUrl" data-bind="data.{{ $index }}.imgUrl"
                                    value="{{ $value.imgUrl }}">
                         </div>

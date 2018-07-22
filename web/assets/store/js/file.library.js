@@ -9,6 +9,7 @@
         this.options = $.extend({}, defaults, options);
         // 触发对象
         this.$trigger = trigger;
+        this.$touch = null; // 当前触发元素
         // 容器元素
         this.$element = null;
         // 初始化对象事件
@@ -32,6 +33,7 @@
             var _this = this;
             // 点击开启文件库弹窗
             _this.$trigger.click(function () {
+                _this.$touch = $(this);
                 _this.showLibraryModal();
             });
         },
@@ -136,7 +138,8 @@
          */
         done: function () {
             var selectedList = this.getSelectedData();
-            selectedList.length > 0 && typeof this.options.done === 'function' && this.options.done(selectedList);
+            selectedList.length > 0 && typeof this.options.done === 'function'
+            && this.options.done(selectedList, this.$touch);
         }
 
     };

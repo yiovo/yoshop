@@ -45,6 +45,9 @@
     </div>
 </div>
 
+<!-- 文件库弹窗 -->
+{{include file="layouts/_template/file_library" /}}
+
 <!--diy元素-->
 {{include file="wxapp/tpl/diy" /}}
 
@@ -58,7 +61,6 @@
 
         // 渲染diy页面
         new diyPhone(<?= $jsonData ?: '{}' ?>);
-
 
     });
 </script>

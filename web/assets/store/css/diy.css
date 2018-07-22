@@ -41,7 +41,7 @@
 .diy-editor .form-items .item .item-form .input-group { display: table; width: 100%; }
 .diy-editor .form-items .item .item-form .input-group input,
 .diy-editor .form-items .item .item-form .input-group .input-group-addon { display: table-cell; border: 1px solid #efefef; }
-.diy-editor .form-items .item .item-form .input-group .input-group-addon { border-radius: 1px; font-weight: 400; text-align: center; background: #fdfdfd; color: #6b6b6b; border-left: 0; width: 82px; }
+.diy-editor .form-items .item .item-form .input-group .input-group-addon { border-radius: 1px; font-weight: 400; text-align: center; background: #fdfdfd; color: #6b6b6b; border-left: 0; width: 82px; cursor: pointer; }
 .diy-editor .form-items .item .title { padding-bottom: 10px; }
 .diy-editor .form-items .item .title-child { padding-bottom: 10px; padding-top: 10px; }
 .diy-editor .form-items .item .item-body.child { margin-bottom: 10px; background: #fff; }
