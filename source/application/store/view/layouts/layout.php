@@ -12,11 +12,11 @@
     <meta name="apple-mobile-web-app-title" content="<?= $setting['store']['values']['name'] ?>"/>
     <link rel="stylesheet" href="assets/store/css/amazeui.min.css"/>
     <link rel="stylesheet" href="assets/store/css/app.css"/>
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_664399_8kvutk31par79zfr.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_664399_1z02i08jjid.css">
     <script src="assets/store/js/jquery.min.js"></script>
-    <script src="//at.alicdn.com/t/font_664399_xhxia8ezfa3ba9k9.js"></script>
+    <script src="//at.alicdn.com/t/font_664399_1z02i08jjid.js"></script>
     <script>
-        const BASE_URL = '<?= url('/store') ?>';
+         BASE_URL = '<?= url('/store') ?>';
     </script>
 </head>
 
@@ -116,8 +116,10 @@
 <script src="assets/layer/layer.js"></script>
 <script src="assets/store/js/jquery.form.min.js"></script>
 <script src="assets/store/js/amazeui.min.js"></script>
-<script src="assets/store/js/app.js"></script>
 <script src="assets/store/js/webuploader.html5only.js"></script>
+<script src="assets/store/js/art-template.js"></script>
+<script src="assets/store/js/app.js"></script>
+<script src="assets/store/js/file.library.js"></script>
 </body>
 
 </html>

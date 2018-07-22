@@ -52,7 +52,6 @@
 {{include file="wxapp/tpl/editor" /}}
 
 <script src="assets/store/js/ddsort.js"></script>
-<script src="assets/store/js/art-template.js"></script>
 <script src="assets/store/js/diy.js"></script>
 <script>
     $(function () {

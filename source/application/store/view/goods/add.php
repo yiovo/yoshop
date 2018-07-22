@@ -248,7 +248,6 @@
 <script src="assets/store/js/ddsort.js"></script>
 <script src="assets/store/plugins/umeditor/umeditor.config.js"></script>
 <script src="assets/store/plugins/umeditor/umeditor.min.js"></script>
-<script src="assets/store/js/art-template.js"></script>
 <script src="assets/store/js/goods.spec.js"></script>
 <script>
     $(function () {

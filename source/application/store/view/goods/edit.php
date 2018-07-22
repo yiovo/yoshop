@@ -270,7 +270,6 @@
 <script src="assets/store/js/ddsort.js"></script>
 <script src="assets/store/plugins/umeditor/umeditor.config.js"></script>
 <script src="assets/store/plugins/umeditor/umeditor.min.js"></script>
-<script src="assets/store/js/art-template.js"></script>
 <script src="assets/store/js/goods.spec.js"></script>
 <script>
     $(function () {
@@ -298,13 +297,13 @@
         });
 
         // 注册商品多规格组件
-        let specMany = new GoodsSpec({
+        var specMany = new GoodsSpec({
             container: '.goods-spec-many',
         }, <?= $specData ?>);
 
         // 切换单/多规格
         $('input:radio[name="goods[spec_type]"]').change(function (e) {
-            let $goodsSpecMany = $('.goods-spec-many')
+            var $goodsSpecMany = $('.goods-spec-many')
                 , $goodsSpecSingle = $('.goods-spec-single');
             if (e.currentTarget.value === '10') {
                 $goodsSpecMany.hide() && $goodsSpecSingle.show();
@@ -328,14 +327,14 @@
             },
             // 自定义验证
             validation: function () {
-                let specType = $('input:radio[name="goods[spec_type]"]:checked').val();
+                var specType = $('input:radio[name="goods[spec_type]"]:checked').val();
                 if (specType === '20') {
-                    let isEmpty = specMany.isEmptySkuList();
+                    var isEmpty = specMany.isEmptySkuList();
                     isEmpty === true && layer.msg('商品规格不能为空');
                     return !isEmpty;
                 }
                 return true;
-            },
+            }
         });
 
     });
