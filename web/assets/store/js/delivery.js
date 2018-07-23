@@ -20,14 +20,14 @@
          * 初始化添加区域事件
          */
         initCreateRegion: function () {
-            let _this = this;
+            var _this = this;
             $(_this.tableElement).find('.add-region').click(function () {
                 // 渲染地域
-                let str = '';
+                var str = '';
                 $(_this.tableElement).find('input[type=hidden]').each(function (index, item) {
                     str += $(item).val() + ',';
                 });
-                let alreadyIds = str.length > 0 ? str.substring(0, str.length - 1).split(',') : [];
+                var alreadyIds = str.length > 0 ? str.substring(0, str.length - 1).split(',') : [];
                 if (alreadyIds.length === 373) {
                     layer.msg('已经选择了所有区域~');
                     return false;
@@ -35,7 +35,7 @@
                 _this.RegionalChoice.render(alreadyIds);
                 _this.showRegionalModal(function () {
                     // 弹窗交互完成
-                    let Checked = _this.RegionalChoice.getCheckedContent();
+                    var Checked = _this.RegionalChoice.getCheckedContent();
                     Checked.ids.length > 0 && _this.appendRulesTr(Checked.content, Checked.ids);
                 });
             });
@@ -45,7 +45,7 @@
          * 创建可配送区域规则
          */
         appendRulesTr: function (regionStr, checkedIds) {
-            let $html = $(
+            var $html = $(
                 '<tr>' +
                 '<td class="am-text-left">' +
                 '   <p class="selected-content am-margin-bottom-xs">' +
@@ -79,13 +79,13 @@
          * @param callback
          */
         showRegionalModal: function (callback) {
-            let _this = this;
+            var _this = this;
             layer.open({
                 type: 1,
                 shade: false,
                 title: '选择可配送区域',
                 btn: ['确定', '取消'],
-                area: ['800px', '520px'], //宽高
+                area: ['820px', '520px'], //宽高
                 content: $('.regional-choice'),
                 yes: function (index) {
                     callback && callback();
@@ -102,18 +102,18 @@
          * 编辑区域事件
          */
         clickEditEvent: function () {
-            let _this = this
+            var _this = this
                 , $table = $(_this.tableElement);
             $table.on('click', '.edit', function () {
                 // 渲染地域
-                let $html = $(this).parent().parent()
+                var $html = $(this).parent().parent()
                     , $content = $html.find('.selected-content')
                     , $input = $html.find('input[type=hidden]');
                 _this.RegionalChoice.render([], $input.val().split(','));
                 // 显示地区选择弹窗
                 _this.showRegionalModal(function () {
                     // 弹窗交互完成
-                    let Checked = _this.RegionalChoice.getCheckedContent();
+                    var Checked = _this.RegionalChoice.getCheckedContent();
                     if (Checked.ids.length > 0) {
                         $content.html(Checked.content);
                         $input.val(Checked.ids);
@@ -126,9 +126,9 @@
          * 删除区域事件
          */
         clickDeleteEvent: function () {
-            let $table = $(this.tableElement);
+            var $table = $(this.tableElement);
             $table.on('click', '.delete', function () {
-                let $delete = $(this);
+                var $delete = $(this);
                 layer.confirm('确定要删除吗？', function (index) {
                     $delete.parents('tr').remove();
                     layer.close(index);
@@ -141,7 +141,7 @@
          */
         clickMethodEvent: function () {
             $('input:radio[name="delivery[method]"]').change(function (e) {
-                let $first = $('.first')
+                var $first = $('.first')
                     , $additional = $('.additional');
                 if (e.currentTarget.value === '20')
                     $first.text('首重 (Kg)') && $additional.text('续重 (Kg)');
