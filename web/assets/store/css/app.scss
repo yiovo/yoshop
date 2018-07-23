@@ -1629,27 +1629,10 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
     }
   }
   .am-form-file {
-    a {
-      &.webuploader-container {
-        font-size: 1.3rem;
-      }
-    }
+    padding-top: .4rem;
     .upload-file {
-      //font-size: 0;
-      //.webuploader-pick {
-      position: relative;
-      display: inline-block;
-      cursor: pointer;
-      background: #3bb4f2;
-      padding: 8px 12px;
-      color: #fff;
-      text-align: center;
-      border-radius: 3px;
-      overflow: hidden;
-      font-size: 1.3rem;
-      -webkit-transition: background-color .3s ease-out, border-color .3s ease-out;
-      transition: background-color .3s ease-out, border-color .3s ease-out;
-      //}
+      font-size: 1.24rem;
+      padding: .6em 1em;
     }
   }
   input[type=color] {
@@ -1658,9 +1641,7 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
     height: 2.2rem;
     background-color: buttonface;
     cursor: pointer;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgb(220, 220, 220);
+    border: 1px solid rgb(220, 220, 220);
     border-image: initial;
     padding: 0 2px;
   }
@@ -1702,7 +1683,6 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
 }
 
 /* 图片上传*/
-/*.uploader-list{}*/
 .uploader-list {
   .file-item {
     float: left;
@@ -1758,7 +1738,7 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
 .dad-noSelect * {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -khtml-user-select: none;
+  //-khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -1770,7 +1750,7 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
   position: relative;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -khtml-user-select: none;
+  //-khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;

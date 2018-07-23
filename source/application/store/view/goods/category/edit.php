@@ -30,18 +30,19 @@
                                 </div>
                             </div>
                             <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">分类图片  </label>
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">分类图片 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <div class="am-form-file">
-                                        <div class="upload-file" data-name="category[image]">
-                                            <i class="am-icon-cloud-upload"></i> 上传图片
-                                        </div>
+                                        <button type="button"
+                                                class="upload-file am-btn am-btn-secondary am-radius">
+                                            <i class="am-icon-cloud-upload"></i> 选择图片
+                                        </button>
                                         <div class="uploader-list am-cf">
                                             <?php if ($model['image']): ?>
-                                                <div class="file-item thumbnail">
+                                                <div class="file-item">
                                                     <img src="<?= $model['image']['file_path'] ?>">
-                                                    <input type="hidden" name="category[image]"
-                                                           value="<?= $model['image']['file_name'] ?>">
+                                                    <input type="hidden" name="category[image_id]"
+                                                           value="<?= $model['image_id'] ?>">
                                                     <i class="iconfont icon-shanchu file-item-delete"></i>
                                                 </div>
                                             <?php endif; ?>
@@ -73,13 +74,19 @@
         </div>
     </div>
 </div>
+
+<!-- 图片文件列表模板 -->
+{{include file="layouts/_template/tpl_file_item" /}}
+
+<!-- 文件库弹窗 -->
+{{include file="layouts/_template/file_library" /}}
+
 <script>
     $(function () {
 
-        // 单文件上传: 分类图片
-        $.uploadImage({
-            pick: '.upload-file',
-            list: '.uploader-list'
+        // 选择图片
+        $('.upload-file').selectImages({
+            name: 'category[image_id]'
         });
 
         /**
