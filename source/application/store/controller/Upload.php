@@ -26,58 +26,11 @@ class Upload extends Controller
     }
 
     /**
-     * 文件库列表
-     * @param string $type
-     * @param int $group_id
-     * @return \think\response\Json
-     */
-    public function library($type = 'image', $group_id = -1)
-    {
-        $data = [
-            'file_group' => [
-                ['group_id' => 10001, 'group_name' => '商品封面'],
-                ['group_id' => 10002, 'group_name' => '商品详情']
-            ],
-            'file_list' => [
-                [
-                    'file_id' => 1,
-                    'file_name' => 'test1.jpg',
-                    'file_path' => 'http://img.zhichiwangluo.com/zcimgdir/album/file_5b509c90a08c1.jpg',
-                ],
-                [
-                    'file_id' => 2,
-                    'file_name' => 'test2.jpg',
-                    'file_path' => 'https://image-c.weimobwmc.com/saas-wxbiz/6ad060cd46694f8985ac17c3ea622f38.jpg'
-                ],
-                [
-                    'file_id' => 3,
-                    'file_name' => 'test3.jpg',
-                    'file_path' => 'http://img.zhichiwangluo.com/zcimgdir/album/file_5b509ad3e1d24.jpg'
-                ],
-                [
-                    'file_id' => 4,
-                    'file_name' => 'test4.jpg',
-                    'file_path' => 'http://img.weiye.me/zcimgdir/album/file_581c3e72cfcc4.gif'
-                ],
-                [
-                    'file_id' => 5,
-                    'file_name' => 'test5.jpg',
-                    'file_path' => 'http://img.zhichiwangluo.com/zcimgdir/album/file_5ad0751fdc2cb.png'
-                ],
-            ],
-            'active_group_id' => (int)$group_id,
-
-        ];
-        shuffle($data['file_list']);
-        return json($data);
-    }
-
-    /**
      * 图片上传接口
      * @return \think\response\Json
      * @throws \think\Exception
      */
-    public function images()
+    public function image()
     {
         // 实例化存储驱动
         $StorageDriver = new StorageDriver($this->config);
@@ -91,10 +44,7 @@ class Upload extends Controller
         // 添加文件库记录
         $uploadFile = $this->addUploadFile($fileName, $fileInfo, 'image');
         // 图片上传成功
-        return json(['code' => 1, 'msg' => '图片上传成功', 'data' => [
-            'path' => $uploadFile['file_name'],
-            'file_path' => $uploadFile['file_path'],
-        ]]);
+        return json(['code' => 1, 'msg' => '图片上传成功', 'data' => $uploadFile]);
     }
 
     /**
@@ -113,7 +63,6 @@ class Upload extends Controller
         // 添加文件库记录
         $model = new UploadFile;
         $model->add([
-            'wxapp_id' => $this->getWxappId(),
             'storage' => $storage,
             'file_url' => $fileUrl,
             'file_name' => $fileName,

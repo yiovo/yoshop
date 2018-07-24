@@ -1127,7 +1127,6 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
 
 .tpl-user-card-title {
   font-size: 26px;
-  margin-top: 0;
   font-weight: 300;
   margin-top: 25px;
   margin-bottom: 10px;
@@ -2085,7 +2084,7 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
     float: left;
     border-radius: 13px;
     position: relative;
-    z-index: 2;
+    z-index: 3;
   }
   .tip {
     font-size: 12px;
@@ -2188,7 +2187,7 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
           }
         }
       }
-      a.file-group-add {
+      a.group-add {
         display: block;
         margin-top: 1.8rem;
         font-size: 1.2rem;
@@ -2202,38 +2201,31 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
         margin-bottom: 10px;
         .h-left {
           .tpl-table-black-operation {
-            margin: 0 20px;
+            margin: 0 1rem;
             a {
               padding: 6px 10px;
             }
           }
-          .am-selected-btn {
+          .am-dropdown-toggle {
             font-size: 1.2rem;
+          }
+          .am-dropdown-content a {
+            font-size: 1.3rem;
           }
         }
         .h-rigth {
-          button {
-            color: #2589ff;
-            background-color: #fff;
-            border-color: #2589ff;
-            font-size: 12px;
-            border-radius: 4px;
-            outline: 0;
-            font-weight: 400;
-            padding: .6em 1em;
-            outline: none !important;
-            .iconfont {
-              font-size: 12px;
-            }
+          .btn-addSpecGroup .iconfont {
+            font-size: 1.2rem;
           }
         }
+
       }
-      .v-box-body {
-        width: 660px;
-        ul {
-          overflow-y: auto;
-          height: 380px;
-        }
+    }
+    .v-box-body {
+      width: 660px;
+      ul.file-list-item {
+        overflow-y: auto;
+        height: 380px;
         li {
           position: relative;
           cursor: pointer;
@@ -2280,6 +2272,53 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
           }
         }
       }
+      ul.pagination {
+        margin: 0;
+        & > li > {
+          a, span {
+            padding: .3rem .9rem;
+            font-size: 1.3rem;
+          }
+        }
+      }
+
+    }
+    .v-box-footer {
+
     }
   }
 }
+
+/* 文件上传按钮 */
+.webuploader-container {
+  position: relative;
+}
+
+.webuploader-element-invisible {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.webuploader-pick {
+  color: #2589ff;
+  background-color: #fff;
+  border-color: #2589ff;
+  font-size: 12px;
+  border-radius: 4px;
+  outline: 0;
+  font-weight: 400;
+  padding: .6em 1em;
+  outline: none !important;
+}
+
+.webuploader-pick-hover {
+  background: #2589ff;
+  color: #fff;
+}
+
+.webuploader-pick-disable {
+  opacity: 0.6;
+  pointer-events: none;
+}
+

@@ -2,6 +2,9 @@
 
 namespace app\common\model;
 
+use think\Request;
+use traits\model\SoftDelete;
+
 /**
  * 文件库模型
  * Class UploadFile
@@ -9,8 +12,11 @@ namespace app\common\model;
  */
 class UploadFile extends BaseModel
 {
+    use SoftDelete;
+
     protected $name = 'upload_file';
     protected $updateTime = false;
+    protected $deleteTime = false;
     protected $append = ['file_path'];
 
     /**
@@ -26,22 +32,6 @@ class UploadFile extends BaseModel
         }
         return $data['file_url'] . '/' . $data['file_name'];
     }
-
-    /**
-     * 兼容写法 (即将废弃)
-     * @param $value
-     * @param $data
-     * @return array
-     */
-//    public function getFileNameAttr($value, $data)
-//    {
-//        if ($data['storage'] === 'local') {
-//            $file_path = self::$base_url . 'uploads' . DS . $data['file_name'];
-//        } else {
-//            $file_path = $data['file_url'] . DS . $data['file_name'];
-//        }
-//        return compact('file_path', 'value');
-//    }
 
     /**
      * 根据文件名查询文件id
@@ -61,6 +51,25 @@ class UploadFile extends BaseModel
     public static function getFileName($fileId)
     {
         return (new static)->where(['file_id' => $fileId])->value('file_name');
+    }
+
+    /**
+     * 获取列表记录
+     * @param $group_id
+     * @param string $file_type
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
+    public function getList($group_id, $file_type = 'image')
+    {
+        $model = $this->where(['file_type' => $file_type, 'is_delete' => 0]);
+        if ($group_id !== -1) {
+            $model->where(compact('group_id'));
+        }
+        return $model->order(['create_time' => 'desc'])
+            ->paginate(32, false, [
+            'query' => Request::instance()->request()
+        ]);
     }
 
 }

@@ -85,21 +85,23 @@
 
         /**
          * 选择图片文件
+         * @param option
          */
         selectImages: function (option) {
-            var $this = this;
-            // 配置项
-            var defaults = {
-                name: ''            // input name
-                , imagesList: '.uploader-list'    // 图片列表容器
-                , imageDelete: '.file-item-delete'   // 删除按钮元素
-                , multiple: false    // 是否多选
-                , done: null  // 选择完成后的回调函数
-            };
-            var options = $.extend({}, defaults, option);
+            var $this = this
+                // 配置项
+                , defaults = {
+                    name: ''            // input name
+                    , imagesList: '.uploader-list'    // 图片列表容器
+                    , imageDelete: '.file-item-delete'   // 删除按钮元素
+                    , multiple: false    // 是否多选
+                    , done: null  // 选择完成后的回调函数
+                }
+                , options = $.extend({}, defaults, option);
             // 显示文件库 选择文件
             $this.fileLibrary({
-                done: function (data, $touch) {
+                type: 'image'
+                , done: function (data, $touch) {
                     var list = options.multiple ? data : [data[0]];
                     // 判断回调参数是否存在, 否则执行默认
                     if (typeof options.done === 'function') {
@@ -177,7 +179,7 @@
                     // 允许重复上传
                     duplicate: true,
                     // 文件接收服务端。
-                    server: BASE_URL + '/upload/images',
+                    server: BASE_URL + '/upload/image',
                     // 选择文件的按钮。可选。
                     // 内部根据当前运行是创建，可能是input元素，也可能是flash.
                     pick: {
@@ -282,7 +284,7 @@
                 // 选完文件后，是否自动上传。
                 auto: true,
                 // 文件接收服务端。
-                server: BASE_URL + '/upload/images',
+                server: BASE_URL + '/upload/image',
                 // 选择文件的按钮。可选。
                 // 内部根据当前运行是创建，可能是input元素，也可能是flash.
                 pick: {

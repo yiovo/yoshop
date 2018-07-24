@@ -857,7 +857,6 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
 
 .tpl-user-card-title {
   font-size: 26px;
-  margin-top: 0;
   font-weight: 300;
   margin-top: 25px;
   margin-bottom: 10px; }
@@ -1561,7 +1560,7 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
     float: left;
     border-radius: 13px;
     position: relative;
-    z-index: 2; }
+    z-index: 3; }
   .order-detail-progress .tip {
     font-size: 12px;
     padding-top: 10px;
@@ -1640,7 +1639,7 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
             color: #0e90d2; }
         .file-library .layui-layer-content .file-group .nav-new li:hover .group-edit, .file-library .layui-layer-content .file-group .nav-new li:hover .group-delete {
           display: inline; }
-    .file-library .layui-layer-content .file-group a.file-group-add {
+    .file-library .layui-layer-content .file-group a.group-add {
       display: block;
       margin-top: 1.8rem;
       font-size: 1.2rem;
@@ -1651,29 +1650,21 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
       padding: 0 2rem 0 1rem;
       margin-bottom: 10px; }
       .file-library .layui-layer-content .file-list .v-box-header .h-left .tpl-table-black-operation {
-        margin: 0 20px; }
+        margin: 0 1rem; }
         .file-library .layui-layer-content .file-list .v-box-header .h-left .tpl-table-black-operation a {
           padding: 6px 10px; }
-      .file-library .layui-layer-content .file-list .v-box-header .h-left .am-selected-btn {
+      .file-library .layui-layer-content .file-list .v-box-header .h-left .am-dropdown-toggle {
         font-size: 1.2rem; }
-      .file-library .layui-layer-content .file-list .v-box-header .h-rigth button {
-        color: #2589ff;
-        background-color: #fff;
-        border-color: #2589ff;
-        font-size: 12px;
-        border-radius: 4px;
-        outline: 0;
-        font-weight: 400;
-        padding: .6em 1em;
-        outline: none !important; }
-        .file-library .layui-layer-content .file-list .v-box-header .h-rigth button .iconfont {
-          font-size: 12px; }
-    .file-library .layui-layer-content .file-list .v-box-body {
-      width: 660px; }
-      .file-library .layui-layer-content .file-list .v-box-body ul {
-        overflow-y: auto;
-        height: 380px; }
-      .file-library .layui-layer-content .file-list .v-box-body li {
+      .file-library .layui-layer-content .file-list .v-box-header .h-left .am-dropdown-content a {
+        font-size: 1.3rem; }
+      .file-library .layui-layer-content .file-list .v-box-header .h-rigth .btn-addSpecGroup .iconfont {
+        font-size: 1.2rem; }
+  .file-library .layui-layer-content .v-box-body {
+    width: 660px; }
+    .file-library .layui-layer-content .v-box-body ul.file-list-item {
+      overflow-y: auto;
+      height: 380px; }
+      .file-library .layui-layer-content .v-box-body ul.file-list-item li {
         position: relative;
         cursor: pointer;
         border-radius: 6px;
@@ -1685,20 +1676,20 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
         -moz-transition: All 0.2s ease-in-out;
         -o-transition: All 0.2s ease-in-out;
         transition: All 0.2s ease-in-out; }
-        .file-library .layui-layer-content .file-list .v-box-body li:hover {
+        .file-library .layui-layer-content .v-box-body ul.file-list-item li:hover {
           border: 1px solid #16bce2; }
-        .file-library .layui-layer-content .file-list .v-box-body li .img-cover {
+        .file-library .layui-layer-content .v-box-body ul.file-list-item li .img-cover {
           width: 120px;
           height: 120px;
           background-repeat: no-repeat;
           background-size: cover; }
-        .file-library .layui-layer-content .file-list .v-box-body li p.file-name {
+        .file-library .layui-layer-content .v-box-body ul.file-list-item li p.file-name {
           margin: 5px 0 0 0;
           width: 120px;
           font-size: 1.3rem; }
-        .file-library .layui-layer-content .file-list .v-box-body li.active .select-mask {
+        .file-library .layui-layer-content .v-box-body ul.file-list-item li.active .select-mask {
           display: block; }
-        .file-library .layui-layer-content .file-list .v-box-body li .select-mask {
+        .file-library .layui-layer-content .v-box-body ul.file-list-item li .select-mask {
           display: none;
           position: absolute;
           top: 0;
@@ -1708,9 +1699,43 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
           background: rgba(0, 0, 0, 0.5);
           text-align: center;
           border-radius: 6px; }
-          .file-library .layui-layer-content .file-list .v-box-body li .select-mask img {
+          .file-library .layui-layer-content .v-box-body ul.file-list-item li .select-mask img {
             position: absolute;
             top: 50px;
             left: 45px; }
+    .file-library .layui-layer-content .v-box-body ul.pagination {
+      margin: 0; }
+      .file-library .layui-layer-content .v-box-body ul.pagination > li > a, .file-library .layui-layer-content .v-box-body ul.pagination > li > span {
+        padding: .3rem .9rem;
+        font-size: 1.3rem; }
+
+/* 文件上传按钮 */
+.webuploader-container {
+  position: relative; }
+
+.webuploader-element-invisible {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px); }
+
+.webuploader-pick {
+  color: #2589ff;
+  background-color: #fff;
+  border-color: #2589ff;
+  font-size: 12px;
+  border-radius: 4px;
+  outline: 0;
+  font-weight: 400;
+  padding: .6em 1em;
+  outline: none !important; }
+
+.webuploader-pick-hover {
+  background: #2589ff;
+  color: #fff; }
+
+.webuploader-pick-disable {
+  opacity: 0.6;
+  pointer-events: none; }
 
 /*# sourceMappingURL=app.css.map */

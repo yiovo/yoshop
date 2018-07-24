@@ -8,6 +8,12 @@
                             <div class="widget-head am-cf">
                                 <div class="widget-title am-fl">添加商品分类</div>
                             </div>
+
+                            <!-- <div id="doc-dropdown-justify-js" style="width: 400px">-->
+
+                            <!-- </div>-->
+
+
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">分类名称 </label>
                                 <div class="am-u-sm-9 am-u-end">
@@ -75,8 +81,11 @@
 <script>
     $(function () {
 
+
+
+
         // 选择图片
-        $('.upload-file').selectImages({
+        $('.upload-file').selectImages('images', {
             name: 'category[image_id]'
         });
 
