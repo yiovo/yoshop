@@ -34,6 +34,9 @@ li {
 a:focus {
   outline: none; }
 
+.c-red {
+  color: #f00 !important; }
+
 .icon {
   width: 1em;
   height: 1em;
@@ -807,8 +810,10 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
 .tpl-form-line-form .am-radio-inline {
   margin-top: 0;
   margin-bottom: 0;
-  padding-top: .8rem;
-  color: #656565; }
+  padding-top: .8rem; }
+
+.am-checkbox, .am-checkbox-inline, .am-radio, .am-radio-inline {
+  user-select: none; }
 
 .tpl-form-line-form .am-checkbox .am-ucheck-icons,
 .tpl-form-line-form .am-checkbox-inline .am-ucheck-icons,

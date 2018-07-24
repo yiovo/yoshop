@@ -153,11 +153,7 @@ return [
                 'submenu' => [
                     [
                         'name' => '清理缓存',
-                        'index' => 'setting.cache/index',
-                        'uris' => [
-                            'setting.cache/index',
-                            'setting.cache/delete'
-                        ],
+                        'index' => 'setting.cache/clear'
                     ],
                 ]
             ]
