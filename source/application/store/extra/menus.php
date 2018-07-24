@@ -4,23 +4,24 @@
  *    'home' => [
  *       'name' => '首页',                // 菜单名称
  *       'icon' => 'icon-home',          // 图标 (class)
- *       'url' => 'index/index',         // 链接
+ *       'index' => 'index/index',         // 链接
  *     ],
  */
 return [
     'index' => [
         'name' => '首页',
         'icon' => 'icon-home',
-        'url' => 'index/index',
+        'index' => 'index/index',
     ],
     'goods' => [
         'name' => '商品管理',
         'icon' => 'icon-goods',
-        'url' => 'goods/index',
+        'index' => 'goods/index',
         'submenu' => [
             [
                 'name' => '商品列表',
-                'handle' => [
+                'index' => 'goods/index',
+                'uris' => [
                     'goods/index',
                     'goods/add',
                     'goods/edit'
@@ -28,99 +29,85 @@ return [
             ],
             [
                 'name' => '商品分类',
-                'url' => 'category/index',
-                'handle' => [
+                'index' => 'goods.category/index',
+                'uris' => [
                     'goods.category/index',
                     'goods.category/add',
                     'goods.category/edit',
                 ],
-            ],
+            ]
         ],
     ],
     'order' => [
         'name' => '订单管理',
         'icon' => 'icon-order',
-        'url' => 'order/delivery_list',
+        'index' => 'order/delivery_list',
         'submenu' => [
             [
                 'name' => '待发货',
-                'handle' => [
-                    'order/delivery_list',
-                ],
+                'index' => 'order/delivery_list',
             ],
             [
                 'name' => '待收货',
-                'handle' => [
-                    'order/receipt_list',
-                ],
+                'index' => 'order/receipt_list',
             ],
             [
                 'name' => '待付款',
-                'handle' => [
-                    'order/pay_list',
-                ],
+                'index' => 'order/pay_list',
             ],
             [
                 'name' => '已完成',
-                'handle' => [
-                    'order/complete_list',
-                ],
+                'index' => 'order/complete_list',
+
             ],
             [
                 'name' => '已取消',
-                'handle' => [
-                    'order/cancel_list',
-                ],
+                'index' => 'order/cancel_list',
             ],
             [
                 'name' => '全部订单',
-                'handle' => [
-                    'order/all_list',
-                ],
+                'index' => 'order/all_list',
             ],
         ]
     ],
     'user' => [
         'name' => '用户管理',
         'icon' => 'icon-user',
-        'url' => 'user/index',
-        'submenu' => [],
+        'index' => 'user/index',
     ],
 //    'marketing' => [
 //        'name' => '营销管理',
 //        'icon' => 'icon-marketing',
-//        'url' => 'marketing/index',
+//        'index' => 'marketing/index',
 //        'submenu' => [],
 //    ],
     'wxapp' => [
         'name' => '小程序',
         'icon' => 'icon-wxapp',
         'color' => '#36b313',
-        'url' => 'wxapp/setting',
+        'index' => 'wxapp/setting',
         'submenu' => [
             [
                 'name' => '小程序设置',
-                'handle' => [
-                    'wxapp/setting'
-                ],
+                'index' => 'wxapp/setting',
             ],
             [
                 'name' => '首页设计',
-                'handle' => [
-                    'wxapp/page'
-                ],
+                'index' => 'wxapp/page'
             ],
             [
                 'name' => '导航设置',
-                'handle' => [
-                    'wxapp/tabbar'
-                ],
+                'index' => 'wxapp/tabbar'
             ],
             [
                 'name' => '帮助中心',
-                'handle' => [
-                    'wxapp.help/index'
-                ],
+                'index' => 'wxapp.help/index',
+                'urls' => [
+                    'wxapp.help/index',
+                    'wxapp.help/add',
+                    'wxapp.help/edit',
+                    'wxapp.help/delete'
+                ]
             ],
         ],
     ],
@@ -128,28 +115,25 @@ return [
         'name' => '应用中心',
         'icon' => 'icon-application',
         'is_svg' => true,   // 多色图标
-//        'url' => 'plugins/index',
+//        'index' => 'plugins/index',
     ],
     'setting' => [
         'name' => '设置',
         'icon' => 'icon-setting',
-        'url' => 'setting/store',
+        'index' => 'setting/store',
         'submenu' => [
             [
                 'name' => '商城设置',
-                'handle' => [
-                    'setting/store'
-                ],
+                'index' => 'setting/store',
             ],
             [
                 'name' => '交易设置',
-                'handle' => [
-                    'setting/trade'
-                ],
+                'index' => 'setting/trade',
             ],
             [
                 'name' => '配送设置',
-                'handle' => [
+                'index' => 'setting.delivery/index',
+                'uris' => [
                     'setting.delivery/index',
                     'setting.delivery/add',
                     'setting.delivery/edit',
@@ -157,17 +141,26 @@ return [
             ],
             [
                 'name' => '短信通知',
-                'handle' => [
-                    'setting/sms'
-                ],
+                'index' => 'setting/sms'
             ],
             [
                 'name' => '上传设置',
-                'handle' => [
-                    'setting/storage'
-                ],
+                'index' => 'setting/storage',
             ],
+            [
+                'name' => '其他',
+                'active' => true,
+                'submenu' => [
+                    [
+                        'name' => '清理缓存',
+                        'index' => 'setting.cache/index',
+                        'uris' => [
+                            'setting.cache/index',
+                            'setting.cache/delete'
+                        ],
+                    ],
+                ]
+            ]
         ],
     ],
-
 ];

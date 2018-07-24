@@ -400,10 +400,7 @@ $(function () {
      * 侧边栏开关 (二级)
      */
     $('.sidebar-nav-sub-title').click(function () {
-        var _this = $(this);
-        _this.next('.sidebar-second-nav-sub').toggle(0, function () {
-            _this.toggleClass('active');
-        });
+        $(this).toggleClass('active');
     });
 
     // 刷新按钮

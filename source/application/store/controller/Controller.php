@@ -16,6 +16,15 @@ class Controller extends \think\Controller
     /* @var array $store 商城session信息 */
     protected $store;
 
+    /* @var string $route 当前路由：控制器名称 */
+    protected $controller = '';
+
+    /* @var string $route 当前路由：方法名称 */
+    protected $action = '';
+
+    /* @var string $route 当前路由：分组名称 */
+    protected $group = '';
+
     /* @var array $allowAllAction 登录验证白名单 */
     protected $allowAllAction = [
         // 登录页面
@@ -35,6 +44,8 @@ class Controller extends \think\Controller
      */
     public function _initialize()
     {
+        // 当前路由信息
+        $this->getRouteinfo();
         // 验证登录
         $this->checkLogin();
         // 全局layout
@@ -46,38 +57,30 @@ class Controller extends \think\Controller
      */
     private function layout()
     {
-        // 路由信息
-        list ($controller, $action, $group) = $this->getRouteinfo();
         // 验证当前请求是否在白名单
-        if (in_array($controller . DS . $action, $this->notLayoutAction)) {
-            return true;
+        if (!in_array($this->controller . DS . $this->action, $this->notLayoutAction)) {
+            // 输出到view
+            $this->assign([
+                'group' => $this->group,
+                'menus' => $this->menus(),                     // 后台菜单
+                'wxapp' => $this->store['wxapp'],               // 当前小程序信息
+                'setting' => Setting::getAll() ?: null,        // 当前商城设置
+            ]);
         }
-        // 当前商城设置
-        $setting = Setting::getAll() ?: null;
-        // 后台菜单
-        $menus = $this->menus();
-        // 当前小程序信息
-        $wxapp = $this->store['wxapp'];
-        // 输出到view
-        $this->assign(compact('group', 'controller', 'action', 'menus'
-            , 'wxapp', 'setting'));
-        return true;
     }
 
     /**
      * 解析当前路由参数 （分组名称、控制器名称、方法名）
-     * @return array
      */
     protected function getRouteinfo()
     {
         // 控制器名称
-        $controller = toUnderScore($this->request->controller());
+        $this->controller = toUnderScore($this->request->controller());
         // 方法名称
-        $action = $this->request->action();
+        $this->action = $this->request->action();
         // 控制器分组 (用于定义所属模块)
-        $groupstr = strstr($controller, '.', true);
-        $group = $groupstr !== false ? $groupstr : $controller;
-        return [$controller, $action, $group];
+        $groupstr = strstr($this->controller, '.', true);
+        $this->group = $groupstr !== false ? $groupstr : $this->controller;
     }
 
     /**
@@ -86,7 +89,40 @@ class Controller extends \think\Controller
      */
     private function menus()
     {
-        return Config::get('menus');
+        $url = $this->controller . DS . $this->action;
+        foreach ($data = Config::get('menus') as $group => $first) {
+            $data[$group]['active'] = $group === $this->group;
+            // 遍历：二级菜单
+            if (isset($first['submenu'])) {
+                foreach ($first['submenu'] as $secondKey => $second) {
+                    // 二级菜单所有uri
+                    $secondUris = [];
+                    if (isset($second['submenu'])) {
+                        // 遍历：三级菜单
+                        foreach ($second['submenu'] as $thirdKey => $third) {
+                            $thirdUris = [];
+                            if (isset($third['uris'])) {
+                                $secondUris = array_merge($secondUris, $third['uris']);
+                                $thirdUris = array_merge($thirdUris, $third['uris']);
+                            } else {
+                                $secondUris[] = $third['index'];
+                                $thirdUris[] = $third['index'];
+                            }
+                            $data[$group]['submenu'][$secondKey]['submenu'][$thirdKey]['active'] = in_array($url, $thirdUris);
+                        }
+                    } else {
+                        if (isset($second['uris']))
+                            $secondUris = array_merge($secondUris, $second['uris']);
+                        else
+                            $secondUris[] = $second['index'];
+                    }
+                    // 二级菜单：active
+                    !isset($data[$group]['submenu'][$secondKey]['active'])
+                    && $data[$group]['submenu'][$secondKey]['active'] = in_array($url, $secondUris);
+                }
+            }
+        }
+        return $data;
     }
 
     /**

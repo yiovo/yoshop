@@ -16,7 +16,7 @@
     <script src="assets/store/js/jquery.min.js"></script>
     <script src="//at.alicdn.com/t/font_664399_1z02i08jjid.js"></script>
     <script>
-         BASE_URL = '<?= url('/store') ?>';
+        BASE_URL = '<?= url('/store') ?>';
     </script>
 </head>
 
@@ -50,21 +50,13 @@
     <!-- 侧边导航栏 -->
     <div class="left-sidebar">
         <?php $menus = $menus ?: []; ?>
-        <?php $group = $group ?: ''; ?>
-        <?php $controller = $controller ?: ''; ?>
-        <?php $action = $action ?: ''; ?>
-        <?php $url = $controller . DS . $action; ?>
-        <?php
-        //        echo $url; die;
-        ?>
         <!-- 一级菜单 -->
         <ul class="sidebar-nav">
             <li class="sidebar-nav-heading"><?= $setting['store']['values']['name'] ?></li>
             <?php foreach ($menus as $key => $item): ?>
-                <?php $first_active = $key === $group ? 'active' : '' ?>
                 <li class="sidebar-nav-link">
-                    <a href="<?= isset($item['url']) ? url($item['url']) : 'javascript:void(0);' ?>"
-                       class="<?= $first_active ?>">
+                    <a href="<?= isset($item['index']) ? url($item['index']) : 'javascript:void(0);' ?>"
+                       class="<?= $item['active'] ? 'active' : '' ?>">
                         <?php if (isset($item['is_svg']) && $item['is_svg'] === true): ?>
                             <svg class="icon sidebar-nav-link-logo" aria-hidden="true">
                                 <use xlink:href="#<?= $item['icon'] ?>"></use>
@@ -78,29 +70,38 @@
                 </li>
             <?php endforeach; ?>
         </ul>
-        <!-- 二级菜单-->
-        <?php $second = isset($menus[$group]['submenu']) ? $menus[$group]['submenu'] : []; ?>
+        <!-- 子级菜单-->
+        <?php $second = $menus[$group]['submenu']; ?>
         <?php if (!empty($second)) : ?>
             <ul class="left-sidebar-second">
                 <li class="sidebar-second-title"><?= $menus[$group]['name'] ?></li>
                 <li class="sidebar-second-item">
                     <?php foreach ($second as $item) : ?>
-                        <?php $two_active = in_array($url, $item['handle']) ? 'active' : '' ?>
-                        <a href="<?= url(current($item['handle'])); ?>" class="sidebar-second-link <?= $two_active ?>">
-                            <?= $item['name']; ?>
-                        </a>
+                        <?php if (!isset($item['submenu'])): ?>
+                            <!-- 二级菜单-->
+                            <a href="<?= url($item['index']) ?>" class="<?= $item['active'] ? 'active' : '' ?>">
+                                <?= $item['name']; ?>
+                            </a>
+                        <?php else: ?>
+                            <!-- 三级菜单-->
+                            <div class="sidebar-third-item">
+                                <a href="javascript:void(0);"
+                                   class="sidebar-nav-sub-title <?= $item['active'] ? 'active' : '' ?>">
+                                    <i class="iconfont icon-caret">&#xe653;</i>
+                                    <?= $item['name']; ?>
+                                </a>
+                                <ul class="sidebar-third-nav-sub">
+                                    <?php foreach ($item['submenu'] as $third) : ?>
+                                        <li>
+                                            <a class="<?= $third['active'] ? 'active' : '' ?>"
+                                               href="<?= url($third['index']) ?>">
+                                                <?= $third['name']; ?></a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
                     <?php endforeach; ?>
-                    <!-- 三级菜单-->
-                    <div style="display: none">
-                        <a href="javascript:void(0);" class="sidebar-nav-sub-title">
-                            <i class="iconfont icon-caret">&#xe653;</i>
-                            基本功能
-                        </a>
-                        <ul class="sidebar-second-nav-sub">
-                            <li><a href="">满额立减</a></li>
-                            <li><a href="">满额包邮</a></li>
-                        </ul>
-                    </div>
                 </li>
             </ul>
         <?php endif; ?>
