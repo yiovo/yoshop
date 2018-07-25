@@ -64,7 +64,7 @@
                                         </div>
                                     </div>
                                     <div class="help-block am-margin-top-sm">
-                                        <small>尺寸750x750像素以上，大小2M以下，最多10张 (可拖拽图片调整显示顺序 )</small>
+                                        <small>尺寸750x750像素以上，大小2M以下 (可拖拽图片调整显示顺序 )</small>
                                     </div>
                                 </div>
                             </div>
@@ -291,7 +291,7 @@
         });
 
         // 图片列表拖动
-        $('#file-list').DDSort({
+        $('.uploader-list').DDSort({
             target: '.file-item',
             delay: 100, // 延时处理，默认为 50 ms，防止手抖点击 A 链接无效
             floatStyle: {
