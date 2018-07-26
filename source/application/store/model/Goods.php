@@ -54,11 +54,11 @@ class Goods extends GoodsModel
     private function addGoodsImages($images)
     {
         $this->image()->delete();
-        $model = new UploadFile;
-        $imagesIds = $model->where('file_name', 'in', $images)
-            ->column('file_id', 'file_name');
-        $data = array_map(function ($val) use ($imagesIds) {
-            return ['image_id' => $imagesIds[$val], 'wxapp_id' => self::$wxapp_id];
+        $data = array_map(function ($image_id) {
+            return [
+                'image_id' => $image_id,
+                'wxapp_id' => self::$wxapp_id
+            ];
         }, $images);
         return $this->image()->saveAll($data);
     }
@@ -77,6 +77,7 @@ class Goods extends GoodsModel
         $data['content'] = isset($data['content']) ? $data['content'] : '';
         $data['wxapp_id'] = $data['spec']['wxapp_id'] = self::$wxapp_id;
 
+//        pre($data['images']);
         // 开启事务
         Db::startTrans();
         try {

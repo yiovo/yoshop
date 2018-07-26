@@ -27,8 +27,7 @@ class Goods extends Controller
 
     /**
      * 添加商品
-     * @return mixed
-     * @throws \think\exception\DbException
+     * @return array|mixed
      */
     public function add()
     {

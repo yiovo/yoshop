@@ -48,22 +48,23 @@
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品图片 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <div class="am-form-file">
-                                        <div id="file-goods-image" class="upload-file">
-                                            <i class="am-icon-cloud-upload"></i> 上传图片
-                                        </div>
-                                        <div id="file-list" class="uploader-list am-cf">
+                                        <button type="button"
+                                                class="upload-file am-btn am-btn-secondary am-radius">
+                                            <i class="am-icon-cloud-upload"></i> 选择图片
+                                        </button>
+                                        <div class="uploader-list am-cf">
                                             <?php foreach ($model['image'] as $key => $item): ?>
-                                                <div class="file-item thumbnail upload-state-done">
+                                                <div class="file-item">
                                                     <img src="<?= $item['file_path'] ?>">
                                                     <input type="hidden" name="goods[images][]"
-                                                           value="<?= $item['file_name'] ?>">
+                                                           value="<?= $item['image_id'] ?>">
                                                     <i class="iconfont icon-shanchu file-item-delete"></i>
                                                 </div>
                                             <?php endforeach; ?>
                                         </div>
                                     </div>
                                     <div class="help-block am-margin-top-sm">
-                                        <small>尺寸750x750像素以上，大小2M以下，最多10张 (可拖拽图片调整显示顺序 )</small>
+                                        <small>尺寸750x750像素以上，大小2M以下 (可拖拽图片调整显示顺序 )</small>
                                     </div>
                                 </div>
                             </div>
@@ -264,13 +265,18 @@
     </div>
 </div>
 
+<!-- 图片文件列表模板 -->
+{{include file="layouts/_template/tpl_file_item" /}}
+
+<!-- 文件库弹窗 -->
+{{include file="layouts/_template/file_library" /}}
+
 <!-- 商品多规格模板 -->
 {{include file="goods/_template/spec_many" /}}
 
 <script src="assets/store/js/ddsort.js"></script>
 <script src="assets/store/plugins/umeditor/umeditor.config.js"></script>
 <script src="assets/store/plugins/umeditor/umeditor.min.js"></script>
-<script src="assets/store/js/art-template.js"></script>
 <script src="assets/store/js/goods.spec.js"></script>
 <script>
     $(function () {
@@ -278,17 +284,14 @@
         // 富文本编辑器
         UM.getEditor('container');
 
-        // 上传商品图片
-        $.uploadImages({
-            pick: '#file-goods-image',
-            list: {
-                id: '#file-list',
-                inputName: 'goods[images][]',
-            }
+        // 选择图片
+        $('.upload-file').selectImages({
+            name: 'goods[images][]'
+            , multiple: true
         });
 
         // 图片列表拖动
-        $('#file-list').DDSort({
+        $('.uploader-list').DDSort({
             target: '.file-item',
             delay: 100, // 延时处理，默认为 50 ms，防止手抖点击 A 链接无效
             floatStyle: {
@@ -298,13 +301,13 @@
         });
 
         // 注册商品多规格组件
-        let specMany = new GoodsSpec({
+        var specMany = new GoodsSpec({
             container: '.goods-spec-many',
         }, <?= $specData ?>);
 
         // 切换单/多规格
         $('input:radio[name="goods[spec_type]"]').change(function (e) {
-            let $goodsSpecMany = $('.goods-spec-many')
+            var $goodsSpecMany = $('.goods-spec-many')
                 , $goodsSpecSingle = $('.goods-spec-single');
             if (e.currentTarget.value === '10') {
                 $goodsSpecMany.hide() && $goodsSpecSingle.show();
@@ -328,14 +331,14 @@
             },
             // 自定义验证
             validation: function () {
-                let specType = $('input:radio[name="goods[spec_type]"]:checked').val();
+                var specType = $('input:radio[name="goods[spec_type]"]:checked').val();
                 if (specType === '20') {
-                    let isEmpty = specMany.isEmptySkuList();
+                    var isEmpty = specMany.isEmptySkuList();
                     isEmpty === true && layer.msg('商品规格不能为空');
                     return !isEmpty;
                 }
                 return true;
-            },
+            }
         });
 
     });

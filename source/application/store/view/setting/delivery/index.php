@@ -76,7 +76,7 @@
     $(function () {
 
         // 删除元素
-        let url = "<?= url('setting.delivery/delete') ?>";
+        var url = "<?= url('setting.delivery/delete') ?>";
         $('.item-delete').delete('delivery_id', url);
 
     });

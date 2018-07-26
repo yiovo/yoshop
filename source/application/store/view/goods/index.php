@@ -94,7 +94,7 @@
     $(function () {
 
         // 删除元素
-        let url = "<?= url('goods/delete') ?>";
+        var url = "<?= url('goods/delete') ?>";
         $('.item-delete').delete('goods_id', url);
 
     });

@@ -136,7 +136,7 @@
         UMEDITOR_HOME_URL: URL
 
         //图片上传配置区
-        , imageUrl:  BASE_URL + "/upload/images"             //图片上传提交地址
+        , imageUrl:  BASE_URL + "/upload/image"             //图片上传提交地址
         , imagePath: URL + "php/"                     //图片修正地址，引用了fixedImagePath,如有特殊需求，可自行配置
         , imageFieldName: "iFile"                   //图片数据的key,若此处修改，需要在后台对应文件修改对应参数
 
