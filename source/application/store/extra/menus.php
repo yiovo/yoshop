@@ -155,6 +155,10 @@ return [
                         'name' => '清理缓存',
                         'index' => 'setting.cache/clear'
                     ],
+                    [
+                        'name' => '环境检测',
+                        'index' => 'setting.science/index'
+                    ],
                 ]
             ]
         ],
