@@ -13,7 +13,7 @@ use app\store\model\Setting;
  */
 class Controller extends \think\Controller
 {
-    /* @var array $store 商城session信息 */
+    /* @var array $store 商家登录信息 */
     protected $store;
 
     /* @var string $route 当前控制器名称 */
@@ -45,6 +45,8 @@ class Controller extends \think\Controller
      */
     public function _initialize()
     {
+        // 商家登录信息
+        $this->store = Session::get('yoshop_store');
         // 当前路由信息
         $this->getRouteinfo();
         // 验证登录
@@ -64,7 +66,7 @@ class Controller extends \think\Controller
             $this->assign([
                 'group' => $this->group,
                 'menus' => $this->menus(),                     // 后台菜单
-                'wxapp' => $this->store['wxapp'],               // 当前小程序信息
+                'store' => $this->store,                       // 商家登录信息
                 'setting' => Setting::getAll() ?: null,        // 当前商城设置
             ]);
         }
@@ -132,14 +134,10 @@ class Controller extends \think\Controller
      */
     private function checkLogin()
     {
-        // 记录session信息
-        $this->store = Session::get('yoshop_store');
-
         // 验证当前请求是否在白名单
         if (in_array($this->routeUri, $this->allowAllAction)) {
             return true;
         }
-
         // 验证登录状态
         if (empty($this->store)
             || (int)$this->store['is_login'] !== 1
