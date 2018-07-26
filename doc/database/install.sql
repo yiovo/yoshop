@@ -4000,16 +4000,31 @@ COMMIT;
 DROP TABLE IF EXISTS `yoshop_upload_file`;
 CREATE TABLE `yoshop_upload_file` (
   `file_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `storage` varchar(20) NOT NULL,
+  `storage` varchar(20) NOT NULL DEFAULT '',
+  `group_id` int(11) unsigned NOT NULL DEFAULT '0',
   `file_url` varchar(255) NOT NULL DEFAULT '',
   `file_name` varchar(255) NOT NULL DEFAULT '',
-  `file_size` int(11) unsigned NOT NULL,
-  `file_type` varchar(20) NOT NULL,
+  `file_size` int(11) unsigned NOT NULL DEFAULT '0',
+  `file_type` varchar(20) NOT NULL DEFAULT '',
   `extension` varchar(20) NOT NULL DEFAULT '',
+  `is_delete` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0',
-  `create_time` int(11) NOT NULL,
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`file_id`),
   UNIQUE KEY `path_idx` (`file_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `yoshop_upload_group`;
+CREATE TABLE `yoshop_upload_group` (
+  `group_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `group_type` varchar(10) NOT NULL DEFAULT '',
+  `group_name` varchar(30) NOT NULL DEFAULT '',
+  `sort` int(11) unsigned NOT NULL DEFAULT '0',
+  `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`group_id`),
+  KEY `type_index` (`group_type`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `yoshop_upload_file_used`;
