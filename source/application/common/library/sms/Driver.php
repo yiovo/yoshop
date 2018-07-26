@@ -35,11 +35,13 @@ class Driver
      * 发送短信通知
      * @param $msgType
      * @param $templateParams
-     * @return mixed
+     * @param bool $isTest
+     * @return bool
      */
-    public function sendSms($msgType, $templateParams)
+    public function sendSms($msgType, $templateParams, $isTest = false)
     {
-        if ($this->config['engine'][$this->engineName][$msgType]['is_enable'] === '0') {
+        if ($isTest === false
+            && $this->config['engine'][$this->engineName][$msgType]['is_enable'] === '0') {
             return false;
         }
         return $this->engine->sendSms($msgType, $templateParams);

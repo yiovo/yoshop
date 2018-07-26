@@ -63,11 +63,11 @@ class UserAddress extends UserAddressModel
     {
         // 添加收货地址
         $region = explode(',', $data['region']);
-        return $this->allowField(true)->save(array_merge([
-            'province_id' => Region::getIdByName($region[0], 1),
-            'city_id' => Region::getIdByName($region[1], 2),
-            'region_id' => Region::getIdByName($region[2], 3),
-        ], $data));
+        $province_id = Region::getIdByName($region[0], 1);
+        $city_id = Region::getIdByName($region[1], 2, $province_id);
+        $region_id = Region::getIdByName($region[2], 3, $city_id);
+        return $this->allowField(true)
+            ->save(array_merge(compact('province_id', 'city_id', 'region_id'), $data));
     }
 
     /**

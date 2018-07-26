@@ -70,7 +70,7 @@
     $(function () {
 
         // 删除元素
-        let url = "<?= url('wxapp.help/delete') ?>";
+        var url = "<?= url('wxapp.help/delete') ?>";
         $('.item-delete').delete('help_id', url);
 
     });

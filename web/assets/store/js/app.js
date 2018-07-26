@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * jquery全局函数封装
  */
@@ -10,18 +8,18 @@
     $.fn.extend({
         superForm: function (option) {
             // 默认选项
-            let defaultOption = {
+            var defaultOption = {
                 buildData: function () {
                     return {};
                 },
                 validation: function () {
                     return true;
-                },
+                }
             };
             option = $.extend(true, {}, defaultOption, option);
 
-            let $form = $(this);
-            let btn_submit = $('.j-submit');
+            var $form = $(this)
+                , btn_submit = $('.j-submit');
             $form.validator({
                 onValid: function (validity) {
                     $(validity.field).next('.am-alert').hide();
@@ -31,13 +29,13 @@
                  * @param validity
                  */
                 onInValid: function (validity) {
-                    let $field = $(validity.field)
+                    var $field = $(validity.field)
                         , $group = $field.parent()
                         , $alert = $group.find('.am-alert');
 
                     if ($field.data('validationMessage') !== undefined) {
                         // 使用自定义的提示信息 或 插件内置的提示信息
-                        let msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+                        var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
                         if (!$alert.length) {
                             $alert = $('<div class="am-alert am-alert-danger"></div>').hide().appendTo($group);
                         }
@@ -73,7 +71,7 @@
          */
         delete: function (index, url) {
             $(this).click(function () {
-                let param = {};
+                var param = {};
                 param[index] = $(this).attr('data-id');
                 layer.confirm('确定要删除吗？', function (index) {
                     $.post(url, param, function (result) {
@@ -84,6 +82,43 @@
                 });
             });
         },
+
+        /**
+         * 选择图片文件
+         * @param option
+         */
+        selectImages: function (option) {
+            var $this = this
+                // 配置项
+                , defaults = {
+                    name: ''            // input name
+                    , imagesList: '.uploader-list'    // 图片列表容器
+                    , imageDelete: '.file-item-delete'   // 删除按钮元素
+                    , multiple: false    // 是否多选
+                    , done: null  // 选择完成后的回调函数
+                }
+                , options = $.extend({}, defaults, option);
+            // 显示文件库 选择文件
+            $this.fileLibrary({
+                type: 'image'
+                , done: function (data, $touch) {
+                    var list = options.multiple ? data : [data[0]];
+                    // 判断回调参数是否存在, 否则执行默认
+                    if (typeof options.done === 'function') {
+                        return options.done(data, $touch);
+                    }
+                    // 新增图片列表
+                    var $html = $(template('tpl-file-item', {list: list, name: options.name}))
+                        , $imagesList = $this.next(options.imagesList);
+                    // 注册删除事件
+                    $html.find(options.imageDelete).click(function () {
+                        $(this).parent().remove();
+                    });
+                    // 渲染html
+                    options.multiple ? $imagesList.append($html) : $imagesList.html($html);
+                }
+            });
+        }
 
     });
 
@@ -114,7 +149,7 @@
          * @param reload
          */
         show_error: function (msg, reload) {
-            let time = reload ? 1800 : 0;
+            var time = reload ? 1800 : 0;
             layer.alert(msg, {
                 title: '提示'
                 , icon: 2
@@ -136,7 +171,7 @@
          */
         uploadImage: function (option) {
             // 文件大小
-            let maxSize = option.maxSize !== undefined ? option.maxSize : 2
+            var maxSize = option.maxSize !== undefined ? option.maxSize : 2
                 // 初始化Web Uploader
                 , uploader = WebUploader.create({
                     // 选完文件后，是否自动上传。
@@ -144,7 +179,7 @@
                     // 允许重复上传
                     duplicate: true,
                     // 文件接收服务端。
-                    server: BASE_URL + '/upload/images',
+                    server: BASE_URL + '/upload/image',
                     // 选择文件的按钮。可选。
                     // 内部根据当前运行是创建，可能是input元素，也可能是flash.
                     pick: {
@@ -184,7 +219,7 @@
 
             // 当有文件添加进来的时候
             uploader.on('fileQueued', function (file) {
-                let $uploadFile = $('#rt_' + file.source.ruid).parent()
+                var $uploadFile = $('#rt_' + file.source.ruid).parent()
                     , $list = $uploadFile.next(option.list)
                     , $li = $(
                     '<div id="' + file.id + '" class="file-item thumbnail">' +
@@ -216,7 +251,7 @@
             // 文件上传成功，给item添加成功class, 用样式标记上传成功。
             uploader.on('uploadSuccess', function (file, response) {
                 if (response.code === 1) {
-                    let $item = $('#' + file.id);
+                    var $item = $('#' + file.id);
                     $item.addClass('upload-state-done')
                         .children('input[type=hidden]').val(response.data.path);
                 } else
@@ -228,7 +263,7 @@
             });
             // 显示上传出错信息
             uploader.uploadError = function (file) {
-                let $li = $('#' + file.id),
+                var $li = $('#' + file.id),
                     $error = $li.find('div.error');
                 // 避免重复创建
                 if (!$error.length) {
@@ -243,13 +278,13 @@
          */
         uploadImages: function (option) {
             // 文件大小
-            let maxSize = option.maxSize !== undefined ? option.maxSize : 2;
+            var maxSize = option.maxSize !== undefined ? option.maxSize : 2;
             // 初始化Web Uploader
-            let uploader = WebUploader.create({
+            var uploader = WebUploader.create({
                 // 选完文件后，是否自动上传。
                 auto: true,
                 // 文件接收服务端。
-                server: BASE_URL + '/upload/images',
+                server: BASE_URL + '/upload/image',
                 // 选择文件的按钮。可选。
                 // 内部根据当前运行是创建，可能是input元素，也可能是flash.
                 pick: {
@@ -287,9 +322,9 @@
             });
             // 当有文件添加进来的时候
             uploader.on('fileQueued', function (file) {
-                let $list = $(option.list.id);
+                var $list = $(option.list.id);
                 // $list.empty();
-                let $li = $(
+                var $li = $(
                     '<div id="' + file.id + '" class="file-item thumbnail test">' +
                     '<img>' +
                     '<input type="hidden" name="' + option.list.inputName + '" value="">' +
@@ -300,7 +335,6 @@
                     $delete = $li.find('.file-item-delete');
                 // 删除文件
                 $delete.on('click', function () {
-                    console.log('1231');
                     uploader.removeFile(file);
                     $delete.parent().remove();
                 });
@@ -320,7 +354,7 @@
             // 文件上传成功，给item添加成功class, 用样式标记上传成功。
             uploader.on('uploadSuccess', function (file, response) {
                 if (response.code === 1) {
-                    let $item = $('#' + file.id);
+                    var $item = $('#' + file.id);
                     $item.addClass('upload-state-done')
                         .children('input[type=hidden]').val(response.data.path);
                 } else
@@ -332,7 +366,7 @@
             });
             // 显示上传出错信息
             uploader.uploadError = function (file) {
-                let $li = $('#' + file.id),
+                var $li = $('#' + file.id),
                     $error = $li.find('div.error');
                 // 避免重复创建
                 if (!$error.length) {
@@ -340,7 +374,9 @@
                 }
                 $error.text('上传失败');
             };
-        },
+        }
+
+
     });
 
 })(jQuery);
@@ -354,7 +390,7 @@ $(function () {
      * 点击侧边开关 (一级)
      */
     $('.switch-button').on('click', function () {
-        let header = $('.tpl-header'), wrapper = $('.tpl-content-wrapper'), leftSidebar = $('.left-sidebar');
+        var header = $('.tpl-header'), wrapper = $('.tpl-content-wrapper'), leftSidebar = $('.left-sidebar');
         if (leftSidebar.css('left') !== "0px") {
             header.removeClass('active') && wrapper.removeClass('active') && leftSidebar.css('left', 0);
         } else {
@@ -366,10 +402,7 @@ $(function () {
      * 侧边栏开关 (二级)
      */
     $('.sidebar-nav-sub-title').click(function () {
-        let _this = $(this);
-        _this.next('.sidebar-second-nav-sub').toggle(0, function () {
-            _this.toggleClass('active');
-        });
+        $(this).toggleClass('active');
     });
 
     // 刷新按钮
@@ -379,7 +412,7 @@ $(function () {
 
     // 删除图片 (数据库已有的)
     $('.file-item-delete').click(function () {
-        let _this = this;
+        var _this = this;
         layer.confirm('您确定要删除该图片吗？', {
             title: '友情提示'
         }, function (index) {
@@ -390,7 +423,7 @@ $(function () {
 
 });
 
-////////////////////////////////////#
+//******* 地区选择插件 *******//
 (function () {
 
     /***
@@ -424,7 +457,7 @@ $(function () {
          * 初始化地域界面
          */
         initInterface: function () {
-            let _this = this;
+            var _this = this;
             $(_this.container).append(
                 $('<div/>', {
                     class: 'place-div'
@@ -440,7 +473,7 @@ $(function () {
                                         $('<input/>', {
                                             type: 'checkbox',
                                             change: function () {
-                                                let checked = $(this).is(':checked'),
+                                                var checked = $(this).is(':checked'),
                                                     $allCheckbox = $('.place').find('input[type=checkbox]');
                                                 $('.ratio').html('');
                                                 $allCheckbox.prop('checked', checked);
@@ -477,7 +510,7 @@ $(function () {
          * @constructor
          */
         getSmallPlace: function () {
-            let _this = this;
+            var _this = this;
             return $('<div/>', {
                 class: 'smallplace clearfloat'
             }).append(
@@ -493,7 +526,7 @@ $(function () {
                                         type: 'checkbox',
                                         class: 'province',
                                         change: function () {
-                                            let $this = $(this)
+                                            var $this = $(this)
                                                 , small = $this.parent().next('.citys').find('input')
                                                 , $placeTooltips = $this.parents('.place-tooltips');
                                             if ($this.prop('checked')) {
@@ -559,7 +592,7 @@ $(function () {
                                 name: 'city[]',
                                 class: 'city',
                                 change: function () {
-                                    let $citys = $(this).parents('.citys')
+                                    var $citys = $(this).parents('.citys')
                                         , $placeTooltips = $(this).parents('.place-tooltips')
                                         , tf = $citys.find('input:checked').length
                                         , $province = $placeTooltips.find('.province')
@@ -589,7 +622,7 @@ $(function () {
          * @constructor
          */
         getCheckedIds: function () {
-            let checkedIds = [];
+            var checkedIds = [];
             $('input[type=checkbox][name="city[]"]:checked').each(function (index, item) {
                 checkedIds.push(item.id);
             });
@@ -601,11 +634,11 @@ $(function () {
          * @returns {Array}
          */
         getCheckedTree: function () {
-            let _this = this;
+            var _this = this;
             // 遍历省份
-            let data = [];
+            var data = [];
             $('input.province:checked').each(function (index, province) {
-                let $this = $(this)
+                var $this = $(this)
                     , $citys = $this.parent().next()
                     , $cityInputChecked = $citys.find('input.city:checked')
                     , cityData = []
@@ -631,17 +664,17 @@ $(function () {
          */
         getCheckedContent: function () {
             // 获取已选中的省市id
-            let dataTree = this.getCheckedTree()
+            var dataTree = this.getCheckedTree()
                 , checkedIds = this.getCheckedIds()
                 , content = '';
             if (checkedIds.length === 373) {
                 content = '全国';
             } else {
-                let str = '';
+                var str = '';
                 dataTree.forEach(function (item) {
                     str += item.name;
                     if (item.city.length > 0) {
-                        let cityStr = '';
+                        var cityStr = '';
                         item.city.forEach(function (city) {
                             cityStr += city.name + '、';
                         });
@@ -664,7 +697,7 @@ $(function () {
          * @constructor
          */
         setChecked: function (checkedIds) {
-            let $place = $('.place-div');
+            var $place = $('.place-div');
             $.each(checkedIds, function (i, id) {
                 $place.find('#' + id).trigger('click');
             });
@@ -676,9 +709,9 @@ $(function () {
          * @constructor
          */
         setAlready: function (alreadyIds) {
-            let $place = $('.place-div');
+            var $place = $('.place-div');
             $.each(alreadyIds, function (i, id) {
-                let $p = $place.find('#' + id).parent().parent()
+                var $p = $place.find('#' + id).parent().parent()
                     , $siblings = $p.siblings();
                 $siblings.length > 0 ? $p.remove() : $p.closest('.place-tooltips').remove();
             });
@@ -688,10 +721,10 @@ $(function () {
          * 清空
          */
         destroy: function () {
-            let $place = $('.place-div');
+            var $place = $('.place-div');
             $place.find('input[type=checkbox]').prop('checked', false);
             $place.find('.ratio').html('');
-        },
+        }
 
     };
 

@@ -3,11 +3,11 @@
 namespace app\store\controller;
 
 use app\store\model\UploadFile;
-use app\common\library\storage\Driver;
+use app\common\library\storage\Driver as StorageDriver;
 use app\store\model\Setting as SettingModel;
 
 /**
- * 后台文件上传
+ * 文件库管理
  * Class Upload
  * @package app\store\controller
  */
@@ -30,24 +30,21 @@ class Upload extends Controller
      * @return \think\response\Json
      * @throws \think\Exception
      */
-    public function images()
+    public function image()
     {
         // 实例化存储驱动
-        $Driver = new Driver($this->config);
+        $StorageDriver = new StorageDriver($this->config);
         // 上传图片
-        if (!$Driver->upload())
-            return json(['code' => 1, 'msg' => '图片上传失败' . $Driver->getError()]);
+        if (!$StorageDriver->upload())
+            return json(['code' => 1, 'msg' => '图片上传失败' . $StorageDriver->getError()]);
         // 图片上传路径
-        $fileName = $Driver->getFileName();
+        $fileName = $StorageDriver->getFileName();
         // 图片信息
-        $fileInfo = $Driver->getFileInfo();
+        $fileInfo = $StorageDriver->getFileInfo();
         // 添加文件库记录
         $uploadFile = $this->addUploadFile($fileName, $fileInfo, 'image');
         // 图片上传成功
-        return json(['code' => 1, 'msg' => '图片上传成功', 'data' => [
-            'path' => $uploadFile['file_name'],
-            'file_path' => $uploadFile['file_path'],
-        ]]);
+        return json(['code' => 1, 'msg' => '图片上传成功', 'data' => $uploadFile]);
     }
 
     /**
@@ -66,7 +63,6 @@ class Upload extends Controller
         // 添加文件库记录
         $model = new UploadFile;
         $model->add([
-            'wxapp_id' => $this->getWxappId(),
             'storage' => $storage,
             'file_url' => $fileUrl,
             'file_name' => $fileName,

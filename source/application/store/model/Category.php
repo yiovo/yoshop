@@ -20,9 +20,9 @@ class Category extends CategoryModel
     public function add($data)
     {
         $data['wxapp_id'] = self::$wxapp_id;
-        if (!empty($data['image'])) {
-            $data['image_id'] = UploadFile::getFildIdByName($data['image']);
-        }
+//        if (!empty($data['image'])) {
+//            $data['image_id'] = UploadFile::getFildIdByName($data['image']);
+//        }
         $this->deleteCache();
         return $this->allowField(true)->save($data);
     }
@@ -34,9 +34,6 @@ class Category extends CategoryModel
      */
     public function edit($data)
     {
-        if (!empty($data['image'])) {
-            $data['image_id'] = UploadFile::getFildIdByName($data['image']);
-        }
         $this->deleteCache();
         return $this->allowField(true)->save($data);
     }

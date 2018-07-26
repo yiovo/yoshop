@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: xany
- * Date: 2018/5/22
- * Time: 下午3:18
- */
 
 namespace app\common\model;
 
@@ -17,7 +11,9 @@ use think\Cache;
  */
 class Region extends BaseModel
 {
-    public $name = 'region';
+    protected $name = 'region';
+    protected $createTime = false;
+    protected $updateTime = false;
 
     /**
      * 根据id获取地区名称
@@ -34,12 +30,27 @@ class Region extends BaseModel
      * 根据名称获取地区id
      * @param $name
      * @param int $level
+     * @param int $pid
      * @return mixed
      */
-    public static function getIdByName($name, $level = 0)
+    public static function getIdByName($name, $level = 0, $pid = 0)
     {
-        return self::useGlobalScope(false)->where(compact('name', 'level'))
-            ->value('id');
+        return static::useGlobalScope(false)->where(compact('name', 'level', 'pid'))
+            ->value('id') ?: static::add($name, $level, $pid);
+    }
+
+    /**
+     * @param $name
+     * @param int $level
+     * @param int $pid
+     * @return mixed
+     */
+    private static function add($name, $level = 0, $pid = 0)
+    {
+        $model = new static;
+        $model->save(compact('name', 'level', 'pid'));
+        Cache::rm('region');
+        return $model->getLastInsID();
     }
 
     /**

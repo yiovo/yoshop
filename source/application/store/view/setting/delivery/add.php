@@ -90,7 +90,7 @@
     $(function () {
 
         // 初始化区域选择界面
-        let datas = JSON.parse('<?= $regionData ?>');
+        var datas = JSON.parse('<?= $regionData ?>');
 
         // 配送区域表格
         new Delivery({

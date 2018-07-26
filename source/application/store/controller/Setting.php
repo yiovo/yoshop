@@ -70,7 +70,7 @@ class Setting extends Controller
         if ($msg_type === 'order_pay') {
             $templateParams = ['order_no' => '2018071200000000'];
         }
-        if ($SmsDriver->sendSms($msg_type, $templateParams)) {
+        if ($SmsDriver->sendSms($msg_type, $templateParams, true)) {
             return $this->renderSuccess('发送成功');
         }
         return $this->renderError('发送失败 ' . $SmsDriver->getError());

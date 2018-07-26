@@ -45,6 +45,9 @@
     </div>
 </div>
 
+<!-- 文件库弹窗 -->
+{{include file="layouts/_template/file_library" /}}
+
 <!--diy元素-->
 {{include file="wxapp/tpl/diy" /}}
 
@@ -52,14 +55,12 @@
 {{include file="wxapp/tpl/editor" /}}
 
 <script src="assets/store/js/ddsort.js"></script>
-<script src="assets/store/js/art-template.js"></script>
 <script src="assets/store/js/diy.js"></script>
 <script>
     $(function () {
 
         // 渲染diy页面
         new diyPhone(<?= $jsonData ?: '{}' ?>);
-
 
     });
 </script>
