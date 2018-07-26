@@ -50,6 +50,7 @@
     <!-- 侧边导航栏 -->
     <div class="left-sidebar">
         <?php $menus = $menus ?: []; ?>
+        <?php $group = $group ?: 0; ?>
         <!-- 一级菜单 -->
         <ul class="sidebar-nav">
             <li class="sidebar-nav-heading"><?= $setting['store']['values']['name'] ?></li>
@@ -71,7 +72,7 @@
             <?php endforeach; ?>
         </ul>
         <!-- 子级菜单-->
-        <?php $second = $menus[$group]['submenu']; ?>
+        <?php $second = isset($menus[$group]['submenu']) ? $menus[$group]['submenu'] : []; ?>
         <?php if (!empty($second)) : ?>
             <ul class="left-sidebar-second">
                 <li class="sidebar-second-title"><?= $menus[$group]['name'] ?></li>
