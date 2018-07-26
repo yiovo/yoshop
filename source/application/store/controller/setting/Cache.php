@@ -21,7 +21,7 @@ class Cache extends Controller
     {
         if ($this->request->isAjax()) {
             $data = $this->postData('cache');
-            $this->rmCache($data['keys'], !!$data['isForce']);
+            $this->rmCache($data['keys'], isset($data['isForce']) ? !!$data['isForce'] : false);
             return $this->renderSuccess('操作成功');
         }
         return $this->fetch('clear', [
