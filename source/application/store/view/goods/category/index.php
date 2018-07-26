@@ -90,7 +90,7 @@
                                 <?php endforeach; endif; ?>
                             <?php endforeach; else: ?>
                                 <tr>
-                                    <td colspan="4" class="am-text-center">暂无记录</td>
+                                    <td colspan="5" class="am-text-center">暂无记录</td>
                                 </tr>
                             <?php endif; ?>
                             </tbody>
