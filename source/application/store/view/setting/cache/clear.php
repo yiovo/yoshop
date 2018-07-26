@@ -36,7 +36,7 @@
                                             是
                                         </label>
                                         <div class="help-block">
-                                            <small class="c-red">此操作将会强制清空缓存目录，包含用户授权登录状态、用户购物车数据，仅允许在开发环境中使用</small>
+                                            <small class="x-color-red">此操作将会强制清空缓存目录，包含用户授权登录状态、用户购物车数据，仅允许在开发环境中使用</small>
                                         </div>
                                     </div>
                                 </div>
