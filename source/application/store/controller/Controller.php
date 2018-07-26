@@ -16,11 +16,14 @@ class Controller extends \think\Controller
     /* @var array $store 商城session信息 */
     protected $store;
 
-    /* @var string $route 当前路由：控制器名称 */
+    /* @var string $route 当前控制器名称 */
     protected $controller = '';
 
-    /* @var string $route 当前路由：方法名称 */
+    /* @var string $route 当前方法名称 */
     protected $action = '';
+
+    /* @var string $route 当前路由uri */
+    protected $routeUri = '';
 
     /* @var string $route 当前路由：分组名称 */
     protected $group = '';
@@ -56,7 +59,7 @@ class Controller extends \think\Controller
     private function layout()
     {
         // 验证当前请求是否在白名单
-        if (!in_array($this->controller . DS . $this->action, $this->notLayoutAction)) {
+        if (!in_array($this->routeUri, $this->notLayoutAction)) {
             // 输出到view
             $this->assign([
                 'group' => $this->group,
@@ -79,6 +82,8 @@ class Controller extends \think\Controller
         // 控制器分组 (用于定义所属模块)
         $groupstr = strstr($this->controller, '.', true);
         $this->group = $groupstr !== false ? $groupstr : $this->controller;
+        // 当前uri
+        $this->routeUri = $this->controller . '/' . $this->action;
     }
 
     /**
@@ -87,7 +92,6 @@ class Controller extends \think\Controller
      */
     private function menus()
     {
-        $url = $this->controller . DS . $this->action;
         foreach ($data = Config::get('menus') as $group => $first) {
             $data[$group]['active'] = $group === $this->group;
             // 遍历：二级菜单
@@ -106,7 +110,7 @@ class Controller extends \think\Controller
                                 $secondUris[] = $third['index'];
                                 $thirdUris[] = $third['index'];
                             }
-                            $data[$group]['submenu'][$secondKey]['submenu'][$thirdKey]['active'] = in_array($url, $thirdUris);
+                            $data[$group]['submenu'][$secondKey]['submenu'][$thirdKey]['active'] = in_array($this->routeUri, $thirdUris);
                         }
                     } else {
                         if (isset($second['uris']))
@@ -116,7 +120,7 @@ class Controller extends \think\Controller
                     }
                     // 二级菜单：active
                     !isset($data[$group]['submenu'][$secondKey]['active'])
-                    && $data[$group]['submenu'][$secondKey]['active'] = in_array($url, $secondUris);
+                    && $data[$group]['submenu'][$secondKey]['active'] = in_array($this->routeUri, $secondUris);
                 }
             }
         }
@@ -131,11 +135,8 @@ class Controller extends \think\Controller
         // 记录session信息
         $this->store = Session::get('yoshop_store');
 
-        // 路由信息
-        list ($controller, $action) = $this->getRouteinfo();
-
         // 验证当前请求是否在白名单
-        if (in_array($controller . '/' . $action, $this->allowAllAction)) {
+        if (in_array($this->routeUri, $this->allowAllAction)) {
             return true;
         }
 
