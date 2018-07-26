@@ -62,7 +62,8 @@
                     , title: '图片库'
                     , skin: _this.options.layerSkin
                     , area: '840px'
-                    , offset: '10px'    // todo: 120
+                    , offset: 'auto'
+                    , anim: 1
                     , closeBtn: 1
                     , shade: 0.3
                     , btn: ['确定', '取消']
