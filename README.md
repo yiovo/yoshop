@@ -7,6 +7,7 @@
 #### 项目演示
 - 后台演示：[http://yoshop.xany6.com/](http://yoshop.xany6.com/)
 - QQ交流群：678019581
+![小程序演示二维码](https://images.gitee.com/uploads/images/2018/0727/210720_037c8178_597459.jpeg "gh_a376934c7da8_344.jpg")
 
 #### 项目截图
 ![输入图片说明](https://gitee.com/uploads/images/2018/0629/144738_39b279a7_597459.png "前端.png")
