@@ -78,12 +78,12 @@
         <ul class="pagination">
             {{ if current_page > 1 }}
             <li>
-                <a class="switch-page" href="javascript:void(0);" data-page="{{ current_page - 1 }}">«</a>
+                <a class="switch-page" href="javascript:void(0);" title="上一页" data-page="{{ current_page - 1 }}">«</a>
             </li>
             {{ /if }}
             {{ if current_page < last_page }}
             <li>
-                <a class="switch-page" href="javascript:void(0);" data-page="{{ current_page + 1 }}">»</a>
+                <a class="switch-page" href="javascript:void(0);" title="下一页" data-page="{{ current_page + 1 }}">»</a>
             </li>
             {{ /if }}
         </ul>

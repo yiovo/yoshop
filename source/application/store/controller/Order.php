@@ -32,7 +32,7 @@ class Order extends Controller
     public function receipt_list()
     {
         return $this->getList('待收货订单列表', [
-            'pay_status' => 10,
+            'pay_status' => 20,
             'delivery_status' => 20,
             'receipt_status' => 10
         ]);
