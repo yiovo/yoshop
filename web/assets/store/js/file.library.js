@@ -166,11 +166,10 @@
                     $.post(BASE_URL + '/upload.library/deleteFiles', {
                         fileIds: fileIds
                     }, function (result) {
-                        layer.msg(result.msg);
+                        layer.close(load);
                         if (result.code === 1) {
                             _this.renderFileList();
                         }
-                        layer.close(load);
                     });
                     layer.close(index);
                 });
@@ -182,8 +181,6 @@
          */
         uploadImagesEvent: function () {
             var _this = this;
-            var $list = _this.$element.find('.file-list-item');
-
             // 文件大小
             var maxSize = 2;
             // 初始化Web Uploader
@@ -202,8 +199,10 @@
                 fileVal: 'iFile',
                 // 图片上传前不进行压缩
                 compress: false,
+                // 允许重复
+                duplicate: true,
                 // 文件总数量
-                fileNumLimit: 10,
+                // fileNumLimit: 10,
                 // 文件大小2m => 2097152
                 fileSingleSizeLimit: maxSize * 1024 * 1024,
                 // 只允许选择图片文件。
@@ -230,6 +229,7 @@
             // 文件上传成功，给item添加成功class, 用样式标记上传成功。
             uploader.on('uploadSuccess', function (file, response) {
                 if (response.code === 1) {
+                    var $list = _this.$element.find('ul.file-list-item');
                     $list.prepend(template('tpl-file-list-item', [response.data]));
                 } else {
                     layer.msg(response.msg);
