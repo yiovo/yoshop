@@ -50,11 +50,9 @@
          * 显示文件库弹窗
          */
         showLibraryModal: function () {
-            var _this = this
-                , loadIndex = layer.load();
+            var _this = this;
             _this.getJsonData({group_id: -1}, function (data) {
                 data.is_default = true;
-                layer.close(loadIndex);
                 // 捕获页
                 layer.open({
                     type: 1
@@ -368,10 +366,16 @@
          * @param success
          */
         getJsonData: function (params, success) {
+            var loadIndex = layer.load();
             typeof params === 'function' && (success = params);
             // 获取文件库列表
-            $.getJSON(BASE_URL + '/upload.library/fileList', params, function (data) {
-                typeof success === 'function' && success(data);
+            $.getJSON(BASE_URL + '/upload.library/fileList', params, function (result) {
+                layer.close(loadIndex);
+                if (result.code === 1) {
+                    typeof success === 'function' && success(result.data);
+                } else {
+                    layer.msg(result.msg, {anim: 6});
+                }
             });
         },
 
@@ -381,12 +385,10 @@
          */
         renderFileList: function (page) {
             var _this = this
-                , groupId = this.getCurrentGroupId()
-                , load = layer.load();
+                , groupId = this.getCurrentGroupId();
             // 重新渲染文件列表
             _this.getJsonData({group_id: groupId, page: page || 1}, function (data) {
                 _this.$element.find('#file-list-body').html(template('tpl-file-list', data.file_list));
-                layer.close(load);
             });
         },
 

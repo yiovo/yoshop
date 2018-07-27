@@ -23,7 +23,7 @@ class Library extends Controller
         $group_list = (new UploadGroupModel)->getList($type);
         // 文件列表
         $file_list = (new UploadFileModel)->getlist(intval($group_id), $type);
-        return compact('group_list', 'file_list');
+        return $this->renderSuccess('success', '', compact('group_list', 'file_list'));
     }
 
     /**
