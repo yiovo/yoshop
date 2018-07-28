@@ -42,12 +42,15 @@ class UserAddress extends UserAddressModel
     {
         // 添加收货地址
         $region = explode(',', $data['region']);
+        $province_id = Region::getIdByName($region[0], 1);
+        $city_id = Region::getIdByName($region[1], 2, $province_id);
+        $region_id = Region::getIdByName($region[2], 3, $city_id);
         $this->allowField(true)->save(array_merge([
             'user_id' => $user['user_id'],
             'wxapp_id' => self::$wxapp_id,
-            'province_id' => Region::getIdByName($region[0], 1),
-            'city_id' => Region::getIdByName($region[1], 2),
-            'region_id' => Region::getIdByName($region[2], 3),
+            'province_id' => $province_id,
+            'city_id' => $city_id,
+            'region_id' => $region_id,
         ], $data));
         // 设为默认收货地址
         !$user['address_id'] && $user->save(['address_id' => $this->getLastInsID()]);
