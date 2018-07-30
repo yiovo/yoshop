@@ -136,10 +136,10 @@ class WxPay
             // 发送短信通知
             $this->sendSms($order['wxapp_id'], $order['order_no']);
             // 返回状态
-            $this->returnCode();
+            $this->returnCode(true, 'OK');
         }
         // 返回状态
-        $this->returnCode(false);
+        $this->returnCode(false, '签名失败');
     }
 
     /**
@@ -162,10 +162,10 @@ class WxPay
      * @param bool $is_success
      * @param string $msg
      */
-    private function returnCode($is_success = true, $msg = '签名失败')
+    private function returnCode($is_success = true, $msg = null)
     {
         $xml_post = $this->toXml([
-            'return_code' => $is_success ? 'SUCCESS' : 'FAIL',
+            'return_code' => $is_success ? $msg ?: 'SUCCESS' : 'FAIL',
             'return_msg' => $is_success ? 'OK' : $msg,
         ]);
         die($xml_post);
