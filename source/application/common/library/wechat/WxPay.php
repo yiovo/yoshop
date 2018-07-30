@@ -62,10 +62,10 @@ class WxPay
         $prepay = $this->fromXml($result);
         // 请求失败
         if ($prepay['return_code'] === 'FAIL') {
-            throw new BaseException(['msg' => $prepay['return_msg']]);
+            throw new BaseException(['msg' => $prepay['return_msg'], 'code' => -10]);
         }
         if ($prepay['result_code'] === 'FAIL') {
-            throw new BaseException(['msg' => $prepay['err_code_des']]);
+            throw new BaseException(['msg' => $prepay['return_msg'], 'code' => -10]);
         }
         // 生成 nonce_str 供前端使用
         $paySign = $this->makePaySign($params['nonce_str'], $prepay['prepay_id'], $time);
