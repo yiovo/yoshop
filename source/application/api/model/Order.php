@@ -256,6 +256,7 @@ class Order extends OrderModel
                 break;
             case 'received';
                 $filter['pay_status'] = 20;
+                $filter['delivery_status'] = 20;
                 $filter['receipt_status'] = 10;
                 break;
         }
