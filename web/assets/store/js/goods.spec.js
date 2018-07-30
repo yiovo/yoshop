@@ -3,12 +3,12 @@
     // 商品规格数据
     var data = {
             spec_attr: [],
-            spec_list: [],
+            spec_list: []
         }
 
         // 配置信息
         , setting = {
-            container: '.goods-spec-many',
+            container: '.goods-spec-many'
         };
 
     function GoodsSpec(options, baseData) {
@@ -236,7 +236,7 @@
             }
             // 遍历tr 行
             var spec_list = [];
-            for (var i = 0; i < totalRow; i++) {
+            for (i = 0; i < totalRow; i++) {
                 var rowData = [], rowCount = 1, specSkuIdAttr = [];
                 // 遍历td 列
                 for (var j = 0; j < data.spec_attr.length; j++) {
@@ -260,8 +260,8 @@
                 });
             }
             // 合并旧sku数据
-            if (data.spec_list.length > 1 && spec_list.length > 1) {
-                for (var i = 0; i < spec_list.length; i++) {
+            if (data.spec_list.length > 0 && spec_list.length > 0) {
+                for (i = 0; i < spec_list.length; i++) {
                     var overlap = data.spec_list.filter(function (val) {
                         return val.spec_sku_id === spec_list[i].spec_sku_id;
                     });
@@ -297,7 +297,7 @@
          */
         isEmptySkuList: function () {
             return !data.spec_list.length;
-        },
+        }
 
     };
 
