@@ -280,10 +280,27 @@ class Order extends OrderModel
             'order_id' => $order_id,
             'user_id' => $user_id,
             'order_status' => ['<>', 20]
-        ], ['goods.image', 'address'])) {
+        ], ['goods' => ['image', 'spec'], 'address'])) {
             throw new BaseException(['msg' => '订单不存在']);
         }
         return $order;
+    }
+
+    /**
+     * 判断商品库存不足
+     * @param $goodsList
+     * @return bool
+     */
+    public function checkGoodsStockNum(&$goodsList)
+    {
+        foreach ($goodsList as $goods) {
+            // 付款减库存
+            if ($goods['deduct_stock_type'] === 20 && $goods['spec']['stock_num'] < 1) {
+                $this->error = '库存不足：【' . $goods['goods_name'] . '】';
+                return false;
+            }
+        }
+        return true;
     }
 
 }
