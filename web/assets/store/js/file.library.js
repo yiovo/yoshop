@@ -181,6 +181,7 @@
          */
         uploadImagesEvent: function () {
             var _this = this;
+            var loadIndex = null;
             // 文件大小
             var maxSize = 2;
             // 初始化Web Uploader
@@ -236,9 +237,16 @@
                 }
             });
             // 文件上传失败
-            uploader.on('uploadError', function (file) {
-                // console.log(file);
+            uploader.on('uploadError', function () {
                 layer.msg('文件上传失败');
+            });
+            // 文件开始上传
+            uploader.on('startUpload', function () {
+                loadIndex = layer.load();
+            });
+            // 文件上传结束
+            uploader.on('uploadFinished', function () {
+                layer.close(loadIndex);
             });
         },
 
