@@ -178,18 +178,7 @@ class WxPay
      */
     private function doLogs($values)
     {
-        if (is_array($values))
-            $values = print_r($values, true);
-        // 日志内容
-        $content = '[' . date('Y-m-d H:i:s') . ']' . PHP_EOL . $values . PHP_EOL . PHP_EOL;
-        // 写入文件
-        $filePath = __DIR__ . '/logs/';
-        try {
-            !is_dir($filePath) && mkdir($filePath, 0755, true);
-            return file_put_contents($filePath . date('Ymd') . '.log', $content, FILE_APPEND);
-        } catch (\Exception $e) {
-            return false;
-        }
+        return write_log($values, __DIR__);
     }
 
     /**
