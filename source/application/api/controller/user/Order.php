@@ -60,6 +60,7 @@ class Order extends Controller
      * 取消订单
      * @param $order_id
      * @return array
+     * @throws \Exception
      * @throws \app\common\exception\BaseException
      * @throws \think\exception\DbException
      */

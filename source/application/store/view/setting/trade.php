@@ -13,7 +13,8 @@
                                 <div class="am-u-sm-9 am-input-group">
                                     <div class="am-u-sm-7">
                                         <input type="number" class="am-form-field" name="trade[order][close_days]"
-                                               value="<?= $values['order']['close_days'] ?>" required>
+                                               value="<?= $values['order']['close_days'] ?>"
+                                               pattern="^(0|\+?[1-9][0-9]*)$" required>
                                     </div>
                                     <label class="am-u-sm-5 am-form-label am-text-left">天后自动关闭</label>
                                     <div class="help-block am-u-sm-12">
@@ -26,26 +27,12 @@
                                 <div class="am-u-sm-9 am-input-group">
                                     <div class="am-u-sm-7">
                                         <input type="number" class="am-form-field" name="trade[order][receive_days]"
-                                               value="<?= $values['order']['receive_days'] ?>" required>
+                                               value="<?= $values['order']['receive_days'] ?>"
+                                               pattern="^(0|\+?[1-9][0-9]*)$" required>
                                     </div>
                                     <label class="am-u-sm-5 am-form-label am-text-left">天后自动确认收货</label>
                                     <div class="help-block am-u-sm-12">
                                         <small>如果在期间未确认收货，系统自动完成收货，设置0天不自动收货</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="am-form-group">
-                                <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-form-label form-require">已收货订单 </label>
-                                    <div class="am-u-sm-9 am-input-group">
-                                        <div class="am-u-sm-7">
-                                            <input type="number" class="am-form-field" name="trade[order][refund_days]"
-                                                   value="<?= $values['order']['refund_days'] ?>" required>
-                                        </div>
-                                        <label class="am-u-sm-5 am-form-label am-text-left">天后关闭退款/退货功能</label>
-                                        <div class="help-block am-u-sm-12">
-                                            <small>订单完成后 ，用户在n天内可以发起退款申请，0代表确认收货后无法维权</small>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -67,7 +54,8 @@
                                     <div class="am-u-sm-12 am-margin-top-sm">
                                         <label class="am-radio">
                                             <input type="radio" name="trade[freight_rule]" value="20" data-am-ucheck
-                                                <?= $values['freight_rule'] === '20' ? 'checked' : '' ?> required> 以最低运费结算
+                                                <?= $values['freight_rule'] === '20' ? 'checked' : '' ?> required>
+                                            以最低运费结算
                                         </label>
                                         <div class="help-block">
                                             <small>订单中的商品有多个运费模板时，取订单中运费最少的商品的运费计为订单总运费</small>
@@ -76,7 +64,8 @@
                                     <div class="am-u-sm-12 am-margin-top-sm">
                                         <label class="am-radio">
                                             <input type="radio" name="trade[freight_rule]" value="30" data-am-ucheck
-                                                <?= $values['freight_rule'] === '30' ? 'checked' : '' ?> required> 以最高运费结算
+                                                <?= $values['freight_rule'] === '30' ? 'checked' : '' ?> required>
+                                            以最高运费结算
                                         </label>
                                         <div class="help-block">
                                             <small>订单中的商品有多个运费模板时，取订单中运费最多的商品的运费计为订单总运费</small>
