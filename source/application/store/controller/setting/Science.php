@@ -155,13 +155,15 @@ class Science extends Controller
      */
     private function checkWriteable($path)
     {
-        !is_dir($path) && @mkdir($path, 0755);
-        if (is_dir($path)) {
+        try {
+            !is_dir($path) && mkdir($path, 0755);
+            if (!is_dir($path))
+                return false;
             $fileName = $path . '/_test_write.txt';
             if ($fp = fopen($fileName, 'w')) {
-                fclose($fp) && unlink($fileName);
-                return true;
+                return fclose($fp) && unlink($fileName);
             }
+        } catch (\Exception $e) {
         }
         return false;
     }
