@@ -60,6 +60,7 @@ class Order extends Controller
      * 取消订单
      * @param $order_id
      * @return array
+     * @throws \Exception
      * @throws \app\common\exception\BaseException
      * @throws \think\exception\DbException
      */
@@ -97,11 +98,16 @@ class Order extends Controller
      */
     public function pay($order_id)
     {
-        $model = OrderModel::getUserOrderDetail($order_id, $this->user['user_id']);
+        // 订单详情
+        $order = OrderModel::getUserOrderDetail($order_id, $this->user['user_id']);
+        // 判断商品库存
+        if (!$order->checkGoodsStockNum($order['goods'])) {
+            return $this->renderError($order->getError());
+        }
         // 发起微信支付
         $wxConfig = WxappModel::getWxappCache();
         $WxPay = new WxPay($wxConfig);
-        $wxParams = $WxPay->unifiedorder($model['order_no'], $this->user['open_id'], $model['pay_price']);
+        $wxParams = $WxPay->unifiedorder($order['order_no'], $this->user['open_id'], $order['pay_price']);
         return $this->renderSuccess($wxParams);
     }
 

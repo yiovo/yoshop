@@ -169,11 +169,5 @@
          */
         $('#my-form').superForm();
 
-        // 单文件上传: 客服图标
-        $.uploadImage({
-            pick: '.upload-file',
-            list: '.uploader-list'
-        });
-
     });
 </script>

@@ -25,4 +25,9 @@ return [
     'log_write'    => [],
     // 应用结束
     'app_end'      => [],
+
+    // 订单处理
+    'order' => [
+        'app\\task\\behavior\\Order'
+    ],
 ];

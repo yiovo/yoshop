@@ -123,6 +123,7 @@ class Science extends Controller
         $paths = [
             'uploads' => realpath(WEB_PATH) . '/uploads/',
             'wxpay_log' => realpath(APP_PATH) . '/common/library/wechat/logs/',
+            'behavior_log' => realpath(APP_PATH) . '/task/behavior/logs/',
         ];
         return [
             'uploads' => [
@@ -135,6 +136,12 @@ class Science extends Controller
                 'name' => '微信支付日志目录',
                 'value' => $paths['wxpay_log'],
                 'status' => $this->checkWriteable($paths['wxpay_log']) ? 'normal' : 'danger',
+                'remark' => '目录不可写，系统将无法正常上传文件'
+            ],
+            'behavior_log' => [
+                'name' => '自动任务日志目录',
+                'value' => $paths['behavior_log'],
+                'status' => $this->checkWriteable($paths['behavior_log']) ? 'normal' : 'danger',
                 'remark' => '目录不可写，系统将无法正常上传文件'
             ],
         ];

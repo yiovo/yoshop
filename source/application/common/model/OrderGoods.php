@@ -21,4 +21,13 @@ class OrderGoods extends BaseModel
         return $this->belongsTo('UploadFile', 'image_id', 'file_id');
     }
 
+    /**
+     * 关联商品规格表
+     * @return \think\model\relation\BelongsTo
+     */
+    public function spec()
+    {
+        return $this->belongsTo('GoodsSpec');
+    }
+
 }
