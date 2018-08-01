@@ -10,7 +10,7 @@
                         $detail['pay_status']['value'] === 20 && $progress += 1;
                         $detail['delivery_status']['value'] === 20 && $progress += 1;
                         $detail['receipt_status']['value'] === 20 && $progress += 1;
-                        $detail['order_status']['value'] === 30 && $progress += 1;
+                        // $detail['order_status']['value'] === 30 && $progress += 1;
                         ?>
                         <ul class="order-detail-progress progress-<?= $progress ?>">
                             <li>
@@ -29,7 +29,7 @@
                                 <span>发货</span>
                                 <?php if ($detail['delivery_status']['value'] === 20): ?>
                                     <div class="tip">
-                                        付款于 <?= date('Y-m-d H:i:s', $detail['delivery_time']) ?>
+                                        发货于 <?= date('Y-m-d H:i:s', $detail['delivery_time']) ?>
                                     </div>
                                 <?php endif; ?>
                             </li>
@@ -37,13 +37,17 @@
                                 <span>收货</span>
                                 <?php if ($detail['receipt_status']['value'] === 20): ?>
                                     <div class="tip">
-                                        付款于 <?= date('Y-m-d H:i:s', $detail['receipt_time']) ?>
+                                        收货于 <?= date('Y-m-d H:i:s', $detail['receipt_time']) ?>
                                     </div>
                                 <?php endif; ?>
                             </li>
                             <li>
                                 <span>完成</span>
-                                <div class="tip"></div>
+                                <?php if ($detail['order_status']['value'] === 30): ?>
+                                    <div class="tip">
+                                        完成于 <?= date('Y-m-d H:i:s', $detail['receipt_time']) ?>
+                                    </div>
+                                <?php endif; ?>
                             </li>
                         </ul>
                     </div>
