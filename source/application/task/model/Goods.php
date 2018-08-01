@@ -23,7 +23,7 @@ class Goods extends GoodsModel
         // 批量更新商品规格：sku销量、库存
         $goodsSpecSave = [];
         foreach ($goodsList as $goods) {
-            $goodsData[] = [
+            $goodsSave[] = [
                 'goods_id' => $goods['goods_id'],
                 'sales_actual' => ['inc', $goods['total_num']]
             ];
@@ -32,7 +32,9 @@ class Goods extends GoodsModel
                 'goods_sales' => ['inc', $goods['total_num']]
             ];
             // 付款减库存
-            $goods['deduct_stock_type'] === 20 && $specData['stock_num'] = ['dec', $goods['total_num']];
+            if ($goods['deduct_stock_type'] === 20) {
+                $specData['stock_num'] = ['dec', $goods['total_num']];
+            }
             $goodsSpecSave[] = $specData;
         }
         // 更新商品总销量

@@ -28,9 +28,8 @@ class Category extends BaseModel
      */
     public static function getALL()
     {
-        $self = new static();
-        if (!Cache::get('category_' . $self::$wxapp_id)) {
-            $model = new static;
+        $model = new static;
+        if (!Cache::get('category_' . $model::$wxapp_id)) {
             $data = $model->with(['image'])->order(['sort' => 'asc'])->select();
             $all = !empty($data) ? $data->toArray() : [];
             $tree = [];
@@ -46,12 +45,15 @@ class Category extends BaseModel
                     !empty($threeTree) && $two['child'] = $threeTree;
                     $twoTree[$two['category_id']] = $two;
                 }
-                !empty($twoTree) && $first['child'] = $twoTree;
+                if (!empty($twoTree)) {
+                    array_multisort(array_column($twoTree, 'sort'), SORT_ASC, $twoTree);
+                    $first['child'] = $twoTree;
+                }
                 $tree[$first['category_id']] = $first;
             }
-            Cache::set('category_' . $self::$wxapp_id, compact('all', 'tree'));
+            Cache::set('category_' . $model::$wxapp_id, compact('all', 'tree'));
         }
-        return Cache::get('category_' . $self::$wxapp_id);
+        return Cache::get('category_' . $model::$wxapp_id);
     }
 
     /**

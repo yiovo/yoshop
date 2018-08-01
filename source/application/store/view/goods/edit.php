@@ -302,7 +302,7 @@
 
         // 注册商品多规格组件
         var specMany = new GoodsSpec({
-            container: '.goods-spec-many',
+            container: '.goods-spec-many'
         }, <?= $specData ?>);
 
         // 切换单/多规格

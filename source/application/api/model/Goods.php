@@ -25,6 +25,16 @@ class Goods extends GoodsModel
     ];
 
     /**
+     * 商品详情：HTML实体转换回普通字符
+     * @param $value
+     * @return string
+     */
+    public function getContentAttr($value)
+    {
+       return htmlspecialchars_decode($value);
+    }
+
+    /**
      * 根据商品id集获取商品列表 (购物车列表用)
      * @param $goodsIds
      * @return false|\PDOStatement|string|\think\Collection

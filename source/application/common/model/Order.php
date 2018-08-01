@@ -2,6 +2,8 @@
 
 namespace app\common\model;
 
+use think\Hook;
+
 /**
  * 订单模型
  * Class Order
@@ -10,6 +12,16 @@ namespace app\common\model;
 class Order extends BaseModel
 {
     protected $name = 'order';
+
+    /**
+     * 订单模型初始化
+     */
+    public static function init()
+    {
+        parent::init();
+        // 监听订单处理事件
+        Hook::listen('order', new static);
+    }
 
     /**
      * 订单商品列表

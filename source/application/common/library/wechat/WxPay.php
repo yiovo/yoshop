@@ -136,10 +136,10 @@ class WxPay
             // 发送短信通知
             $this->sendSms($order['wxapp_id'], $order['order_no']);
             // 返回状态
-            $this->returnCode();
+            $this->returnCode(true, 'OK');
         }
         // 返回状态
-        $this->returnCode(false);
+        $this->returnCode(false, '签名失败');
     }
 
     /**
@@ -162,10 +162,10 @@ class WxPay
      * @param bool $is_success
      * @param string $msg
      */
-    private function returnCode($is_success = true, $msg = '签名失败')
+    private function returnCode($is_success = true, $msg = null)
     {
         $xml_post = $this->toXml([
-            'return_code' => $is_success ? 'SUCCESS' : 'FAIL',
+            'return_code' => $is_success ? $msg ?: 'SUCCESS' : 'FAIL',
             'return_msg' => $is_success ? 'OK' : $msg,
         ]);
         die($xml_post);
@@ -178,18 +178,7 @@ class WxPay
      */
     private function doLogs($values)
     {
-        if (is_array($values))
-            $values = print_r($values, true);
-        // 日志内容
-        $content = '[' . date('Y-m-d H:i:s') . ']' . PHP_EOL . $values . PHP_EOL . PHP_EOL;
-        // 写入文件
-        $filePath = __DIR__ . '/logs/';
-        try {
-            !is_dir($filePath) && mkdir($filePath, 0755, true);
-            return file_put_contents($filePath . date('Ymd') . '.log', $content, FILE_APPEND);
-        } catch (\Exception $e) {
-            return false;
-        }
+        return write_log($values, __DIR__);
     }
 
     /**

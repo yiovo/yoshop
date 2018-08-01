@@ -2026,13 +2026,23 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
   text-align: center;
   position: relative;
   margin-bottom: 70px;
+  &:before, &:after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 13px;
+    background: #54aff5;
+  }
   &:after {
     background: #8ccdff;
     z-index: 1;
   }
   &.progress-1 {
     &:before {
-      width: 0%;
+      width: 0;
     }
     &:after {
       width: 20%;
@@ -2087,44 +2097,33 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
     padding-top: 10px;
     color: #8c8c8c;
   }
-}
 
-.order-detail-progress:before,
-.order-detail-progress:after {
-  content: "";
-  position: absolute;
-  z-index: 2;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  border-radius: 13px;
-  background: #54aff5;
-}
+  &.progress-1 li:nth-child(1),
+  &.progress-2 li:nth-child(1),
+  &.progress-3 li:nth-child(1),
+  &.progress-4 li:nth-child(1),
+  &.progress-5 li:nth-child(1) {
+    color: #fff;
+  }
 
-.order-detail-progress.progress-1 li:nth-child(1),
-.order-detail-progress.progress-2 li:nth-child(1),
-.order-detail-progress.progress-3 li:nth-child(1),
-.order-detail-progress.progress-4 li:nth-child(1),
-.order-detail-progress.progress-5 li:nth-child(1) {
-  color: #fff;
-}
+  &.progress-2 li:nth-child(2),
+  &.progress-3 li:nth-child(2),
+  &.progress-4 li:nth-child(2),
+  &.progress-5 li:nth-child(2) {
+    color: #fff;
+  }
 
-.order-detail-progress.progress-2 li:nth-child(2),
-.order-detail-progress.progress-3 li:nth-child(2),
-.order-detail-progress.progress-4 li:nth-child(2),
-.order-detail-progress.progress-5 li:nth-child(2) {
-  color: #fff;
-}
+  &.progress-3 li:nth-child(3),
+  &.progress-4 li:nth-child(3),
+  &.progress-5 li:nth-child(3) {
+    color: #fff;
+  }
 
-.order-detail-progress.progress-3 li:nth-child(3),
-.order-detail-progress.progress-4 li:nth-child(3),
-.order-detail-progress.progress-5 li:nth-child(3) {
-  color: #fff;
-}
+  &.progress-4 li:nth-child(4),
+  &.progress-5 li:nth-child(4) {
+    color: #fff;
+  }
 
-.order-detail-progress.progress-4 li:nth-child(4),
-.order-detail-progress.progress-5 li:nth-child(4) {
-  color: #fff;
 }
 
 /* 文件库 */

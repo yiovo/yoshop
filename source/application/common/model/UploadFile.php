@@ -66,7 +66,7 @@ class UploadFile extends BaseModel
         if ($group_id !== -1) {
             $model->where(compact('group_id'));
         }
-        return $model->order(['create_time' => 'desc'])
+        return $model->order(['file_id' => 'desc'])
             ->paginate(32, false, [
             'query' => Request::instance()->request()
         ]);

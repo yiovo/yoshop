@@ -181,6 +181,7 @@
          */
         uploadImagesEvent: function () {
             var _this = this;
+            var loadIndex = null;
             // 文件大小
             var maxSize = 2;
             // 初始化Web Uploader
@@ -210,21 +211,24 @@
                     title: 'Images',
                     extensions: 'gif,jpg,jpeg,bmp,png',
                     mimeTypes: 'image/*'
+                },
+                // 文件上传header扩展
+                headers: {
+                    'Accept': 'application/json, text/javascript, */*; q=0.01',
+                    'X-Requested-With': 'XMLHttpRequest'
                 }
-                // // 缩略图配置
-                // , thumb: {
-                //     quality: 100,
-                //     crop: false,
-                //     allowMagnify: false
-                // }
             });
             //  验证大小
             uploader.on('error', function (type) {
-                if (type === "F_DUPLICATE") {
-                    console.log("请不要重复选择文件！");
-                } else if (type === "F_EXCEED_SIZE") {
-                    alert("文件大小不可超过" + maxSize + "m 哦！换个小点的文件吧！");
+                if (type === 'F_DUPLICATE') {
+                    console.log('请不要重复选择文件！');
+                } else if (type === 'F_EXCEED_SIZE') {
+                    alert('文件大小不可超过' + maxSize + 'm 哦！换个小点的文件吧！');
                 }
+            });
+            // 文件上传前触发,添加附带参数
+            uploader.on('uploadBeforeSend', function (obj, data) {
+                data.group_id = _this.getCurrentGroupId();
             });
             // 文件上传成功，给item添加成功class, 用样式标记上传成功。
             uploader.on('uploadSuccess', function (file, response) {
@@ -232,13 +236,24 @@
                     var $list = _this.$element.find('ul.file-list-item');
                     $list.prepend(template('tpl-file-list-item', [response.data]));
                 } else {
-                    layer.msg(response.msg);
+                    uploader.uploadError(file, response);
                 }
             });
-            // 文件上传失败
-            uploader.on('uploadError', function (file) {
-                // console.log(file);
-                layer.msg('文件上传失败');
+            // 监听文件上传失败
+            uploader.on('uploadError', function (file, reason) {
+                uploader.uploadError(file, reason);
+            });
+            // 文件上传失败回调函数
+            uploader.uploadError = function (file, reason) {
+                layer.msg(reason.msg, {anim: 6});
+            };
+            // 文件开始上传
+            uploader.on('startUpload', function () {
+                loadIndex = layer.load();
+            });
+            // 文件上传结束
+            uploader.on('uploadFinished', function () {
+                layer.close(loadIndex);
             });
         },
 

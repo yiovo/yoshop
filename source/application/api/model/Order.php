@@ -210,6 +210,7 @@ class Order extends OrderModel
     /**
      * 取消订单
      * @return bool|false|int
+     * @throws \Exception
      */
     public function cancel()
     {
@@ -217,7 +218,31 @@ class Order extends OrderModel
             $this->error = '已付款订单不可取消';
             return false;
         }
+        // 回退商品库存
+        $this->backGoodsStock($this['goods']);
         return $this->save(['order_status' => 20]);
+    }
+
+    /**
+     * 回退商品库存
+     * @param $goodsList
+     * @return array|false
+     * @throws \Exception
+     */
+    private function backGoodsStock(&$goodsList)
+    {
+        $goodsSpecSave = [];
+        foreach ($goodsList as $goods) {
+            // 下单减库存
+            if ($goods['deduct_stock_type'] === 10) {
+                $goodsSpecSave[] = [
+                    'goods_spec_id' => $goods['goods_spec_id'],
+                    'stock_num' => ['inc', $goods['total_num']]
+                ];
+            }
+        }
+        // 更新商品规格库存
+        return !empty($goodsSpecSave) && (new GoodsSpec)->isUpdate()->saveAll($goodsSpecSave);
     }
 
     /**
@@ -280,10 +305,27 @@ class Order extends OrderModel
             'order_id' => $order_id,
             'user_id' => $user_id,
             'order_status' => ['<>', 20]
-        ], ['goods.image', 'address'])) {
+        ], ['goods' => ['image', 'spec'], 'address'])) {
             throw new BaseException(['msg' => '订单不存在']);
         }
         return $order;
+    }
+
+    /**
+     * 判断商品库存不足
+     * @param $goodsList
+     * @return bool
+     */
+    public function checkGoodsStockNum(&$goodsList)
+    {
+        foreach ($goodsList as $goods) {
+            // 付款减库存
+            if ($goods['deduct_stock_type'] === 20 && $goods['spec']['stock_num'] < 1) {
+                $this->error = '库存不足：【' . $goods['goods_name'] . '】';
+                return false;
+            }
+        }
+        return true;
     }
 
 }
