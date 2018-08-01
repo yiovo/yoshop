@@ -2,10 +2,10 @@
 
 namespace app\task\behavior;
 
-use app\task\model\Order as OrderModel;
-use app\task\model\Setting;
-use think\Cache;
 use think\Db;
+use think\Cache;
+use app\task\model\Setting;
+use app\task\model\Order as OrderModel;
 
 /**
  * 订单行为管理
@@ -68,7 +68,11 @@ class Order
         // 查询截止时间未支付的订单
         $orderIds = $this->model->where($filter)->column('order_id');
         // 记录日志
-        write_log('Order --close --time ' . $deadlineTime . ' --orderIds: ' . json_encode($orderIds), __DIR__);
+        $this->dologs('close', [
+            'close_days' => (int)$close_days,
+            'deadline_time' => $deadlineTime,
+            'orderIds' => json_encode($orderIds),
+        ]);
         // 直接更新
         if (!empty($orderIds)) {
             return $this->model->isUpdate(true)->save(['order_status' => 20], ['order_id' => ['in', $orderIds]]);
@@ -98,7 +102,11 @@ class Order
         // 查询截止时间未支付的订单
         $orderIds = $this->model->where($filter)->column('order_id');
         // 记录日志
-        write_log('Order --receive --time ' . $deadlineTime . ' --orderIds: ' . json_encode($orderIds), __DIR__);
+        $this->dologs('receive', [
+            'receive_days' => (int)$receive_days,
+            'deadline_time' => $deadlineTime,
+            'orderIds' => json_encode($orderIds),
+        ]);
         // 直接更新
         if (!empty($orderIds)) {
             return $this->model->isUpdate(true)->save([
@@ -108,6 +116,20 @@ class Order
             ], ['order_id' => ['in', $orderIds]]);
         }
         return false;
+    }
+
+    /**
+     * 记录日志
+     * @param $method
+     * @param array $params
+     * @return bool|int
+     */
+    private function dologs($method, $params = [])
+    {
+        $value = 'Order --' . $method;
+        foreach ($params as $key => $val)
+            $value .= ' --' . $key . ' ' . $val;
+        return write_log($value, __DIR__);
     }
 
 }
