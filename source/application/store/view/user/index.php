@@ -32,9 +32,9 @@
                                     </td>
                                     <td class="am-text-middle"><?= $item['nickName'] ?></td>
                                     <td class="am-text-middle"><?= $item['gender'] ?></td>
-                                    <td class="am-text-middle"><?= $item['country'] ?></td>
-                                    <td class="am-text-middle"><?= $item['province'] ?></td>
-                                    <td class="am-text-middle"><?= $item['city'] ?></td>
+                                    <td class="am-text-middle"><?= $item['country'] ?: '--' ?></td>
+                                    <td class="am-text-middle"><?= $item['province'] ?: '--' ?></td>
+                                    <td class="am-text-middle"><?= $item['city'] ?: '--' ?></td>
                                     <td class="am-text-middle"><?= $item['create_time'] ?></td>
                                 </tr>
                             <?php endforeach; else: ?>
