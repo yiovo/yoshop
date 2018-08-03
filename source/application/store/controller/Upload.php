@@ -37,7 +37,7 @@ class Upload extends Controller
         $StorageDriver = new StorageDriver($this->config);
         // 上传图片
         if (!$StorageDriver->upload())
-            return $this->renderError('图片上传失败 ' . $StorageDriver->getError());
+            return json(['code' => 1, 'msg' => '图片上传失败' . $StorageDriver->getError()]);
         // 图片上传路径
         $fileName = $StorageDriver->getFileName();
         // 图片信息
@@ -45,7 +45,7 @@ class Upload extends Controller
         // 添加文件库记录
         $uploadFile = $this->addUploadFile($group_id, $fileName, $fileInfo, 'image');
         // 图片上传成功
-        return $this->renderSuccess('图片上传成功', null, $uploadFile->toArray());
+        return json(['code' => 1, 'msg' => '图片上传成功', 'data' => $uploadFile]);
     }
 
     /**
