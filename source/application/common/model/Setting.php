@@ -70,43 +70,22 @@ class Setting extends BaseModel
             $data = array_column(collection($self::all())->toArray(), null, 'key');
             Cache::set('setting_' . $wxapp_id, $data);
         }
-        return $data;
+        return array_merge_multiple($self->defaultData(), $data);
     }
 
     /**
-     * 新增默认配置
-     * @param $wxapp_id
-     * @param $app_name
-     * @return array|false
-     * @throws \Exception
+     * 默认配置
+     * @return array
      */
-    public function insertDefault($wxapp_id, $app_name)
+    public function defaultData()
     {
-        // 添加商城默认设置记录
-        $setting = [
-            [
-                'key' => 'storage',
-                'describe' => '上传设置',
-                'values' => [
-                    'default' => 'local',
-                    'engine' => [
-                        'qiniu' => [
-                            'bucket' => '',
-                            'access_key' => '',
-                            'secret_key' => '',
-                            'domain' => ''
-                        ],
-                    ]
-                ],
-                'wxapp_id' => $wxapp_id
-            ],
-            [
+        return [
+            'store' => [
                 'key' => 'store',
                 'describe' => '商城设置',
-                'values' => ['name' => $app_name],
-                'wxapp_id' => $wxapp_id
+                'values' => ['name' => '萤火小程序商城'],
             ],
-            [
+            'trade' => [
                 'key' => 'trade',
                 'describe' => '交易设置',
                 'values' => [
@@ -116,10 +95,24 @@ class Setting extends BaseModel
                         'refund_days' => '0'
                     ],
                     'freight_rule' => '10',
-                ],
-                'wxapp_id' => $wxapp_id
+                ]
             ],
-            [
+            'storage' => [
+                'key' => 'storage',
+                'describe' => '上传设置',
+                'values' => [
+                    'default' => 'local',
+                    'engine' => [
+                        'qiniu' => [
+                            'bucket' => '',
+                            'access_key' => '',
+                            'secret_key' => '',
+                            'domain' => 'http://'
+                        ],
+                    ]
+                ],
+            ],
+            'sms' => [
                 'key' => 'sms',
                 'describe' => '短信通知',
                 'values' => [
@@ -137,11 +130,8 @@ class Setting extends BaseModel
                         ],
                     ],
                 ],
-                'wxapp_id' => $wxapp_id
             ],
-
         ];
-        return $this->saveAll($setting);
     }
 
 }
