@@ -100,8 +100,8 @@ class Order extends Controller
     {
         // 订单详情
         $order = OrderModel::getUserOrderDetail($order_id, $this->user['user_id']);
-        // 判断商品库存
-        if (!$order->checkGoodsStockNum($order['goods'])) {
+        // 判断商品状态、库存
+        if (!$order->checkGoodsStatusFromOrder($order['goods'])) {
             return $this->renderError($order->getError());
         }
         // 发起微信支付

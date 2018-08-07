@@ -32,19 +32,22 @@ class Order extends Controller
      * 订单确认-立即购买
      * @param $goods_id
      * @param $goods_num
-     * @param $goods_spec_id
+     * @param $goods_sku_id
      * @return array
      * @throws \app\common\exception\BaseException
      * @throws \think\exception\DbException
      * @throws \Exception
      */
-    public function buyNow($goods_id, $goods_num, $goods_spec_id)
+    public function buyNow($goods_id, $goods_num, $goods_sku_id)
     {
         // 商品结算信息
         $model = new OrderModel;
-        $order = $model->getBuyNow($this->user, $goods_id, $goods_num, $goods_spec_id);
+        $order = $model->getBuyNow($this->user, $goods_id, $goods_num, $goods_sku_id);
         if (!$this->request->isPost()) {
             return $this->renderSuccess($order);
+        }
+        if ($model->hasError()) {
+            return $this->renderError($model->getError());
         }
         // 创建订单
         if ($model->add($this->user['user_id'], $order)) {

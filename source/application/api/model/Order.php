@@ -27,29 +27,25 @@ class Order extends OrderModel
      * @param User $user
      * @param $goods_id
      * @param $goods_num
-     * @param $goods_spec_id
+     * @param $goods_sku_id
      * @return array
      * @throws \think\exception\DbException
      */
-    public function getBuyNow($user, $goods_id, $goods_num, $goods_spec_id)
+    public function getBuyNow($user, $goods_id, $goods_num, $goods_sku_id)
     {
         // 商品信息
         /* @var Goods $goods */
         $goods = Goods::detail($goods_id);
-        // 规格信息
-        $goods['goods_spec_id'] = $goods_spec_id;
-        $goods_sku = array_column($goods['spec']->toArray(), null, 'goods_spec_id')[$goods_spec_id];
-        // 多规格文字内容
-        $goods_sku['goods_attr'] = '';
-        if ($goods['spec_type'] === 20) {
-            $attrs = explode('_', $goods_sku['spec_sku_id']);
-            $spec_rel = array_column($goods['spec_rel']->toArray(), null, 'spec_value_id');
-            foreach ($attrs as $specValueId) {
-                $goods_sku['goods_attr'] .= $spec_rel[$specValueId]['spec']['spec_name'] . ':'
-                    . $spec_rel[$specValueId]['spec_value'] . '; ';
-            }
+        // 商品sku信息
+        $goods['goods_sku'] = $goods->getGoodsSku($goods_sku_id);
+        // 判断商品是否下架
+        if ($goods['goods_status']['value'] !== 10) {
+            $this->setError('很抱歉，该商品已下架');
         }
-        $goods['goods_sku'] = $goods_sku;
+        // 判断商品库存
+        if ($goods_num > $goods['goods_sku']['stock_num']) {
+            $this->setError('很抱歉，商品库存不足');
+        }
         // 商品单价
         $goods['goods_price'] = $goods['goods_sku']['goods_price'];
         // 商品总价
@@ -59,8 +55,12 @@ class Order extends OrderModel
         $goods_total_weight = bcmul($goods['goods_sku']['goods_weight'], $goods_num, 2);
         // 当前用户收货城市id
         $cityId = $user['address_default'] ? $user['address_default']['city_id'] : null;
+        // 是否存在收货地址
+        $exist_address = !$user['address']->isEmpty();
         // 验证用户收货地址是否存在运费规则中
-        $intraRegion = $goods['delivery']->checkAddress($cityId);
+        if (!$intraRegion = $goods['delivery']->checkAddress($cityId)) {
+            $exist_address && $this->setError('很抱歉，您的收货地址不在配送范围内');
+        }
         // 计算配送费用
         $expressPrice = $intraRegion ?
             $goods['delivery']->calcTotalFee($goods_num, $goods_total_weight, $cityId) : 0;
@@ -70,10 +70,11 @@ class Order extends OrderModel
             'order_total_price' => $totalPrice,    // 商品总金额 (不含运费)
             'order_pay_price' => bcadd($totalPrice, $expressPrice, 2),  // 实际支付金额
             'address' => $user['address_default'],  // 默认地址
-            'exist_address' => !$user['address']->isEmpty(),  // 是否存在收货地址
+            'exist_address' => $exist_address,  // 是否存在收货地址
             'express_price' => $expressPrice,    // 配送费用
             'intra_region' => $intraRegion,    // 当前用户收货城市是否存在配送规则中
-            'intra_region_error' => '很抱歉，您的收货地址不在配送范围内',
+            'has_error' => $this->hasError(),
+            'error_msg' => $this->getError(),
         ];
     }
 
@@ -103,10 +104,6 @@ class Order extends OrderModel
     {
         if (empty($order['address'])) {
             $this->error = '请先选择收货地址';
-            return false;
-        }
-        if (!$order['intra_region']) {
-            $this->error = $order['intra_region_error'];
             return false;
         }
         Db::startTrans();
@@ -305,27 +302,50 @@ class Order extends OrderModel
             'order_id' => $order_id,
             'user_id' => $user_id,
             'order_status' => ['<>', 20]
-        ], ['goods' => ['image', 'spec'], 'address'])) {
+        ], ['goods' => ['image', 'spec', 'goods'], 'address'])) {
             throw new BaseException(['msg' => '订单不存在']);
         }
         return $order;
     }
 
     /**
-     * 判断商品库存不足
+     * 判断商品库存不足 (未付款订单)
      * @param $goodsList
      * @return bool
      */
-    public function checkGoodsStockNum(&$goodsList)
+    public function checkGoodsStatusFromOrder(&$goodsList)
     {
         foreach ($goodsList as $goods) {
+            // 判断商品是否下架
+            if ($goods['goods']['goods_status']['value'] !== 10) {
+                $this->setError('很抱歉，商品 [' . $goods['goods_name'] . '] 已下架');
+                return false;
+            }
             // 付款减库存
             if ($goods['deduct_stock_type'] === 20 && $goods['spec']['stock_num'] < 1) {
-                $this->error = '库存不足：【' . $goods['goods_name'] . '】';
+                $this->setError('很抱歉，商品 [' . $goods['goods_name'] . '] 库存不足');
                 return false;
             }
         }
         return true;
+    }
+
+    /**
+     * 设置错误信息
+     * @param $error
+     */
+    private function setError($error)
+    {
+        empty($this->error) && $this->error = $error;
+    }
+
+    /**
+     * 是否存在错误
+     * @return bool
+     */
+    public function hasError()
+    {
+        return !empty($this->error);
     }
 
 }

@@ -217,5 +217,29 @@ class Goods extends BaseModel
             ->select();
     }
 
+    /**
+     * 商品多规格信息
+     * @param $goods_sku_id
+     * @return array|bool
+     */
+    public function getGoodsSku($goods_sku_id)
+    {
+        $goodsSkuData = array_column($this['spec']->toArray(), null, 'spec_sku_id');
+        if (!isset($goodsSkuData[$goods_sku_id])) {
+            return false;
+        }
+        $goods_sku = $goodsSkuData[$goods_sku_id];
+        // 多规格文字内容
+        $goods_sku['goods_attr'] = '';
+        if ($this['spec_type'] === 20) {
+            $attrs = explode('_', $goods_sku['spec_sku_id']);
+            $spec_rel = array_column($this['spec_rel']->toArray(), null, 'spec_value_id');
+            foreach ($attrs as $specValueId) {
+                $goods_sku['goods_attr'] .= $spec_rel[$specValueId]['spec']['spec_name'] . ':'
+                    . $spec_rel[$specValueId]['spec_value'] . '; ';
+            }
+        }
+        return $goods_sku;
+    }
 
 }
