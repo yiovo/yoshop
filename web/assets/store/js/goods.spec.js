@@ -25,7 +25,6 @@
          * 初始化
          */
         initialize: function () {
-
             // 注册html容器
             this.$container = $(setting.container);
             this.$specAttr = this.$container.find('.spec-attr');
@@ -41,6 +40,8 @@
             this.deleteSpecGroupEvent();
             // 注册删除规则元素事件
             this.deleteSpecItemEvent();
+            // 注册批量设置sku事件
+            this.batchUpdateSku();
             // 注册表格input数据修改事件
             this.updateSpecInputEvent();
             // 渲染已存在的sku信息
@@ -196,6 +197,32 @@
         },
 
         /**
+         * 注册批量设置sku事件
+         */
+        batchUpdateSku: function () {
+            var _this = this,
+                $specBatch = _this.$container.find('.spec-batch');
+            $specBatch.on('click', '.btn-specBatchBtn', function () {
+                var formData = {};
+                $specBatch.find('input').each(function () {
+                    var $this = $(this)
+                        , formType = $this.data('type')
+                        , value = $this.val();
+                    if (typeof formType !== 'undefined' && formType !== '' && value !== '') {
+                        formData[formType] = value;
+                    }
+                });
+                if (!$.isEmptyObject(formData)) {
+                    data.spec_list.forEach(function (item, index) {
+                        data.spec_list[index].form = $.extend({}, data.spec_list[index].form, formData);
+                    });
+                    // 渲染商品规格table
+                    _this.renderTabelHtml();
+                }
+            });
+        },
+
+        /**
          * 渲染多规格模块html
          */
         renderHtml: function () {
@@ -209,20 +236,20 @@
          * 渲染表格html
          */
         renderTabelHtml: function () {
-            var $specTabel = this.$container.find('.spec-tabel')
-                , $goodsSpecLine = $specTabel.parent().prev('.goods-spec-line');
-            // 商品规格为空：隐藏分割线、清空table
+            var $specTabel = this.$container.find('.spec-sku-tabel')
+                , $goodsSku = $specTabel.parent();
+            // 商品规格为空：隐藏sku容器
             if (data.spec_attr.length === 0) {
                 $specTabel.empty();
-                $goodsSpecLine.hide();
+                $goodsSku.hide();
                 return false;
             }
             // 构建规格组合列表
             this.buildSpeclist();
             // 渲染table
             $specTabel.html(template('tpl_spec_table', data));
-            // 显示分割线
-            $goodsSpecLine.show();
+            // 显示sku容器
+            $goodsSku.show();
         },
 
         /**
@@ -276,7 +303,7 @@
          */
         updateSpecInputEvent: function () {
             var _this = this;
-            _this.$container.find('.spec-tabel').on('propertychange change', 'input', function () {
+            _this.$container.find('.spec-sku-tabel').on('propertychange change', 'input', function () {
                 var $this = $(this)
                     , dataType = $this.attr('name')
                     , specIndex = $this.parent().parent().data('index');

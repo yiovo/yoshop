@@ -107,16 +107,40 @@
                                             </button>
                                         </div>
                                     </div>
-
-                                    <!-- 虚线 -->
-                                    <div class="goods-spec-line am-margin-top-lg am-margin-bottom-lg"></div>
-
-                                    <!-- 商品规格table -->
-                                    <div class="am-scrollable-horizontal">
-                                        <table class="spec-tabel am-table am-table-bordered am-table-centered
+                                    <!-- 商品多规格sku信息 -->
+                                    <div class="goods-sku am-scrollable-horizontal">
+                                        <!-- 分割线 -->
+                                        <div class="goods-spec-line am-margin-top-lg am-margin-bottom-lg"></div>
+                                        <!-- sku 批量设置 -->
+                                        <div class="spec-batch am-form-inline">
+                                            <div class="am-form-group">
+                                                <label class="am-form-label">批量设置</label>
+                                            </div>
+                                            <div class="am-form-group">
+                                                <input type="text" data-type="goods_no" placeholder="商家编码">
+                                            </div>
+                                            <div class="am-form-group">
+                                                <input type="number" data-type="goods_price" placeholder="销售价">
+                                            </div>
+                                            <div class="am-form-group">
+                                                <input type="number" data-type="line_price" placeholder="划线价">
+                                            </div>
+                                            <div class="am-form-group">
+                                                <input type="number" data-type="stock_num" placeholder="库存数量">
+                                            </div>
+                                            <div class="am-form-group">
+                                                <input type="number" data-type="goods_weight" placeholder="重量">
+                                            </div>
+                                            <div class="am-form-group">
+                                                <button type="button" class="btn-specBatchBtn am-btn am-btn-sm am-btn-secondary
+                                                 am-radius">确定
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- sku table -->
+                                        <table class="spec-sku-tabel am-table am-table-bordered am-table-centered
                                      am-margin-bottom-xs am-text-nowrap"></table>
                                     </div>
-
                                 </div>
                             </div>
 

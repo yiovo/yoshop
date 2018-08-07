@@ -47,18 +47,18 @@
             <input type="text" name="goods_no" value="{{ item.form.goods_no }}" class="ipt-goods-no am-field-valid">
         </td>
         <td>
-            <input type="text" name="goods_price" value="{{ item.form.goods_price }}" class="am-field-valid ipt-w80"
+            <input type="number" name="goods_price" value="{{ item.form.goods_price }}" class="am-field-valid ipt-w80"
                    required>
         </td>
         <td>
-            <input type="text" name="line_price" value="{{ item.form.line_price }}" class="am-field-valid ipt-w80">
+            <input type="number" name="line_price" value="{{ item.form.line_price }}" class="am-field-valid ipt-w80">
         </td>
         <td>
-            <input type="text" name="stock_num" value="{{ item.form.stock_num }}" class="am-field-valid ipt-w80"
+            <input type="number" name="stock_num" value="{{ item.form.stock_num }}" class="am-field-valid ipt-w80"
                    required>
         </td>
         <td>
-            <input type="text" name="goods_weight" value="{{ item.form.goods_weight }}" class="am-field-valid ipt-w80"
+            <input type="number" name="goods_weight" value="{{ item.form.goods_weight }}" class="am-field-valid ipt-w80"
                    required>
         </td>
     </tr>
