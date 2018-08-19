@@ -94,12 +94,11 @@ class Setting extends Controller
      */
     private function updateEvent($key)
     {
-        $setting = SettingModel::detail($key);
         if (!$this->request->isAjax()) {
-            $values = $setting['values'];
+            $values = SettingModel::getItem($key);
             return $this->fetch($key, compact('values'));
         }
-        $model = $setting ?: new SettingModel;
+        $model = new SettingModel;
         if ($model->edit($key, $this->postData($key))) {
             return $this->renderSuccess('更新成功');
         }
