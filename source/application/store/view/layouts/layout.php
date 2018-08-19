@@ -16,7 +16,8 @@
     <script src="assets/store/js/jquery.min.js"></script>
     <script src="//at.alicdn.com/t/font_783249_e5yrsf08rap.js"></script>
     <script>
-        BASE_URL = '<?= url('/store') ?>';
+        BASE_URL = '<?= isset($base_url) ? $base_url : '' ?>';
+        STORE_URL = '<?= isset($store_url) ? $store_url : '' ?>';
     </script>
 </head>
 

@@ -135,7 +135,7 @@
                 }
                 layer.confirm('确定移动选中的文件吗？', {title: '友情提示'}, function (index) {
                     var load = layer.load();
-                    $.post(BASE_URL + '/upload.library/moveFiles', {
+                    $.post(STORE_URL + '/upload.library/moveFiles', {
                         group_id: groupId
                         , fileIds: fileIds
                     }, function (result) {
@@ -163,7 +163,7 @@
                 }
                 layer.confirm('确定删除选中的文件吗？', {title: '友情提示'}, function (index) {
                     var load = layer.load();
-                    $.post(BASE_URL + '/upload.library/deleteFiles', {
+                    $.post(STORE_URL + '/upload.library/deleteFiles', {
                         fileIds: fileIds
                     }, function (result) {
                         layer.close(load);
@@ -189,7 +189,7 @@
                 // 选完文件后，是否自动上传。
                 auto: true,
                 // 文件接收服务端。
-                server: BASE_URL + '/upload/image',
+                server: STORE_URL + '/upload/image',
                 // 选择文件的按钮。可选。
                 // 内部根据当前运行是创建，可能是input元素，也可能是flash.
                 pick: {
@@ -266,7 +266,7 @@
             _this.$element.on('click', '.group-add', function () {
                 layer.prompt({title: '请输入新分组名称'}, function (value, index) {
                     var load = layer.load();
-                    $.post(BASE_URL + '/upload.library/addGroup', {
+                    $.post(STORE_URL + '/upload.library/addGroup', {
                         group_name: value,
                         group_type: _this.options.type
                     }, function (result) {
@@ -298,7 +298,7 @@
                     , group_id = $li.data('group-id');
                 layer.prompt({title: '修改分组名称', value: $li.attr('title')}, function (value, index) {
                     var load = layer.load();
-                    $.post(BASE_URL + '/upload.library/editGroup', {
+                    $.post(STORE_URL + '/upload.library/editGroup', {
                         group_id: group_id
                         , group_name: value
                     }, function (result) {
@@ -326,7 +326,7 @@
                     , group_id = $li.data('group-id');
                 layer.confirm('确定删除该分组吗？', {title: '友情提示'}, function (index) {
                     var load = layer.load();
-                    $.post(BASE_URL + '/upload.library/deleteGroup', {
+                    $.post(STORE_URL + '/upload.library/deleteGroup', {
                         group_id: group_id
                     }, function (result) {
                         layer.msg(result.msg);
@@ -384,7 +384,7 @@
             var loadIndex = layer.load();
             typeof params === 'function' && (success = params);
             // 获取文件库列表
-            $.getJSON(BASE_URL + '/upload.library/fileList', params, function (result) {
+            $.getJSON(STORE_URL + '/upload.library/fileList', params, function (result) {
                 layer.close(loadIndex);
                 if (result.code === 1) {
                     typeof success === 'function' && success(result.data);

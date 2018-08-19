@@ -80,7 +80,7 @@
                 }
                 // 添加到数据库
                 var load = layer.load();
-                $.post(BASE_URL + '/goods.spec/addSpec', {
+                $.post(STORE_URL + '/goods.spec/addSpec', {
                     spec_name: specNameInputValue,
                     spec_value: specValueInputValue
                 }, function (result) {
@@ -138,7 +138,7 @@
                 }
                 // 添加到数据库
                 var load = layer.load();
-                $.post(BASE_URL + '/goods.spec/addSpecValue', {
+                $.post(STORE_URL + '/goods.spec/addSpecValue', {
                     spec_id: $specGroup.data('group-id'),
                     spec_value: specItemInputValue
                 }, function (result) {
