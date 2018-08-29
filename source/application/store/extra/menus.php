@@ -93,7 +93,7 @@ return [
             ],
             [
                 'name' => '首页设计',
-                'index' => 'wxapp/page'
+                'index' => 'wxapp.page/home'
             ],
             [
                 'name' => '导航设置',

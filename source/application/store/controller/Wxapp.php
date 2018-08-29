@@ -3,7 +3,6 @@
 namespace app\store\controller;
 
 use app\store\model\Wxapp as WxappModel;
-use app\store\model\WxappPage as WxappPageModel;
 use app\store\model\WxappNavbar as WxappNavbarModel;
 
 /**
@@ -27,25 +26,6 @@ class Wxapp extends Controller
             return $this->renderError('更新失败');
         }
         return $this->fetch('setting', compact('wxapp'));
-    }
-
-    /**
-     * 页面设计
-     * @return array|mixed
-     * @throws \think\exception\DbException
-     */
-    public function page()
-    {
-        $model = WxappPageModel::detail();
-        if (!$this->request->isAjax()) {
-            $jsonData = $model['page_data']['json'];
-            return $this->fetch('page', compact('jsonData'));
-        }
-        $data = $this->postData('data');
-        if (!$model->edit($data)) {
-            return $this->renderError('更新失败');
-        }
-        return $this->renderSuccess('更新成功');
     }
 
     /**
