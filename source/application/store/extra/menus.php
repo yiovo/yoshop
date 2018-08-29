@@ -92,12 +92,18 @@ return [
                 'index' => 'wxapp/setting',
             ],
             [
-                'name' => '首页设计',
-                'index' => 'wxapp.page/home'
-            ],
-            [
-                'name' => '导航设置',
-                'index' => 'wxapp/tabbar'
+                'name' => '页面管理',
+                'active' => true,
+                'submenu' => [
+                    [
+                        'name' => '首页设计',
+                        'index' => 'wxapp.page/home'
+                    ],
+                    [
+                        'name' => '页面链接',
+                        'index' => 'wxapp.page/links'
+                    ],
+                ]
             ],
             [
                 'name' => '帮助中心',
@@ -109,6 +115,11 @@ return [
                     'wxapp.help/delete'
                 ]
             ],
+            [
+                'name' => '导航设置',
+                'index' => 'wxapp/tabbar'
+            ],
+
         ],
     ],
     'plugins' => [
