@@ -388,7 +388,6 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
         }
         a {
           position: relative;
-
           .iconfont.icon-caret {
             position: absolute;
             left: .8rem;
@@ -398,6 +397,9 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
           }
         }
         .sidebar-third-nav-sub {
+          a {
+            padding-left: 2.8rem;
+          }
           display: none;
         }
       }

@@ -297,6 +297,8 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
         font-size: 1.2rem; }
     .left-sidebar .left-sidebar-second .sidebar-second-item .sidebar-third-item .sidebar-third-nav-sub {
       display: none; }
+      .left-sidebar .left-sidebar-second .sidebar-second-item .sidebar-third-item .sidebar-third-nav-sub a {
+        padding-left: 2.8rem; }
   .left-sidebar.xs-active {
     left: 0; }
 
