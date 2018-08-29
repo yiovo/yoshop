@@ -60,6 +60,11 @@ class Cart
         // 购物车商品列表
         $cartList = [];
         foreach ($this->cart as $key => $cart) {
+            // 判断商品不存在则自动删除
+            if (!isset($goodsList[$cart['goods_id']])) {
+                $this->delete($cart['goods_id'], $cart['goods_sku_id']);
+                continue;
+            }
             /* @var Goods $goods */
             $goods = $goodsList[$cart['goods_id']];
             // 商品sku信息

@@ -36,12 +36,12 @@ class Order extends OrderModel
         // 商品信息
         /* @var Goods $goods */
         $goods = Goods::detail($goods_id);
-        // 商品sku信息
-        $goods['goods_sku'] = $goods->getGoodsSku($goods_sku_id);
         // 判断商品是否下架
         if ($goods['goods_status']['value'] !== 10) {
-            $this->setError('很抱歉，该商品已下架');
+            $this->setError('很抱歉，商品信息不存在或已下架');
         }
+        // 商品sku信息
+        $goods['goods_sku'] = $goods->getGoodsSku($goods_sku_id);
         // 判断商品库存
         if ($goods_num > $goods['goods_sku']['stock_num']) {
             $this->setError('很抱歉，商品库存不足');
