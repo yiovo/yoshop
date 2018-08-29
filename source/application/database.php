@@ -2,10 +2,10 @@
 
 // 数据库配置
 $config = [
-    'host' => '192.168.33.10',
-    'database' => 'we7_cn',
+    'host' => '127.0.0.1',
+    'database' => 'yoshop_free',
     'username' => 'root',
-    'password' => '123456',
+    'password' => 'root',
     'port' => '3306',
     'charset' => 'utf8',
 ];
