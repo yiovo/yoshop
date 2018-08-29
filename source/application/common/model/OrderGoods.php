@@ -22,6 +22,15 @@ class OrderGoods extends BaseModel
     }
 
     /**
+     * 关联商品表
+     * @return \think\model\relation\BelongsTo
+     */
+    public function goods()
+    {
+        return $this->belongsTo('Goods');
+    }
+
+    /**
      * 关联商品规格表
      * @return \think\model\relation\BelongsTo
      */
