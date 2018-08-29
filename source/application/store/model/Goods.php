@@ -75,7 +75,6 @@ class Goods extends GoodsModel
         }
         $data['content'] = isset($data['content']) ? $data['content'] : '';
         $data['wxapp_id'] = $data['spec']['wxapp_id'] = self::$wxapp_id;
-
         // 开启事务
         Db::startTrans();
         try {
@@ -89,8 +88,9 @@ class Goods extends GoodsModel
             return true;
         } catch (\Exception $e) {
             Db::rollback();
+            $this->error = $e->getMessage();
+            return false;
         }
-        return false;
     }
 
     /**
