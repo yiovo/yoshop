@@ -37,7 +37,9 @@ class Goods extends Controller
     public function detail($goods_id)
     {
         // 商品详情
-        $detail = GoodsModel::detail($goods_id);
+        if (!$detail = GoodsModel::detail($goods_id)) {
+            return $this->renderError('商品信息不存在或已删除');
+        }
         // 规格信息
         $specData = $detail['spec_type'] === 20 ? $detail->getManySpecData($detail['spec_rel'], $detail['spec']) : null;
 //        $user = $this->getUser();
