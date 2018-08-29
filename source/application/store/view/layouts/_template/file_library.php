@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="h-rigth am-fr">
-                    <div class="btn-addSpecGroup">
+                    <div class="j-upload upload-image">
                         <i class="iconfont icon-add1"></i>
                         上传图片
                     </div>
