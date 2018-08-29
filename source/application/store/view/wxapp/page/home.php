@@ -49,10 +49,10 @@
 {{include file="layouts/_template/file_library" /}}
 
 <!--diy元素-->
-{{include file="wxapp/tpl/diy" /}}
+{{include file="wxapp/page/tpl/diy" /}}
 
 <!--编辑器: 搜索栏-->
-{{include file="wxapp/tpl/editor" /}}
+{{include file="wxapp/page/tpl/editor" /}}
 
 <script src="assets/store/js/ddsort.js"></script>
 <script src="assets/store/js/diy.js"></script>
