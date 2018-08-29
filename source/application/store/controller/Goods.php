@@ -50,9 +50,7 @@ class Goods extends Controller
      * 删除商品
      * @param $goods_id
      * @return array
-     * @throws \think\Exception
      * @throws \think\exception\DbException
-     * @throws \think\exception\PDOException
      */
     public function delete($goods_id)
     {

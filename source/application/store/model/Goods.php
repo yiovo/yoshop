@@ -12,7 +12,6 @@ use think\Db;
  */
 class Goods extends GoodsModel
 {
-
     /**
      * 添加商品
      * @param array $data
@@ -77,7 +76,6 @@ class Goods extends GoodsModel
         $data['content'] = isset($data['content']) ? $data['content'] : '';
         $data['wxapp_id'] = $data['spec']['wxapp_id'] = self::$wxapp_id;
 
-//        pre($data['images']);
         // 开启事务
         Db::startTrans();
         try {
@@ -120,18 +118,27 @@ class Goods extends GoodsModel
 
     /**
      * 删除商品
-     * @return int
-     * @throws \think\Exception
-     * @throws \think\exception\PDOException
+     * @return bool
      */
     public function remove()
     {
+        // 开启事务处理
         Db::startTrans();
-        (new GoodsSpec)->removeAll($this['goods_id']);
-        $this->image()->delete();
-        $this->delete();
-        Db::commit();
-        return true;
+        try {
+            // 删除商品sku
+            (new GoodsSpec)->removeAll($this['goods_id']);
+            // 删除商品图片
+            $this->image()->delete();
+            // 删除当前商品
+            $this->delete();
+            // 事务提交
+            Db::commit();
+            return true;
+        } catch (\Exception $e) {
+            $this->error = $e->getMessage();
+            Db::rollback();
+            return false;
+        }
     }
 
 }
