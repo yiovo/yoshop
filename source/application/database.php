@@ -3,7 +3,7 @@
 // 数据库配置
 $config = [
     'host' => '127.0.0.1',
-    'database' => 'yoshop_free',
+    'database' => 'yoshop',
     'username' => 'root',
     'password' => 'root',
     'port' => '3306',
