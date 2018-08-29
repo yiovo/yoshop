@@ -27,7 +27,7 @@ class OrderGoods extends BaseModel
      */
     public function spec()
     {
-        return $this->belongsTo('GoodsSpec');
+        return $this->belongsTo('GoodsSpec', 'spec_sku_id', 'spec_sku_id');
     }
 
 }
