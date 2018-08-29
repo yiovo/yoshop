@@ -1057,6 +1057,12 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
 .x-color-green {
   color: #4db14d !important; }
 
+.x-color-blue {
+  color: #259fdc !important; }
+
+.x-color-c-gray-5f {
+  color: #828282; }
+
 .tips .pre {
   padding: 1rem;
   background-color: #fbfdff;
