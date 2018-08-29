@@ -2350,3 +2350,23 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
   pointer-events: none;
 }
 
+// 小程序页面链接
+.link-list {
+  padding-bottom: 1rem;
+  p {
+    margin: 0;
+  }
+  .link-item {
+    padding: .8rem 2rem;
+    border-bottom: 1px dashed #eee;
+    .row {
+      margin: .4rem 0;
+      font-size: 1.22rem;
+      &.page-name {
+        font-size: 1.4rem;
+        color: #259fdc;
+      }
+    }
+  }
+}
+

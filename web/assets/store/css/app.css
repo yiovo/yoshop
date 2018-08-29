@@ -1742,4 +1742,18 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
   opacity: 0.6;
   pointer-events: none; }
 
+.link-list {
+  padding-bottom: 1rem; }
+  .link-list p {
+    margin: 0; }
+  .link-list .link-item {
+    padding: .8rem 2rem;
+    border-bottom: 1px dashed #eee; }
+    .link-list .link-item .row {
+      margin: .4rem 0;
+      font-size: 1.22rem; }
+      .link-list .link-item .row.page-name {
+        font-size: 1.4rem;
+        color: #259fdc; }
+
 /*# sourceMappingURL=app.css.map */

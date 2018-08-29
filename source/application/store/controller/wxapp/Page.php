@@ -31,4 +31,13 @@ class Page extends Controller
         return $this->renderSuccess('更新成功');
     }
 
+    /**
+     * 页面链接
+     * @return mixed
+     */
+    public function links()
+    {
+        return $this->fetch('links');
+    }
+
 }
