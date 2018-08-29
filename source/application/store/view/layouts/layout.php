@@ -12,9 +12,9 @@
     <meta name="apple-mobile-web-app-title" content="<?= $setting['store']['values']['name'] ?>"/>
     <link rel="stylesheet" href="assets/store/css/amazeui.min.css"/>
     <link rel="stylesheet" href="assets/store/css/app.css"/>
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_664399_1z02i08jjid.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_783249_t6knt0guzo.css">
     <script src="assets/store/js/jquery.min.js"></script>
-    <script src="//at.alicdn.com/t/font_664399_1z02i08jjid.js"></script>
+    <script src="//at.alicdn.com/t/font_783249_e5yrsf08rap.js"></script>
     <script>
         BASE_URL = '<?= url('/store') ?>';
     </script>
@@ -28,11 +28,11 @@
         <div class="tpl-header-fluid">
             <!-- 侧边切换 -->
             <div class="am-fl tpl-header-button switch-button">
-                <i class="iconfont">&#xe6a8;</i>
+                <i class="iconfont icon-menufold"></i>
             </div>
             <!-- 刷新页面 -->
             <div class="am-fl tpl-header-button refresh-button">
-                <i class="iconfont">&#xe638;</i>
+                <i class="iconfont icon-refresh"></i>
             </div>
             <!-- 其它功能-->
             <div class="am-fr tpl-header-navbar">
@@ -45,7 +45,7 @@
                     <!-- 退出 -->
                     <li class="am-text-sm">
                         <a href="<?= url('passport/logout') ?>">
-                            <i class="iconfont">&#xe60b;</i> 退出
+                            <i class="iconfont icon-tuichu"></i> 退出
                         </a>
                     </li>
                 </ul>
@@ -93,7 +93,7 @@
                             <div class="sidebar-third-item">
                                 <a href="javascript:void(0);"
                                    class="sidebar-nav-sub-title <?= $item['active'] ? 'active' : '' ?>">
-                                    <i class="iconfont icon-caret">&#xe653;</i>
+                                    <i class="iconfont icon-caret"></i>
                                     <?= $item['name']; ?>
                                 </a>
                                 <ul class="sidebar-third-nav-sub">
