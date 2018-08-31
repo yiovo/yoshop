@@ -27,6 +27,7 @@ class Passport extends Controller
             if ($model->login($this->postData('User'))) {
                 $referer = Cookie::get('login_referer');
 				$url = $referer ?: url('index/index');
+				Cookie::set('login_referer', '');
                 return $this->renderSuccess('登录成功', $url);
             }
             return $this->renderError($model->getError() ?: '登录失败');
