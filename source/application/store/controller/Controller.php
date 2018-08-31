@@ -4,6 +4,7 @@ namespace app\store\controller;
 
 use think\Config;
 use think\Session;
+use think\Cookie;
 use app\store\model\Setting;
 
 /**
@@ -146,8 +147,10 @@ class Controller extends \think\Controller
             || !isset($this->store['wxapp'])
             || empty($this->store['wxapp'])
         ) {
-            $referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
-            $this->error('您还没有登录', "passport/login?referer={$referer}", 2);
+            $referer = isset($_SERVER['HTTP_REFERER']) ?: '';
+			Cookie::set('login_referer', $referer);
+
+            $this->error('您还没有登录', 'passport/login');
             return false;
         }
         return true;
