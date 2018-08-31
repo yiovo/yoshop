@@ -146,7 +146,8 @@ class Controller extends \think\Controller
             || !isset($this->store['wxapp'])
             || empty($this->store['wxapp'])
         ) {
-            $this->error('您还没有登录', 'passport/login');
+            $referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+            $this->error('您还没有登录', "passport/login?referer={$referer}", 2);
             return false;
         }
         return true;
