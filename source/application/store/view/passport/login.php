@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>商城系统登录</title>
     <link rel="icon" type="image/png" href="assets/admin/i/favicon.ico"/>
     <link rel="stylesheet" href="assets/store/css/login/style.css"/>
