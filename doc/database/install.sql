@@ -78,8 +78,7 @@ CREATE TABLE `yoshop_goods_image` (
   `image_id` int(11) NOT NULL,
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `goods_image` (`goods_id`,`image_id`) USING BTREE
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `yoshop_goods_spec`;
