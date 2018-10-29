@@ -43,3 +43,9 @@ html, body { height: 100%; }
 .login-form button { width: 100%; margin-top: 20px; padding: 10px 18px; font-size: 18px; line-height: 1.3333333; border-radius: 4px; white-space: normal; -webkit-transition: border .2s linear, color .2s linear, width .2s linear, background-color .2s linear; -o-transition: border .2s linear, color .2s linear, width .2s linear, background-color .2s linear; transition: border .2s linear, color .2s linear, width .2s linear, background-color .2s linear; -webkit-font-smoothing: subpixel-antialiased; color: #fff; background-color: #ff5060; border-color: #ff5060; background-image: none; border: 1px solid transparent; cursor: pointer; outline: none; }
 .login-form button[disabled], .login-form button[disabled]:hover { color: #fff; background-color: #a2caee; border-color: #a2caee; cursor: not-allowed; opacity: .65; }
 .login-form button:hover { background-color: #fd717e; border-color: #fd717e; }
+@media screen and (max-width: 404px) {
+    .login-body{
+		width: 310px;
+        padding: 50px 30px 40px;
+    }
+}
