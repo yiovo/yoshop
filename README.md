@@ -33,7 +33,3 @@
 #### 安全&缺陷
 如果你发现了一个安全漏洞，请发送邮件到 482075501@qq.com。所有的安全漏洞都将及时得到解决。
 
-
-#### License
-萤火小程序商城（YoShop）遵循 [GPL license](https://opensource.org/licenses/GPL-3.0) 开源协议。
-
