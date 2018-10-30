@@ -147,14 +147,7 @@ class Controller extends \think\Controller
             || !isset($this->store['wxapp'])
             || empty($this->store['wxapp'])
         ) {
-            $referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
-			if ($referer){
-				$refererInfo = parse_url($referer);
-				if (isset($refererInfo['host']) && $refererInfo['host'] == $_SERVER['HTTP_HOST']){
-					Cookie::set('login_referer', $referer);
-				}
-			}
-			$this->error('您还没有登录', 'passport/login');
+			$this->redirect('passport/login');
             return false;
         }
         return true;
