@@ -32,7 +32,7 @@ class Goods extends GoodsModel
                 'goods_sales' => ['inc', $goods['total_num']]
             ];
             // 付款减库存
-            if ($goods['deduct_stock_type'] === 20) {
+            if ($goods['deduct_stock_type'] == 20) {
                 $specData['stock_num'] = ['dec', $goods['total_num']];
             }
             $goodsSpecSave[] = $specData;
