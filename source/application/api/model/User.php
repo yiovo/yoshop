@@ -81,10 +81,14 @@ class User extends UserModel
     {
         // 获取当前小程序信息
         $wxapp = Wxapp::detail();
+        if (empty($wxapp['app_id']) || empty($wxapp['app_secret'])) {
+            throw new BaseException(['msg' => '请到 [后台-小程序设置] 填写appid 和 appsecret']);
+        }
         // 微信登录 (获取session_key)
         $WxUser = new WxUser($wxapp['app_id'], $wxapp['app_secret']);
-        if (!$session = $WxUser->sessionKey($code))
-            throw new BaseException(['msg' => 'session_key 获取失败']);
+        if (!$session = $WxUser->sessionKey($code)) {
+            throw new BaseException(['msg' => $WxUser->getError()]);
+        }
         return $session;
     }
 
