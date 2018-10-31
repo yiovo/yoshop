@@ -37,7 +37,7 @@ class Order extends OrderModel
         /* @var Goods $goods */
         $goods = Goods::detail($goods_id);
         // 判断商品是否下架
-        if ($goods['goods_status']['value'] !== 10) {
+        if ($goods['goods_status']['value'] != 10) {
             $this->setError('很抱歉，商品信息不存在或已下架');
         }
         // 商品sku信息

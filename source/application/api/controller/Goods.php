@@ -38,7 +38,7 @@ class Goods extends Controller
     {
         // 商品详情
         $detail = GoodsModel::detail($goods_id);
-        if (!$detail || $detail['goods_status']['value'] !== 10) {
+        if (!$detail || $detail['goods_status']['value'] != 10) {
             return $this->renderError('很抱歉，商品信息不存在或已下架');
         }
         // 规格信息

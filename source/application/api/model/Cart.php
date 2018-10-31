@@ -75,7 +75,7 @@ class Cart
                 continue;
             }
             // 判断商品是否下架
-            if ($goods['goods_status']['value'] !== 10) {
+            if ($goods['goods_status']['value'] != 10) {
                 $this->setError('很抱歉，商品 [' . $goods['goods_name'] . '] 已下架');
             }
             // 判断商品库存
@@ -135,7 +135,7 @@ class Cart
         // 商品sku信息
         $goods['goods_sku'] = $goods->getGoodsSku($goods_sku_id);
         // 判断商品是否下架
-        if ($goods['goods_status']['value'] !== 10) {
+        if ($goods['goods_status']['value'] != 10) {
             $this->setError('很抱歉，该商品已下架');
             return false;
         }
