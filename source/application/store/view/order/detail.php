@@ -7,10 +7,10 @@
                         <?php
                         // 计算当前步骤位置
                         $progress = 2;
-                        $detail['pay_status']['value'] === 20 && $progress += 1;
-                        $detail['delivery_status']['value'] === 20 && $progress += 1;
-                        $detail['receipt_status']['value'] === 20 && $progress += 1;
-                        // $detail['order_status']['value'] === 30 && $progress += 1;
+                        $detail['pay_status']['value'] == 20 && $progress += 1;
+                        $detail['delivery_status']['value'] == 20 && $progress += 1;
+                        $detail['receipt_status']['value'] == 20 && $progress += 1;
+                        // $detail['order_status']['value'] == 30 && $progress += 1;
                         ?>
                         <ul class="order-detail-progress progress-<?= $progress ?>">
                             <li>
@@ -19,7 +19,7 @@
                             </li>
                             <li>
                                 <span>付款</span>
-                                <?php if ($detail['pay_status']['value'] === 20): ?>
+                                <?php if ($detail['pay_status']['value'] == 20): ?>
                                     <div class="tip">
                                         付款于 <?= date('Y-m-d H:i:s', $detail['pay_time']) ?>
                                     </div>
@@ -27,7 +27,7 @@
                             </li>
                             <li>
                                 <span>发货</span>
-                                <?php if ($detail['delivery_status']['value'] === 20): ?>
+                                <?php if ($detail['delivery_status']['value'] == 20): ?>
                                     <div class="tip">
                                         发货于 <?= date('Y-m-d H:i:s', $detail['delivery_time']) ?>
                                     </div>
@@ -35,7 +35,7 @@
                             </li>
                             <li>
                                 <span>收货</span>
-                                <?php if ($detail['receipt_status']['value'] === 20): ?>
+                                <?php if ($detail['receipt_status']['value'] == 20): ?>
                                     <div class="tip">
                                         收货于 <?= date('Y-m-d H:i:s', $detail['receipt_time']) ?>
                                     </div>
@@ -43,7 +43,7 @@
                             </li>
                             <li>
                                 <span>完成</span>
-                                <?php if ($detail['order_status']['value'] === 30): ?>
+                                <?php if ($detail['order_status']['value'] == 30): ?>
                                     <div class="tip">
                                         完成于 <?= date('Y-m-d H:i:s', $detail['receipt_time']) ?>
                                     </div>
@@ -78,17 +78,17 @@
                                 <td>
                                     <p>付款状态：
                                         <span class="am-badge
-                                        <?= $detail['pay_status']['value'] === 20 ? 'am-badge-success' : '' ?>">
+                                        <?= $detail['pay_status']['value'] == 20 ? 'am-badge-success' : '' ?>">
                                                 <?= $detail['pay_status']['text'] ?></span>
                                     </p>
                                     <p>发货状态：
                                         <span class="am-badge
-                                        <?= $detail['delivery_status']['value'] === 20 ? 'am-badge-success' : '' ?>">
+                                        <?= $detail['delivery_status']['value'] == 20 ? 'am-badge-success' : '' ?>">
                                                 <?= $detail['delivery_status']['text'] ?></span>
                                     </p>
                                     <p>收货状态：
                                         <span class="am-badge
-                                        <?= $detail['receipt_status']['value'] === 20 ? 'am-badge-success' : '' ?>">
+                                        <?= $detail['receipt_status']['value'] == 20 ? 'am-badge-success' : '' ?>">
                                                 <?= $detail['receipt_status']['text'] ?></span>
                                     </p>
                                 </td>
@@ -165,7 +165,7 @@
                         </table>
                     </div>
 
-                    <?php if ($detail['pay_status']['value'] === 20): ?>
+                    <?php if ($detail['pay_status']['value'] == 20): ?>
                         <div class="widget-head am-cf">
                             <div class="widget-title am-fl">付款信息</div>
                         </div>
@@ -186,7 +186,7 @@
                                     <td><?= $detail['transaction_id'] ?: '--' ?></td>
                                     <td>
                                         <span class="am-badge
-                                        <?= $detail['pay_status']['value'] === 20 ? 'am-badge-success' : '' ?>">
+                                        <?= $detail['pay_status']['value'] == 20 ? 'am-badge-success' : '' ?>">
                                                 <?= $detail['pay_status']['text'] ?></span>
                                     </td>
                                     <td>
@@ -198,12 +198,12 @@
                         </div>
                     <?php endif; ?>
 
-                    <?php if ($detail['pay_status']['value'] === 20): ?>
+                    <?php if ($detail['pay_status']['value'] == 20): ?>
                         <div class="widget-head am-cf">
                             <div class="widget-title am-fl">发货信息</div>
                         </div>
 
-                        <?php if ($detail['delivery_status']['value'] === 10): ?>
+                        <?php if ($detail['delivery_status']['value'] == 10): ?>
                             <!-- 去发货 -->
                             <form id="delivery" class="my-form am-form tpl-form-line-form" method="post"
                                   action="<?= url('order/delivery', ['order_id' => $detail['order_id']]) ?>">
@@ -245,7 +245,7 @@
                                         <td><?= $detail['express_no'] ?></td>
                                         <td>
                                              <span class="am-badge
-                                            <?= $detail['delivery_status']['value'] === 20 ? 'am-badge-success' : '' ?>">
+                                            <?= $detail['delivery_status']['value'] == 20 ? 'am-badge-success' : '' ?>">
                                                     <?= $detail['delivery_status']['text'] ?></span>
                                         </td>
                                         <td>

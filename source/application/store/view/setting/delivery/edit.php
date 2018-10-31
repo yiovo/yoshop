@@ -20,11 +20,11 @@
                                 <div class="am-u-sm-9 am-u-end">
                                     <label class="am-radio-inline">
                                         <input type="radio" name="delivery[method]" value="10" data-am-ucheck
-                                            <?= $model['method']['value'] === 10 ? 'checked' : '' ?>> 按件数
+                                            <?= $model['method']['value'] == 10 ? 'checked' : '' ?>> 按件数
                                     </label>
                                     <label class="am-radio-inline">
                                         <input type="radio" name="delivery[method]" value="20" data-am-ucheck
-                                            <?= $model['method']['value'] === 20 ? 'checked' : '' ?>>
+                                            <?= $model['method']['value'] == 20 ? 'checked' : '' ?>>
                                         按重量
                                     </label>
                                 </div>
@@ -42,13 +42,13 @@
                                                 <th width="42%">可配送区域</th>
                                                 <th>
                                                     <span class="first">
-                                                        <?= $model['method']['value'] === 10 ? '首件 (个)' : '首重 (Kg)' ?>
+                                                        <?= $model['method']['value'] == 10 ? '首件 (个)' : '首重 (Kg)' ?>
                                                     </span>
                                                 </th>
                                                 <th>运费 (元)</th>
                                                 <th>
                                                     <span class="additional">
-                                                          <?= $model['method']['value'] === 10 ? '续件 (个)' : '续重 (Kg)' ?>
+                                                          <?= $model['method']['value'] == 10 ? '续件 (个)' : '续重 (Kg)' ?>
                                                     </span>
                                                 </th>
                                                 <th>续费 (元)</th>

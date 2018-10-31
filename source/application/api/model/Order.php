@@ -37,7 +37,7 @@ class Order extends OrderModel
         /* @var Goods $goods */
         $goods = Goods::detail($goods_id);
         // 判断商品是否下架
-        if ($goods['goods_status']['value'] !== 10) {
+        if ($goods['goods_status']['value'] != 10) {
             $this->setError('很抱歉，商品信息不存在或已下架');
         }
         // 商品sku信息
@@ -142,7 +142,7 @@ class Order extends OrderModel
                 'total_price' => $goods['total_price'],
             ];
             // 下单减库存
-            $goods['deduct_stock_type'] === 10 && $deductStockData[] = [
+            $goods['deduct_stock_type'] == 10 && $deductStockData[] = [
                 'goods_spec_id' => $goods['goods_sku']['goods_spec_id'],
                 'stock_num' => ['dec', $goods['total_num']]
             ];
@@ -211,7 +211,7 @@ class Order extends OrderModel
      */
     public function cancel()
     {
-        if ($this['pay_status']['value'] === 20) {
+        if ($this['pay_status']['value'] == 20) {
             $this->error = '已付款订单不可取消';
             return false;
         }
@@ -231,7 +231,7 @@ class Order extends OrderModel
         $goodsSpecSave = [];
         foreach ($goodsList as $goods) {
             // 下单减库存
-            if ($goods['deduct_stock_type'] === 10) {
+            if ($goods['deduct_stock_type'] == 10) {
                 $goodsSpecSave[] = [
                     'goods_spec_id' => $goods['goods_spec_id'],
                     'stock_num' => ['inc', $goods['total_num']]
@@ -248,7 +248,7 @@ class Order extends OrderModel
      */
     public function receipt()
     {
-        if ($this['delivery_status']['value'] === 10 || $this['receipt_status']['value'] === 20) {
+        if ($this['delivery_status']['value'] == 10 || $this['receipt_status']['value'] == 20) {
             $this->error = '该订单不合法';
             return false;
         }
@@ -317,12 +317,12 @@ class Order extends OrderModel
     {
         foreach ($goodsList as $goods) {
             // 判断商品是否下架
-            if ($goods['goods']['goods_status']['value'] !== 10) {
+            if ($goods['goods']['goods_status']['value'] != 10) {
                 $this->setError('很抱歉，商品 [' . $goods['goods_name'] . '] 已下架');
                 return false;
             }
             // 付款减库存
-            if ($goods['deduct_stock_type'] === 20 && $goods['spec']['stock_num'] < 1) {
+            if ($goods['deduct_stock_type'] == 20 && $goods['spec']['stock_num'] < 1) {
                 $this->setError('很抱歉，商品 [' . $goods['goods_name'] . '] 库存不足');
                 return false;
             }

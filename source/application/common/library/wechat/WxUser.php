@@ -12,6 +12,8 @@ class WxUser
     private $appId;
     private $appSecret;
 
+    private $error;
+
     /**
      * 构造方法
      * WxUser constructor.
@@ -43,7 +45,16 @@ class WxUser
             'grant_type' => 'authorization_code',
             'js_code' => $code
         ]), true);
-        return isset($result['errcode']) ? [] : $result;
+        if (isset($result['errcode'])) {
+            $this->error = $result['errmsg'];
+            return false;
+        }
+        return $result;
+    }
+
+    public function getError()
+    {
+        return $this->error;
     }
 
 }

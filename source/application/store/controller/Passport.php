@@ -4,7 +4,6 @@ namespace app\store\controller;
 
 use app\store\model\StoreUser;
 use think\Session;
-use think\Cookie;
 
 /**
  * 商户认证
@@ -25,10 +24,7 @@ class Passport extends Controller
         if ($this->request->isAjax()) {
             $model = new StoreUser;
             if ($model->login($this->postData('User'))) {
-                $referer = Cookie::get('login_referer');
-				$url = $referer ?: url('index/index');
-				Cookie::set('login_referer', '');
-                return $this->renderSuccess('登录成功', $url);
+                return $this->renderSuccess('登录成功', url('index/index'));
             }
             return $this->renderError($model->getError() ?: '登录失败');
         }

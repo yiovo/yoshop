@@ -34,8 +34,8 @@ class Order extends OrderModel
      */
     public function delivery($data)
     {
-        if ($this['pay_status']['value'] === 10
-            || $this['delivery_status']['value'] === 20) {
+        if ($this['pay_status']['value'] == 10
+            || $this['delivery_status']['value'] == 20) {
             $this->error = '该订单不合法';
             return false;
         }
