@@ -25,15 +25,15 @@
                                         <option value=""></option>
                                         <?php if (isset($catgory)): foreach ($catgory as $first): ?>
                                             <option value="<?= $first['category_id'] ?>"
-                                                <?= $model['category_id'] === $first['category_id'] ? 'selected' : '' ?>>
+                                                <?= $model['category_id'] == $first['category_id'] ? 'selected' : '' ?>>
                                                 <?= $first['name'] ?></option>
                                             <?php if (isset($first['child'])): foreach ($first['child'] as $two): ?>
                                                 <option value="<?= $two['category_id'] ?>"
-                                                    <?= $model['category_id'] === $two['category_id'] ? 'selected' : '' ?>>
+                                                    <?= $model['category_id'] == $two['category_id'] ? 'selected' : '' ?>>
                                                     　　<?= $two['name'] ?></option>
                                                 <?php if (isset($two['child'])): foreach ($two['child'] as $three): ?>
                                                     <option value="<?= $three['category_id'] ?>"
-                                                        <?= $model['category_id'] === $three['category_id'] ? 'selected' : '' ?>>
+                                                        <?= $model['category_id'] == $three['category_id'] ? 'selected' : '' ?>>
                                                         　　　<?= $three['name'] ?></option>
                                                 <?php endforeach; endif; ?>
                                             <?php endforeach; endif; ?>
@@ -77,12 +77,12 @@
                                 <div class="am-u-sm-9 am-u-end">
                                     <label class="am-radio-inline">
                                         <input type="radio" name="goods[spec_type]" value="10" data-am-ucheck
-                                            <?= $model['spec_type'] === 10 ? 'checked' : '' ?> >
+                                            <?= $model['spec_type'] == 10 ? 'checked' : '' ?> >
                                         单规格
                                     </label>
                                     <label class="am-radio-inline">
                                         <input type="radio" name="goods[spec_type]" value="20" data-am-ucheck
-                                            <?= $model['spec_type'] === 20 ? 'checked' : '' ?> >
+                                            <?= $model['spec_type'] == 20 ? 'checked' : '' ?> >
                                         <span class="am-link-muted">多规格</span>
                                     </label>
                                 </div>
@@ -90,7 +90,7 @@
 
                             <!-- 商品多规格 -->
                             <div class="goods-spec-many am-form-group"
-                                 style="display: <?= $model['spec_type'] === 20 ? 'block' : 'none' ?>;">
+                                 style="display: <?= $model['spec_type'] == 20 ? 'block' : 'none' ?>;">
                                 <div class="goods-spec-box am-u-sm-9 am-u-sm-push-2 am-u-end">
                                     <!-- 规格属性 -->
                                     <div class="spec-attr"></div>
@@ -159,7 +159,7 @@
                             </div>
                             <!-- 商品单规格 -->
                             <div class="goods-spec-single"
-                                 style="display: <?= $model['spec_type'] === 10 ? 'block' : 'none' ?>;">
+                                 style="display: <?= $model['spec_type'] == 10 ? 'block' : 'none' ?>;">
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label">商品编码 </label>
                                     <div class="am-u-sm-9 am-u-end">
@@ -202,12 +202,12 @@
                                 <div class="am-u-sm-9 am-u-end">
                                     <label class="am-radio-inline">
                                         <input type="radio" name="goods[deduct_stock_type]" value="10" data-am-ucheck
-                                            <?= $model['deduct_stock_type'] === 10 ? 'checked' : '' ?> >
+                                            <?= $model['deduct_stock_type'] == 10 ? 'checked' : '' ?> >
                                         下单减库存
                                     </label>
                                     <label class="am-radio-inline">
                                         <input type="radio" name="goods[deduct_stock_type]" value="20" data-am-ucheck
-                                            <?= $model['deduct_stock_type'] === 20 ? 'checked' : '' ?> >
+                                            <?= $model['deduct_stock_type'] == 20 ? 'checked' : '' ?> >
                                         付款减库存
                                     </label>
                                 </div>
@@ -234,7 +234,7 @@
                                         <option value="">请选择运费模板</option>
                                         <?php foreach ($delivery as $item): ?>
                                             <option value="<?= $item['delivery_id'] ?>"
-                                                <?= $model['delivery_id'] === $item['delivery_id'] ? 'selected' : '' ?>>
+                                                <?= $model['delivery_id'] == $item['delivery_id'] ? 'selected' : '' ?>>
                                                 <?= $item['name'] ?> (<?= $item['method']['text'] ?>)
                                             </option>
                                         <?php endforeach; ?>
@@ -249,12 +249,12 @@
                                 <div class="am-u-sm-9 am-u-end">
                                     <label class="am-radio-inline">
                                         <input type="radio" name="goods[goods_status]" value="10" data-am-ucheck
-                                            <?= $model['goods_status']['value'] === 10 ? 'checked' : '' ?> >
+                                            <?= $model['goods_status']['value'] == 10 ? 'checked' : '' ?> >
                                         上架
                                     </label>
                                     <label class="am-radio-inline">
                                         <input type="radio" name="goods[goods_status]" value="20" data-am-ucheck
-                                            <?= $model['goods_status']['value'] === 20 ? 'checked' : '' ?> >
+                                            <?= $model['goods_status']['value'] == 20 ? 'checked' : '' ?> >
                                         下架
                                     </label>
                                 </div>

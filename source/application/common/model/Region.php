@@ -83,15 +83,15 @@ class Region extends BaseModel
             // 格式化
             $tree = [];
             foreach ($allData as $pKey => $province) {
-                if ($province['level'] === 1) {    // 省份
+                if ($province['level'] == 1) {    // 省份
                     $tree[$province['id']] = $province;
                     unset($allData[$pKey]);
                     foreach ($allData as $cKey => $city) {
-                        if ($city['level'] === 2 && $city['pid'] === $province['id']) {    // 城市
+                        if ($city['level'] == 2 && $city['pid'] == $province['id']) {    // 城市
                             $tree[$province['id']]['city'][$city['id']] = $city;
                             unset($allData[$cKey]);
                             foreach ($allData as $rKey => $region) {
-                                if ($region['level'] === 3 && $region['pid'] === $city['id']) {    // 地区
+                                if ($region['level'] == 3 && $region['pid'] == $city['id']) {    // 地区
                                     $tree[$province['id']]['city'][$city['id']]['region'][$region['id']] = $region;
                                     unset($allData[$rKey]);
                                 }

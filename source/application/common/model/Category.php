@@ -34,13 +34,13 @@ class Category extends BaseModel
             $all = !empty($data) ? $data->toArray() : [];
             $tree = [];
             foreach ($all as $first) {
-                if ($first['parent_id'] !== 0) continue;
+                if ($first['parent_id'] != 0) continue;
                 $twoTree = [];
                 foreach ($all as $two) {
-                    if ($two['parent_id'] !== $first['category_id']) continue;
+                    if ($two['parent_id'] != $first['category_id']) continue;
                     $threeTree = [];
                     foreach ($all as $three)
-                        $three['parent_id'] === $two['category_id']
+                        $three['parent_id'] == $two['category_id']
                         && $threeTree[$three['category_id']] = $three;
                     !empty($threeTree) && $two['child'] = $threeTree;
                     $twoTree[$two['category_id']] = $two;

@@ -105,10 +105,10 @@ class Goods extends GoodsModel
         $model = new GoodsSpec;
         $isUpdate && $model->removeAll($this['goods_id']);
         // 添加规格数据
-        if ($data['spec_type'] === '10') {
+        if ($data['spec_type'] == '10') {
             // 单规格
             $this->spec()->save($data['spec']);
-        } else if ($data['spec_type'] === '20') {
+        } else if ($data['spec_type'] == '20') {
             // 添加商品与规格关系记录
             $model->addGoodsSpecRel($this['goods_id'], $data['spec_many']['spec_attr']);
             // 添加商品sku

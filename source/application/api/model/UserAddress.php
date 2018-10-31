@@ -92,7 +92,7 @@ class UserAddress extends UserAddressModel
     public function remove($user)
     {
         // 查询当前是否为默认地址
-        $user['address_id'] === $this['address_id'] && $user->save(['address_id' => 0]);
+        $user['address_id'] == $this['address_id'] && $user->save(['address_id' => 0]);
         return $this->delete();
     }
 

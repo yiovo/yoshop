@@ -37,7 +37,7 @@ class Wxapp extends WxappModel
         );
         // 删除wxapp缓存
         self::deleteCache();
-        return $this->allowField(true)->save($data) !== false ?: false;
+        return $this->allowField(true)->save($data) !== false;
     }
 
     /**

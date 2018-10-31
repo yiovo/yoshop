@@ -52,7 +52,7 @@
                                     <td class="am-text-middle"><?= $item['sales_actual'] ?></td>
                                     <td class="am-text-middle"><?= $item['goods_sort'] ?></td>
                                     <td class="am-text-middle">
-                                            <span class="<?= $item['goods_status']['value'] === 10 ? 'x-color-green'
+                                            <span class="<?= $item['goods_status']['value'] == 10 ? 'x-color-green'
                                                 : 'x-color-red' ?>">
                                             <?= $item['goods_status']['text'] ?>
                                             </span>
