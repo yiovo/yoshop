@@ -60,17 +60,17 @@
                                             <td class="am-text-middle" rowspan="<?= $goodsCount ?>">
                                                 <p>付款状态：
                                                     <span class="am-badge
-                                                <?= $order['pay_status']['value'] === 20 ? 'am-badge-success' : '' ?>">
+                                                <?= $order['pay_status']['value'] == 20 ? 'am-badge-success' : '' ?>">
                                                         <?= $order['pay_status']['text'] ?></span>
                                                 </p>
                                                 <p>发货状态：
                                                     <span class="am-badge
-                                                <?= $order['delivery_status']['value'] === 20 ? 'am-badge-success' : '' ?>">
+                                                <?= $order['delivery_status']['value'] == 20 ? 'am-badge-success' : '' ?>">
                                                         <?= $order['delivery_status']['text'] ?></span>
                                                 </p>
                                                 <p>收货状态：
                                                     <span class="am-badge
-                                                <?= $order['receipt_status']['value'] === 20 ? 'am-badge-success' : '' ?>">
+                                                <?= $order['receipt_status']['value'] == 20 ? 'am-badge-success' : '' ?>">
                                                         <?= $order['receipt_status']['text'] ?></span>
                                                 </p>
                                             </td>
@@ -79,8 +79,8 @@
                                                     <a class="tpl-table-black-operation-green"
                                                        href="<?= url('order/detail', ['order_id' => $order['order_id']]) ?>">
                                                         订单详情</a>
-                                                    <?php if ($order['pay_status']['value'] === 20
-                                                        && $order['delivery_status']['value'] === 10): ?>
+                                                    <?php if ($order['pay_status']['value'] == 20
+                                                        && $order['delivery_status']['value'] == 10): ?>
                                                         <a class="tpl-table-black-operation"
                                                            href="<?= url('order/detail#delivery',
                                                                ['order_id' => $order['order_id']]) ?>">

@@ -23,7 +23,7 @@
                                         <option value="0">顶级分类</option>
                                         <?php if (isset($list)): foreach ($list as $first): ?>
                                             <option value="<?= $first['category_id'] ?>"
-                                                <?= $model['parent_id'] === $first['category_id'] ? 'selected' : '' ?>>
+                                                <?= $model['parent_id'] == $first['category_id'] ? 'selected' : '' ?>>
                                                 <?= $first['name'] ?></option>
                                         <?php endforeach; endif; ?>
                                     </select>
