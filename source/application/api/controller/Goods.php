@@ -42,7 +42,7 @@ class Goods extends Controller
             return $this->renderError('很抱歉，商品信息不存在或已下架');
         }
         // 规格信息
-        $specData = $detail['spec_type'] === 20 ? $detail->getManySpecData($detail['spec_rel'], $detail['spec']) : null;
+        $specData = $detail['spec_type'] == 20 ? $detail->getManySpecData($detail['spec_rel'], $detail['spec']) : null;
 //        $user = $this->getUser();
 //        // 购物车商品总数量
 //        $cart_total_num = (new CartModel($user['user_id']))->getTotalNum();
