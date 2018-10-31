@@ -78,7 +78,7 @@ class Goods extends Controller
             $delivery = Delivery::getAll();
             // 多规格信息
             $specData = 'null';
-            if ($model['spec_type'] === 20)
+            if ($model['spec_type'] == 20)
                 $specData = json_encode($model->getManySpecData($model['spec_rel'], $model['spec']));
             return $this->fetch('edit', compact('model', 'catgory', 'delivery', 'specData'));
         }
