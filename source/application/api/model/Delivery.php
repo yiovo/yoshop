@@ -38,7 +38,7 @@ class Delivery extends DeliveryModel
             }
         }
         // 商品总数量or总重量
-        $total = $this['method']['value'] === 10 ? $total_num : $total_weight;
+        $total = $this['method']['value'] == 10 ? $total_num : $total_weight;
         if ($total <= $rule['first']) {
             return number_format($rule['first_fee'], 2);
         }
