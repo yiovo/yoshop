@@ -40,7 +40,7 @@ class Setting extends SettingModel
             'describe' => $this->describe[$key],
             'values' => $values,
             'wxapp_id' => self::$wxapp_id,
-        ]) !== false ?: false;
+        ]) !== false;
     }
 
 }
