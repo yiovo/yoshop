@@ -40,7 +40,7 @@ class Category extends BaseModel
                     if ($two['parent_id'] !== $first['category_id']) continue;
                     $threeTree = [];
                     foreach ($all as $three)
-                        $three['parent_id'] === $two['category_id']
+                        $three['parent_id'] == $two['category_id']
                         && $threeTree[$three['category_id']] = $three;
                     !empty($threeTree) && $two['child'] = $threeTree;
                     $twoTree[$two['category_id']] = $two;
