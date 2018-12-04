@@ -5,8 +5,8 @@
 萤火小程序商城，是一款开源的电商系统，为中小企业提供最佳的新零售解决方案。采用稳定的MVC框架开发，执行效率、扩展性、稳定性值得信赖。
 
 #### 项目演示
-- 后台演示：[http://yoshop.xany6.com/](http://yoshop.xany6.com/)
-- QQ交流群：678019581
+- 后台演示：[https://yoshop.xany6.com/](https://yoshop.xany6.com/)
+- QQ交流群：603201798
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/0727/210807_271acafd_597459.jpeg "gh_a376934c7da8_344.jpg")
 
