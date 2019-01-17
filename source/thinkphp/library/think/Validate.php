@@ -67,6 +67,8 @@ class Validate
         'min'         => 'min size of :attribute must be :rule',
         'after'       => ':attribute cannot be less than :rule',
         'before'      => ':attribute cannot exceed :rule',
+        'afterWith'   => ':attribute cannot be less than :rule',
+        'beforeWith'  => ':attribute cannot exceed :rule',
         'expire'      => ':attribute not within :rule',
         'allowIp'     => 'access IP is not allowed',
         'denyIp'      => 'access IP denied',
@@ -878,12 +880,16 @@ class Validate
             // 支持多个字段验证
             $fields = explode('^', $key);
             foreach ($fields as $key) {
-                $map[$key] = $data[$key];
+                if (isset($data[$key])) {
+                    $map[$key] = $data[$key];
+                }
             }
         } elseif (strpos($key, '=')) {
             parse_str($key, $map);
-        } else {
+        } elseif (isset($data[$field])) {
             $map[$key] = $data[$field];
+        } else {
+            $map = [];
         }
 
         $pk = isset($rule[3]) ? $rule[3] : $db->getPk();
@@ -1113,9 +1119,10 @@ class Validate
      * @access protected
      * @param mixed     $value  字段值
      * @param mixed     $rule  验证规则
+     * @param array     $data  数据
      * @return bool
      */
-    protected function after($value, $rule)
+    protected function after($value, $rule, $data)
     {
         return strtotime($value) >= strtotime($rule);
     }
@@ -1125,11 +1132,40 @@ class Validate
      * @access protected
      * @param mixed     $value  字段值
      * @param mixed     $rule  验证规则
+     * @param array     $data  数据
      * @return bool
      */
-    protected function before($value, $rule)
+    protected function before($value, $rule, $data)
     {
         return strtotime($value) <= strtotime($rule);
+    }
+
+    /**
+     * 验证日期字段
+     * @access protected
+     * @param mixed     $value  字段值
+     * @param mixed     $rule  验证规则
+     * @param array     $data  数据
+     * @return bool
+     */
+    protected function afterWith($value, $rule, $data)
+    {
+        $rule = $this->getDataValue($data, $rule);
+        return !is_null($rule) && strtotime($value) >= strtotime($rule);
+    }
+
+    /**
+     * 验证日期字段
+     * @access protected
+     * @param mixed     $value  字段值
+     * @param mixed     $rule  验证规则
+     * @param array     $data  数据
+     * @return bool
+     */
+    protected function beforeWith($value, $rule, $data)
+    {
+        $rule = $this->getDataValue($data, $rule);
+        return !is_null($rule) && strtotime($value) <= strtotime($rule);
     }
 
     /**
