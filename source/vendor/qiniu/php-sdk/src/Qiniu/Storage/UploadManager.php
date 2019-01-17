@@ -48,7 +48,7 @@ final class UploadManager
         $mime = 'application/octet-stream',
         $fname = null
     ) {
-
+    
         $params = self::trimParams($params);
         return FormUploader::put(
             $upToken,
@@ -65,13 +65,13 @@ final class UploadManager
     /**
      * 上传文件到七牛
      *
-     * @param string $upToken    上传凭证
-     * @param string $key        上传文件名
-     * @param string $filePath   上传文件的路径
-     * @param array $params     自定义变量，规格参考
+     * @param $upToken    上传凭证
+     * @param $key        上传文件名
+     * @param $filePath   上传文件的路径
+     * @param $params     自定义变量，规格参考
      *                    http://developer.qiniu.com/docs/v6/api/overview/up/response/vars.html#xvar
-     * @param string $mime       上传数据的mimeType
-     * @param boolean $checkCrc   是否校验crc32
+     * @param $mime       上传数据的mimeType
+     * @param $checkCrc   是否校验crc32
      *
      * @return array    包含已上传文件的信息，类似：
      *                                              [
@@ -87,7 +87,7 @@ final class UploadManager
         $mime = 'application/octet-stream',
         $checkCrc = false
     ) {
-
+    
         $file = fopen($filePath, 'rb');
         if ($file === false) {
             throw new \Exception("file can not open", 1);
@@ -133,8 +133,9 @@ final class UploadManager
         }
         $ret = array();
         foreach ($params as $k => $v) {
-            $pos = strpos($k, 'x:');
-            if ($pos === 0 && !empty($v)) {
+            $pos1 = strpos($k, 'x:');
+            $pos2 = strpos($k, 'x-qn-meta-');
+            if (($pos1 === 0 || $pos2 === 0) && !empty($v)) {
                 $ret[$k] = $v;
             }
         }
