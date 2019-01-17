@@ -68,7 +68,7 @@ class Controller extends ThinkController
      */
     protected function renderJson($code = self::JSON_SUCCESS_STATUS, $msg = '', $data = [])
     {
-        return compact('code', 'msg', 'url', 'data');
+        return compact('code', 'msg', 'data');
     }
 
     /**
