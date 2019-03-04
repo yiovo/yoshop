@@ -99,7 +99,14 @@ class User extends UserModel
      */
     private function token($openid)
     {
-        return md5($openid . self::$wxapp_id . 'token_salt');
+        $wxapp_id = self::$wxapp_id;
+        // 生成一个不会重复的随机字符串
+        $guid = \getGuidV4();
+        // 当前时间戳 (精确到毫秒)
+        $timeStamp = microtime(true);
+        // 自定义一个盐
+        $salt = 'token_salt';
+        return md5("{$wxapp_id}_{$timeStamp}_{$openid}_{$guid}_{$salt}");
     }
 
     /**
