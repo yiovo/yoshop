@@ -34,7 +34,7 @@ class Help extends Controller
     {
         $model = new WxappHelpModel;
         if (!$this->request->isAjax()) {
-            return $this->fetch('add', compact('list'));
+            return $this->fetch('add');
         }
         // 新增记录
         if ($model->add($this->postData('help'))) {
