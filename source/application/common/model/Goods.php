@@ -231,7 +231,7 @@ class Goods extends BaseModel
         $goods_sku = $goodsSkuData[$goods_sku_id];
         // 多规格文字内容
         $goods_sku['goods_attr'] = '';
-        if ($this['spec_type'] === 20) {
+        if ($this['spec_type'] == 20) {
             $attrs = explode('_', $goods_sku['spec_sku_id']);
             $spec_rel = array_column($this['spec_rel']->toArray(), null, 'spec_value_id');
             foreach ($attrs as $specValueId) {
