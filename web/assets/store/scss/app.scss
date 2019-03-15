@@ -2269,8 +2269,7 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
           .img-cover {
             width: 120px;
             height: 120px;
-            background-repeat: no-repeat;
-            background-size: cover;
+            background: no-repeat center center / 100%;
           }
           p {
             &.file-name {

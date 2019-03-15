@@ -1685,8 +1685,7 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .tpl-dropdown-menu-noti
         .file-library .layui-layer-content .v-box-body ul.file-list-item li .img-cover {
           width: 120px;
           height: 120px;
-          background-repeat: no-repeat;
-          background-size: cover; }
+          background: no-repeat center center / 100%; }
         .file-library .layui-layer-content .v-box-body ul.file-list-item li p.file-name {
           margin: 5px 0 0 0;
           width: 120px;
