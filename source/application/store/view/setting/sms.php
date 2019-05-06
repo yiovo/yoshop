@@ -77,6 +77,9 @@
                                            name="sms[engine][aliyun][order_pay][accept_phone]"
                                            value="<?= $values['engine']['aliyun']['order_pay']['accept_phone'] ?>">
                                     <div class="help-block">
+                                        <small>注：如需填写多个手机号，可用英文逗号 <code>,</code> 隔开</small>
+                                    </div>
+                                    <div class="help-block">
                                         <small>接收测试： <a class="j-sendTestMsg" data-msg-type="order_pay"
                                                         href="javascript:void(0);">点击发送</a>
                                         </small>
