@@ -25,6 +25,8 @@ class Goods extends Controller
     {
         $model = new GoodsModel;
         $list = $model->getList(10, $category_id, $search, $sortType, $sortPrice);
+        // 隐藏api属性
+        !$list->isEmpty() && $list->hidden(['category', 'content']);
         return $this->renderSuccess(compact('list'));
     }
 
