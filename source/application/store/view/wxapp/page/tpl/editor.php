@@ -91,7 +91,7 @@
                         <div class="input-group" style="margin-top:10px;">
                             <input type="text" name="linkUrl" data-bind="data.{{ $index }}.linkUrl"
                                    value="{{ $value.linkUrl }}"
-                                   placeholder="请输入链接地址    例：page/index/index">
+                                   placeholder="请输入链接地址    例：pages/index/index">
                             <!-- <span class="input-group-addon">选择链接</span> -->
                         </div>
                     </div>
