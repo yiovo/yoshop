@@ -16,6 +16,8 @@ class Goods extends GoodsModel
      * @var array
      */
     protected $hidden = [
+        'spec_rel',
+        'delivery',
         'sales_initial',
         'sales_actual',
         'is_delete',

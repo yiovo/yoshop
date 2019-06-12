@@ -96,7 +96,7 @@ class Cart
             } else {
                 $exist_address && $this->setError("很抱歉，您的收货地址不在商品 [{$goods['goods_name']}] 的配送范围内");
             }
-            $cartList[] = $goods->toArray();
+            $cartList[] = $goods->hidden(['category', 'content', 'spec']);
         }
         // 商品总金额
         $orderTotalPrice = array_sum(array_column($cartList, 'total_price'));
