@@ -3,6 +3,7 @@
 namespace app\api\model;
 
 use think\Cache;
+use app\common\library\helper;
 
 /**
  * 购物车管理
@@ -96,18 +97,18 @@ class Cart
             } else {
                 $exist_address && $this->setError("很抱歉，您的收货地址不在商品 [{$goods['goods_name']}] 的配送范围内");
             }
-            $cartList[] = $goods->hidden(['category', 'content', 'spec'])->toArray();
+            $cartList[] = $goods->hidden(['category', 'content', 'spec']);
         }
         // 商品总金额
-        $orderTotalPrice = array_sum(array_column($cartList, 'total_price'));
+        $orderTotalPrice = helper::getArrayColumnSum($cartList, 'total_price');
         // 所有商品的运费金额
-        $allExpressPrice = array_column($cartList, 'express_price');
+        $allExpressPrice = helper::getArrayColumn($cartList, 'express_price');
         // 订单总运费金额
         $expressPrice = $allExpressPrice ? Delivery::freightRule($allExpressPrice) : 0.00;
         return [
             'goods_list' => $cartList,                       // 商品列表
             'order_total_num' => $this->getTotalNum(),       // 商品总数量
-            'order_total_price' => round($orderTotalPrice, 2),              // 商品总金额 (不含运费)
+            'order_total_price' => helper::number2($orderTotalPrice),              // 商品总金额 (不含运费)
             'order_pay_price' => bcadd($orderTotalPrice, $expressPrice, 2),    // 实际支付金额
             'address' => $user['address_default'],  // 默认地址
             'exist_address' => $exist_address,      // 是否存在收货地址
