@@ -95,6 +95,7 @@ class Cart
                 $goods['express_price'] = $goods['delivery']->calcTotalFee(
                     $cart['goods_num'], $goods['goods_total_weight'], $cityId);
             } else {
+                $goods['express_price'] = 0.00;
                 $exist_address && $this->setError("很抱歉，您的收货地址不在商品 [{$goods['goods_name']}] 的配送范围内");
             }
             $cartList[] = $goods->hidden(['category', 'content', 'spec']);
@@ -112,7 +113,7 @@ class Cart
             'order_pay_price' => bcadd($orderTotalPrice, $expressPrice, 2),    // 实际支付金额
             'address' => $user['address_default'],  // 默认地址
             'exist_address' => $exist_address,      // 是否存在收货地址
-            'express_price' => $expressPrice,       // 配送费用
+            'express_price' => helper::number2($expressPrice),       // 配送费用
             'intra_region' => $intraRegion,         // 当前用户收货城市是否存在配送规则中
             'has_error' => $this->hasError(),
             'error_msg' => $this->getError(),
