@@ -67,7 +67,7 @@ class Cart
                 continue;
             }
             /* @var Goods $goods */
-            $goods = $goodsList[$cart['goods_id']];
+            $goods = clone $goodsList[$cart['goods_id']];
             // 商品sku信息
             $goods['goods_sku_id'] = $cart['goods_sku_id'];
             // 商品sku不存在则自动删除
@@ -128,7 +128,7 @@ class Cart
      * @return bool
      * @throws \think\exception\DbException
      */
-    public function add($goods_id, $goods_num, $goods_sku_id)
+    public function add($goods_id, $goods_num, $goods_sku_id = 0)
     {
         // 购物车商品索引
         $index = $goods_id . '_' . $goods_sku_id;
