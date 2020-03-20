@@ -7,7 +7,7 @@
 #### 项目演示
 - 官网地址：[https://www.yiovo.com/](https://www.yiovo.com/)
 - 后台演示：[https://yoshop.xany6.com/](https://yoshop.xany6.com/)
-- QQ交流群：806461900
+- QQ交流群：1055189864
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/0727/210807_271acafd_597459.jpeg "gh_a376934c7da8_344.jpg")
 
