@@ -276,6 +276,10 @@ class Order extends OrderModel
             case 'payment';
                 $filter['pay_status'] = 10;
                 break;
+            case 'delivery';
+                $filter['pay_status'] = 20;
+                $filter['delivery_status'] = 10;
+                break;
             case 'received';
                 $filter['pay_status'] = 20;
                 $filter['delivery_status'] = 20;
