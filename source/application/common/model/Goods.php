@@ -126,30 +126,36 @@ class Goods extends BaseModel
 
     /**
      * 获取商品列表
-     * @param int $status
-     * @param int $category_id
-     * @param string $search
-     * @param string $sortType
-     * @param bool $sortPrice
-     * @return \think\Paginator
+     * @param $param
+     * @return mixed
      * @throws \think\exception\DbException
      */
-    public function getList($status = null, $category_id = 0, $search = '', $sortType = 'all', $sortPrice = false)
+    public function getList($param)
     {
+        // 商品列表获取条件
+        $params = array_merge([
+            'status' => 10,         // 商品状态
+            'category_id' => 0,     // 分类id
+            'search' => '',         // 搜索关键词
+            'sortType' => 'all',    // 排序类型
+            'sortPrice' => false,   // 价格排序 高低
+            'listRows' => 15,       // 每页数量
+        ], $param);
+
         // 筛选条件
         $filter = [];
-        $category_id > 0 && $filter['category_id'] = $category_id;
-        $status > 0 && $filter['goods_status'] = $status;
-        !empty($search) && $filter['goods_name'] = ['like', '%' . trim($search) . '%'];
+        $params['category_id'] > 0 && $filter['category_id'] = ['IN', Category::getSubCategoryId($params['category_id'])];
+        $params['status'] > 0 && $filter['goods_status'] = $params['status'];
+        !empty($params['search']) && $filter['goods_name'] = ['like', '%' . trim($params['search']) . '%'];
 
         // 排序规则
         $sort = [];
-        if ($sortType === 'all') {
+        if ($params['sortType'] === 'all') {
             $sort = ['goods_sort', 'goods_id' => 'desc'];
-        } elseif ($sortType === 'sales') {
+        } elseif ($params['sortType'] === 'sales') {
             $sort = ['goods_sales' => 'desc'];
-        } elseif ($sortType === 'price') {
-            $sort = $sortPrice ? ['goods_max_price' => 'desc'] : ['goods_min_price'];
+        } elseif ($params['sortType'] === 'price') {
+            $sort = $params['sortPrice'] ? ['goods_max_price' => 'desc'] : ['goods_min_price' => 'asc'];
         }
         // 商品表名称
         $tableName = $this->getTable();
@@ -167,10 +173,33 @@ class Goods extends BaseModel
             ->where('is_delete', '=', 0)
             ->where($filter)
             ->order($sort)
-            ->paginate(15, false, [
+            ->paginate($params['listRows'], false, [
                 'query' => Request::instance()->request()
             ]);
-        return $list;
+        // 整理列表数据并返回
+        return $this->setGoodsListData($list, true);
+    }
+
+    /**
+     * 设置商品展示的数据
+     * @param $data
+     * @param bool $isMultiple
+     * @param callable $callback
+     * @return mixed
+     */
+    protected function setGoodsListData($data, $isMultiple = true, callable $callback = null)
+    {
+        if (!$isMultiple) $dataSource = [&$data]; else $dataSource = &$data;
+        // 整理商品列表数据
+        foreach ($dataSource as &$goods) {
+            // 商品主图
+            $goods['goods_image'] = $goods['image'][0]['file_path'];
+            // 商品默认规格
+            $goods['goods_sku'] = $goods['spec'][0];
+            // 回调函数
+            is_callable($callback) && call_user_func($callback, $goods);
+        }
+        return $data;
     }
 
     /**

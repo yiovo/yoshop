@@ -20,8 +20,9 @@ class Goods extends Controller
      */
     public function index()
     {
+        // 获取全部商品列表
         $model = new GoodsModel;
-        $list = $model->getList();
+        $list = $model->getList(array_merge(['status' => -1], $this->request->param()));
         return $this->fetch('index', compact('list'));
     }
 

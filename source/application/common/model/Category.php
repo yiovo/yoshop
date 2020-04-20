@@ -74,4 +74,24 @@ class Category extends BaseModel
         return self::getALL()['tree'];
     }
 
+    /**
+     * 获取指定分类下的所有子分类id
+     * @param $parent_id
+     * @param array $all
+     * @return array
+     */
+    public static function getSubCategoryId($parent_id, $all = [])
+    {
+        $arrIds = [$parent_id];
+        empty($all) && $all = self::getCacheAll();
+        foreach ($all as $key => $item) {
+            if ($item['parent_id'] == $parent_id) {
+                unset($all[$key]);
+                $subIds = self::getSubCategoryId($item['category_id'], $all);
+                !empty($subIds) && $arrIds = array_merge($arrIds, $subIds);
+            }
+        }
+        return $arrIds;
+    }
+
 }

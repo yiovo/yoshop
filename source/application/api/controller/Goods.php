@@ -3,7 +3,6 @@
 namespace app\api\controller;
 
 use app\api\model\Goods as GoodsModel;
-use app\api\model\Cart as CartModel;
 
 /**
  * 商品控制器
@@ -14,19 +13,18 @@ class Goods extends Controller
 {
     /**
      * 商品列表
-     * @param $category_id
-     * @param $search
-     * @param $sortType
-     * @param $sortPrice
      * @return array
      * @throws \think\exception\DbException
      */
-    public function lists($category_id, $search, $sortType, $sortPrice)
+    public function lists()
     {
+        // 整理请求的参数
+        $param = array_merge($this->request->param(), [
+            'status' => 10
+        ]);
+        // 获取列表数据
         $model = new GoodsModel;
-        $list = $model->getList(10, $category_id, $search, $sortType, $sortPrice);
-        // 隐藏api属性
-        !$list->isEmpty() && $list->hidden(['category', 'content']);
+        $list = $model->getList($param);
         return $this->renderSuccess(compact('list'));
     }
 
@@ -48,7 +46,8 @@ class Goods extends Controller
 //        $user = $this->getUser();
 //        // 购物车商品总数量
 //        $cart_total_num = (new CartModel($user['user_id']))->getTotalNum();
-        return $this->renderSuccess(compact('detail', /*'cart_total_num',*/ 'specData'));
+        return $this->renderSuccess(compact('detail', /*'cart_total_num',*/
+            'specData'));
     }
 
 }

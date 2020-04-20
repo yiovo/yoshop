@@ -49,4 +49,20 @@ class Goods extends GoodsModel
             ->where('goods_id', 'in', $goodsIds)->select();
     }
 
+    /**
+     * 获取商品列表
+     * @param $param
+     * @return mixed
+     * @throws \think\exception\DbException
+     */
+    public function getList($param)
+    {
+        // 获取商品列表
+        $data = parent::getList($param);
+        // 隐藏api属性
+        !$data->isEmpty() && $data->hidden(['category', 'content', 'spec']);
+        // 整理列表数据并返回
+        return $data;
+    }
+
 }
