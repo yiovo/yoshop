@@ -28,7 +28,7 @@
 - PHP5.4+
 - MySQL5.1+
 
-建议使用环境：Linux + Nginx1.14 + PHP7 + MySQL5.6
+建议使用环境：Linux + Nginx1.14 + PHP7.1 + MySQL5.6
 
 
 #### 安全&缺陷
